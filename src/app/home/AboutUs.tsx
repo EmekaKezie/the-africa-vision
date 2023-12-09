@@ -41,7 +41,7 @@ export default function AboutUs() {
                 sx={{
                   flexGrow: 1,
                   display: { xs: "flex" },
-                  alignItems:"center",
+                  alignItems: "center",
                 }}>
                 <PhoneInTalk sx={{ color: "#A8518A", marginRight: "5px" }} />
                 <Typography sx={{ fontSize: "0.9em" }}>
@@ -82,11 +82,7 @@ export default function AboutUs() {
                 fontSize: "0.9rem",
                 paddingBottom: "2rem",
               }}>
-              TheAfrica Vision Info Technology Company Limited is a private
-              company that provide a cutting-edge, tech-driven crowdfunding
-              platform to empower innovative businesses and projects in Africa.
-              We pride ourselves to be a catalyst for change, innovation, and
-              cultural preservation in Africa.
+              {texts[0]}
             </Typography>
 
             <Typography
@@ -94,11 +90,7 @@ export default function AboutUs() {
                 color: "#4B5563",
                 fontSize: "0.9rem",
               }}>
-              Africa is a land of untapped brilliance, where countless
-              groundbreaking ideas and ventures struggle to find the support
-              they need. We understand the unique challenges and opportunities
-              that Africa presents, and we're here to nurture its vibrant
-              entrepreneurial spirit.
+              {texts[1]}
             </Typography>
           </Box>
         </Grid>
@@ -114,3 +106,8 @@ const useStyles = makeStyles(() => ({
 
   sectionRight: {},
 }));
+
+const texts: string[] = [
+  "TheAfrica Vision Info Technology Company Limited is a private company that provide a cutting-edge, tech-driven crowdfunding platform to empower innovative businesses and projects in Africa. We pride ourselves to be a catalyst for change, innovation, and cultural preservation in Africa.",
+  "Africa is a land of untapped brilliance, where countless groundbreaking ideas and ventures struggle to find the support they need. We understand the unique challenges and opportunities that Africa presents, and we're here to nurture its vibrant entrepreneurial spirit.",
+];

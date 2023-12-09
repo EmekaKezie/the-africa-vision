@@ -56,12 +56,7 @@ export default function Testimonials() {
             <FormatQuoteRounded
               sx={{ fontSize: "100px", color: "lightgray" }}
             />
-            <Typography sx={{ padding: "2rem" }}>
-              Our commitment goes beyond crowdfunding. We recognize the immense
-              value of preserving and celebrating African culture. That's why we
-              have a dedicated blog where we curate and share authentic African
-              content.
-            </Typography>
+            <Typography sx={{ padding: "2rem" }}>{texts[0]}</Typography>
           </Box>
 
           <Box
@@ -73,24 +68,36 @@ export default function Testimonials() {
             <FormatQuoteRounded
               sx={{ fontSize: "100px", color: "lightgray" }}
             />
-            <Typography sx={{ padding: "2rem" }}>
-              Our commitment goes beyond crowdfunding. We recognize the immense
-              value of preserving and celebrating African culture. That's why we
-              have a dedicated blog where we curate and share authentic African
-              content.
-            </Typography>
+            <Typography sx={{ padding: "2rem" }}>{texts[1]}</Typography>
           </Box>
         </Box>
       </Box>
 
-      <Box sx={{paddingTop:"3rem"}}>
+      <Box sx={{ paddingTop: "3rem" }}>
         <Grid container spacing={4}>
           {data?.map((item: props, index: number) => (
             <Grid item lg={3} md={3} sm={6} xs={6} key={index}>
               <Box>
-                <Typography sx={{fontWeight:"bold", color:"#A8518A", fontSize:"1.2rem", paddingBottom:"1rem"}}>{item.counter}</Typography>
-                <Typography sx={{fontWeight:"bold", color: "#4B5563", fontSize:"0.9rem"}}>{item.title}</Typography>
-                <Typography  sx={{color: "#4B5563", fontSize:"0.8rem"}}>{item.desc}</Typography>
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                    color: "#A8518A",
+                    fontSize: "1.2rem",
+                    paddingBottom: "1rem",
+                  }}>
+                  {item.counter}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                    color: "#4B5563",
+                    fontSize: "0.9rem",
+                  }}>
+                  {item.title}
+                </Typography>
+                <Typography sx={{ color: "#4B5563", fontSize: "0.8rem" }}>
+                  {item.desc}
+                </Typography>
               </Box>
             </Grid>
           ))}
@@ -121,4 +128,9 @@ const data: props[] = [
     title: "Success stories",
     desc: "contrary to popular belief, Lorem Ipsum is not simply random text.",
   },
+];
+
+const texts: string[] = [
+  "Our commitment goes beyond crowdfunding. We recognize the immense value of preserving and celebrating African culture. That's why we have a dedicated blog where we curate and share authentic African",
+  "Our commitment goes beyond crowdfunding. We recognize the immense value of preserving and celebrating African culture. That's why we have a dedicated blog where we curate and share authentic African content.",
 ];
