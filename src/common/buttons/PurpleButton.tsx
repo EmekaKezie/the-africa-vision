@@ -1,10 +1,18 @@
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
+type sizeTypes =
+    | 'small'
+    | 'medium'
+    | 'large'
+
+
 type props = {
   text: string;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
+  size?: sizeTypes
+  style?: any
 };
 
 export default function PurpleButton(props: props) {
@@ -13,7 +21,9 @@ export default function PurpleButton(props: props) {
     <Button
       className={classes.btn}
       startIcon={props.startIcon}
-      endIcon={props.endIcon}>
+      endIcon={props.endIcon}
+      size={!props.size ? 'large' : props.size}
+      style={props.style}>
       {props.text}
     </Button>
   );

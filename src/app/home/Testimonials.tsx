@@ -9,13 +9,12 @@ type props = {
 
 export default function Testimonials() {
   return (
-    <Box>
-      <Box
-        sx={{
-          paddingTop: "10rem",
-          textAlign: "center",
-          color: "#4B5563",
-        }}>
+    <Box
+      sx={{
+        paddingTop: "7rem",
+        color: "#4B5563",
+      }}>
+      <Box sx={{ textAlign: "center" }}>
         <Box>
           <Typography
             component="div"

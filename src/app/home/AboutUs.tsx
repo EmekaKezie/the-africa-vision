@@ -1,6 +1,6 @@
 import PurpleButton from "@/common/buttons/PurpleButton";
 import { East, MarkEmailUnread, PhoneInTalk } from "@mui/icons-material";
-import { Box, Grid, Icon, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ export default function AboutUs() {
   return (
     <Box
       sx={{
-        padding: "2rem 0",
+        paddingTop: "2rem",
         color: "#4B5563",
       }}>
       <Grid container spacing={4}>
