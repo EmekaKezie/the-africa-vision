@@ -5,11 +5,17 @@ import styles from "./page.module.css";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
-import NavHeader from "./home/NavHeader";
 import Hero from "./home/Hero";
-import AboutUs from "./home/AboutUs";
 import Testimonials from "./home/Testimonials";
 import Donate from "./home/Donate";
+import Nav from "@/component/core/Nav";
+import PgAboutUs from "../component/core/PgAboutUs";
+import PgCoreServices from "@/component/core/PgCoreServices";
+import PgProjects from "@/component/core/PgProjects";
+import PgStory from "@/component/core/PgStory";
+import PgLatestCauses from "@/component/core/PgLatestCauses";
+import PgDonateAds from "@/component/core/PgDonateAds";
+import PgBlog from "@/component/core/PgBlog";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -19,15 +25,66 @@ export default function Home() {
 
   return (
     <Box>
-      <NavHeader />
+      <Nav />
       <Hero />
+
+      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
+        <PgAboutUs />
+      </Box>
+      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+        <PgAboutUs />
+      </Box>
+
+      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
+        <PgCoreServices />
+      </Box>
+      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+        <PgCoreServices />
+      </Box>
 
       <Box
         sx={{
           display: { xs: "none", md: "block" },
-          padding: "2rem 10rem",
+          padding: "0 8rem",
+          background: "#F5F7FA",
         }}>
-        <AboutUs />
+        <PgProjects />
+      </Box>
+      <Box
+        sx={{
+          display: { xs: "block", md: "none" },
+          padding: "0 1rem",
+          background: "#F5F7FA",
+        }}>
+        <PgProjects />
+      </Box>
+
+      <PgStory />
+
+      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
+        <PgLatestCauses />
+      </Box>
+      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+        <PgLatestCauses />
+      </Box>
+
+      <PgDonateAds />
+
+      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
+        <PgBlog />
+      </Box>
+      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+        <PgBlog />
+      </Box>
+
+      {/* <Box
+        sx={{
+          display: { xs: "none", md: "block" },
+          padding: "0 8rem",
+        }}>
+        <PgAboutUs />
+        <PgCoreServices />
+        <PgProjects />
         <Testimonials />
         <Donate />
       </Box>
@@ -37,10 +94,12 @@ export default function Home() {
           display: { xs: "block", md: "none" },
           padding: "2rem 1rem",
         }}>
-        <AboutUs />
+        <PgAboutUs />
+        <PgCoreServices />
+        <PgProjects />
         <Testimonials />
         <Donate />
-      </Box>
+      </Box> */}
     </Box>
   );
 }

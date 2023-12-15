@@ -26,14 +26,14 @@ import supportus4 from "@/assets/supportus-thumbnail-4.png";
 import supportus5 from "@/assets/supportus-thumbnail-5.png";
 import supportus6 from "@/assets/supportus-thumbnail-6.png";
 import Link from "next/link";
-import PurpleButton from "@/common/buttons/PurpleButton";
+import PurpleButton from "@/component/common/PurpleButton";
 import {
   ArrowRightAlt,
   BrokenImage,
   Favorite,
   Redo,
 } from "@mui/icons-material";
-import { formatNumberWithSuffix } from "@/common/helpers";
+import { formatNumberWithSuffix } from "@/component/common/helpers";
 
 type donationAnaysis = {
   id: string;
@@ -69,75 +69,74 @@ type supportProps = {
 };
 
 const useStyles = makeStyles((theme) => ({
-  scrollContainer: {
-    width: "100%",
-    overflowX: "auto",
-    display: "flex",
-    gap: 20,
-    padding: "1rem",
-  },
-  scrollContentBox: {
-    minWidth: "300px",
-    minHeight: "100px",
-    color: "#4B5563",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    "& > div": {
-      width: "300px",
-    },
-  },
+  // scrollContainer: {
+  //   width: "100%",
+  //   overflowX: "auto",
+  //   display: "flex",
+  //   gap: 20,
+  //   padding: "1rem",
+  //   marginBottom: "5rem",
+  // },
+  // scrollContentBox: {
+  //   minWidth: "300px",
+  //   minHeight: "100px",
+  //   color: "#4B5563",
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   "& > div": {
+  //     width: "300px",
+  //   },
+  // },
 
-  imageBox: {
-    height: "150px",
-    "& > img": {
-      objectFit: "cover",
-      width: "100%",
-    },
-  },
+  // imageBox: {
+  //   height: "150px",
+  //   "& > img": {
+  //     objectFit: "cover",
+  //     width: "100%",
+  //   },
+  // },
 
-  contentBox: {
-    background: "#FFFFF",
-    // height: "150px",
-    margin: "-5% 5% 0 5%",
-    zIndex: 100,
-    position: "relative",
-  },
+  // contentBox: {
+  //   background: "#FFFFF",
+  //   margin: "-5% 5% 0 5%",
+  //   zIndex: 100,
+  //   position: "relative",
+  // },
 
-  contentLabel: {
-    fontSize: "0.6em",
-    fontWeight: "bold",
-    display: "inline-block",
-    padding: "0.3rem 1rem",
-    borderRadius: "5px",
-    marginBottom: "1rem",
-    background: "lightgreen",
-  },
+  // contentLabel: {
+  //   fontSize: "0.6em",
+  //   fontWeight: "bold",
+  //   display: "inline-block",
+  //   padding: "0.3rem 1rem",
+  //   borderRadius: "5px",
+  //   marginBottom: "1rem",
+  // },
 
-  contentTitle: {
-    fontSize: "0.8em",
-    fontWeight: "bold",
-    marginBottom: "1rem",
-  },
+  // contentTitle: {
+  //   fontSize: "0.8em",
+  //   fontWeight: "bold",
+  //   marginBottom: "1rem",
+  // },
 
-  contentAnalysisPurpose: {
-    fontSize: "0.7em",
-    color: "#667085",
-    paddingTop: "1rem",
-    fontWeight: "bold",
-  },
+  // contentAnalysisPurpose: {
+  //   fontSize: "0.7em",
+  //   color: "#667085",
+  //   paddingTop: "1rem",
+  //   fontWeight: "bold",
+  // },
 
-  contentAnalysisAmount: {
-    fontSize: "0.7em",
-    fontWeight: "bold",
-    color: "#2E4049",
-  },
+  // contentAnalysisAmount: {
+  //   fontSize: "0.7em",
+  //   fontWeight: "bold",
+  //   color: "#2E4049",
+  // },
 
-  contentActionIconBox: {
-    display: "flex",
-    justifyContent: "end",
-    flexGrow: 1,
-  },
+  // contentActionIconBox: {
+  //   display: "flex",
+  //   justifyContent: "end",
+  //   flexGrow: 1,
+  // },
 
   linearProgress: {
     "&>.MuiLinearProgress-bar": {
@@ -362,7 +361,7 @@ export default function Donate() {
               padding: "0.5rem 1rem",
               borderRadius: "5px",
               background: "#F2DFEE",
-              fontSize: "0.9rem",
+              fontSize: "12px",
               fontWeight: "bold",
             }}>
             Donate
@@ -372,10 +371,8 @@ export default function Donate() {
             component="div"
             sx={{
               textAlign: "center",
-              display: { xs: "inline-block" },
               paddingBottom: "2rem",
-              borderRadius: "5px",
-              fontSize: "1.4em",
+              fontSize: "2rem",
               fontWeight: "bold",
             }}>
             Your help is Needed
@@ -383,26 +380,63 @@ export default function Donate() {
         </Box>
       </Box>
 
-      <Box className={classes.scrollContainer}>
+      <Box
+        sx={{
+          width: "100%",
+          overflowX: "auto",
+          display: "flex",
+          gap: 7,
+          padding: "1rem",
+          marginBottom: "5rem",
+        }}>
         {data?.map((item: donationProps) => (
-          <Box key={item.id} className={classes.scrollContentBox}>
+          <Box
+            key={item.id}
+            sx={{
+              minWidth: "300px",
+              minHeight: "100px",
+              color: "#4B5563",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
             <Box component="div">
-              <Box className={classes.imageBox}>
-                <Image src={item.src} alt={item.alt} />
+              <Box sx={{ height: "150px" }}>
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  style={{ objectFit: "cover", width: "100%" }}
+                />
               </Box>
-              <Box className={classes.contentBox}>
+              <Box
+                sx={{
+                  background: "#FFFFF",
+                  margin: "-5% 5% 0 5%",
+                  zIndex: 100,
+                  position: "relative",
+                }}>
                 <Card elevation={2}>
                   <CardContent>
                     <Box component="div">
                       <Typography
-                        className={classes.contentLabel}
                         style={{
                           color: item.color,
                           background: item.background,
+                          fontSize: "0.6em",
+                          fontWeight: "bold",
+                          display: "inline-block",
+                          padding: "0.3rem 1rem",
+                          borderRadius: "5px",
+                          marginBottom: "1rem",
                         }}>
                         {item.label}
                       </Typography>
-                      <Typography className={classes.contentTitle}>
+                      <Typography
+                        style={{
+                          fontSize: "0.8em",
+                          fontWeight: "bold",
+                          marginBottom: "1rem",
+                        }}>
                         {item.title}
                       </Typography>
                       <Box>
@@ -420,11 +454,20 @@ export default function Donate() {
                             <Grid key={analizedItem.id} item xs={4}>
                               <Box>
                                 <Typography
-                                  className={classes.contentAnalysisPurpose}>
+                                  sx={{
+                                    fontSize: "0.7em",
+                                    color: "#667085",
+                                    paddingTop: "1rem",
+                                    fontWeight: "bold",
+                                  }}>
                                   {analizedItem.purpose}
                                 </Typography>
                                 <Typography
-                                  className={classes.contentAnalysisAmount}>
+                                  sx={{
+                                    fontSize: "0.7em",
+                                    fontWeight: "bold",
+                                    color: "#2E4049",
+                                  }}>
                                   {analizedItem.currency}
                                   {formatNumberWithSuffix(analizedItem.amount)}
                                 </Typography>
@@ -444,12 +487,14 @@ export default function Donate() {
                         text="Donate"
                         endIcon={<Favorite sx={{ color: "#92CD00" }} />}
                         size="small"
-                        style={{
-                          padding: "0.5rem",
-                        }}
                       />
                     </Link>
-                    <Box className={classes.contentActionIconBox}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                        flexGrow: 1,
+                      }}>
                       <IconButton>
                         <Redo />
                       </IconButton>
@@ -462,7 +507,9 @@ export default function Donate() {
         ))}
       </Box>
 
-      <Box sx={{ marginTop: "10rem" }}>
+      <Divider />
+      <br />
+      <Box>
         <Box sx={{ display: { xs: "none", md: "block" } }}>
           <Grid container spacing={4}>
             {activity?.map((item: activityProps) => (
@@ -489,7 +536,7 @@ export default function Donate() {
           </Grid>
         </Box>
 
-        <Box sx={{ display: { xs: "block", md: "none" }}}>
+        <Box sx={{ display: { xs: "block", md: "none" } }}>
           <Grid container spacing={4}>
             {activity?.map((item: activityProps) => (
               <Grid item sm={6} xs={6} key={item.id}>
@@ -520,8 +567,30 @@ export default function Donate() {
             ))}
           </Grid>
         </Box>
+        <br />
+        <Divider />
 
         <Box style={{ marginTop: "10rem" }}>
+          <Typography
+            component="div"
+            sx={{
+              textAlign: "center",
+              // display: { xs: "inline-block" },
+              fontSize: "2em",
+              fontWeight: "bold",
+            }}>
+            Support our drive today
+          </Typography>
+          <Typography
+            component="div"
+            sx={{
+              textAlign: "center",
+              // display: { xs: "inline-block" },
+              paddingBottom: "2rem",
+            }}>
+            Help make our community a better place for all.
+          </Typography>
+
           <Grid container spacing={10}>
             {supportUs?.map((item: supportProps, index) => (
               <Grid item lg={4} md={4} sm={6} xs={12} key={index}>
@@ -533,7 +602,7 @@ export default function Donate() {
                       style={{
                         objectFit: "cover",
                         width: "100%",
-                        borderRadius:"10px"
+                        borderRadius: "10px",
                       }}
                     />
                   </Box>

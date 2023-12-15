@@ -1,20 +1,18 @@
-import PurpleButton from "@/common/buttons/PurpleButton";
+import PurpleButton from "@/component/common/PurpleButton";
 import { East, MarkEmailUnread, PhoneInTalk } from "@mui/icons-material";
 import { Box, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 
-export default function AboutUs() {
-  const classes = useStyles();
+export default function PgAboutUs() {
   return (
     <Box
       sx={{
-        paddingTop: "2rem",
         color: "#4B5563",
+        padding:"4rem 0"
       }}>
       <Grid container spacing={4}>
         <Grid item lg={6} md={6} sm={12} xs={12}>
-          <Box className={classes.sectionLeft}>
+          <Box>
             <Typography
               component="h1"
               sx={{
@@ -65,7 +63,7 @@ export default function AboutUs() {
         </Grid>
 
         <Grid item lg={6} md={6} sm={12} xs={12}>
-          <Box className={classes.sectionRight}>
+          <Box>
             <Typography
               sx={{
                 paddingBottom: "2rem",
@@ -98,14 +96,6 @@ export default function AboutUs() {
     </Box>
   );
 }
-
-const useStyles = makeStyles(() => ({
-  sectionLeft: {
-    color: "#4B5563",
-  },
-
-  sectionRight: {},
-}));
 
 const texts: string[] = [
   "TheAfrica Vision Info Technology Company Limited is a private company that provide a cutting-edge, tech-driven crowdfunding platform to empower innovative businesses and projects in Africa. We pride ourselves to be a catalyst for change, innovation, and cultural preservation in Africa.",
