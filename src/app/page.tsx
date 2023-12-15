@@ -16,6 +16,8 @@ import PgStory from "@/component/core/PgStory";
 import PgLatestCauses from "@/component/core/PgLatestCauses";
 import PgDonateAds from "@/component/core/PgDonateAds";
 import PgBlog from "@/component/core/PgBlog";
+import PgFooter from "@/component/core/PgFooter";
+import PgNewsLetter from "@/component/core/PgNewsLetter";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -75,6 +77,30 @@ export default function Home() {
       </Box>
       <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
         <PgBlog />
+      </Box>
+
+      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
+        <PgNewsLetter />
+      </Box>
+      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+        <PgNewsLetter />
+      </Box>
+
+      <Box
+        sx={{
+          display: { xs: "none", md: "block" },
+          padding: "0 8rem",
+          backgroundColor: "#FFF9FD",
+        }}>
+        <PgFooter />
+      </Box>
+      <Box
+        sx={{
+          display: { xs: "block", md: "none" },
+          padding: "0 1rem",
+          backgroundColor: "#FFF9FD",
+        }}>
+        <PgFooter />
       </Box>
 
       {/* <Box

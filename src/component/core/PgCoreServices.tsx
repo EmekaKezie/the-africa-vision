@@ -51,12 +51,12 @@ export default function PgCoreServices() {
                 sx={{
                   fontWeight: "bold",
                   color: "#4D4D4D",
-                  fontSize: "1.6em",
+                  fontSize: "1em",
                 }}>
                 {item.title}
               </Typography>
               <br />
-              <Typography sx={{ color: "#717171", fontSize: "1.15em" }}>
+              <Typography sx={{ color: "#717171", fontSize: "0.9" }}>
                 {item.summary}
               </Typography>
             </Box>

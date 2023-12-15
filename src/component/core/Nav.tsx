@@ -7,7 +7,7 @@ import NavMainMenuSm from "./NavMainMenuSm";
 export default function Nav() {
   return (
     <Box>
-      <AppBar sx={{ background: "#FFFFFF" }}>
+      <AppBar sx={{ background: "#FFFFFF", padding:"1rem" }}>
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
             <NavLogo />

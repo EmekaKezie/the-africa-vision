@@ -110,7 +110,7 @@ export default function PgLatestCauses() {
                     sx={{
                       height: "54px",
                       fontWeight: "bold",
-                      fontSize: "1.2em",
+                      fontSize: "1.1em",
                       color: "#252A34",
                       textOverflow: "ellipsis",
                       lineHeight: "20px",
@@ -121,7 +121,7 @@ export default function PgLatestCauses() {
                   <Typography
                     sx={{
                       height: "41px",
-                      fontSize: "1rem",
+                      fontSize: "0.9rem",
                       color: "#555555",
                       textOverflow: "ellipsis",
                       lineHeight: "20px",

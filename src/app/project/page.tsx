@@ -8,5 +8,5 @@ export default function Projects(){
     const router = usePathname();
 
   console.log(router)
-    return(<Box>dssd</Box>)
+    return(<Box></Box>)
 }

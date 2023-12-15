@@ -80,7 +80,6 @@ export default function PgBlog() {
             display: "flex",
             gap: 7,
             padding: "1rem",
-            marginBottom: "5rem",
           }}>
           {data?.map((item: dataProps) => (
             <Box
