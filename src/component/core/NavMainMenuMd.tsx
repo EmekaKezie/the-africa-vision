@@ -1,14 +1,10 @@
+import { mainMenuData } from "@/data/menuData";
+import { IMenu } from "@/types/IMenu";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type menuProps = {
-  id: string;
-  url: string;
-  name: string;
-  visibility: boolean;
-};
 
 export default function NavMainMenuMd() {
   const pathname = usePathname();
@@ -21,7 +17,7 @@ export default function NavMainMenuMd() {
         display: { xs: "none", md: "flex" },
         justifyContent: "center",
       }}>
-      {menu?.map((item: menuProps) => {
+      {mainMenuData?.map((item: IMenu) => {
         if (item.visibility) {
           if (pathname === item.url) {
             return (
@@ -66,35 +62,3 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const menu: menuProps[] = [
-  {
-    id: "1",
-    url: "/",
-    name: "Home",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/project",
-    name: "Campaigns",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/donate",
-    name: "Donate",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/blog",
-    name: "Blog",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/contactus",
-    name: "Contact us",
-    visibility: true,
-  },
-];

@@ -2,13 +2,8 @@ import { Box, Divider, IconButton, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu as MenuIcon } from "@mui/icons-material";
-
-type menuProps = {
-  id: string;
-  url: string;
-  name: string;
-  visibility: boolean;
-};
+import { authMenuData, mainMenuData } from "@/data/menuData";
+import { IMenu } from "@/types/IMenu";
 
 export default function NavMainMenuSm() {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
@@ -40,7 +35,7 @@ export default function NavMainMenuSm() {
         }}
         sx={{ marginTop: "40px" }}
         onClose={handleCloseMenu}>
-        {menu?.map((item: menuProps) => {
+        {mainMenuData?.map((item: IMenu) => {
           if (item.visibility) {
             return (
               <MenuItem key={item.id} onClick={handleCloseMenu}>
@@ -50,7 +45,7 @@ export default function NavMainMenuSm() {
           }
         })}
         <Divider />
-        {authMenu?.map((item: menuProps) => {
+        {authMenuData?.map((item: IMenu) => {
           if (item.visibility) {
             return (
               <MenuItem key={item.id} onClick={handleCloseMenu}>
@@ -64,50 +59,3 @@ export default function NavMainMenuSm() {
   );
 }
 
-const menu: menuProps[] = [
-  {
-    id: "1",
-    url: "/",
-    name: "Home",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/project",
-    name: "Campaigns",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/donate",
-    name: "Donate",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/blog",
-    name: "Blog",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/contactus",
-    name: "Contact us",
-    visibility: true,
-  },
-];
-
-const authMenu: menuProps[] = [
-  {
-    id: "1",
-    url: "/login",
-    name: "Login",
-    visibility: true,
-  },
-  {
-    id: "1",
-    url: "/singup",
-    name: "Sign up",
-    visibility: true,
-  },
-];

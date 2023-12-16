@@ -4,9 +4,9 @@
 import { Box } from "@mui/material";
 import { usePathname } from "next/navigation";
 
-export default function Projects(){
+export default function CampaignPage(){
     const router = usePathname();
 
   console.log(router)
-    return(<Box></Box>)
+    return(<Box>Campaign</Box>)
 }

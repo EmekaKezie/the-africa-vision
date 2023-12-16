@@ -8,6 +8,7 @@ type props = {
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
   size?: sizeTypes;
+  style?:any;
 };
 
 export default function PurpleLightButton(props: props) {
@@ -18,7 +19,7 @@ export default function PurpleLightButton(props: props) {
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       size={!props.size ? "large" : props.size}
-      style={{}}>
+      style={props.style}>
       {props.text}
     </Button>
   );
