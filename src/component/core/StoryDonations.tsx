@@ -174,7 +174,7 @@ export default function StoryDonations(props: props) {
         }}>
         <Grid container spacing={7}>
           {data?.slice(offset, limit)?.map((item: IStory) => (
-            <Grid item lg={4} md={4} sm={6} xs={12}>
+            <Grid item lg={4} md={4} sm={6} xs={12} key={item.id}>
               <Box>
                 <Card>
                   <CardMedia
