@@ -43,7 +43,7 @@ export default function DonatePage() {
           setSelectedCategoryIds(categoryIds)
         }}
       />
-      <StoryDonations data={displayDonations()} swipeable/>
+      <StoryDonations data={displayDonations()} />
     </Box>
   );
 }

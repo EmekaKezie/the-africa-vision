@@ -2,7 +2,7 @@ export interface IStory {
   id: string;
   image: string | any;
   title: string;
-  content: string | JSX.Element;
+  content: any;
   date?: string;
   author?: string;
   likes?: number;
@@ -10,6 +10,7 @@ export interface IStory {
   categoryId?: string;
   categoryName?: string;
   analytics?: IStoryAnalytics;
+  url?:string
 }
 
 interface IStoryAnalytics {

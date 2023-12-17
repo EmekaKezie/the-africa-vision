@@ -7,9 +7,9 @@ import {
   Grid,
   Icon,
   IconButton,
+  Stack,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import PurpleLightButton from "../common/PurpleLightButton";
 import {
   KeyboardArrowLeft,
@@ -27,7 +27,6 @@ type props = {
 };
 
 export default function StoryDonations(props: props) {
-  const classes = useStyles();
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [data, setData] = useState<IStory[]>([]);
@@ -54,10 +53,84 @@ export default function StoryDonations(props: props) {
     }
   };
 
+  const renderCard = (item: IStory) => {
+    return (
+      <Card elevation={1}>
+        <CardMedia component="img" height="150px" image={item.image.src} />
+        <CardContent>
+          <Box sx={{ display: "flex" }}>
+            <Typography
+              style={{
+                flexGrow: 1,
+                color: "#999CA9",
+                fontSize: "0.8em",
+                lineHeight: "16px",
+              }}>
+              {item.date}
+            </Typography>
+            <Typography
+              sx={{
+                textOverflow: "ellipsis",
+                color: "#A8518A",
+                fontSize: "0.8em",
+                lineHeight: "16px",
+              }}>
+              {item.analytics?.count} donations
+            </Typography>
+          </Box>
+          <br />
+          <Typography
+            component="div"
+            variant="body1"
+            sx={{
+              color: "#0F111D",
+              fontSize: "1.1em",
+              fontWeight: "bold",
+              display: "-webkit-box",
+              overflow: "hidden",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 1,
+            }}>
+            {item.title}
+          </Typography>
+          <br />
+          <Typography
+            component="div"
+            variant="body2"
+            sx={{
+              color: "#7B7D8C",
+              fontSize: "0.9em",
+              display: "-webkit-box",
+              overflow: "hidden",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+            }}>
+            {item.content}
+          </Typography>
+        </CardContent>
+        <CardActions sx={{ padding: "1rem" }}>
+          <Icon
+            sx={{
+              border: "1px solid #A8518A",
+              padding: "1.6rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "5px",
+              borderRadius: "5px",
+            }}>
+            <TurnedInNot sx={{ color: "#A8518A" }} />
+          </Icon>
+          <PurpleLightButton text="Donate" style={{ flexGrow: 1 }} />
+        </CardActions>
+      </Card>
+    );
+  };
+
   const isSwipeable = () => {
     return (
       <Box>
-        <Box sx={{ display: "flex", justifyContent: "end" }}>
+        {/* <Box sx={{ display: "flex", justifyContent: "end" }}>
           <IconButton
             sx={{ backgroundColor: "#FFE1F5" }}
             onClick={handleScrolLeft}>
@@ -69,10 +142,23 @@ export default function StoryDonations(props: props) {
             sx={{ backgroundColor: "#FFE1F5" }}>
             <KeyboardArrowRight />
           </IconButton>
-        </Box>
+        </Box> */}
+
+        <Stack direction="row" justifyContent="end">
+          <IconButton
+            sx={{ backgroundColor: "#FFE1F5" }}
+            onClick={handleScrolLeft}>
+            <KeyboardArrowLeft />
+          </IconButton>
+          <span style={{ marginLeft: "10px" }}></span>
+          <IconButton
+            onClick={handleScrollRight}
+            sx={{ backgroundColor: "#FFE1F5" }}>
+            <KeyboardArrowRight />
+          </IconButton>
+        </Stack>
         <br />
         <Box
-          // className={classes.swipeableContainer}
           sx={{
             overflowX: "auto",
             display: "flex",
@@ -93,71 +179,7 @@ export default function StoryDonations(props: props) {
                 justifyContent: "center",
               }}
               ref={ref}>
-              <Card elevation={1}>
-                <CardMedia
-                  component="img"
-                  height="150px"
-                  image={item.image.src}
-                />
-                <CardContent>
-                  <Box sx={{ display: "flex" }}>
-                    <Typography
-                      style={{
-                        flexGrow: 1,
-                        color: "#999CA9",
-                        fontSize: "0.8em",
-                        lineHeight: "16px",
-                      }}>
-                      {item.date}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        textOverflow: "ellipsis",
-                        color: "#A8518A",
-                        fontSize: "0.8em",
-                        lineHeight: "16px",
-                      }}>
-                      {item.analytics?.count} donations
-                    </Typography>
-                  </Box>
-                  <br />
-                  <Typography
-                    sx={{
-                      textOverflow: "ellipsis",
-                      color: "#0F111D",
-                      fontSize: "1.1wm",
-                      lineHeight: "28px",
-                      fontWeight: "bold",
-                    }}>
-                    {item.title}
-                  </Typography>
-                  <br />
-                  <Typography
-                    component="div"
-                    sx={{
-                      textOverflow: "ellipsis",
-                      color: "#7B7D8C",
-                      fontSize: "0.9em",
-                    }}>
-                    {item.content}
-                  </Typography>
-                </CardContent>
-                <CardActions sx={{ padding: "1rem" }}>
-                  <Icon
-                    sx={{
-                      border: "1px solid #A8518A",
-                      padding: "1.6rem",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginRight: "5px",
-                      borderRadius: "5px",
-                    }}>
-                    <TurnedInNot sx={{ color: "#A8518A" }} />
-                  </Icon>
-                  <PurpleLightButton text="Donate" style={{ flexGrow: 1 }} />
-                </CardActions>
-              </Card>
+              {renderCard(item)}
             </Box>
           ))}
         </Box>
@@ -174,73 +196,7 @@ export default function StoryDonations(props: props) {
         <Grid container spacing={7}>
           {data?.slice(offset, limit)?.map((item: IStory) => (
             <Grid item lg={4} md={4} sm={6} xs={12} key={item.id}>
-              <Box>
-                <Card>
-                  <CardMedia
-                    component="img"
-                    height="150px"
-                    image={item.image.src}
-                  />
-                  <CardContent>
-                    <Box sx={{ display: "flex" }}>
-                      <Typography
-                        style={{
-                          flexGrow: 1,
-                          color: "#999CA9",
-                          fontSize: "0.8em",
-                          lineHeight: "16px",
-                        }}>
-                        {item.date}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          textOverflow: "ellipsis",
-                          color: "#A8518A",
-                          fontSize: "0.8em",
-                          lineHeight: "16px",
-                        }}>
-                        {item.analytics?.count} donations
-                      </Typography>
-                    </Box>
-                    <br />
-                    <Typography
-                      sx={{
-                        textOverflow: "ellipsis",
-                        color: "#0F111D",
-                        fontSize: "1.1wm",
-                        lineHeight: "28px",
-                        fontWeight: "bold",
-                      }}>
-                      {item.title}
-                    </Typography>
-                    <br />
-                    <Typography
-                      component="div"
-                      sx={{
-                        textOverflow: "ellipsis",
-                        color: "#7B7D8C",
-                        fontSize: "0.9em",
-                      }}>
-                      {item.content}
-                    </Typography>
-                  </CardContent>
-                  <CardActions sx={{ padding: "1rem" }}>
-                    <Icon
-                      sx={{
-                        border: "1px solid #A8518A",
-                        padding: "1.6rem",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginRight: "5px",
-                        borderRadius: "5px",
-                      }}>
-                      <TurnedInNot sx={{ color: "#A8518A" }} />
-                    </Icon>
-                    <PurpleLightButton text="Donate" style={{ flexGrow: 1 }} />
-                  </CardActions>
-                </Card>
-              </Box>
+              <Box>{renderCard(item)}</Box>
             </Grid>
           ))}
         </Grid>
@@ -248,7 +204,7 @@ export default function StoryDonations(props: props) {
     );
   };
 
-  const renderDContent = () => {
+  const renderContent = () => {
     if (swipeable) return isSwipeable();
     else return isNotSwipeable();
   };
@@ -258,15 +214,7 @@ export default function StoryDonations(props: props) {
       sx={{
         padding: "1rem 0",
       }}>
-      {renderDContent()}
+      {renderContent()}
     </Box>
   );
 }
-
-const useStyles = makeStyles(() => ({
-  swipeableContainer: {
-    "&::-webkit-scrollbar": {
-      backgroundColor: "transparent",
-    },
-  },
-}));
