@@ -66,139 +66,140 @@ export default function PgLatestCauses() {
           </IconButton>
         </Box>
 
-        <Box
-          className={classes.scrollableContainer}
-          sx={{
-            width: "100%",
-            overflowX: "auto",
-            display: "flex",
-            gap: 7,
-            padding: "1rem",
-          }}>
-          {data?.map((item: dataProps) => (
-            <Box
-              key={item.id}
-              sx={{
-                minWidth: "300px",
-                minHeight: "100px",
-                color: "#4B5563",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                //border: "1px solid gray",
-              }}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  height="150px"
-                  image={item.src.src}
-                  alt={item.id}
-                />
-                <CardContent>
-                  <Typography
-                    sx={{
-                      fontWeight: "bold",
-                      fontSize: "0.9em",
-                      color: "#A9518B",
-                      lineHeight: "24px",
-                    }}>
-                    {item.label}
-                  </Typography>
-                  <br />
-                  <Typography
-                    sx={{
-                      height: "54px",
-                      fontWeight: "bold",
-                      fontSize: "1.1em",
-                      color: "#252A34",
-                      textOverflow: "ellipsis",
-                      lineHeight: "20px",
-                    }}>
-                    {item.title}
-                  </Typography>
-                  {/* <br/> */}
-                  <Typography
-                    sx={{
-                      height: "41px",
-                      fontSize: "0.9rem",
-                      color: "#555555",
-                      textOverflow: "ellipsis",
-                      lineHeight: "20px",
-                    }}>
-                    {item.summary}
-                  </Typography>
-                  <br />
-                  <Box>
-                    <Box
+        <Box>
+          <Box
+            className={classes.scrollableContainer}
+            sx={{
+              width: "100%",
+              overflowX: "auto",
+              display: "flex",
+              gap: 7,
+              padding: "1rem",
+            }}>
+            {data?.map((item: dataProps) => (
+              <Box
+                key={item.id}
+                sx={{
+                  minWidth: "300px",
+                  minHeight: "100px",
+                  color: "#4B5563",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  //border: "1px solid gray",
+                }}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="150px"
+                    image={item.src.src}
+                    alt={item.id}
+                  />
+                  <CardContent>
+                    <Typography
                       sx={{
-                        display: "flex",
-                        color: "#555555",
-                        paddingBottom: "0.3rem",
+                        fontWeight: "bold",
+                        fontSize: "0.9em",
+                        color: "#A9518B",
+                        lineHeight: "24px",
                       }}>
-                      <Typography
-                        component="div"
-                        sx={{
-                          justifyContent: "start",
-                          flexGrow: 1,
-                          fontSize: "0.7em",
-                        }}>
-                        Donation
-                      </Typography>
-                      <Typography
-                        component="div"
-                        sx={{
-                          justifyContent: "end",
-                          fontSize: "0.7em",
-                        }}>
-                        {item.donationPercentage}%
-                      </Typography>
-                    </Box>
-                    <LinearProgress
-                      variant="determinate"
-                      value={item.donationPercentage}
-                      className={classes.linearProgress}
-                      color="inherit"
+                      {item.label}
+                    </Typography>
+                    <br />
+                    <Typography
                       sx={{
-                        padding: "0.2rem",
-                        borderRadius: "5px",
-                        backgroundColor: "#C7E7DF",
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        display: "flex",
-                        color: "#555555",
-                        paddingTop: "0.3rem",
+                        height: "54px",
+                        fontWeight: "bold",
+                        fontSize: "1.1em",
+                        color: "#252A34",
+                        textOverflow: "ellipsis",
+                        lineHeight: "20px",
                       }}>
-                      <Typography
-                        component="div"
+                      {item.title}
+                    </Typography>
+                    {/* <br/> */}
+                    <Typography
+                      sx={{
+                        height: "41px",
+                        fontSize: "0.9rem",
+                        color: "#555555",
+                        textOverflow: "ellipsis",
+                        lineHeight: "20px",
+                      }}>
+                      {item.summary}
+                    </Typography>
+                    <br />
+                    <Box>
+                      <Box
                         sx={{
-                          justifyContent: "start",
-                          flexGrow: 1,
-                          fontSize: "0.7em",
+                          display: "flex",
+                          color: "#555555",
+                          paddingBottom: "0.3rem",
                         }}>
-                        Raised: {item.currency}
-                        {formatNumberWithSuffix(item.raisedAmount)}
-                      </Typography>
-                      <Typography
-                        component="div"
+                        <Typography
+                          component="div"
+                          sx={{
+                            justifyContent: "start",
+                            flexGrow: 1,
+                            fontSize: "0.7em",
+                          }}>
+                          Donation
+                        </Typography>
+                        <Typography
+                          component="div"
+                          sx={{
+                            justifyContent: "end",
+                            fontSize: "0.7em",
+                          }}>
+                          {item.donationPercentage}%
+                        </Typography>
+                      </Box>
+                      <LinearProgress
+                        variant="determinate"
+                        value={item.donationPercentage}
+                        className={classes.linearProgress}
+                        color="inherit"
                         sx={{
-                          justifyContent: "end",
-                          fontSize: "0.7em",
+                          padding: "0.2rem",
+                          borderRadius: "5px",
+                          backgroundColor: "#C7E7DF",
+                        }}
+                      />
+                      <Box
+                        sx={{
+                          display: "flex",
+                          color: "#555555",
+                          paddingTop: "0.3rem",
                         }}>
-                        Goal: {item.currency}
-                        {formatNumberWithSuffix(item.goalAmount)}
-                      </Typography>
+                        <Typography
+                          component="div"
+                          sx={{
+                            justifyContent: "start",
+                            flexGrow: 1,
+                            fontSize: "0.7em",
+                          }}>
+                          Raised: {item.currency}
+                          {formatNumberWithSuffix(item.raisedAmount)}
+                        </Typography>
+                        <Typography
+                          component="div"
+                          sx={{
+                            justifyContent: "end",
+                            fontSize: "0.7em",
+                          }}>
+                          Goal: {item.currency}
+                          {formatNumberWithSuffix(item.goalAmount)}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </Box>
-                </CardContent>
-                <CardActions sx={{ padding: "1rem" }}>
-                  <Link href="/donate">
-                    <PurpleLightButton text="Donate Now" size="small" />
-                  </Link>
-                </CardActions>
-              </Card>
-              {/* <Box>
+                  </CardContent>
+                  <CardActions sx={{ padding: "1rem" }}>
+                    <Link href="/donate">
+                      <PurpleLightButton text="Donate Now" size="small" />
+                    </Link>
+                  </CardActions>
+                </Card>
+                {/* <Box>
                 <Box>
                   <Image
                     src={Thumbnail1}
@@ -218,8 +219,9 @@ export default function PgLatestCauses() {
                   {item.label}
                 </Typography>
               </Box> */}
-            </Box>
-          ))}
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Box>
     </Box>
