@@ -98,7 +98,7 @@ export default function PgFooter() {
             }}>
             <Box>
               <Grid container spacing={4}>
-                <Grid item lg={4} md={4} sm={6} xs={6}>
+                <Grid item lg={4} md={4} sm={4} xs={4}>
                   <Box>
                     <Typography sx={{ fontWeight: "bold" }}>
                       Quick Links
@@ -115,7 +115,7 @@ export default function PgFooter() {
                   </Box>
                 </Grid>
 
-                <Grid item lg={4} md={4} sm={6} xs={6}>
+                <Grid item lg={4} md={4} sm={4} xs={4}>
                   <Box>
                     <Typography sx={{ fontWeight: "bold" }}>
                       Get In Touch
@@ -132,7 +132,7 @@ export default function PgFooter() {
                   </Box>
                 </Grid>
 
-                <Grid item lg={4} md={4} sm={12} xs={12}>
+                <Grid item lg={4} md={4} sm={4} xs={4}>
                   <Box>
                     <Typography sx={{ fontWeight: "bold" }}>Address</Typography>
                     <br />
