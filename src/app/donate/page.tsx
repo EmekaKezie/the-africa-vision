@@ -40,7 +40,7 @@ export default function DonatePage() {
       <StoryCategories
         data={categories}
         onSelected={(categoryIds) => {
-          setSelectedCategoryIds(categoryIds);
+          setSelectedCategoryIds(categoryIds)
         }}
       />
       <StoryDonations data={displayDonations()} />

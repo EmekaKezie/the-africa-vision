@@ -18,6 +18,7 @@ import PgDonateAds from "@/component/core/PgDonateAds";
 import PgBlog from "@/component/core/PgBlog";
 import PgFooter from "@/component/core/PgFooter";
 import PgNewsLetter from "@/component/core/PgNewsLetter";
+import NavHeader from "./home/NavHeader";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -27,7 +28,8 @@ export default function Home() {
 
   return (
     <Box>
-      <Nav />
+      {/* <Nav /> */}
+      <NavHeader/>
       <Hero />
 
       <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>

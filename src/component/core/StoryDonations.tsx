@@ -34,8 +34,7 @@ export default function StoryDonations(props: props) {
 
   useEffect(() => {
     if (props?.data) setData(props?.data);
-  },[props]);
-
+  }, [props]);
 
   const offset: number = !props.startAt ? 0 : props.startAt;
   const limit: number = !props.stopAt ? data.length : props.stopAt;
