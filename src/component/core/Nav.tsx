@@ -9,12 +9,12 @@ export default function Nav() {
     <Box>
       <AppBar sx={{ background: "#FFFFFF", padding: "1rem" }}>
         <Toolbar>
-          <Box
+          {/* <Box
             sx={{
               flexGrow: 1,
             }}>
             <NavLogo />
-          </Box>
+          </Box> */}
 
           {/* <Box
             sx={{
@@ -24,7 +24,7 @@ export default function Nav() {
             <NavMainMenuMd />
           </Box> */}
 
-          <NavMainMenuMd />
+          {/* <NavMainMenuMd /> */}
 
           {/* <Box
             sx={{
