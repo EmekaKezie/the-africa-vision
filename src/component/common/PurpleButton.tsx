@@ -18,7 +18,14 @@ export default function PurpleButton(props: props) {
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       size={!props.size ? "large" : props.size}
-      style={{}}>
+      //style={{}}
+      sx={{
+        background: "#A8518A",
+        padding: "0.8rem",
+        textTransform: "none",
+        color: "#FFFFFF",
+        width: "150px",
+      }}>
       {props.text}
     </Button>
   );
@@ -26,15 +33,15 @@ export default function PurpleButton(props: props) {
 
 const useStyles = makeStyles(() => ({
   btn: {
-    background: "#A8518A",
-    padding: "0.8rem",
-    textTransform: "none",
-    color: "#FFFFFF",
-    width: "150px",
+    // background: "#A8518A",
+    // padding: "0.8rem",
+    // textTransform: "none",
+    // color: "#FFFFFF",
+    // width: "150px",
     "&:hover": {
       border: "1px solid #A8518A",
-      background:"#FFFFFF",
-      color:"#A8518A"
+      background: "#FFFFFF",
+      color: "#A8518A",
       //opacity: "0.8",
     },
   },
