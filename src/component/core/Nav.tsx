@@ -19,8 +19,7 @@ export default function Nav() {
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "center",
+              display: { xs: "none", md: "block" },
             }}>
             <NavMainMenuMd />
           </Box>
