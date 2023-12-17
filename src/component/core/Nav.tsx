@@ -25,18 +25,18 @@ export default function Nav() {
             <NavMainMenuMd />
           </Box>
 
-          <Box
+          {/* <Box
             sx={{
               flexGrow: 1,
               display: "flex",
               justifyContent: "end",
             }}>
-            {/* <Box
+            <Box
               sx={{
                 display: { xs: "none", md: "block" },
               }}>
               <NavAuthMenu />
-            </Box> */}
+            </Box>
 
             <Box
               sx={{
@@ -44,7 +44,7 @@ export default function Nav() {
               }}>
               <NavMainMenuSm/>
             </Box>
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
     </Box>
