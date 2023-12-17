@@ -72,12 +72,15 @@ export default function StoryDonations(props: props) {
         </Box>
         <br />
         <Box
-          className={classes.swipeableContainer}
+          // className={classes.swipeableContainer}
           sx={{
             overflowX: "auto",
             display: "flex",
             gap: 7,
             paddingBottom: "0.1rem",
+            "&::-webkit-scrollbar": {
+              backgroundColor: "transparent",
+            },
           }}>
           {data?.slice(offset, limit)?.map((item: IStory) => (
             <Box
