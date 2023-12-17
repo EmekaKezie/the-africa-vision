@@ -11,7 +11,12 @@ export default function NavMainMenuMd() {
   const classes = useStyles();
 
   return (
-    <Box>
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: { xs: "none", md: "flex" },
+        justifyContent: "center",
+      }}>
       {mainMenuData?.map((item: IMenu) => {
         if (item.visibility) {
           if (pathname === item.url) {

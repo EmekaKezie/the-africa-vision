@@ -16,13 +16,15 @@ export default function Nav() {
             <NavLogo />
           </Box>
 
-          <Box
+          {/* <Box
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "block" },
             }}>
             <NavMainMenuMd />
-          </Box>
+          </Box> */}
+
+          <NavMainMenuMd />
 
           {/* <Box
             sx={{
