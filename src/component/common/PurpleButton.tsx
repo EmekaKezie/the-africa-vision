@@ -8,16 +8,18 @@ type props = {
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
   size?: sizeTypes;
+  style?:any;
 };
 
 export default function PurpleButton(props: props) {
   const classes = useStyles();
   return (
     <Button
-      className={classes.btn}
+      // className={classes.btn}
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       size={!props.size ? "large" : props.size}
+      style={props.style}
       //variant="contained"
       //style={{}}
       // style={{

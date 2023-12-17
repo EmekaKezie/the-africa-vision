@@ -8,18 +8,29 @@ type props = {
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
   size?: sizeTypes;
-  style?:any;
+  style?: any;
 };
 
 export default function PurpleLightButton(props: props) {
   const classes = useStyles();
   return (
     <Button
-      className={classes.btn}
+      // className={classes.btn}
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       size={!props.size ? "large" : props.size}
-      style={props.style}>
+      style={props.style}
+      sx={{
+        border: "1px solid #A8518A",
+        padding: "0.8rem",
+        textTransform: "none",
+        color: "#A8518A",
+        width: "150px",
+        "&:hover": {
+          background: "#A8518A",
+          color: "#FFFFFF",
+        },
+      }}>
       {props.text}
     </Button>
   );
@@ -35,7 +46,7 @@ const useStyles = makeStyles(() => ({
     width: "150px",
     "&:hover": {
       background: "#A8518A",
-      color:"#FFFFFF"
+      color: "#FFFFFF",
     },
   },
 }));
