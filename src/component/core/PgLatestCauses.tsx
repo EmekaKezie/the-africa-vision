@@ -199,26 +199,6 @@ export default function PgLatestCauses() {
                     </Link>
                   </CardActions>
                 </Card>
-                {/* <Box>
-                <Box>
-                  <Image
-                    src={Thumbnail1}
-                    alt="Thumbnail"
-                    style={{
-                      width: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                </Box>
-                <Typography
-                  sx={{
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                    fontSize: "15px",
-                  }}>
-                  {item.label}
-                </Typography>
-              </Box> */}
               </Box>
             ))}
           </Box>
