@@ -31,12 +31,12 @@ export default function Nav() {
               display: "flex",
               justifyContent: "end",
             }}>
-            <Box
+            {/* <Box
               sx={{
                 display: { xs: "none", md: "block" },
               }}>
               <NavAuthMenu />
-            </Box>
+            </Box> */}
 
             <Box
               sx={{
