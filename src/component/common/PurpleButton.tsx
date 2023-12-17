@@ -19,7 +19,7 @@ export default function PurpleButton(props: props) {
       endIcon={props.endIcon}
       size={!props.size ? "large" : props.size}
       //style={{}}
-      sx={{
+      style={{
         background: "#A8518A",
         padding: "0.8rem",
         textTransform: "none",
