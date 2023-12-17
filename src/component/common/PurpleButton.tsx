@@ -39,10 +39,10 @@ const useStyles = makeStyles(() => ({
     // color: "#FFFFFF",
     // width: "150px",
     "&:hover": {
-      border: "1px solid #A8518A",
-      background: "#FFFFFF",
-      color: "#A8518A",
-      //opacity: "0.8",
+      //border: "1px solid #A8518A",
+      //background: "#FFFFFF",
+      //color: "#A8518A",
+      opacity: "0.8",
     },
   },
 }));
