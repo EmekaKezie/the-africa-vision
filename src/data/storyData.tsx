@@ -12,14 +12,27 @@ import SupportUsThumbnail6 from "@/assets/supportus-thumbnail-6.png";
 export const storyDonationData: IStory[] = [
   {
     id: "1",
-    image: DonationThumbnail1,
+    image: {
+      src: DonationThumbnail1,
+      col: 2,
+      row: 3,
+    },
     date: "June 27, 2023",
-    title: "Flood in Lamboa Flood in Lamboa Flood in Lamboa Flood in Lamboa Flood in Lamboa",
-    content:(
+    title:
+      "Flood in Lamboa Flood in Lamboa Flood in Lamboa Flood in Lamboa Flood in Lamboa",
+    content: (
       <div>
-        <p>Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation</p>
-        <br/>
-        <p>Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation</p>
+        <p>
+          Land of Hope Foundation Land of Hope Foundation Land of Hope
+          Foundation Land of Hope Foundation Land of Hope Foundation Land of
+          Hope Foundation Land of Hope Foundation Land of Hope Foundation
+        </p>
+        <br />
+        <p>
+          Land of Hope Foundation Land of Hope Foundation Land of Hope
+          Foundation Land of Hope Foundation Land of Hope Foundation Land of
+          Hope Foundation Land of Hope Foundation Land of Hope Foundation
+        </p>
       </div>
     ),
     categoryName: "Disaster",
@@ -30,7 +43,11 @@ export const storyDonationData: IStory[] = [
   },
   {
     id: "2",
-    image: DonationThumbnail2,
+    image:  {
+      src: DonationThumbnail2,
+      col: 2,
+      row: 3,
+    },
     date: "July 39, 2022",
     title: "Tsunami in Malika",
     content:
@@ -43,7 +60,9 @@ export const storyDonationData: IStory[] = [
   },
   {
     id: "3",
-    image: DonationThumbnail1,
+    image:  {
+      src: DonationThumbnail3,
+    },
     date: "July 19, 2022",
     title: "Help African Children",
     content:
@@ -56,7 +75,11 @@ export const storyDonationData: IStory[] = [
   },
   {
     id: "4",
-    image: DonationThumbnail2,
+    image:  {
+      src: DonationThumbnail2,
+      col: 2,
+      row: 3,
+    },
     date: "July 30, 2022",
     title: "Sianka Forest Fire",
     content:
@@ -69,7 +92,11 @@ export const storyDonationData: IStory[] = [
   },
   {
     id: "5",
-    image: DonationThumbnail3,
+    image:  {
+      src: DonationThumbnail3,
+      col: 2,
+      row: 3,
+    },
     date: "Sept 1, 2023",
     title: "Soporo Earthquake",
     content:
@@ -82,7 +109,11 @@ export const storyDonationData: IStory[] = [
   },
   {
     id: "6",
-    image: DonationThumbnail1,
+    image:  {
+      src: DonationThumbnail2,
+      col: 2,
+      row: 3,
+    },
     date: "Sept 1, 2023",
     title: "Lidu Land Drought",
     content:
@@ -137,98 +168,149 @@ export const storyCategoryData: IStoryCategory[] = [
 export const storyBlogData: IStory[] = [
   {
     id: "1",
-    image: SupportUsThumbnail1,
+    image:  {
+      src: SupportUsThumbnail1,
+      col: 2,
+      row: 4,
+    },
     title:
       "Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation",
     content: (
       <div>
-        <p>Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation</p>
-        <br/>
-        <p>Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation</p>
+        <p>
+          Land of Hope Foundation Land of Hope Foundation Land of Hope
+          Foundation Land of Hope Foundation Land of Hope Foundation Land of
+          Hope Foundation Land of Hope Foundation Land of Hope Foundation
+        </p>
+        <br />
+        <p>
+          Land of Hope Foundation Land of Hope Foundation Land of Hope
+          Foundation Land of Hope Foundation Land of Hope Foundation Land of
+          Hope Foundation Land of Hope Foundation Land of Hope Foundation
+        </p>
       </div>
     ),
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
   {
     id: "2",
-    image: SupportUsThumbnail2,
+    image:  {
+      src: SupportUsThumbnail2,
+      col: 2,
+      row: 2,
+    },
     title: "Yinka Shonibare Foundation",
     content:
       "The Land of Hope was founded to fight against the idea that children are witches in Nigeria to be tortured or killed. The Land of Hope was founded to fight against the idea that children are witches in Nigeria to be tortured or killed.",
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
   {
     id: "3",
-    image: SupportUsThumbnail3,
+    image:  {
+      src: SupportUsThumbnail3,
+      col: 2,
+      row: 2,
+    },
     title: "Yinka Shonibare Foundation",
     content:
       "Founded to encourage cultural interchange through residencies and development programmes in the UK and Nigeria.",
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
   {
     id: "4",
-    image: SupportUsThumbnail4,
+    image:  {
+      src: SupportUsThumbnail4,
+      col: 2,
+      row: 4
+    },
     title: "The GEANCO Foundation",
     content:
       "We organize special surgical missions and run an innovative, life-saving program to fight anemia in Nigeria.",
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
   {
     id: "5",
-    image: SupportUsThumbnail5,
+    image:  {
+      src: SupportUsThumbnail5,
+      row:4
+    },
     title: "Chess in slum Africa",
     content:
       "A non-profit organization using the game of chess to help youngsters in slum communities realize their full potential.",
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
   {
     id: "6",
-    image: SupportUsThumbnail6,
+    image:  {
+      src: SupportUsThumbnail6,
+    },
     title: "Lagos Food Bank Initiative",
     content:
       "The Lagos Food Bank Initiative provides low-income communities across Nigeria with basic food and self-care items.",
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
   {
     id: "7",
-    image: SupportUsThumbnail1,
+    image:  {
+      src: SupportUsThumbnail1,
+    },
     title: "Yinka Shonibare Foundation",
     content:
       "Founded to encourage cultural interchange through residencies and development programmes in the UK and Nigeria.",
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
   {
     id: "8",
-    image: SupportUsThumbnail2,
+    image:  {
+      src: SupportUsThumbnail2,
+    },
     title: "Yinka Shonibare Foundation",
     content:
       "Founded to encourage cultural interchange through residencies and development programmes in the UK and Nigeria.",
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
   {
     id: "9",
-    image: SupportUsThumbnail3,
+    image:  {
+      src: SupportUsThumbnail3,
+    },
     title: "Yinka Shonibare Foundation",
     content:
       "Founded to encourage cultural interchange through residencies and development programmes in the UK and Nigeria.",
     comments: 30,
     likes: 12,
+    shares: 2,
     url: "/blog",
   },
 ];
+
+// export const storyImageData:IStory[] = [
+//   {
+//     id:"1",
+//     title:""
+//   }
+// ]

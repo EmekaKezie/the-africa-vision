@@ -56,7 +56,7 @@ export default function StoryDonations(props: props) {
   const renderCard = (item: IStory) => {
     return (
       <Card elevation={1}>
-        <CardMedia component="img" height="150px" image={item.image.src} />
+        <CardMedia component="img" height="150px" image={item.image.src.src} />
         <CardContent>
           <Box sx={{ display: "flex" }}>
             <Typography
@@ -95,16 +95,16 @@ export default function StoryDonations(props: props) {
           </Typography>
           <br />
           <Typography
-            component="div"
-            variant="body2"
-            sx={{
-              color: "#7B7D8C",
-              fontSize: "0.9em",
-              display: "-webkit-box",
-              overflow: "hidden",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 3,
-            }}>
+              component="div"
+              variant="body2"
+              sx={{
+                color: "#7B7D8C",
+                fontSize: "0.9em",
+                display: "-webkit-box",
+                overflow: "hidden",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 3,
+              }}>
             {item.content}
           </Typography>
         </CardContent>
@@ -144,7 +144,7 @@ export default function StoryDonations(props: props) {
           </IconButton>
         </Box> */}
 
-        <Stack direction="row" justifyContent="end">
+        <Stack direction="row" spacing={1} justifyContent="end">
           <IconButton
             sx={{ backgroundColor: "#FFE1F5" }}
             onClick={handleScrolLeft}>

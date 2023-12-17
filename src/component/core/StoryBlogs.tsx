@@ -1,13 +1,14 @@
 import { IStory } from "@/types/IStory";
 import {
+  Comment,
   KeyboardArrowLeft,
   KeyboardArrowRight,
-  LibraryAddOutlined,
   Share,
   ThumbDown,
   ThumbUp,
 } from "@mui/icons-material";
 import {
+  Badge,
   Box,
   Card,
   CardContent,
@@ -55,7 +56,7 @@ export default function StoryBlogs(props: props) {
           <CardMedia
             component="img"
             height="150px"
-            image={item.image.src}
+            image={item.image.src.src}
             sx={{ borderRadius: "20px" }}
           />
           <CardContent>
@@ -90,31 +91,63 @@ export default function StoryBlogs(props: props) {
               {item.content}
             </Typography>
             <br />
-            <br />
-            <Box
+            <Stack direction="row" spacing={4}>
+              <Tooltip title="Shares">
+                <Badge badgeContent={item.shares} color="success">
+                  <Share
+                    sx={{
+                      fontSize: "20px",
+                      color: "#A9518B",
+                    }}
+                  />
+                </Badge>
+              </Tooltip>
+              <Tooltip title="Likes">
+                <Badge badgeContent={item.likes} color="error">
+                  <ThumbUp
+                    sx={{
+                      fontSize: "20px",
+                      color: "#A9518B",
+                    }}
+                  />
+                </Badge>
+              </Tooltip>
+              <Tooltip title="Comments">
+                <Badge badgeContent={item.comments} color="info">
+                  <Comment
+                    sx={{
+                      fontSize: "20px",
+                      color: "#A9518B",
+                    }}
+                  />
+                </Badge>
+              </Tooltip>
+            </Stack>
+
+            {/* <br /> */}
+            {/* <Box
               sx={{
                 display: "flex",
                 gap: 1,
                 alignItems: "center",
               }}>
               <Stack direction="row">
-                <Typography sx={{ fontSize: "11px", marginRight: "2px" }}>
-                  Share
+                <Typography sx={{ fontSize: "9px", marginRight: "2px" }}>
+                  {item.shares} Shares
                 </Typography>
-                <Share sx={{ fontSize: "14px" }} />
               </Stack>
-              <Typography sx={{ fontSize: "11px" }}>
+              <Typography sx={{ fontSize: "9px" }}>
                 {item.likes} Likes
               </Typography>
-              <Typography sx={{ fontSize: "11px" }}>
+              <Typography sx={{ fontSize: "9px" }}>
                 {item.comments} Comments
               </Typography>
               <Stack direction="row" spacing={1}>
-                <LibraryAddOutlined sx={{ fontSize: "14px" }} />
+                <Share sx={{ fontSize: "14px" }} />
                 <ThumbUp sx={{ fontSize: "14px" }} />
                 <ThumbDown sx={{ fontSize: "14px" }} />
               </Stack>
-            </Box>
+            </Box> */}
           </CardContent>
         </Card>
       </Link>
@@ -124,7 +157,7 @@ export default function StoryBlogs(props: props) {
   const isSwipeable = () => {
     return (
       <Box>
-        <Stack direction="row" justifyContent="end">
+        <Stack direction="row" spacing={1} justifyContent="end">
           <IconButton sx={{ backgroundColor: "#FFE1F5" }}>
             <KeyboardArrowLeft />
           </IconButton>
