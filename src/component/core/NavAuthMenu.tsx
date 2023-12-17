@@ -7,12 +7,7 @@ export default function NavAuthMenu() {
   const classes = useStyles();
   return (
     <Box
-      className={classes.container}
-      sx={{
-        flexGrow: 1,
-        display: { xs: "none", md: "flex" },
-        justifyContent: "end",
-      }}>
+      className={classes.container}>
       <Link
         href="/login"
         style={{

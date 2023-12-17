@@ -14,22 +14,18 @@ export default function DonatePage() {
 
   useEffect(() => {
     setDonations(storyDonationData);
-  });
+  }, []);
 
   useEffect(() => {
     setCategories(storyCategoryData);
-  });
+  }, []);
 
   useEffect(() => {
-    handleFilterDonations();
-  }, [selectedCategoryIds]);
-
-  const handleFilterDonations = () => {
     const filtered = donations?.filter((x: IStory) =>
       selectedCategoryIds.includes(x.categoryId!)
     );
     setFilteredDonations(filtered);
-  };
+  }, [selectedCategoryIds, donations]);
 
   const displayDonations = (): IStory[] => {
     if (!selectedCategoryIds?.length || selectedCategoryIds[0] === "all") {

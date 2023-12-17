@@ -14,17 +14,13 @@ export default function StoryCategories(props: props) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   useEffect(() => {
-    handleData();
-  });
+    if (props?.data) setData(props?.data);
+  }, [props]);
 
   useEffect(() => {
     if (!selectedIds.length) setSelectedIds(["all"]);
     if (props?.onSelected) props.onSelected(selectedIds);
-  }, [selectedIds]);
-
-  const handleData = () => {
-    if (props?.data) setData(props?.data);
-  };
+  }, [selectedIds, props]);
 
   const handleSelect = (id: string) => {
     const index = selectedIds.indexOf("all");
@@ -98,5 +94,8 @@ const useStyles = makeStyles(() => ({
   main: {
     border: "1px solid #A9518B",
     fontSize: "0.9em",
+    "&:hover": {
+      opacity: 0.8,
+    },
   },
 }));

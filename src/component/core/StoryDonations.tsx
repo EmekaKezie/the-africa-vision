@@ -33,12 +33,9 @@ export default function StoryDonations(props: props) {
   const [data, setData] = useState<IStory[]>([]);
 
   useEffect(() => {
-    handleData();
-  });
-
-  const handleData = () => {
     if (props?.data) setData(props?.data);
-  };
+  },[props]);
+
 
   const offset: number = !props.startAt ? 0 : props.startAt;
   const limit: number = !props.stopAt ? data.length : props.stopAt;

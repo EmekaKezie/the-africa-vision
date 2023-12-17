@@ -16,12 +16,7 @@ export default function NavMainMenuSm() {
     setMenuAnchor(null);
   };
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        display: { xs: "flex", md: "none" },
-        justifyContent: "end",
-      }}>
+    <Box>
       <IconButton onClick={handleOpenMenu}>
         <MenuIcon style={{ color: "#A8518A", fontSize:"40px" }}  />
       </IconButton>
