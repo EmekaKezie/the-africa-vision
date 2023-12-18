@@ -15,6 +15,7 @@ export default function NavMainMenuMd() {
         if (item.visibility) {
           return (
             <Link
+              className={classes.link}
               href={item.url}
               key={item.id}
               style={{
