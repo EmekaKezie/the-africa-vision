@@ -12,37 +12,38 @@ export default function NavMainMenuMd() {
   return (
     <Stack direction="row">
       {mainMenuData?.map((item: IMenu) => {
-        if (item.visibility) {
-          if (pathname === item.url) {
-            return (
-              <Link
-                key={item.id}
-                href={item.url}
-                style={{
-                  padding: "0.5rem 1rem",
-                  fontSize: "16px",
-                  color: "#120F0F",
-                  fontWeight: "bold",
-                }}
-                className={classes.link}>
-                {item.name}
-              </Link>
-            );
-          }
-          return (
-            <Link
-              key={item.id}
-              href={item.url}
-              style={{
-                padding: "0.5rem 1rem",
-                fontSize: "16px",
-                color: "#120F0F",
-              }}
-              className={classes.link}>
-              {item.name}
-            </Link>
-          );
-        }
+        return <Link href={item.url}>{item.name}</Link>
+        // if (item.visibility) {
+        //   if (pathname === item.url) {
+        //     return (
+        //       <Link
+        //         key={item.id}
+        //         href={item.url}
+        //         style={{
+        //           padding: "0.5rem 1rem",
+        //           fontSize: "16px",
+        //           color: "#120F0F",
+        //           fontWeight: "bold",
+        //         }}
+        //         className={classes.link}>
+        //         {item.name}
+        //       </Link>
+        //     );
+        //   }
+        //   return (
+        //     <Link
+        //       key={item.id}
+        //       href={item.url}
+        //       style={{
+        //         padding: "0.5rem 1rem",
+        //         fontSize: "16px",
+        //         color: "#120F0F",
+        //       }}
+        //       className={classes.link}>
+        //       {item.name}
+        //     </Link>
+        //   );
+        // }
       })}
     </Stack>
   );
