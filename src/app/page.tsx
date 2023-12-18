@@ -20,6 +20,7 @@ import PgFooter from "@/component/core/PgFooter";
 import PgNewsLetter from "@/component/core/PgNewsLetter";
 import StoryArticles from "@/component/core/StoryArticles";
 import { storyDonationData } from "@/data/storyData";
+import StoryCampaign from "@/component/core/StoryCampaign";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -65,21 +66,21 @@ export default function Home() {
 
       <PgStory />
 
-      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-        <PgLatestCauses />
-      </Box>
-      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
-        <PgLatestCauses />
+      <Box>
+        <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
+          <StoryCampaign data={storyDonationData} />
+        </Box>
+        <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+          <StoryCampaign data={storyDonationData} />
+        </Box>
       </Box>
 
       <PgDonateAds />
 
       <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-        {/* <PgBlog /> */}
         <StoryArticles data={storyDonationData} />
       </Box>
       <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
-        {/* <PgBlog /> */}
         <StoryArticles data={storyDonationData} swipeable />
       </Box>
 

@@ -40,6 +40,7 @@ export const storyDonationData: IStory[] = [
     categoryId: "1",
     analytics: {
       count: 230,
+      percentage: 20,
     },
     url: "/",
   },
@@ -59,6 +60,10 @@ export const storyDonationData: IStory[] = [
     categoryId: "1",
     analytics: {
       count: 1099,
+      percentage: 50,
+      goal: 2000,
+      attanied: 100,
+      currency: "USD",
     },
     url: "/",
   },
@@ -76,6 +81,10 @@ export const storyDonationData: IStory[] = [
     categoryId: "2",
     analytics: {
       count: 748,
+      percentage: 40,
+      goal: 2500000,
+      attanied: 1000000,
+      currency: "NGN",
     },
     url: "/",
   },
@@ -96,7 +105,7 @@ export const storyDonationData: IStory[] = [
     analytics: {
       count: 748,
     },
-    url:"/"
+    url: "/",
   },
   {
     id: "5",
