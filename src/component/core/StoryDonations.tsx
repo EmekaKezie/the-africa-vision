@@ -18,6 +18,7 @@ import {
 } from "@mui/icons-material";
 import { useEffect, useRef, useState } from "react";
 import { IStory } from "@/types/IStory";
+import Link from "next/link";
 
 type props = {
   swipeable?: boolean;
@@ -95,16 +96,16 @@ export default function StoryDonations(props: props) {
           </Typography>
           <br />
           <Typography
-              component="div"
-              variant="body2"
-              sx={{
-                color: "#7B7D8C",
-                fontSize: "0.9em",
-                display: "-webkit-box",
-                overflow: "hidden",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 3,
-              }}>
+            component="div"
+            variant="body2"
+            sx={{
+              color: "#7B7D8C",
+              fontSize: "0.9em",
+              display: "-webkit-box",
+              overflow: "hidden",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+            }}>
             {item.content}
           </Typography>
         </CardContent>
@@ -121,7 +122,9 @@ export default function StoryDonations(props: props) {
             }}>
             <TurnedInNot sx={{ color: "#A8518A" }} />
           </Icon>
-          <PurpleLightButton text="Donate" style={{ flexGrow: 1 }} />
+          <Link href={item.url!} style={{width:"100%"}} >
+            <PurpleLightButton text="Donate" style={{ flexGrow: 1, width:"100%" }}/>
+          </Link>
         </CardActions>
       </Card>
     );
@@ -163,7 +166,7 @@ export default function StoryDonations(props: props) {
             overflowX: "auto",
             display: "flex",
             gap: 7,
-            paddingBottom: "0.1rem",
+            padding: "0.1rem",
             "&::-webkit-scrollbar": {
               backgroundColor: "transparent",
             },

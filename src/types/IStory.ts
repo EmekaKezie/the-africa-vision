@@ -15,10 +15,12 @@ export interface IStory {
 }
 
 interface IStoryAnalytics {
-  raised?: number;
   goal?: number;
+  attanied?: number;
+  outstanding?: number;
   percentage?: number;
   count?: number;
+  currency?: string;
 }
 
 interface IStoryImage {

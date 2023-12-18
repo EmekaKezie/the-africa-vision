@@ -18,6 +18,7 @@ export const storyDonationData: IStory[] = [
       row: 3,
     },
     date: "June 27, 2023",
+    author: "Clink James",
     title:
       "Flood in Lamboa Flood in Lamboa Flood in Lamboa Flood in Lamboa Flood in Lamboa",
     content: (
@@ -40,15 +41,17 @@ export const storyDonationData: IStory[] = [
     analytics: {
       count: 230,
     },
+    url: "/",
   },
   {
     id: "2",
-    image:  {
+    image: {
       src: DonationThumbnail2,
       col: 2,
       row: 3,
     },
     date: "July 39, 2022",
+    author: "Clink James",
     title: "Tsunami in Malika",
     content:
       "Emergency! A tsunami has just hit Malika, Tarasudi District. Help our affected brothers and sisters.",
@@ -57,13 +60,15 @@ export const storyDonationData: IStory[] = [
     analytics: {
       count: 1099,
     },
+    url: "/",
   },
   {
     id: "3",
-    image:  {
+    image: {
       src: DonationThumbnail3,
     },
     date: "July 19, 2022",
+    author: "Clink James",
     title: "Help African Children",
     content:
       "African children need your help to get proper food and water. Prolonged crisis is a real urgency.",
@@ -72,15 +77,17 @@ export const storyDonationData: IStory[] = [
     analytics: {
       count: 748,
     },
+    url: "/",
   },
   {
     id: "4",
-    image:  {
+    image: {
       src: DonationThumbnail2,
       col: 2,
       row: 3,
     },
     date: "July 30, 2022",
+    author: "Clink James",
     title: "Sianka Forest Fire",
     content:
       "The Sianka forest has caught fire and affected the surrounding community. Let's help buy their health facilities!",
@@ -89,16 +96,18 @@ export const storyDonationData: IStory[] = [
     analytics: {
       count: 748,
     },
+    url:"/"
   },
   {
     id: "5",
-    image:  {
+    image: {
       src: DonationThumbnail3,
       col: 2,
       row: 3,
     },
     date: "Sept 1, 2023",
     title: "Soporo Earthquake",
+    author: "Clink James",
     content:
       "A magnitude 7.3 earthquake has shaken Saporo sub-district, help them recover with food and medicine.",
     categoryName: "Health",
@@ -106,15 +115,17 @@ export const storyDonationData: IStory[] = [
     analytics: {
       count: 760,
     },
+    url: "/",
   },
   {
     id: "6",
-    image:  {
+    image: {
       src: DonationThumbnail2,
       col: 2,
       row: 3,
     },
     date: "Sept 1, 2023",
+    author: "Clink James",
     title: "Lidu Land Drought",
     content:
       "The people of Tanah Lidu are currently suffering from drought, help them get clean water!",
@@ -123,6 +134,7 @@ export const storyDonationData: IStory[] = [
     analytics: {
       count: 760,
     },
+    url: "/",
   },
 ];
 
@@ -168,7 +180,7 @@ export const storyCategoryData: IStoryCategory[] = [
 export const storyBlogData: IStory[] = [
   {
     id: "1",
-    image:  {
+    image: {
       src: SupportUsThumbnail1,
       col: 2,
       row: 4,
@@ -197,7 +209,7 @@ export const storyBlogData: IStory[] = [
   },
   {
     id: "2",
-    image:  {
+    image: {
       src: SupportUsThumbnail2,
       col: 2,
       row: 2,
@@ -212,7 +224,7 @@ export const storyBlogData: IStory[] = [
   },
   {
     id: "3",
-    image:  {
+    image: {
       src: SupportUsThumbnail3,
       col: 2,
       row: 2,
@@ -227,10 +239,10 @@ export const storyBlogData: IStory[] = [
   },
   {
     id: "4",
-    image:  {
+    image: {
       src: SupportUsThumbnail4,
       col: 2,
-      row: 4
+      row: 4,
     },
     title: "The GEANCO Foundation",
     content:
@@ -242,9 +254,9 @@ export const storyBlogData: IStory[] = [
   },
   {
     id: "5",
-    image:  {
+    image: {
       src: SupportUsThumbnail5,
-      row:4
+      row: 4,
     },
     title: "Chess in slum Africa",
     content:
@@ -256,7 +268,7 @@ export const storyBlogData: IStory[] = [
   },
   {
     id: "6",
-    image:  {
+    image: {
       src: SupportUsThumbnail6,
     },
     title: "Lagos Food Bank Initiative",
@@ -269,7 +281,7 @@ export const storyBlogData: IStory[] = [
   },
   {
     id: "7",
-    image:  {
+    image: {
       src: SupportUsThumbnail1,
     },
     title: "Yinka Shonibare Foundation",
@@ -282,7 +294,7 @@ export const storyBlogData: IStory[] = [
   },
   {
     id: "8",
-    image:  {
+    image: {
       src: SupportUsThumbnail2,
     },
     title: "Yinka Shonibare Foundation",
@@ -295,7 +307,7 @@ export const storyBlogData: IStory[] = [
   },
   {
     id: "9",
-    image:  {
+    image: {
       src: SupportUsThumbnail3,
     },
     title: "Yinka Shonibare Foundation",

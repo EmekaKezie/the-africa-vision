@@ -9,10 +9,11 @@ type props = {
   endIcon?: JSX.Element;
   size?: sizeTypes;
   style?: any;
+  fullWidth?: boolean;
 };
 
 export default function PurpleLightButton(props: props) {
-  const classes = useStyles();
+  //const classes = useStyles();
   return (
     <Button
       // className={classes.btn}
@@ -20,12 +21,13 @@ export default function PurpleLightButton(props: props) {
       endIcon={props.endIcon}
       size={!props.size ? "large" : props.size}
       style={props.style}
+      fullWidth={!props.fullWidth ? false : true}
       sx={{
         border: "1px solid #A8518A",
         padding: "0.8rem",
         textTransform: "none",
         color: "#A8518A",
-        width: "150px",
+        //width: !props.fullWidth ? "150px" : "200px",
         "&:hover": {
           background: "#A8518A",
           color: "#FFFFFF",
@@ -36,17 +38,17 @@ export default function PurpleLightButton(props: props) {
   );
 }
 
-const useStyles = makeStyles(() => ({
-  btn: {
-    background: "#FFFFFF",
-    border: "1px solid #A8518A",
-    padding: "0.8rem",
-    textTransform: "none",
-    color: "#A8518A",
-    width: "150px",
-    "&:hover": {
-      background: "#A8518A",
-      color: "#FFFFFF",
-    },
-  },
-}));
+// const useStyles = makeStyles(() => ({
+//   btn: {
+//     background: "#FFFFFF",
+//     border: "1px solid #A8518A",
+//     padding: "0.8rem",
+//     textTransform: "none",
+//     color: "#A8518A",
+//     width: "150px",
+//     "&:hover": {
+//       background: "#A8518A",
+//       color: "#FFFFFF",
+//     },
+//   },
+// }));
