@@ -21,6 +21,7 @@ import PgNewsLetter from "@/component/core/PgNewsLetter";
 import StoryArticles from "@/component/core/StoryArticles";
 import { storyDonationData } from "@/data/storyData";
 import StoryCampaign from "@/component/core/StoryCampaign";
+import StoryCampaign2 from "@/component/core/StoryCampaign2";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -68,18 +69,21 @@ export default function Home() {
 
       <Box>
         <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
+          <StoryCampaign2 data={storyDonationData} swipeable />
+        </Box>
+        <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+          <StoryCampaign2 data={storyDonationData} swipeable />
+        </Box>
+      </Box>
+
+      <Box>
+        <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
           <StoryCampaign data={storyDonationData} swipeable />
         </Box>
         <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
           <StoryCampaign data={storyDonationData} swipeable />
         </Box>
       </Box>
-
-      {/* <Box>
-        <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-          <Donate />
-        </Box>
-      </Box> */}
 
       <PgDonateAds />
 
