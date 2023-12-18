@@ -76,7 +76,7 @@ export default function Home() {
 
       <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
         {/* <PgBlog /> */}
-        <StoryArticles data={storyDonationData} swipeable />
+        <StoryArticles data={storyDonationData} />
       </Box>
       <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
         {/* <PgBlog /> */}

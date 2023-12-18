@@ -54,7 +54,7 @@ export const storyDonationData: IStory[] = [
     author: "Clink James",
     title: "Tsunami in Malika",
     content:
-      "Emergency! A tsunami has just hit Malika, Tarasudi District. Help our affected brothers and sisters.",
+      "Emergency! A tsunami has just hit Malika, Tarasudi District. Help our affected brothers and sisters. Emergency! A tsunami has just hit Malika, Tarasudi District. Help our affected brothers and sisters.",
     categoryName: "Disaster",
     categoryId: "1",
     analytics: {
@@ -71,7 +71,7 @@ export const storyDonationData: IStory[] = [
     author: "Clink James",
     title: "Help African Children",
     content:
-      "African children need your help to get proper food and water. Prolonged crisis is a real urgency.",
+      "African children need your help to get proper food and water. Prolonged crisis is a real urgency. Emergency! A tsunami has just hit Malika, Tarasudi District. Help our affected brothers and sisters.",
     categoryName: "Children",
     categoryId: "2",
     analytics: {
@@ -90,7 +90,7 @@ export const storyDonationData: IStory[] = [
     author: "Clink James",
     title: "Sianka Forest Fire",
     content:
-      "The Sianka forest has caught fire and affected the surrounding community. Let's help buy their health facilities!",
+      "The Sianka forest has caught fire and affected the surrounding community. Let's help buy their health facilities! Emergency! A tsunami has just hit Malika, Tarasudi District. Help our affected brothers and sisters.",
     categoryName: "Children",
     categoryId: "2",
     analytics: {
@@ -109,7 +109,7 @@ export const storyDonationData: IStory[] = [
     title: "Soporo Earthquake",
     author: "Clink James",
     content:
-      "A magnitude 7.3 earthquake has shaken Saporo sub-district, help them recover with food and medicine.",
+      "A magnitude 7.3 earthquake has shaken Saporo sub-district, help them recover with food and medicine. Emergency! A tsunami has just hit Malika, Tarasudi District. Help our affected brothers and sisters.",
     categoryName: "Health",
     categoryId: "3",
     analytics: {
@@ -128,7 +128,7 @@ export const storyDonationData: IStory[] = [
     author: "Clink James",
     title: "Lidu Land Drought",
     content:
-      "The people of Tanah Lidu are currently suffering from drought, help them get clean water!",
+      "The people of Tanah Lidu are currently suffering from drought, help them get clean water! Emergency! A tsunami has just hit Malika, Tarasudi District. Help our affected brothers and sisters.",
     categoryName: "Pandemic",
     categoryId: "4",
     analytics: {
