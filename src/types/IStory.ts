@@ -1,10 +1,11 @@
+import { IContact } from "./IContact";
+
 export interface IStory {
   id: string;
   image: IStoryImage;
   title: string;
   content: any;
   date?: string;
-  author?: string;
   likes?: number;
   comments?: number;
   shares?: number;
@@ -12,9 +13,11 @@ export interface IStory {
   categoryName?: string;
   analytics?: IStoryAnalytics;
   url?: string;
+  author?: string;
+  facilitator?: IContact;
 }
 
-interface IStoryAnalytics {
+export interface IStoryAnalytics {
   goal?: number;
   attanied?: number;
   outstanding?: number;

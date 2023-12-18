@@ -12,7 +12,7 @@ import PgDonateAds from "@/component/core/PgDonateAds";
 import PgFooter from "@/component/core/PgFooter";
 import PgNewsLetter from "@/component/core/PgNewsLetter";
 import StoryArticles from "@/component/core/StoryArticles";
-import { storyDonationData } from "@/data/storyData";
+import { storyDonationData } from "@/data/storyDonationData";
 import StoryCampaign from "@/component/core/StoryCampaign";
 import PgSectionDescription from "@/component/core/PgSectionDescription";
 

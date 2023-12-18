@@ -122,7 +122,7 @@ export default function StoryDonations(props: props) {
             }}>
             <TurnedInNot sx={{ color: "#A8518A" }} />
           </Icon>
-          <Link href={item.url!} style={{width:"100%"}} >
+          <Link href={`/donate/[id]`} as={`/donate/${item.id}`} style={{width:"100%"}} >
             <PurpleLightButton text="Donate" style={{ flexGrow: 1, width:"100%" }}/>
           </Link>
         </CardActions>

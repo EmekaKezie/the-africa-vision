@@ -1,12 +1,13 @@
 export interface IDonation {
   id: string;
-  image: string | any;
-  date: string;
-  count: number;
-  title: string;
+  storyDonationId?: string;
+  itemDesc: string;
+  itemType: string;
+  donationDate: Date;
+  itemCount: number;
+  benefactorFirstname: string;
+  benefactorLastname: string;
   content: string;
   categoryId: string;
   categoryName: string;
 }
-
-
