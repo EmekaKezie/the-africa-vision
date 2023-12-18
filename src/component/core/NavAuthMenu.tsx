@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import Link from "next/link";
