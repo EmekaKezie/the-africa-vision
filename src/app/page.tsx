@@ -68,12 +68,18 @@ export default function Home() {
 
       <Box>
         <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-          <StoryCampaign data={storyDonationData} />
+          <StoryCampaign data={storyDonationData} swipeable />
         </Box>
         <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
-          <StoryCampaign data={storyDonationData} />
+          <StoryCampaign data={storyDonationData} swipeable />
         </Box>
       </Box>
+
+      {/* <Box>
+        <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
+          <Donate />
+        </Box>
+      </Box> */}
 
       <PgDonateAds />
 
