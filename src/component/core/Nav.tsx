@@ -19,12 +19,30 @@ export default function Nav() {
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", md: "block" },
+              display: { xs: "none", md: "flex" },
+
+              justifyContent: "center",
             }}>
             <NavMainMenuMd />
           </Box>
 
-          {/* <NavMainMenuMd /> */}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "end",
+            }}>
+            <NavAuthMenu />
+          </Box>
+
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              justifyContent: "end",
+            }}>
+            <NavMainMenuSm />
+          </Box>
 
           {/* <Box
             sx={{
@@ -43,7 +61,7 @@ export default function Nav() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}>
-              <NavMainMenuSm/>
+              <NavMainMenuSm />
             </Box>
           </Box> */}
         </Toolbar>
