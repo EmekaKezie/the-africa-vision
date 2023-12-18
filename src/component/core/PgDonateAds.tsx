@@ -8,12 +8,12 @@ export default function PgDonateAds() {
   return (
     <Box
       sx={{
-        
         backgroundColor: "#F5F7FA",
       }}>
       <Grid container>
         <Grid item lg={6} md={6} sm={12} xs={12}>
-          <Box sx={{ display: { xs: "none", md: "block" }, padding: "4rem 8rem" }}>
+          <Box
+            sx={{ display: { xs: "none", md: "block" }, padding: "4rem 8rem" }}>
             <Typography
               sx={{
                 fontSize: "3rem",
@@ -26,7 +26,7 @@ export default function PgDonateAds() {
             <br />
             <br />
             <Link href="/donate">
-              <PurpleButton text="Donate" />
+              <PurpleButton text="Donate" style={{ width: "150px" }} />
             </Link>
           </Box>
 
@@ -43,7 +43,7 @@ export default function PgDonateAds() {
             <br />
             <br />
             <Link href="/donate">
-              <PurpleButton text="Donate" />
+              <PurpleButton text="Donate"  style={{ width: "150px" }}/>
             </Link>
           </Box>
         </Grid>
@@ -52,10 +52,14 @@ export default function PgDonateAds() {
           <Box
             sx={{
               display: { xs: "none", md: "block" },
-               height:"350px",
-               overflow:"hidden"
+              height: "350px",
+              overflow: "hidden",
             }}>
-            <Image src={Thumbnail} alt="Thumbnail" style={{width:"100%", objectFit:"cover"}} />
+            <Image
+              src={Thumbnail}
+              alt="Thumbnail"
+              style={{ width: "100%", objectFit: "cover" }}
+            />
           </Box>
         </Grid>
       </Grid>

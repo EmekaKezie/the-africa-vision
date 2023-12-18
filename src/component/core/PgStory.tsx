@@ -77,7 +77,7 @@ export default function PgStory() {
               </Typography>
               <br />
               <br />
-              <PurpleButton text="Learn More" />
+              <PurpleButton text="Learn More" style={{ width: "150px" }} />
             </Box>
           </Box>
         </Box>
@@ -160,7 +160,7 @@ export default function PgStory() {
               </Typography>
               <br />
               <br />
-              <PurpleButton text="Learn More" />
+              <PurpleButton text="Learn More" style={{ width: "150px" }} />
             </Box>
           </Box>
         ))}
