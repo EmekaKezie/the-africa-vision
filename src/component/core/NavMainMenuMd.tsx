@@ -12,7 +12,7 @@ export default function NavMainMenuMd() {
   return (
     <Stack direction="row">
       {mainMenuData?.map((item: IMenu) => {
-        return <Link href={item.url}>{item.name}</Link>
+        return <Link href={item.url} key={item.id}>{item.name}</Link>
         // if (item.visibility) {
         //   if (pathname === item.url) {
         //     return (
