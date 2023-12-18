@@ -112,8 +112,11 @@ export default function Hero() {
               width: "50%",
             }}
             InputProps={{
-              classes: {
-                input: classes.inputField,
+              style: {
+                margin: 0,
+                outline: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.9)",
+                color: "#FFFFFF",
               },
             }}
           />
@@ -128,10 +131,16 @@ export default function Hero() {
           <TextField
             placeholder="Search for Crowdfunding Project"
             //className={classes.inputBox}
-            sx={{ width: "100%", marginBottom:"2px" }}
+            sx={{
+              width: "100%",
+              marginBottom: "2px",
+            }}
             InputProps={{
-              classes: {
-                input: classes.inputField,
+              style: {
+                margin: 0,
+                outline: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.9)",
+                color: "#FFFFFF",
               },
             }}
           />
@@ -144,53 +153,6 @@ export default function Hero() {
 }
 
 const useStyles = makeStyles(() => ({
-  // container: {
-  //   position: "relative",
-  //   "&::before": {
-  //     content: '""',
-  //     position: "absolute",
-  //     top: 0,
-  //     right: 0,
-  //     bottom: 0,
-  //     left: 0,
-  //     backgroundColor: "rgba(0, 0, 0, 0.5)",
-  //   },
-  // },
-
-  // contentBox: {
-  //   position: "absolute",
-  //   top: "50%",
-  //   left: "50%",
-  //   transform: "translate(-50%, -50%)",
-  //   color: "white",
-  //   padding: "1rem",
-  //   textAlign: "center",
-  // },
-
-  // contentTextMax: {
-  //   textAlign: "center",
-  //   justifyContent: "center",
-  //   "& span": {
-  //     fontSize: "4em",
-  //     lineHeight: "70px",
-  //     fontWeight: "bold",
-  //   },
-  // },
-
-  // contentTextMin: {
-  //   marginTop: "-20px",
-  //   textAlign: "center",
-  //   justifyContent: "center",
-  //   "& span": {
-  //     fontSize: "2rem",
-  //     fontWeight: "bold",
-  //   },
-  // },
-
-  // inputBox: {
-  //   width: "50%",
-  // },
-
   inputField: {
     padding: "1rem",
     margin: 0,
@@ -200,18 +162,4 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "rgba(0, 0, 0, 0.9)",
     color: "#FFFFFF",
   },
-
-  // btn: {
-  //   background: "#A8518A",
-  //   padding: "1rem",
-  //   width: "100px",
-  //   textTransform: "none",
-  //   borderBottomLeftRadius: 0,
-  //   borderTopLeftRadius: 0,
-  //   color: "#FFFFFF",
-  //   "&:hover": {
-  //     background: "#A8518A",
-  //     opacity: "0.8",
-  //   },
-  // },
 }));
