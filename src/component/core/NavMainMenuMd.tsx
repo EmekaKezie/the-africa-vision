@@ -12,7 +12,22 @@ export default function NavMainMenuMd() {
   return (
     <Stack direction="row">
       {mainMenuData?.map((item: IMenu) => {
-        return <Link href={item.url} key={item.id}>{item.name}</Link>
+        if (item.visibility) {
+          return (
+            <Link
+              href={item.url}
+              key={item.id}
+              style={{
+                padding: "0.5rem 1rem",
+                fontSize: "16px",
+                color: "#120F0F",
+                fontWeight: pathname === item.url ? "bold" : "normal",
+              }}>
+              {item.name}
+            </Link>
+          );
+        }
+
         // if (item.visibility) {
         //   if (pathname === item.url) {
         //     return (
