@@ -14,6 +14,7 @@ import PgNewsLetter from "@/component/core/PgNewsLetter";
 import StoryArticles from "@/component/core/StoryArticles";
 import { storyDonationData } from "@/data/storyData";
 import StoryCampaign from "@/component/core/StoryCampaign";
+import PgSectionDescription from "@/component/core/PgSectionDescription";
 
 export default function Home() {
   return (
@@ -40,6 +41,10 @@ export default function Home() {
       <PgStory />
 
       <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
+        <PgSectionDescription
+          title="Latest Causes ____"
+          subtitle="Find The Popular Cause And Donate To Them"
+        />
         <StoryCampaign data={storyDonationData} swipeable />
       </Box>
 
@@ -54,6 +59,10 @@ export default function Home() {
       <br />
 
       <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
+        <PgSectionDescription
+          title="Latest News _____"
+          subtitle="Articles You May Read"
+        />
         <StoryArticles data={storyDonationData} swipeable />
       </Box>
 
