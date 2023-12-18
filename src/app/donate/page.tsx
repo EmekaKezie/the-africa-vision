@@ -35,30 +35,23 @@ export default function DonatePage() {
     }
   };
 
-  console.log(filteredDonations);
-
   return (
     <Box>
-      
-
-      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
-        <StoryCategories
-          data={categories}
-          onSelected={(categoryIds) => {
-            setSelectedCategoryIds(categoryIds);
-          }}
-        />
-        <StoryDonations data={displayDonations()} />
-      </Box>
-
-      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-        <StoryCategories
-          data={categories}
-          onSelected={(categoryIds) => {
-            setSelectedCategoryIds(categoryIds);
-          }}
-        />
-        <StoryDonations data={displayDonations()} />
+      <Box
+        sx={{
+          padding: { xs: "0 1rem", md: "0 8rem" },
+        }}>
+        <Box>
+          <StoryCategories
+            data={categories}
+            onSelected={(categoryIds) => {
+              setSelectedCategoryIds(categoryIds);
+            }}
+          />
+        </Box>
+        <Box>
+          <StoryDonations data={displayDonations()} />
+        </Box>
       </Box>
     </Box>
   );

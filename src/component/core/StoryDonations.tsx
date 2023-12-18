@@ -76,7 +76,7 @@ export default function StoryDonations(props: props) {
                 fontSize: "0.8em",
                 lineHeight: "16px",
               }}>
-              {item.analytics?.count} donations
+              {item.analytics?.contributions} donations
             </Typography>
           </Box>
           <br />

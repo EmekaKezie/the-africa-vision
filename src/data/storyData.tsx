@@ -39,7 +39,7 @@ export const storyDonationData: IStory[] = [
     categoryName: "Disaster",
     categoryId: "1",
     analytics: {
-      count: 230,
+      contributions: 230,
       percentage: 20,
     },
     url: "/",
@@ -59,7 +59,7 @@ export const storyDonationData: IStory[] = [
     categoryName: "Disaster",
     categoryId: "1",
     analytics: {
-      count: 1099,
+      contributions: 1099,
       percentage: 50,
       goal: 2000,
       attanied: 100,
@@ -80,7 +80,7 @@ export const storyDonationData: IStory[] = [
     categoryName: "Children",
     categoryId: "2",
     analytics: {
-      count: 748,
+      contributions: 748,
       percentage: 40,
       goal: 2500000,
       attanied: 1000000,
@@ -103,7 +103,7 @@ export const storyDonationData: IStory[] = [
     categoryName: "Children",
     categoryId: "2",
     analytics: {
-      count: 748,
+      contributions: 748,
     },
     url: "/",
   },
@@ -122,7 +122,7 @@ export const storyDonationData: IStory[] = [
     categoryName: "Health",
     categoryId: "3",
     analytics: {
-      count: 760,
+      contributions: 760,
     },
     url: "/",
   },
@@ -141,7 +141,7 @@ export const storyDonationData: IStory[] = [
     categoryName: "Pandemic",
     categoryId: "4",
     analytics: {
-      count: 760,
+      contributions: 760,
     },
     url: "/",
   },

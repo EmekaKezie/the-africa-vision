@@ -1,22 +1,16 @@
 import { mainMenuData } from "@/data/menuData";
 import { IMenu } from "@/types/IMenu";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 
 export default function NavMainMenuMd() {
   const pathname = usePathname();
   const classes = useStyles();
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        display: { xs: "none", md: "flex" },
-        justifyContent: "center",
-      }}>
+    <Stack direction="row">
       {mainMenuData?.map((item: IMenu) => {
         if (item.visibility) {
           if (pathname === item.url) {
@@ -50,7 +44,7 @@ export default function NavMainMenuMd() {
           );
         }
       })}
-    </Box>
+    </Stack>
   );
 }
 
@@ -61,4 +55,3 @@ const useStyles = makeStyles(() => ({
     },
   },
 }));
-

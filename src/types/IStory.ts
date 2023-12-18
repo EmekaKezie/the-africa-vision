@@ -19,8 +19,9 @@ interface IStoryAnalytics {
   attanied?: number;
   outstanding?: number;
   percentage?: number;
-  count?: number;
+  contributions?: number;
   currency?: string;
+  countdown?: number;
 }
 
 interface IStoryImage {
