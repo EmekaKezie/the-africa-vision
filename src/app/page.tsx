@@ -1,65 +1,37 @@
 "use client";
 
-import Image from "next/image";
-import styles from "./page.module.css";
 import { Box } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import React, { useState } from "react";
-import Hero from "./home/Hero";
-import Testimonials from "./home/Testimonials";
-import Donate from "./home/Donate";
+import React from "react";
+import HeroHome from "@/component/core/HeroHome";
 import Nav from "@/component/core/Nav";
 import PgAboutUs from "../component/core/PgAboutUs";
 import PgCoreServices from "@/component/core/PgCoreServices";
 import PgProjects from "@/component/core/PgProjects";
 import PgStory from "@/component/core/PgStory";
-import PgLatestCauses from "@/component/core/PgLatestCauses";
 import PgDonateAds from "@/component/core/PgDonateAds";
-import PgBlog from "@/component/core/PgBlog";
 import PgFooter from "@/component/core/PgFooter";
 import PgNewsLetter from "@/component/core/PgNewsLetter";
 import StoryArticles from "@/component/core/StoryArticles";
 import { storyDonationData } from "@/data/storyData";
 import StoryCampaign from "@/component/core/StoryCampaign";
-import StoryCampaign2 from "@/component/core/StoryCampaign2";
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function Home() {
-  const classes = useStyles();
-
   return (
     <Box>
       <Nav />
-      <Hero />
+      <HeroHome />
 
-      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-        <PgAboutUs />
-      </Box>
-      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+      <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
         <PgAboutUs />
       </Box>
 
-      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-        <PgCoreServices />
-      </Box>
-      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+      <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
         <PgCoreServices />
       </Box>
 
       <Box
         sx={{
-          display: { xs: "none", md: "block" },
-          padding: "0 8rem",
-          background: "#F5F7FA",
-        }}>
-        <PgProjects />
-      </Box>
-      <Box
-        sx={{
-          display: { xs: "block", md: "none" },
-          padding: "0 1rem",
+          padding: { xs: "0 1rem", md: "0 8rem" },
           background: "#F5F7FA",
         }}>
         <PgProjects />
@@ -67,36 +39,36 @@ export default function Home() {
 
       <PgStory />
 
-      <Box>
-        <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-          <StoryCampaign2 data={storyDonationData} swipeable />
-        </Box>
-        <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
-          <StoryCampaign2 data={storyDonationData} swipeable />
-        </Box>
+      <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
+        <StoryCampaign data={storyDonationData} swipeable />
       </Box>
 
-      <Box>
-        <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-          <StoryCampaign data={storyDonationData} swipeable />
-        </Box>
-        <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
-          <StoryCampaign data={storyDonationData} swipeable />
-        </Box>
-      </Box>
+      <br />
+      <br />
+      <br />
 
       <PgDonateAds />
 
-      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-        <StoryArticles data={storyDonationData} />
-      </Box>
-      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+      <br />
+      <br />
+      <br />
+
+      <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
         <StoryArticles data={storyDonationData} swipeable />
       </Box>
+
+      <br />
+      <br />
+      <br />
 
       <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
         <PgNewsLetter />
       </Box>
+
+      <br />
+      <br />
+      <br />
+
       <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
         <PgNewsLetter />
       </Box>
@@ -117,42 +89,6 @@ export default function Home() {
         }}>
         <PgFooter />
       </Box>
-
-      {/* <Box
-        sx={{
-          display: { xs: "none", md: "block" },
-          padding: "0 8rem",
-        }}>
-        <PgAboutUs />
-        <PgCoreServices />
-        <PgProjects />
-        <Testimonials />
-        <Donate />
-      </Box>
-
-      <Box
-        sx={{
-          display: { xs: "block", md: "none" },
-          padding: "2rem 1rem",
-        }}>
-        <PgAboutUs />
-        <PgCoreServices />
-        <PgProjects />
-        <Testimonials />
-        <Donate />
-      </Box> */}
     </Box>
   );
 }
-
-const useStyles = makeStyles(() => ({
-  subContainerMax: {
-    border: "1px solid gray",
-    padding: "3rem 10rem",
-  },
-
-  subContainerMin: {
-    border: "1px solid red",
-    padding: "3rem 2rem",
-  },
-}));

@@ -1,17 +1,13 @@
 import {
   Box,
-  Button,
-  InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import Image from "next/image";
 import Banner from "@/assets/banner1.jpg";
 import PurpleButton from "@/component/common/PurpleButton";
 
 export default function Hero() {
-  const classes = useStyles();
   return (
     <Box
       sx={{
@@ -37,7 +33,6 @@ export default function Hero() {
       />
       <Box
         sx={{
-          // border:"1px solid gray",
           position: "absolute",
           top: "50%",
           left: "50%",
@@ -130,7 +125,6 @@ export default function Hero() {
           }}>
           <TextField
             placeholder="Search for Crowdfunding Project"
-            //className={classes.inputBox}
             sx={{
               width: "100%",
               marginBottom: "2px",
@@ -151,15 +145,3 @@ export default function Hero() {
     </Box>
   );
 }
-
-const useStyles = makeStyles(() => ({
-  inputField: {
-    padding: "1rem",
-    margin: 0,
-    // borderBottomRightRadius: 0,
-    // borderTopRightRadius: 0,
-    outline: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.9)",
-    color: "#FFFFFF",
-  },
-}));

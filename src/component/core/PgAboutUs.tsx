@@ -8,7 +8,7 @@ export default function PgAboutUs() {
     <Box
       sx={{
         color: "#4B5563",
-        padding:"4rem 0"
+        padding: "4rem 0",
       }}>
       <Grid container spacing={4}>
         <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -30,7 +30,11 @@ export default function PgAboutUs() {
 
             <Box sx={{ padding: "2rem 0" }}>
               <Link href="/donate">
-                <PurpleButton text="Donate" endIcon={<East />} />
+                <PurpleButton
+                  text="Donate"
+                  endIcon={<East />}
+                  style={{ width: "150px" }}
+                />
               </Link>
             </Box>
 
