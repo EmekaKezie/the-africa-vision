@@ -67,14 +67,11 @@ export default function Home() {
       </Box>
 
       <br />
-      <br />
-      <br />
 
       <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
         <PgNewsLetter />
       </Box>
 
-      <br />
       <br />
       <br />
 
