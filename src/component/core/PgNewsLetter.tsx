@@ -37,7 +37,7 @@ export default function PgNewsLetter() {
               fullWidth
               style={{ marginRight: "5px" }}
             />
-            <PurpleButton text="Subscribe" />
+            <PurpleButton text="Subscribe"  style={{ width: "150px" }}/>
           </Box>
 
           <Box
@@ -47,7 +47,7 @@ export default function PgNewsLetter() {
               fullWidth
               style={{ marginBottom: "5px" }}
             />
-            <PurpleButton text="Subscribe" />
+            <PurpleButton text="Subscribe"  style={{ width: "150px" }}/>
           </Box>
         </Grid>
       </Grid>
