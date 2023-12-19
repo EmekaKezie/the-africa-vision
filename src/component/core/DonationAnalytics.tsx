@@ -10,19 +10,17 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import {
-  convertToCurrencyShort,
-  formatNumberWithSuffix,
-} from "../common/helpers";
-import {
-  Favorite,
-  HourglassBottom,
-  HourglassTop,
-  Redo,
-} from "@mui/icons-material";
+import { convertToCurrencyShort } from "../common/helpers";
+import { Favorite, HourglassBottom, Redo } from "@mui/icons-material";
 import PurpleButton from "../common/PurpleButton";
+import Link from "next/link";
 
-export default function DonationAnalytics(props: IStoryAnalytics) {
+type props = {
+  data: IStoryAnalytics;
+  url: string;
+};
+
+export default function DonationAnalytics(props: props) {
   return (
     <Card elevation={2}>
       <CardContent>
@@ -37,8 +35,8 @@ export default function DonationAnalytics(props: IStoryAnalytics) {
               fontWeight: "bold",
             }}>
             {convertToCurrencyShort(
-              !props?.attanied ? 0 : props?.attanied,
-              !props?.currency ? "NGN" : props?.currency
+              !props?.data?.attanied ? 0 : props?.data?.attanied,
+              !props?.data?.currency ? "NGN" : props?.data?.currency
             )}
           </Typography>
         </Box>
@@ -48,7 +46,7 @@ export default function DonationAnalytics(props: IStoryAnalytics) {
         <Box>
           <LinearProgress
             variant="determinate"
-            value={!props?.percentage ? 0 : props?.percentage}
+            value={!props?.data?.percentage ? 0 : props?.data?.percentage}
             sx={{
               padding: "0.2rem",
               borderRadius: "5px",
@@ -65,8 +63,8 @@ export default function DonationAnalytics(props: IStoryAnalytics) {
               </Typography>
               <Typography flexGrow={1} fontSize="0.9em" fontWeight="bold">
                 {convertToCurrencyShort(
-                  !props?.goal ? 0 : props?.goal,
-                  !props?.currency ? "NGN" : props?.currency
+                  !props?.data?.goal ? 0 : props?.data?.goal,
+                  !props?.data?.currency ? "NGN" : props?.data?.currency
                 )}
               </Typography>
             </Box>
@@ -76,8 +74,8 @@ export default function DonationAnalytics(props: IStoryAnalytics) {
               </Typography>
               <Typography fontSize="0.9em" fontWeight="bold">
                 {convertToCurrencyShort(
-                  !props?.outstanding ? 0 : props?.outstanding,
-                  !props?.currency ? "NGN" : props?.currency
+                  !props?.data?.outstanding ? 0 : props?.data?.outstanding,
+                  !props?.data?.currency ? "NGN" : props?.data?.currency
                 )}
               </Typography>
             </Box>
@@ -93,7 +91,7 @@ export default function DonationAnalytics(props: IStoryAnalytics) {
             style={{ marginRight: "5px" }}
           />
           <Typography color="#2E4049" fontSize="0.9em">
-            {!props?.countdown ? 30 : props?.countdown} Days left
+            {!props?.data?.countdown ? 30 : props?.data?.countdown} Days left
           </Typography>
         </Stack>
 
@@ -105,8 +103,9 @@ export default function DonationAnalytics(props: IStoryAnalytics) {
             color="error"
             style={{ marginRight: "5px" }}
           />
-          <Typography color="#2E4049"  fontSize="0.9em">
-            {!props?.countdown ? 30 : props?.contributions} Contributions
+          <Typography color="#2E4049" fontSize="0.9em">
+            {!props?.data?.countdown ? 30 : props?.data?.contributions}{" "}
+            Contributions
           </Typography>
         </Stack>
 
@@ -116,11 +115,13 @@ export default function DonationAnalytics(props: IStoryAnalytics) {
       </CardContent>
 
       <CardActions sx={{ padding: "0 1rem 1rem 1rem" }}>
-        <PurpleButton
-          text="Donate"
-          style={{ flexGrow: 1 }}
-          endIcon={<Favorite sx={{ color: "#92CD00" }} />}
-        />
+        <Link href={props.url} style={{ flexGrow: 1, display:"block", marginRight:"2px" }}>
+          <PurpleButton
+            text="Donate"
+            fullWidth
+            endIcon={<Favorite sx={{ color: "#92CD00" }} />}
+          />
+        </Link>
         <IconButton sx={{ backgroundColor: "#FFE1F5", padding: "0.8rem" }}>
           <Redo />
         </IconButton>

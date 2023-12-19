@@ -8,34 +8,25 @@ type props = {
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
   size?: sizeTypes;
-  style?:any;
-  fullWidth?:boolean
+  style?: any;
+  fullWidth?: boolean;
+  onClick?: () => void;
 };
 
 export default function PurpleButton(props: props) {
   const classes = useStyles();
   return (
     <Button
-      // className={classes.btn}
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       size={!props.size ? "large" : props.size}
       style={props.style}
       fullWidth={!props.fullWidth ? false : true}
-      //variant="contained"
-      //style={{}}
-      // style={{
-      //   background: "#A8518A",
-      //   padding: "0.8rem",
-      //   textTransform: "none",
-      //   color: "#FFFFFF",
-      //   width: "150px",
-      // }}
+      onClick={props.onClick}
       sx={{
         padding: "0.8rem",
         textTransform: "none",
         color: "#FFFFFF",
-        //width: "150px",
         backgroundColor: "#A8518A",
         "&:hover": {
           border: "1px solid #A8518A",

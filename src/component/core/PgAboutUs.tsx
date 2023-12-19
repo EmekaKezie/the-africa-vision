@@ -47,7 +47,7 @@ export default function PgAboutUs() {
                 }}>
                 <PhoneInTalk sx={{ color: "#A8518A", marginRight: "5px" }} />
                 <Typography sx={{ fontSize: "0.9em" }}>
-                  +(234) 7030 901 914
+                  +234 (0) 912 879 8369
                 </Typography>
               </Box>
               <Box
@@ -59,7 +59,7 @@ export default function PgAboutUs() {
                   sx={{ color: "#A8518A", marginRight: "5px" }}
                 />
                 <Typography sx={{ fontSize: "0.9em" }}>
-                  pia@landofhope.dk
+                  growth@theafricavision.com
                 </Typography>
               </Box>
             </Box>

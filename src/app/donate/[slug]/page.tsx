@@ -173,13 +173,16 @@ export default function DonateViewPage() {
           <Grid item lg={4} md={4} sm={12} xs={12}>
             <Box>
               <DonationAnalytics
-                attanied={data?.analytics?.attanied}
-                currency={data?.analytics?.currency}
-                goal={data?.analytics?.goal}
-                outstanding={data?.analytics?.outstanding}
-                contributions={data?.analytics?.contributions}
-                percentage={data?.analytics?.percentage}
-                countdown={data?.analytics?.countdown}
+                data={{
+                  attanied: data?.analytics?.attanied,
+                  currency: data?.analytics?.currency,
+                  goal: data?.analytics?.goal,
+                  outstanding: data?.analytics?.outstanding,
+                  contributions: data?.analytics?.contributions,
+                  percentage: data?.analytics?.percentage,
+                  countdown: data?.analytics?.countdown,
+                }}
+                url={`/donate/${pageId}/action`}
               />
             </Box>
           </Grid>

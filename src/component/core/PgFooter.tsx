@@ -247,17 +247,17 @@ const contactData: contactDataProps[] = [
   {
     id: "1",
     icon: <WhatsApp sx={{ marginRight: "10px", color: "#A8518A" }} />,
-    text: "+(234) 912 879 8369",
+    text: "+234 (0) 912 879 8369",
   },
   {
     id: "2",
     icon: <Email sx={{ marginRight: "10px", color: "#A8518A" }} />,
-    text: " Growth@theafricavision.com",
+    text: " growth@theafricavision.com",
   },
   {
     id: "3",
     icon: <Phone sx={{ marginRight: "10px", color: "#A8518A" }} />,
-    text: "+(234) 912 879 8369",
+    text: "+234 (0) 912 879 8369",
   },
   {
     id: "4",
