@@ -11,3 +11,14 @@ export interface IDonation {
   categoryId: string;
   categoryName: string;
 }
+
+export interface IDonationActionStore {
+  currentPage: number;
+  amount: number;
+  fullname: string;
+  email: string;
+  phone: string;
+  message: string;
+  country: string;
+  paymentChannel: string;
+}

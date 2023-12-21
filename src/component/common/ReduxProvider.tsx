@@ -1,5 +1,4 @@
 import { persistor, store } from "@/redux/store";
-import { Component } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 

@@ -13,16 +13,18 @@ import {
   REGISTER,
 } from "redux-persist";
 import _testSlice from "./slices/_testSlice";
+import donateSlice from "./slices/donateSlice";
 
 const persistConfig = {
   key: "root",
   storage,
   whiteLists: [],
-  blacklist: ["testReducer"],
+  blacklist: ["testReducer", "donateSlice"],
 };
 
 const reducers = combineReducers({
   testReducer: _testSlice,
+  donateReducer: donateSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

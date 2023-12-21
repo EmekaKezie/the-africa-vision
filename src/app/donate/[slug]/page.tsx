@@ -23,17 +23,12 @@ import DonationAnalytics from "@/component/core/DonationAnalytics";
 
 export default function DonateViewPage() {
   const router = useRouter();
-
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  //console.log(searchParams.get("p"));
 
   const splitPathname: string[] = pathname.split("/");
   const pageId = splitPathname[splitPathname.length - 1];
   const data = storyDonationData.filter((x: IStory) => x.id === pageId)[0];
-  console.log(data);
 
-  console.log(pageId);
   return (
     <Box>
       <Nav />
