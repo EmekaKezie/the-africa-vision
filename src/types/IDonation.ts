@@ -14,7 +14,7 @@ export interface IDonation {
 
 export interface IDonationActionStore {
   currentPage: number;
-  amount: number;
+  amount: string;
   fullname: string;
   email: string;
   phone: string;

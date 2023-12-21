@@ -25,7 +25,7 @@ function PaystackPaymentVerify() {
     const payload: IDonationActionStore = {
       currentPage: 0,
       paymentChannel: "",
-      amount: 0,
+      amount: "",
       fullname: "",
       email: "",
       phone: "",
@@ -44,17 +44,14 @@ function PaystackPaymentVerify() {
   };
 
   const handleVerifyPayment = () => {
-    //setMessage("Verifying . . .");
     const secretKey = "sk_test_b936ac52ea2ff2f600d65a9b6330ddcd4a8ab8a7";
     verifyPaystackPayment(reference!, secretKey)
       .then((res) => {
-        //console.log(res);
         if (res?.data.gateway_response === "Successful") {
           handleRedirect();
         }
       })
       .catch((err) => {
-        //console.log(err);
       });
   };
 
