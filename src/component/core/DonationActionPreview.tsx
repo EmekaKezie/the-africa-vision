@@ -14,7 +14,8 @@ import { getDogs } from "../api/testApi";
 import { IDonationActionStore } from "@/types/IDonation";
 import { onDonationAction } from "@/redux/slices/donateSlice";
 import { useRouter } from "next/navigation";
-import { initializePaystackPayment } from "../api/paymentApi";
+import { initializePayment } from "@/component/api/paymentApi";
+import { v4 as uniqueId } from "uuid";
 
 export default function DonationActionPreview() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function DonationActionPreview() {
 
   const handleChange = (event: any) => {
     const selected = event.target.value;
+    console.log(selected);
 
     const payload: IDonationActionStore = {
       currentPage: store.donationAction.currentPage,
@@ -79,51 +81,87 @@ export default function DonationActionPreview() {
 
   const handlePayWithPaystack = () => {
     setLoading(true);
-
+    const url = "https://api.paystack.co/transaction/initialize";
     const secretKey = "sk_test_b936ac52ea2ff2f600d65a9b6330ddcd4a8ab8a7";
+    //const callbackUrl = "https://the-africa-vision.vercel.app/payment/verifypaystack?page=donate";
+    const callbackUrl =
+      "http://localhost:3000/payment/verifypaystack?page=donate";
     const payload = {
+      reference: uniqueId(),
       email: store.donationAction.email,
       amount: Number(store.donationAction.amount) * 100, //convert ammount to kobo
       currency: "NGN",
-      callback_url: "http://localhost:3000/donate/2/verify",
+      callback_url: callbackUrl,
     };
 
-    initializePaystackPayment(secretKey, payload)
+    initializePayment(url, secretKey, payload)
       .then((res) => {
         console.log(res);
-        setLoading(true);
-        return res?.data?.authorization_url;
+        setLoading(false);
+        router.push(res?.data?.authorization_url);
       })
       .catch((err) => {
         console.log(err);
-        setLoading(true);
-        return "";
+        setLoading(false);
+      });
+  };
+
+  const handlePaymentWithFlutterwave = () => {
+    setLoading(true);
+    const url = "https://api.flutterwave.com/v3/payments";
+    const secretKey = "FLWSECK_TEST-6bdd359e9888a0c32433452f2951d6bd-X";
+    const callbackUrl =
+      "http://localhost:3000/payment/verifyflutterwave?page=donate";
+    const payload = {
+      tx_ref: uniqueId(),
+      amount: Number(store.donationAction.amount),
+      currency: "NGN",
+      redirect_url: callbackUrl,
+      customer: {
+        email: store.donationAction.email,
+        phonenumber: store.donationAction?.phone ?? "",
+        name: store.donationAction.fullname,
+      },
+    };
+
+    console.log(payload);
+    console.log(store.donationAction.paymentChannel);
+
+    initializePayment(url, secretKey, payload)
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        //router.push(res?.data?.link);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        setLoading(false);
       });
   };
 
   const handlePay = () => {
-    if (store.donationAction.paymentChannel === "PAYSTACK") {
-      setLoading(true);
+    console.log(store.donationAction.paymentChannel.toUpperCase());
+    // switch (store.donationAction.paymentChannel.toUpperCase()) {
+    //   case "FLUTTERWAVE":
+    //     handlePaymentWithFlutterwave();
+    //     break;
+    //   case "PAYSTACK":
+    //     handlePayWithPaystack();
+    //     break;
+    //   default:
+    //     console.log("Payment gateway was not selected");
+    //     break;
+    // }
 
-      const secretKey = "sk_test_b936ac52ea2ff2f600d65a9b6330ddcd4a8ab8a7";
-      const payload = {
-        email: store.donationAction.email,
-        amount: Number(store.donationAction.amount) * 100, //convert ammount to kobo
-        currency: "NGN",
-        callback_url: "https://the-africa-vision.vercel.app/payment/verifypaystack?page=donate",
-      };
+    handlePaymentWithFlutterwave();
 
-      initializePaystackPayment(secretKey, payload)
-        .then((res) => {
-          console.log(res);
-          setLoading(true);
-          router.push(res?.data?.authorization_url);
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(true);
-        });
-    }
+    // if (store.donationAction.paymentChannel === "PAYSTACK") {
+    //   handlePayWithPaystack();
+    // }
+
+    // if (store.donationAction.paymentChannel === "FLUTTERWAVE") {
+    //   handlePaymentWithFlutterwave();
+    // }
   };
 
   return (

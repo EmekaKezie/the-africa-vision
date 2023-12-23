@@ -1,11 +1,11 @@
 import { IPaystackInitialize } from "@/types/IPayment";
 
-export async function initializePaystackPayment(
+export async function initializePayment(
+  url: string,
   secretKey: string,
-  param: IPaystackInitialize
+  param: any
 ) {
   try {
-    const url = "https://api.paystack.co/transaction/initialize";
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(param),
@@ -17,6 +17,7 @@ export async function initializePaystackPayment(
     const data = response.json();
     return data;
   } catch (e) {
+    //console.log(e)
     return e;
   }
 }
