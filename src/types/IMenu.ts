@@ -1,6 +1,7 @@
 export interface IMenu {
-    id: string;
-    url: string;
-    name: string;
-    visibility: boolean;
-  };
+  id: string;
+  url: string;
+  name: string;
+  visibility: boolean;
+  icon?: any;
+}
