@@ -109,7 +109,7 @@ function DonateAction() {
             }}>
             <KeyboardArrowLeft />
           </IconButton>
-          <Typography>Back</Typography>
+          <Typography  sx={{ color: "#667085" }}>Back</Typography>
         </Stack>
         <br />
       </Box>
