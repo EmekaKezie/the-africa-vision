@@ -221,52 +221,76 @@ export default function DonationActionPreview() {
       <Grid container>
         <Grid item lg={6} xs={12}>
           <Grid container>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Typography>Fullname:</Typography>
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085" fontWeight="bold">
+                Fullname:
+              </Typography>
             </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              {store.donationAction.fullname}
-            </Grid>
-            <br />
-            <br />
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Typography>Email Address:</Typography>
-            </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              {store.donationAction.email}
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085">
+                {store.donationAction.fullname}
+              </Typography>
             </Grid>
             <br />
             <br />
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Typography>Phone Number:</Typography>
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085" fontWeight="bold">
+                Email Address:
+              </Typography>
             </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              {store.donationAction.phone}
-            </Grid>
-            <br />
-            <br />
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Typography>Country:</Typography>
-            </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              {/* {store.donationAction.country} */}
-              {country[0]?.name?.common}
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085">
+                {store.donationAction.email}
+              </Typography>
             </Grid>
             <br />
             <br />
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Typography>Remarks:</Typography>
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085" fontWeight="bold">
+                Phone Number:
+              </Typography>
             </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              {store.donationAction.message}
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085">
+                {store.donationAction.phone}
+              </Typography>
             </Grid>
             <br />
             <br />
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Typography>Amount:</Typography>
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085" fontWeight="bold">
+                Country:
+              </Typography>
             </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              {store.donationAction.amount}
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085">
+                {/* {store.donationAction.country} */}
+                {country[0]?.name?.common}
+              </Typography>
+            </Grid>
+            <br />
+            <br />
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085" fontWeight="bold">
+                Remarks:
+              </Typography>
+            </Grid>
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085">
+                {store.donationAction.message}
+              </Typography>
+            </Grid>
+            <br />
+            <br />
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085" fontWeight="bold">
+                Amount:
+              </Typography>
+            </Grid>
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Typography color="#667085">
+                {store.donationAction.amount}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
