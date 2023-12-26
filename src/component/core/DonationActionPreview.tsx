@@ -315,13 +315,13 @@ export default function DonationActionPreview() {
             name="paymentChanel">
             <FormControlLabel
               value="PAYSTACK"
-              control={<Radio sx={{ color: "#667085" }} />}
+              control={<Radio sx={{ color: "#667085" }}  color="default"/>}
               label="Paystack (Best for local users)"
               onClick={handleChange}
             />
             <FormControlLabel
               value="FLUTTERWAVE"
-              control={<Radio sx={{ color: "#667085" }} />}
+              control={<Radio sx={{ color: "#667085" }} color="default" />}
               label="Flutter Wave (Best for loca/international users)"
               onClick={handleChange}
             />
