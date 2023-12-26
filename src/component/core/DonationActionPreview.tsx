@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/useReduxHooks";
 import {
   Box,
+  Divider,
   FormControl,
   FormControlLabel,
   Grid,
@@ -297,6 +298,8 @@ export default function DonationActionPreview() {
         </Grid>
       </Grid>
       <br />
+      
+      <Divider/>
       <br />
       <Box>
         <Typography

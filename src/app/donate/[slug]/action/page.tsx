@@ -104,12 +104,13 @@ function DonateAction() {
       <Box sx={{ padding: { md: "0 8rem", xs: "0 1rem" } }}>
         <Stack direction="row" alignItems="center">
           <IconButton
+            sx={{ backgroundColor: "#FFE1F5", marginRight:"5px" }}
             onClick={() => {
               handleBackButton();
             }}>
             <KeyboardArrowLeft />
           </IconButton>
-          <Typography  sx={{ color: "#667085" }}>Back</Typography>
+          <Typography sx={{ color: "#667085" }}>Back</Typography>
         </Stack>
         <br />
       </Box>
