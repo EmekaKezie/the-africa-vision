@@ -209,6 +209,7 @@ export default function DonationActionPreview() {
           sx={{
             fontSize: "1.5em",
             fontWeight: "bold",
+            color: "black",
           }}>
           Donatation Summary
         </Typography>
@@ -302,6 +303,7 @@ export default function DonationActionPreview() {
           sx={{
             fontSize: "1.1em",
             fontWeight: "bold",
+            color: "black",
           }}>
           Select payment method
         </Typography>
@@ -313,13 +315,13 @@ export default function DonationActionPreview() {
             name="paymentChanel">
             <FormControlLabel
               value="PAYSTACK"
-              control={<Radio />}
+              control={<Radio sx={{ color: "#667085" }} />}
               label="Paystack (Best for local users)"
               onClick={handleChange}
             />
             <FormControlLabel
               value="FLUTTERWAVE"
-              control={<Radio />}
+              control={<Radio sx={{ color: "#667085" }} />}
               label="Flutter Wave (Best for loca/international users)"
               onClick={handleChange}
             />
