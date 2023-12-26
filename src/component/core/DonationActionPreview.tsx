@@ -101,7 +101,7 @@ export default function DonationActionPreview() {
     const secretKey = "sk_test_b936ac52ea2ff2f600d65a9b6330ddcd4a8ab8a7";
     //const callbackUrl = "https://the-africa-vision.vercel.app/payment/verifypaystack?page=donate";
     const callbackUrl =
-      "http://localhost:3000/payment/verifypaystack?page=donate";
+      "https://the-africa-vision.vercel.app/payment/verifypaystack?page=donate";
     const payload = {
       reference: uniqueId(),
       email: store.donationAction.email,
@@ -127,7 +127,7 @@ export default function DonationActionPreview() {
     const url = "https://api.flutterwave.com/v3/payments";
     const secretKey = "FLWPUBK_TEST-1ae6b0675012cd2aeee313e4bd86b85b-Xsss";
     const callbackUrl =
-      "http://localhost:3000/payment/verifyflutterwave?page=donate";
+      "https://the-africa-vision.vercel.app/payment/verifyflutterwave?page=donate";
     const payload = {
       tx_ref: uniqueId(),
       amount: store.donationAction.amount,
