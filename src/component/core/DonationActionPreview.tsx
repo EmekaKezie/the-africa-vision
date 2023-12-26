@@ -301,11 +301,11 @@ export default function DonationActionPreview() {
       <Box>
         <Typography
           sx={{
-            fontSize: "1.1em",
+            fontSize: "1.5em",
             fontWeight: "bold",
             color: "black",
           }}>
-          Select payment method
+          Select Payment Method
         </Typography>
         <br />
         <FormControl>
@@ -316,18 +316,26 @@ export default function DonationActionPreview() {
             <FormControlLabel
               value="PAYSTACK"
               control={<Radio sx={{ color: "#A8518A" }} color="default" />}
-              label={<Typography color="#667085">"Paystack (Best for local users)</Typography>}
+              //label={<Typography color="#667085">"Paystack (Best for local users)</Typography>}
+              label="Paystack (Best for local users)"
               onClick={handleChange}
+              sx={{
+                color:"#667085"
+              }}
             />
             <FormControlLabel
               value="FLUTTERWAVE"
               control={<Radio sx={{ color: "#A8518A" }} color="default" />}
-              label={
-                <Typography color="#667085">
-                  Flutter Wave (Best for loca/international users)
-                </Typography>
-              }
+              // label={
+              //   <Typography color="#667085">
+              //     Flutter Wave (Best for loca/international users)
+              //   </Typography>
+              // }
+              label="Flutter Wave (Best for loca/international users)"
               onClick={handleChange}
+              sx={{
+                color:"#667085"
+              }}
             />
           </RadioGroup>
         </FormControl>
