@@ -69,7 +69,7 @@ export default function TextInput(props: props) {
         }}
         sx={{
           "& fieldset": {
-            border: !props.validate ? "none " : "1px solid red",
+            border: !props.validationMessage ? "none " : "1px solid red",
           },
           "&:hover": {
             border: "1px solid #A8518A",
@@ -78,9 +78,6 @@ export default function TextInput(props: props) {
         }}>
         {!props.children ? null : props.children}
       </TextField>
-      {/* <Typography color="" fontSize="0.8em">
-        sds
-      </Typography> */}
     </Box>
   );
 }

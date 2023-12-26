@@ -6,23 +6,29 @@ import {
   Grid,
   Radio,
   RadioGroup,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import PurpleButton from "../common/PurpleButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getDogs } from "../api/testApi";
 import { IDonationActionStore } from "@/types/IDonation";
 import { onDonationAction } from "@/redux/slices/donateSlice";
 import { useRouter } from "next/navigation";
 import { initializePayment } from "@/component/api/paymentApi";
 import { v4 as uniqueId } from "uuid";
+import { ICountry } from "@/types/ICountry";
+import { getCountryByCode } from "../api/locationApi";
+import { SnackbarProvider, VariantType, useSnackbar } from "notistack";
 
 export default function DonationActionPreview() {
   const router = useRouter();
   const store = useAppSelector((state) => state.donateReducer);
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [country, setCountry] = useState<ICountry[]>([]);
 
   //console.log(store.donationAction);
 
@@ -34,9 +40,19 @@ export default function DonationActionPreview() {
   //       console.log(err);
   //     });
 
+  useEffect(() => {
+    getCountryByCode(store.donationAction.country)
+      .then((res: any) => {
+        //console.log(res)
+        setCountry(res);
+      })
+      .catch((err: any) => {
+        //console.log(err);
+      });
+  }, []);
+
   const handleChange = (event: any) => {
     const selected = event.target.value;
-    console.log(selected);
 
     const payload: IDonationActionStore = {
       currentPage: store.donationAction.currentPage,
@@ -96,12 +112,12 @@ export default function DonationActionPreview() {
 
     initializePayment(url, secretKey, payload)
       .then((res) => {
-        console.log(res);
-        setLoading(false);
+        //console.log(res);
+        //setLoading(false);
         router.push(res?.data?.authorization_url);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         setLoading(false);
       });
   };
@@ -109,12 +125,12 @@ export default function DonationActionPreview() {
   const handlePaymentWithFlutterwave = () => {
     setLoading(true);
     const url = "https://api.flutterwave.com/v3/payments";
-    const secretKey = "FLWSECK_TEST-6bdd359e9888a0c32433452f2951d6bd-X";
+    const secretKey = "FLWPUBK_TEST-1ae6b0675012cd2aeee313e4bd86b85b-Xsss";
     const callbackUrl =
       "http://localhost:3000/payment/verifyflutterwave?page=donate";
     const payload = {
       tx_ref: uniqueId(),
-      amount: Number(store.donationAction.amount),
+      amount: store.donationAction.amount,
       currency: "NGN",
       redirect_url: callbackUrl,
       customer: {
@@ -124,36 +140,58 @@ export default function DonationActionPreview() {
       },
     };
 
-    console.log(payload);
-    console.log(store.donationAction.paymentChannel);
-
     initializePayment(url, secretKey, payload)
       .then((res) => {
-        console.log(res);
         setLoading(false);
+        console.log("thunder");
+        console.log(res);
+
         //router.push(res?.data?.link);
       })
       .catch((err) => {
-        console.log(err.response);
+        //console.log(err);
         setLoading(false);
+        enqueueSnackbar(
+          <Box>
+            <Typography fontSize="1em">Something went wrong!</Typography>
+            <Typography fontSize="0.8em">
+              Please try again or use another payment option
+            </Typography>
+          </Box>,
+          {
+            variant: "error",
+            anchorOrigin: { vertical: "top", horizontal: "right" },
+          }
+        );
       });
+
+    // verifyFlutterwavePayment(
+    //   "7f8b01dedcc1e8caf7db",
+    //   "FLWSECK_TEST-6bdd359e9888a0c32433452f2951d6bd-X"
+    // )
+    //   .then((res) => {
+    //     //console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   const handlePay = () => {
-    console.log(store.donationAction.paymentChannel.toUpperCase());
-    // switch (store.donationAction.paymentChannel.toUpperCase()) {
-    //   case "FLUTTERWAVE":
-    //     handlePaymentWithFlutterwave();
-    //     break;
-    //   case "PAYSTACK":
-    //     handlePayWithPaystack();
-    //     break;
-    //   default:
-    //     console.log("Payment gateway was not selected");
-    //     break;
-    // }
+    //console.log(store.donationAction.paymentChannel.toUpperCase());
+    switch (store.donationAction.paymentChannel.toUpperCase()) {
+      case "FLUTTERWAVE":
+        handlePaymentWithFlutterwave();
+        break;
+      case "PAYSTACK":
+        handlePayWithPaystack();
+        break;
+      default:
+        console.log("Payment gateway was not selected");
+        break;
+    }
 
-    handlePaymentWithFlutterwave();
+    //handlePaymentWithFlutterwave();
 
     // if (store.donationAction.paymentChannel === "PAYSTACK") {
     //   handlePayWithPaystack();
@@ -211,7 +249,8 @@ export default function DonationActionPreview() {
               <Typography>Country:</Typography>
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              {store.donationAction.country}
+              {/* {store.donationAction.country} */}
+              {country[0]?.name?.common}
             </Grid>
             <br />
             <br />
@@ -274,6 +313,15 @@ export default function DonationActionPreview() {
           style={{ width: "200px" }}
         />
       </Box>
+
+      {/* <Snackbar
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={true}
+        message="Snack bar"
+      /> */}
     </Box>
   );
 }

@@ -7,7 +7,7 @@ export default function NavAuthMenu() {
   const classes = useStyles();
   return (
     <Stack direction="row">
-      <Link href="/login" style={{ display: "block" }}>
+      <Link href="/auth/login" style={{ display: "block" }}>
         <Typography
           sx={{
             border: "1px solid #A8518A",
@@ -27,7 +27,7 @@ export default function NavAuthMenu() {
           Login
         </Typography>
       </Link>
-      <Link href="/signup" style={{ display: "block" }}>
+      <Link href="/auth/signup" style={{ display: "block" }}>
         <Typography
           sx={{
             background: "#A8518A",

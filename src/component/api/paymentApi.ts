@@ -17,7 +17,7 @@ export async function initializePayment(
     const data = response.json();
     return data;
   } catch (e) {
-    //console.log(e)
+    console.log(e)
     return e;
   }
 }

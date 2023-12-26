@@ -18,6 +18,12 @@ import { useState } from "react";
 import DonationActionForm from "@/component/core/DonationActionForm";
 import DonationActionPreview from "@/component/core/DonationActionPreview";
 import { onDonationAction } from "@/redux/slices/donateSlice";
+import {
+  SnackbarProvider,
+  VariantType,
+  enqueueSnackbar,
+  useSnackbar,
+} from "notistack";
 
 function DonateAction() {
   const router = useRouter();

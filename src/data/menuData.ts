@@ -36,13 +36,13 @@ export const mainMenuData: IMenu[] = [
 export const authMenuData: IMenu[] = [
   {
     id: "1",
-    url: "/login",
+    url: "/auth/login",
     name: "Login",
     visibility: true,
   },
   {
     id: "1",
-    url: "/singup",
+    url: "/auth/singup",
     name: "Sign up",
     visibility: true,
   },

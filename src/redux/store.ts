@@ -14,17 +14,19 @@ import {
 } from "redux-persist";
 import _testSlice from "./slices/_testSlice";
 import donateSlice from "./slices/donateSlice";
+import authSlice from "./slices/authSlice";
 
 const persistConfig = {
   key: "root",
   storage,
   whiteLists: [],
-  blacklist: ["testReducer", "donateSlice"],
+  blacklist: ["testReducer", "donateSlice", "authSlice"],
 };
 
 const reducers = combineReducers({
   testReducer: _testSlice,
   donateReducer: donateSlice,
+  authReducer: authSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

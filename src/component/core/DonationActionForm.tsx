@@ -2,7 +2,11 @@ import {
   Box,
   Grid,
   IconButton,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   MenuItem,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -10,14 +14,42 @@ import TextInput from "@/component/common/TextInput";
 import PurpleButton from "@/component/common/PurpleButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Close, Favorite } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "@/redux/useReduxHooks";
 import { onDonationAction } from "@/redux/slices/donateSlice";
 import { IDonationActionStore } from "@/types/IDonation";
+import { getCountries } from "../api/locationApi";
+import Image from "next/image";
+import { ICountry } from "@/types/ICountry";
 
 export default function DonationActionForm() {
   const [customAmount, setCustomAmount] = useState<string>("");
+  const [countries, setCountries] = useState<ICountry[]>([]);
+
+  useEffect(() => {
+    // getLocationByIpAddress()
+    //   .then((res: any) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err: any) => {
+    //     console.log(err);
+    //   });
+  }, []);
+
+  useEffect(() => {
+    getCountries()
+      .then((res) => {
+        const sorted = res
+          .slice()
+          .sort((a: any, b: any) => a.name.common.localeCompare(b.name.common));
+        setCountries(sorted);
+        console.log(sorted);
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  }, []);
 
   const store = useAppSelector((state) => state.donateReducer);
   const dispatch = useAppDispatch();
@@ -47,18 +79,17 @@ export default function DonationActionForm() {
   });
 
   const handleSubmit = (values: any) => {
-    const payload: IDonationActionStore = {
-      currentPage: 1,
-      paymentChannel: "",
-      amount: values?.amount,
-      fullname: values.fullname,
-      email: values.email,
-      phone: values.phone,
-      country: values.country,
-      message: values.message,
-    };
-    dispatch(onDonationAction(payload));
-    console.log(payload);
+    // const payload: IDonationActionStore = {
+    //   currentPage: 1,
+    //   paymentChannel: "",
+    //   amount: values?.amount,
+    //   fullname: values.fullname,
+    //   email: values.email,
+    //   phone: values.phone,
+    //   country: values.country,
+    //   message: values.message,
+    // };
+    // dispatch(onDonationAction(payload));
   };
   return (
     <Box>
@@ -162,7 +193,7 @@ export default function DonationActionForm() {
                       background: "#FFF9FD",
                       border: "1px solid #A8518A",
                     }}
-                    validate={formik.touched.fullname}
+                    validate={!formik.errors.fullname}
                     validationMessage={formik.errors.fullname}
                   />
                 </Grid>
@@ -178,6 +209,8 @@ export default function DonationActionForm() {
                       background: "#FFF9FD",
                       border: "1px solid #A8518A",
                     }}
+                    validate={!formik.touched.email}
+                    validationMessage={formik.errors.email}
                   />
                 </Grid>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -207,8 +240,30 @@ export default function DonationActionForm() {
                       background: "#FFF9FD",
                       border: "1px solid #A8518A",
                     }}>
-                    <MenuItem value="A">Country A</MenuItem>
-                    <MenuItem value="B">Country B</MenuItem>
+                    {countries?.map((item: ICountry) => {
+                      //  <ListItem button>
+                      //   <ListItemIcon>
+                      //     <Image src={item.flags.png} alt="Flag" width={20} height={20}/>
+                      //   </ListItemIcon>
+                      //   <ListItemText secondary={item.name.common}/>
+                      //  </ListItem>
+
+                      return (
+                        <MenuItem value={item.cca2} key={item.cca2}>
+                          <Stack direction="row" spacing={2}>
+                            <Image
+                              src={item.flags.png}
+                              alt="Flag"
+                              width={20}
+                              height={20}
+                            />
+                            <Typography>{item.name.common}</Typography>
+                          </Stack>
+                        </MenuItem>
+                      );
+                    })}
+                    {/* <MenuItem value="A">Country A</MenuItem>
+                    <MenuItem value="B">Country B</MenuItem> */}
                   </TextInput>
 
                   {/* <TextField
