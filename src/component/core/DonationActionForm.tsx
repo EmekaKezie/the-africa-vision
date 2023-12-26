@@ -26,6 +26,7 @@ import { ICountry } from "@/types/ICountry";
 export default function DonationActionForm() {
   const [customAmount, setCustomAmount] = useState<string>("");
   const [countries, setCountries] = useState<ICountry[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     // getLocationByIpAddress()
@@ -79,17 +80,21 @@ export default function DonationActionForm() {
   });
 
   const handleSubmit = (values: any) => {
-    // const payload: IDonationActionStore = {
-    //   currentPage: 1,
-    //   paymentChannel: "",
-    //   amount: values?.amount,
-    //   fullname: values.fullname,
-    //   email: values.email,
-    //   phone: values.phone,
-    //   country: values.country,
-    //   message: values.message,
-    // };
-    // dispatch(onDonationAction(payload));
+    setLoading(true);
+    setTimeout(() => {
+      const payload: IDonationActionStore = {
+        currentPage: 1,
+        paymentChannel: "",
+        amount: values?.amount,
+        fullname: values.fullname,
+        email: values.email,
+        phone: values.phone,
+        country: values.country,
+        message: values.message,
+      };
+      setLoading(false);
+      dispatch(onDonationAction(payload));
+    }, 2000);
   };
   return (
     <Box>
@@ -299,6 +304,8 @@ export default function DonationActionForm() {
                 text="Donate"
                 endIcon={<Favorite />}
                 style={{ width: "150px" }}
+                loading={loading}
+                disabled={loading}
               />
             </form>
           </Grid>
