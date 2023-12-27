@@ -63,7 +63,7 @@ export const authMenuData: IMenu[] = [
 export const authenticatedUserAdminMenu: IMenu[] = [
   {
     id: "1",
-    url: "/Overview",
+    url: "/overview",
     name: "Overview",
     visibility: true,
     icon: <Dashboard />,
