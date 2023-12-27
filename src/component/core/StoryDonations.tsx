@@ -22,6 +22,7 @@ import Link from "next/link";
 
 type props = {
   swipeable?: boolean;
+  swipeButtons?: boolean;
   startAt?: number;
   stopAt?: number;
   data: IStory[];
@@ -122,8 +123,14 @@ export default function StoryDonations(props: props) {
             }}>
             <TurnedInNot sx={{ color: "#A8518A" }} />
           </Icon>
-          <Link href={`/donate/[id]`} as={`/donate/${item.id}`} style={{width:"100%"}} >
-            <PurpleLightButton text="Donate" style={{ flexGrow: 1, width:"100%" }}/>
+          <Link
+            href={`/donate/[id]`}
+            as={`/donate/${item.id}`}
+            style={{ width: "100%" }}>
+            <PurpleLightButton
+              text="Donate"
+              style={{ flexGrow: 1, width: "100%" }}
+            />
           </Link>
         </CardActions>
       </Card>
@@ -147,20 +154,24 @@ export default function StoryDonations(props: props) {
           </IconButton>
         </Box> */}
 
-        <Stack direction="row" spacing={1} justifyContent="end">
-          <IconButton
-            sx={{ backgroundColor: "#FFE1F5" }}
-            onClick={handleScrolLeft}>
-            <KeyboardArrowLeft />
-          </IconButton>
-          <span style={{ marginLeft: "10px" }}></span>
-          <IconButton
-            onClick={handleScrollRight}
-            sx={{ backgroundColor: "#FFE1F5" }}>
-            <KeyboardArrowRight />
-          </IconButton>
-        </Stack>
+        {props.swipeButtons && (
+          <Stack direction="row" spacing={1} justifyContent="end">
+            <IconButton
+              sx={{ backgroundColor: "#FFE1F5" }}
+              onClick={handleScrolLeft}>
+              <KeyboardArrowLeft />
+            </IconButton>
+            <span style={{ marginLeft: "10px" }}></span>
+            <IconButton
+              onClick={handleScrollRight}
+              sx={{ backgroundColor: "#FFE1F5" }}>
+              <KeyboardArrowRight />
+            </IconButton>
+          </Stack>
+        )}
+
         <br />
+
         <Box
           sx={{
             overflowX: "auto",
