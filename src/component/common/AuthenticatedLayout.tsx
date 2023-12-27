@@ -18,6 +18,7 @@ function AuthenticatedLayout(props: props) {
     if (!authStore.isLoggedIn) {
       router.push("../auth/login");
     }
+    // eslint-disable-next-line
   }, []);
 
   const [drawer, setDrawer] = useState<boolean>(true);

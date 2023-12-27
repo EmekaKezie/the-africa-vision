@@ -50,6 +50,7 @@ export default function DonationActionPreview() {
       .catch((err: any) => {
         //console.log(err);
       });
+      // eslint-disable-next-line
   }, []);
 
   const handleChange = (event: any) => {

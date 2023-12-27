@@ -18,7 +18,6 @@ import {
   AccessAlarm,
   KeyboardArrowLeft,
   KeyboardArrowRight,
-  Place,
   PlaceOutlined,
   Today,
 } from "@mui/icons-material";
@@ -132,7 +131,7 @@ export default function StoryProjects(props: props) {
 
   const renderCard2 = (item: IStory) => {
     return (
-      <Card>
+      <Card elevation={0} sx={{borderBottom:"1px solid lightgray", borderTop:"0px solid lightgray"}}>
         <Box
           sx={{
             padding: "1rem",
@@ -159,35 +158,29 @@ export default function StoryProjects(props: props) {
             <Typography
               component="span"
               sx={{
-                fontSize: "0.6em",
+                fontSize: "0.7em",
                 backgroundColor: "#F4F3FF",
                 padding: "0.2rem 0.4rem",
                 color: "#5925DC",
+                fontWeight:"bold",
+                //boxShadow:"1px 1px 1px 1px lightgray",
+                //borderRadius:"5px"
               }}>
               {item.categoryName}
             </Typography>
             <Typography
               sx={{
                 color: "#120F0F",
-                fontSize: "0.9em",
+                fontSize: "0.8em",
                 fontWeight: "bold",
                 display: "-webkit-box",
                 overflow: "hidden",
                 WebkitBoxOrient: "block-axis",
                 WebkitLineClamp: 1,
-                margin:"5px 0 5px 0"
+                margin: "5px 0 5px 0",
               }}>
               {item.title}
             </Typography>
-            {/* <Stack direction="row" spacing={1} alignItems="center">
-              <PlaceOutlined
-                sx={{ fontSize: "0.9em", color: "#120F0F", opacity: 0.6 }}
-              />
-              <Typography
-                sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.6em" }}>
-                Lagos Nigeria
-              </Typography>
-            </Stack> */}
             <Stack direction="row" spacing={2}>
               <Stack direction="row" spacing={1} alignItems="center">
                 <PlaceOutlined

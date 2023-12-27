@@ -19,6 +19,7 @@ function PaystackPaymentVerify() {
 
   useEffect(() => {
     handleVerifyPayment();
+    // eslint-disable-next-line
   }, [reference]);
 
   const handleDispatch = () => {

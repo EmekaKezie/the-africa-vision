@@ -2,10 +2,14 @@
 import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
+import StoryActivities from "@/component/core/StoryActivities";
 import StoryCampaign2 from "@/component/core/StoryCampaign2";
 import StoryDonations from "@/component/core/StoryDonations";
 import StoryProjects from "@/component/core/StoryProjects";
+import Transactions from "@/component/core/Transactions";
+import { activityData } from "@/data/activityData";
 import { storyDonationData } from "@/data/storyDonationData";
+import { transactionData } from "@/data/transactionData";
 import { useAppSelector } from "@/redux/useReduxHooks";
 import { AttachMoney, PieChart } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
@@ -97,6 +101,7 @@ function Overview() {
                 padding: "1rem",
                 backgroundColor: "#FFFFFF",
                 height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
               }}>
               <Box display="flex" alignItems="center">
                 <Typography
@@ -125,6 +130,7 @@ function Overview() {
                 padding: "1rem",
                 backgroundColor: "#FFFFFF",
                 height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
               }}>
               <Box display="flex" alignItems="center">
                 <Typography
@@ -147,17 +153,34 @@ function Overview() {
           </Grid>
         </Grid>
       </Box>
-      <br />
-      <br />
+
       <br />
 
       <Box>
         <Grid container spacing={2}>
           <Grid item lg={8} md={8} sm={12} xs={12}>
-            {/* sddddddddd */}
+            <Transactions data={transactionData}/>
           </Grid>
           <Grid item lg={4} md={4} sm={12} xs={12}>
-            {/* sdddddddd */}
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+              }}>
+              <Box display="flex" alignItems="center">
+                <Typography
+                  sx={{
+                    flexGrow: 1,
+                    color: "#120F0F",
+                    fontWeight: "bold",
+                    fontSize: "1.1em",
+                  }}>
+                  Recent Activities
+                </Typography>
+              </Box>
+              <StoryActivities data={activityData} />
+            </Box>
           </Grid>
         </Grid>
       </Box>
