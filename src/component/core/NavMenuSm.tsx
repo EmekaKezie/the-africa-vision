@@ -5,7 +5,7 @@ import { Menu as MenuIcon } from "@mui/icons-material";
 import { authMenuData, mainMenuData } from "@/data/menuData";
 import { IMenu } from "@/types/IMenu";
 
-export default function NavMainMenuSm() {
+export default function NavMenuSm() {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {

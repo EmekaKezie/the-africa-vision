@@ -1,85 +1,145 @@
-import { authenticatedUserAdminMenu } from "@/data/menuData";
+import {
+  authenticatedSuperAdminMenu,
+  authenticatedUserAdminMenu,
+} from "@/data/menuData";
 import { useAppSelector } from "@/redux/useReduxHooks";
 import { IMenu } from "@/types/IMenu";
-import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function AuthenticatedNavMenu1() {
+  const pathname = usePathname();
   const authStore = useAppSelector((state) => state.authReducer);
 
+  const getPathHome = (): string => {
+    const splitPath: string[] = pathname.split("/");
+    const pathHome = splitPath[1];
+    return pathHome;
+  };
+  getPathHome();
+
   const renderUserAdminMenu = () => {
-    return (
-      <List>
-        {authenticatedUserAdminMenu?.map((item: IMenu) => {
-          if (item.visibility) {
-            return (
-              <Link key={item.id} href={item.url}>
-                <ListItem>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.name} sx={{ color: "#202020" }} />
-                </ListItem>
-              </Link>
-            );
-          }
-        })}
-      </List>
-    );
+    return authenticatedUserAdminMenu?.map((item: IMenu) => {
+      if (item.visibility) {
+        return (
+          <Link key={item.id} href={item.url}>
+            <ListItem
+              sx={{
+                borderRadius: "5px",
+                backgroundColor:
+                  getPathHome().toLowerCase() === item.name.toLowerCase()
+                    ? "#FFE1F5"
+                    : null,
+                ":hover": {
+                  backgroundColor: "#F0F1F3",
+                },
+              }}>
+              <ListItemIcon
+                sx={{
+                  color:
+                    getPathHome().toLowerCase() === item.name.toLowerCase()
+                      ? "#A9518B"
+                      : null,
+                }}>
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography
+                    sx={{
+                      color: "#202020",
+                      fontSize:"0.9em",
+                      fontWeight:
+                        getPathHome().toLowerCase() === item.name.toLowerCase()
+                          ? "bold"
+                          : "normal",
+                    }}>
+                    {item.name}
+                  </Typography>
+                }
+              />
+            </ListItem>
+          </Link>
+        );
+      }
+    });
   };
 
   const renderSuperAdminMenu = () => {
-    return (
-      <List>
-        {authenticatedUserAdminMenu?.map((item: IMenu) => {
-          if (item.visibility) {
-            return (
-              <Link key={item.id} href={item.url}>
-                <ListItem>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.name} sx={{ color: "#202020" }} />
-                </ListItem>
-              </Link>
-            );
-          }
-        })}
-      </List>
-    );
+    return authenticatedSuperAdminMenu?.map((item: IMenu) => {
+      if (item.visibility) {
+        return (
+          <Link key={item.id} href={item.url}>
+            <ListItem
+              sx={{
+                borderRadius: "5px",
+                backgroundColor:
+                  getPathHome().toLowerCase() === item.name.toLowerCase()
+                    ? "#FFE1F5"
+                    : null,
+                ":hover": {
+                  backgroundColor: "#F0F1F3",
+                },
+              }}>
+              <ListItemIcon
+                sx={{
+                  color:
+                    getPathHome().toLowerCase() === item.name.toLowerCase()
+                      ? "#A9518B"
+                      : null,
+                }}>
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography
+                    sx={{
+                      color: "#202020",
+                      fontSize:"0.9em",
+                      fontWeight:
+                        getPathHome().toLowerCase() === item.name.toLowerCase()
+                          ? "bold"
+                          : "normal",
+                    }}>
+                    {item.name}
+                  </Typography>
+                }
+              />
+            </ListItem>
+          </Link>
+        );
+      }
+    });
   };
 
   const renderContent = () => {
-    if (authStore.roleName.toUpperCase() === "USER ADMIN")
-      return renderUserAdminMenu();
-    else return renderSuperAdminMenu();
+    switch (authStore.roleName.toUpperCase()) {
+      case "USER":
+        return renderUserAdminMenu();
+        break;
+      case "SUPER ADMIN":
+        return renderSuperAdminMenu();
+        break;
+      default:
+        //return "No roles found";
+        break;
+    }
   };
 
   return (
-    <List>
+    <List
+      sx={{
+        border: "0px solid gray",
+        padding: "1rem 0.5rem",
+      }}>
       {renderContent()}
-      {/* <Link href="/overview">
-        <ListItem>
-          <ListItemIcon>
-            <Dashboard />
-          </ListItemIcon>
-          <ListItemText primary="Overview" />
-        </ListItem>
-      </Link>
-
-      <Link href="/overview">
-        <ListItem>
-          <ListItemIcon>
-            <AutoStories />
-          </ListItemIcon>
-          <ListItemText primary="Stories" />
-        </ListItem>
-      </Link>
-
-      <Link href="/overview">
-        <ListItem>
-          <ListItemIcon>
-            <Campaign />
-          </ListItemIcon>
-          <ListItemText primary="Campaign" />
-        </ListItem>
-      </Link> */}
     </List>
   );
 }

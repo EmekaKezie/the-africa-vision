@@ -20,8 +20,8 @@ const persistConfig = {
   key: "root",
   //storage:AsyncStorage,
   storage,
-  whiteLists: [],
-  blacklist: ["testReducer", "donateSlice", "authSlice"],
+  whiteLists: ["authSlice"],
+  blacklist: ["testReducer", "donateSlice"],
 };
 
 const reducers = combineReducers({

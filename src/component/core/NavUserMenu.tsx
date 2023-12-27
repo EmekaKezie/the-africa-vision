@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 
 import Link from "next/link";
 
-export default function NavAuthMenu() {
+export default function NavUserMenu() {
   const classes = useStyles();
   return (
     <Stack direction="row">

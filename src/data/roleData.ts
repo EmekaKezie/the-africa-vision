@@ -3,7 +3,7 @@ import { IRole } from "@/types/IRole";
 export const roleData: IRole[] = [
   {
     id: "1",
-    roleName: "User Admin",
+    roleName: "User",
     roleDesc: "This role belongs to ordinary admin",
   },
   {

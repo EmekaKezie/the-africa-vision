@@ -4,7 +4,7 @@ import { Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function NavMainMenuMd() {
+export default function NavMenuMd() {
   const pathname = usePathname();
 
   return (

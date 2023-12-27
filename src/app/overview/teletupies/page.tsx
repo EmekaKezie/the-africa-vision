@@ -1,15 +1,14 @@
 "use client";
 import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import ReduxProvider from "@/component/common/ReduxProvider";
-import AuthenticatedNavSide from "@/component/core/AuthenticatedNavDrawer";
 import { useAppSelector } from "@/redux/useReduxHooks";
 import { Box, Typography } from "@mui/material";
 
-function AdminUserOverview() {
+function Teletupies() {
   const auth = useAppSelector((state) => state.authReducer);
   return (
     <AuthenticatedLayout>
-      <Box>sdsdsdsd</Box>
+      <Box>Overview</Box>
       {/* <Box
         sx={{
           display: "flex",
@@ -33,4 +32,4 @@ function AdminUserOverview() {
   );
 }
 
-export default ReduxProvider(AdminUserOverview);
+export default ReduxProvider(Teletupies);

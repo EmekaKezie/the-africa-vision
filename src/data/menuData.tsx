@@ -70,7 +70,7 @@ export const authenticatedUserAdminMenu: IMenu[] = [
   },
   {
     id: "2",
-    url: "/",
+    url: "/stories",
     name: "Stories",
     visibility: true,
     icon: <AutoStories />,
@@ -101,8 +101,8 @@ export const authenticatedUserAdminMenu: IMenu[] = [
 export const authenticatedSuperAdminMenu: IMenu[] = [
   {
     id: "1",
-    url: "/Overview",
-    name: "Overview",
+    url: "/dashboard",
+    name: "Dashboard",
     visibility: true,
     icon: <Dashboard />,
   },
@@ -146,7 +146,7 @@ export const authenticatedMenu: IMenu[] = [
   },
   {
     id: "2",
-    url: "/",
+    url: "../auth/logout",
     name: "Log Out",
     visibility: true,
     icon: <Logout />,

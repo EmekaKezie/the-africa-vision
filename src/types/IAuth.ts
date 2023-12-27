@@ -10,6 +10,7 @@ export interface IAuth {
 }
 
 export interface IAuthStore {
+  isLoggedIn: boolean;
   id: string;
   token: string;
   email: string;

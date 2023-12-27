@@ -23,6 +23,7 @@ import { IAuth, IAuthStore } from "@/types/IAuth";
 import { useAppDispatch } from "@/redux/useReduxHooks";
 import { onLogin } from "@/redux/slices/authSlice";
 import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 
 function Login() {
   const router = useRouter();
@@ -60,6 +61,7 @@ function Login() {
       )[0];
       if (getuser) {
         const payload: IAuthStore = {
+          isLoggedIn: true,
           token: getuser.token,
           id: getuser.id,
           firstname: getuser.firstname,
@@ -69,13 +71,33 @@ function Login() {
           roleName: getuser.role.roleName,
         };
         dispatch(onLogin(payload));
-        router.push("../admusr");
+        handleRedirect(getuser.role.roleName);
         setLoading(false);
       } else {
         setLoginMesage("Invalid credential!");
         setLoading(false);
       }
     }, 2000);
+  };
+
+  const handleRedirect = (roleName: string) => {
+    switch (roleName.toUpperCase()) {
+      case "USER":
+        router.push("../overview");
+        break;
+      case "SUPER ADMIN":
+        router.push("../dashboard");
+        break;
+      default:
+        enqueueSnackbar("User has no defined role. Please contact admin", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+        break;
+    }
   };
 
   return (
@@ -88,7 +110,6 @@ function Login() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              //width:"50%",
               border: "0px solid gray",
             }}>
             <Box

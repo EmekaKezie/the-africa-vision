@@ -2,6 +2,7 @@ import { IAuth, IAuthStore } from "@/types/IAuth";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  isLoggedIn: false,
   id: "",
   token: "",
   email: "",
@@ -17,6 +18,7 @@ export const authSlice = createSlice({
   reducers: {
     onLogin: (state, action: PayloadAction<IAuthStore>) => {
       return {
+        isLoggedIn: action.payload.isLoggedIn,
         id: action.payload.id,
         token: action.payload.token,
         email: action.payload.email,
@@ -26,9 +28,22 @@ export const authSlice = createSlice({
         roleName: action.payload.roleName,
       };
     },
+
+    onLogout: (state) => {
+      return {
+        isLoggedIn: false,
+        id: "",
+        token: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        roleId: "",
+        roleName: "",
+      };
+    },
   },
 });
 
-export const { onLogin } = authSlice.actions;
+export const { onLogin, onLogout } = authSlice.actions;
 
 export default authSlice.reducer;

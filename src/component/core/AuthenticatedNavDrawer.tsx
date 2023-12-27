@@ -3,18 +3,15 @@ import {
   Box,
   Drawer,
   IconButton,
-  List,
-  ListItem,
+  Stack,
   SwipeableDrawer,
   Toolbar,
 } from "@mui/material";
-import ReduxProvider from "../common/ReduxProvider";
 import { Menu, Menu as MenuIcon } from "@mui/icons-material";
-import { useState } from "react";
-import Logo from "@/assets/tavlogo.png";
-import Image from "next/image";
 import AuthenticatedNavMenu1 from "./AuthenticatedNavMenu1";
 import AuthenticatedNavMenu2 from "./AuthenticatedNavMenu2";
+import AuthenticatedNavLogo from "./AuthenticatedNavLogo";
+import AuthenticatedNavUserMenu from "./AuthenticatedNavUserMenu";
 
 type props = {
   drawerWidthMd: number;
@@ -27,7 +24,7 @@ type props = {
   ) => void;
 };
 
-function AuthenticatedNavDrawer(props: props) {
+export default function AuthenticatedNavDrawer(props: props) {
   const handleCloseDrawer = () => {
     if (props.onToggleDrawer) props.onToggleDrawer(false, 0, 0);
   };
@@ -50,73 +47,55 @@ function AuthenticatedNavDrawer(props: props) {
             },
           },
         }}>
-        <Box
-          sx={{
-            padding: "1rem",
-            display: "flex",
-          }}>
-          <Box marginRight="10px">
-            <IconButton onClick={handleCloseDrawer}>
-              <MenuIcon />
-            </IconButton>
-          </Box>
-          <Box
-            sx={{
-              width: "150px",
-              height: "40px",
-            }}>
-            <Image
-              src={Logo}
-              alt="Logo"
-              style={{
-                objectFit: "fill",
-                width: "100%",
-                height: "100%",
-              }}
-            />
-          </Box>
-        </Box>
+        <Stack direction="row" spacing={1} padding="1rem">
+          <IconButton
+            onClick={handleCloseDrawer}
+            sx={{ backgroundColor: "#FFE1F5" }}>
+            <MenuIcon />
+          </IconButton>
+          <AuthenticatedNavLogo />
+        </Stack>
 
         <Box sx={{ height: "100%" }}>
           <Box sx={{ height: "80%" }}>
             <AuthenticatedNavMenu1 />
           </Box>
           <Box>
-          <AuthenticatedNavMenu2 />
+            <AuthenticatedNavMenu2 />
           </Box>
         </Box>
       </Drawer>
 
       <AppBar sx={{ background: "#FFFFFF" }}>
         <Toolbar>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ padding: "1rem 0", width: { md: "230px" } }}>
+            <IconButton
+              onClick={handleOpenDrawer}
+              sx={{ backgroundColor: "#FFE1F5" }}>
+              <Menu />
+            </IconButton>
+            <AuthenticatedNavLogo />
+          </Stack>
+
           <Box
             sx={{
-              padding: "1rem",
-              display: "flex",
+              color: "red",
+              flexGrow: 1,
+              display: { md: "block", xs: "none" },
             }}>
-            <Box marginRight="10px">
-              <IconButton onClick={handleOpenDrawer}>
-                <Menu />
-              </IconButton>
-            </Box>
-            <Box
-              sx={{
-                width: "150px",
-                height: "40px",
-              }}>
-              <Image
-                src={Logo}
-                alt="Logo"
-                style={{
-                  objectFit: "fill",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </Box>
-          </Box>
-          <Box color="red" border="0px solid gray" flexGrow={1}>
             search
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "end",
+              flexGrow: { md: 0, xs: 1 },
+            }}>
+            <AuthenticatedNavUserMenu />
           </Box>
         </Toolbar>
       </AppBar>
@@ -134,5 +113,3 @@ function AuthenticatedNavDrawer(props: props) {
     </Box>
   );
 }
-
-export default ReduxProvider(AuthenticatedNavDrawer);

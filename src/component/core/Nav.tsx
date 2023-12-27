@@ -1,8 +1,8 @@
 import { AppBar, Box, Toolbar } from "@mui/material";
-import NavMainMenuMd from "./NavMainMenuMd";
-import NavAuthMenu from "./NavAuthMenu";
+import NavMenuMd from "./NavMenuMd";
+import NavUserMenu from "./NavUserMenu";
 import NavLogo from "./NavLogo";
-import NavMainMenuSm from "./NavMainMenuSm";
+import NavMenuSm from "./NavMenuSm";
 
 export default function Nav() {
   return (
@@ -19,7 +19,7 @@ export default function Nav() {
               display: { xs: "none", md: "flex" },
               justifyContent: "center",
             }}>
-            <NavMainMenuMd />
+            <NavMenuMd />
           </Box>
 
           <Box
@@ -28,7 +28,7 @@ export default function Nav() {
               display: { xs: "none", md: "flex" },
               justifyContent: "end",
             }}>
-            <NavAuthMenu />
+            <NavUserMenu />
           </Box>
 
           <Box
@@ -37,7 +37,7 @@ export default function Nav() {
               display: { xs: "flex", md: "none" },
               justifyContent: "end",
             }}>
-            <NavMainMenuSm />
+            <NavMenuSm />
           </Box>
         </Toolbar>
       </AppBar>

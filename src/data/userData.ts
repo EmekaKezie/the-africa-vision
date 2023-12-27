@@ -4,12 +4,12 @@ export const userData: IAuth[] = [
   {
     id: "1",
     token:"123",
-    email: "admin@africavision.com",
+    email: "user@africavision.com",
     firstname: "Ebube",
     lastname: "Modebe",
     role: {
       id: "1",
-      roleName: "User Admin",
+      roleName: "User",
       roleDesc: "This role belongs to ordinary admin",
     },
   },
