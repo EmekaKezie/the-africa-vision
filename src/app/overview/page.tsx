@@ -23,7 +23,7 @@ function Overview() {
         <Typography
           sx={{
             color: "#120F0F",
-            fontSize:"2.25em",
+            fontSize:{md:"2.25em", xs:"1.8em"},
             fontWeight:"bold",
             lineHeight:"46px"
           }}>
@@ -42,7 +42,7 @@ function Overview() {
 
       <Box>
         <Grid container spacing={2}>
-          <Grid item lg={3} md={3} sm={6} xs={12}>
+          <Grid item lg={3} md={3} sm={6} xs={6}>
             <StatsCard
               type="type1"
               data={{
@@ -59,7 +59,7 @@ function Overview() {
             />
           </Grid>
 
-          <Grid item lg={3} md={3} sm={6} xs={12}>
+          <Grid item lg={3} md={3} sm={6} xs={6}>
             <StatsCard
               type="type1"
               data={{
@@ -76,7 +76,7 @@ function Overview() {
             />
           </Grid>
 
-          <Grid item lg={3} md={3} sm={6} xs={12}>
+          <Grid item lg={3} md={3} sm={6} xs={6}>
             <StatsCard
               type="type1"
               data={{
@@ -93,7 +93,7 @@ function Overview() {
             />
           </Grid>
 
-          <Grid item lg={3} md={3} sm={6} xs={12}>
+          <Grid item lg={3} md={3} sm={6} xs={6}>
             <StatsCard
               type="type1"
               data={{

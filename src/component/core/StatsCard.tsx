@@ -34,21 +34,21 @@ export default function StatsCard(props: props) {
             alignItems: "center",
           }}>
           <Box flexGrow={1}>
-            <Typography sx={{ color: "#728095", fontSize: "0.8em" }}>
+            <Typography sx={{ color: "#728095", fontSize: {md:"0.8em", xs:"0.65em"} }}>
               {props.data.title.toUpperCase()}
             </Typography>
             <Stack direction="row" alignItems="center" spacing={1}>
               <Typography
                 sx={{
                   color: "#0F2744",
-                  fontSize: "1.1em",
+                  fontSize:{md:"1.1em", xs:"0.75em"} ,
                   fontWeight: "bold",
                 }}>
                 {convertToCurrency(props.data.amount, props.data.currency)}
               </Typography>
               <Typography
                 sx={{
-                  fontSize: "0.7em",
+                  fontSize: {md:"0.7em", xs:"0.5em"},
                   backgroundColor: "#E8F9F5",
                   color: "#16C79A",
                   borderRadius: "5px",
@@ -59,7 +59,7 @@ export default function StatsCard(props: props) {
               </Typography>
             </Stack>
           </Box>
-          <Box>{props.data.icon}</Box>
+          <Box sx={{display:{md:"block", xs:"none"}}}>{props.data.icon}</Box>
         </CardContent>
       </Card>
     );

@@ -137,7 +137,7 @@ export default function StoryProjects(props: props) {
           sx={{
             padding: "1rem",
             display: "flex",
-            gap: 2,
+            gap: 1,
           }}>
           <Box
             sx={{
@@ -185,28 +185,28 @@ export default function StoryProjects(props: props) {
             <Stack direction="row" spacing={1}>
               <Stack direction="row" alignItems="center">
                 <PlaceOutlined
-                  sx={{ fontSize: "0.9em", color: "#120F0F", opacity: 0.6 }}
+                  sx={{ fontSize: "0.6em", color: "#120F0F", opacity: 0.6 }}
                 />
                 <Typography
-                  sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.6em" }}>
+                  sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.55em" }}>
                   Lagos Nigeria
                 </Typography>
               </Stack>
               <Stack direction="row" alignItems="center">
                 <Today
-                  sx={{ fontSize: "0.9em", color: "#120F0F", opacity: 0.6 }}
+                  sx={{ fontSize: "0.6em", color: "#120F0F", opacity: 0.6 }}
                 />
                 <Typography
-                  sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.6em" }}>
+                  sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.55em" }}>
                   {convertToReadableDate(item.date!)}
                 </Typography>
               </Stack>
               <Stack direction="row" alignItems="center">
                 <AccessAlarm
-                  sx={{ fontSize: "0.9em", color: "#120F0F", opacity: 0.6 }}
+                  sx={{ fontSize: "0.6em", color: "#120F0F", opacity: 0.6 }}
                 />
                 <Typography
-                  sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.6em" }}>
+                  sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.55em" }}>
                   {convertToReadableTime(item.date!)}
                 </Typography>
               </Stack>
