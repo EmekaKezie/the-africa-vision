@@ -19,6 +19,7 @@ import {
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import PurpleLightButton from "../common/PurpleLightButton";
+import { convertToReadableDate } from "../common/helpers";
 
 type props = {
   swipeable?: boolean;
@@ -71,7 +72,7 @@ export default function StoryArticles(props: props) {
                   fontSize: "12px",
                   color: "#999999",
                 }}>
-                {item?.date}
+                {convertToReadableDate(item?.date!)}
               </Typography>
             </Stack>
           </Box>
