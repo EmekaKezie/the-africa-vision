@@ -2,6 +2,7 @@
 import { IActivity } from "@/types/IActivity";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { convertToReadableTime } from "../common/helpers";
 
 type variationTypes = "swipeable" | "grid" | "pinned";
 
@@ -48,7 +49,7 @@ export default function StoryActivities(props: props) {
                   month: "short",
                   day: "numeric",
                 })}{" "}
-            - {new Date(item.endDate!).toLocaleTimeString()}
+            - {convertToReadableTime(item.endDate!)}
           </Typography>
         </CardContent>
       </Card>

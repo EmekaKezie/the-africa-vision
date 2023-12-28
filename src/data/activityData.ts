@@ -22,7 +22,7 @@ export const activityData: IActivity[] = [
     assigneeLastname: "Modebe",
     assignorId: "2",
     startDate: "2023-12-27T08:00:00.757Z",
-    endDate: "2023-12-27T17:00:00.757Z",
+    endDate: "2023-12-27T13:00:00.757Z",
     status: "progress",
   },
   {

@@ -59,7 +59,11 @@ export default function AuthenticatedNavDrawer(props: props) {
         <Stack direction="row" spacing={1} padding="1rem">
           <IconButton
             onClick={handleCloseDrawer}
-            sx={{ backgroundColor: "#FFE1F5" }}>
+            sx={
+              {
+                //backgroundColor: "#FFE1F5",
+              }
+            }>
             <MenuIcon />
           </IconButton>
           <AuthenticatedNavLogo />
@@ -83,7 +87,11 @@ export default function AuthenticatedNavDrawer(props: props) {
             sx={{ padding: "1rem 0", width: { md: "230px" } }}>
             <IconButton
               onClick={handleOpenDrawer}
-              sx={{ backgroundColor: "#FFE1F5" }}>
+              sx={
+                {
+                  //backgroundColor: "#FFE1F5"
+                }
+              }>
               <Menu />
             </IconButton>
             <AuthenticatedNavLogo />
@@ -117,11 +125,11 @@ export default function AuthenticatedNavDrawer(props: props) {
             sx={{
               display: "flex",
               justifyContent: "end",
-              gap:2,
+              gap: 2,
               flexGrow: { md: 0, xs: 1 },
-              alignItems:"center"
+              alignItems: "center",
             }}>
-            <AuthenticatedNavNotification/>
+            <AuthenticatedNavNotification />
             <AuthenticatedNavUserMenu />
           </Box>
         </Toolbar>

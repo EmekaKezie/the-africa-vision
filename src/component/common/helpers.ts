@@ -30,5 +30,10 @@ export function convertToReadableDate(date: string) {
 }
 
 export function convertToReadableTime(date: string) {
-  return new Date(date).toLocaleTimeString();
+  return new Date(date).toLocaleTimeString("en-NG", {
+    hour: "numeric",
+    minute: "numeric",
+    //second: "2-digit",
+    hour12: true,
+  });
 }

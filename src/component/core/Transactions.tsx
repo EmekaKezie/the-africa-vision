@@ -276,6 +276,8 @@ export default function Transactions(props: props) {
           print: "false",
           viewColumns: "false",
           elevation: 0,
+          responsive:"standard",
+          selectableRows:"none"
         }}
       />
     </Box>
