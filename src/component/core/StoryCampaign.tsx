@@ -175,7 +175,7 @@ export default function StoryCampaign(props: props) {
           sx={{
             overflowX: "auto",
             display: "flex",
-            gap: 7,
+            gap: 2,
             padding: "0.1rem",
             "&::-webkit-scrollbar": {
               backgroundColor: "transparent",
@@ -185,7 +185,7 @@ export default function StoryCampaign(props: props) {
             <Box
               key={item.id}
               sx={{
-                minWidth: "300px",
+                minWidth: "280px",
                 minHeight: "100px",
                 display: "flex",
                 alignItems: "center",
