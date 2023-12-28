@@ -69,7 +69,7 @@ export default function TextInput(props: props) {
         }}
         sx={{
           "& fieldset": {
-            border: !props.validationMessage ? "none " : "1px solid red",
+            border: !props.validationMessage ? "none" : "1px solid red",
           },
           "&:hover": {
             border: "1px solid #A8518A",

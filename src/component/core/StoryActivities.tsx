@@ -25,7 +25,7 @@ export default function StoryActivities(props: props) {
 
   const renderCard2 = (item: IActivity) => {
     return (
-      <Card elevation={0} sx={{ backgroundColor: "#FAFAFA" }}>
+      <Card elevation={0} sx={{ backgroundColor: "#FAFAFA", border:"1px solid #E6E6E6" }}>
         <CardContent>
           <Typography
             sx={{
@@ -61,7 +61,7 @@ export default function StoryActivities(props: props) {
         sx={{
           paddingBottom: "1rem",
         }}>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           {data?.slice(offset, limit)?.map((item: IActivity) => (
             <Grid item lg={12} md={12} sm={6} xs={12} key={item.id}>
               <Box>{renderCard2(item)}</Box>

@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { convertToCurrencyShort } from "../common/helpers";
+import { convertToCurrency } from "../common/helpers";
 import { Favorite, HourglassBottom, Redo } from "@mui/icons-material";
 import PurpleButton from "../common/PurpleButton";
 import Link from "next/link";
@@ -34,7 +34,7 @@ export default function DonationAnalytics(props: props) {
               color: "#2E4049",
               fontWeight: "bold",
             }}>
-            {convertToCurrencyShort(
+            {convertToCurrency(
               !props?.data?.attanied ? 0 : props?.data?.attanied,
               !props?.data?.currency ? "NGN" : props?.data?.currency
             )}
@@ -62,7 +62,7 @@ export default function DonationAnalytics(props: props) {
                 Goal
               </Typography>
               <Typography flexGrow={1} fontSize="0.9em" fontWeight="bold">
-                {convertToCurrencyShort(
+                {convertToCurrency(
                   !props?.data?.goal ? 0 : props?.data?.goal,
                   !props?.data?.currency ? "NGN" : props?.data?.currency
                 )}
@@ -73,7 +73,7 @@ export default function DonationAnalytics(props: props) {
                 Remaining
               </Typography>
               <Typography fontSize="0.9em" fontWeight="bold">
-                {convertToCurrencyShort(
+                {convertToCurrency(
                   !props?.data?.outstanding ? 0 : props?.data?.outstanding,
                   !props?.data?.currency ? "NGN" : props?.data?.currency
                 )}

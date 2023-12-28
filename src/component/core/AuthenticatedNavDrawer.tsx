@@ -1,17 +1,26 @@
 import {
   AppBar,
+  Badge,
   Box,
   Drawer,
   IconButton,
   Stack,
   SwipeableDrawer,
   Toolbar,
+  Tooltip,
 } from "@mui/material";
-import { Menu, Menu as MenuIcon } from "@mui/icons-material";
+import {
+  Menu,
+  Menu as MenuIcon,
+  Notifications,
+  Search,
+} from "@mui/icons-material";
 import AuthenticatedNavMenu1 from "./AuthenticatedNavMenu1";
 import AuthenticatedNavMenu2 from "./AuthenticatedNavMenu2";
 import AuthenticatedNavLogo from "./AuthenticatedNavLogo";
 import AuthenticatedNavUserMenu from "./AuthenticatedNavUserMenu";
+import TextInput from "../common/TextInput";
+import AuthenticatedNavNotification from "./AuthenticatedNavNotification";
 
 type props = {
   drawerWidthMd: number;
@@ -85,16 +94,34 @@ export default function AuthenticatedNavDrawer(props: props) {
               color: "red",
               flexGrow: 1,
               display: { md: "block", xs: "none" },
+              marginLeft: "1rem",
             }}>
-            search
+            <TextInput
+              placeholder="Search..."
+              size="small"
+              inputStyle={{
+                background: "#FFF9FD",
+                border: "1px solid #CCCCCC",
+              }}
+              startIcon={
+                <Search
+                  sx={{
+                    color: "#898989",
+                  }}
+                />
+              }
+            />
           </Box>
 
           <Box
             sx={{
               display: "flex",
               justifyContent: "end",
+              gap:2,
               flexGrow: { md: 0, xs: 1 },
+              alignItems:"center"
             }}>
+            <AuthenticatedNavNotification/>
             <AuthenticatedNavUserMenu />
           </Box>
         </Toolbar>

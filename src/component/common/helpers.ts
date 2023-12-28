@@ -14,9 +14,21 @@ export function formatNumberWithSuffix(amount: number) {
   }
 }
 
-export function convertToCurrencyShort(amount: number, currencyCode: string) {
-  return new Intl.NumberFormat("en-US", {
+export function convertToCurrency(amount: number, currencyCode: string) {
+  return new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency: currencyCode,
   }).format(amount);
+}
+
+export function convertToReadableDate(date: string) {
+  return new Date(date).toLocaleDateString("en-NG", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+export function convertToReadableTime(date: string) {
+  return new Date(date).toLocaleTimeString();
 }

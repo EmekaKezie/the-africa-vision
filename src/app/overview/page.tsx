@@ -3,7 +3,6 @@ import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
 import StoryActivities from "@/component/core/StoryActivities";
-import StoryCampaign2 from "@/component/core/StoryCampaign2";
 import StoryDonations from "@/component/core/StoryDonations";
 import StoryProjects from "@/component/core/StoryProjects";
 import Transactions from "@/component/core/Transactions";
@@ -11,7 +10,7 @@ import { activityData } from "@/data/activityData";
 import { storyDonationData } from "@/data/storyDonationData";
 import { transactionData } from "@/data/transactionData";
 import { useAppSelector } from "@/redux/useReduxHooks";
-import { AttachMoney, PieChart } from "@mui/icons-material";
+import { AttachMoney } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 
@@ -19,6 +18,28 @@ function Overview() {
   const auth = useAppSelector((state) => state.authReducer);
   return (
     <AuthenticatedLayout>
+      <br/>
+      <Box>
+        <Typography
+          sx={{
+            color: "#120F0F",
+            fontSize:"2.25em",
+            fontWeight:"bold",
+            lineHeight:"46px"
+          }}>
+          Hi {auth.firstname} {auth.lastname}
+        </Typography>
+        <Typography
+        sx={{
+          color:"#898989",
+          fontSize:"0.8em",
+          fontWeight:"bold"
+        }}
+        >Welcome to your dashboard</Typography>
+      </Box>
+
+      <br />
+
       <Box>
         <Grid container spacing={2}>
           <Grid item lg={3} md={3} sm={6} xs={12}>
@@ -159,7 +180,14 @@ function Overview() {
       <Box>
         <Grid container spacing={2}>
           <Grid item lg={8} md={8} sm={12} xs={12}>
-            <Transactions data={transactionData}/>
+            <Box
+              sx={{
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+              }}>
+              <Transactions data={transactionData} startAt={0} stopAt={6} />
+            </Box>
           </Grid>
           <Grid item lg={4} md={4} sm={12} xs={12}>
             <Box
@@ -167,6 +195,7 @@ function Overview() {
                 padding: "1rem",
                 backgroundColor: "#FFFFFF",
                 height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
               }}>
               <Box display="flex" alignItems="center">
                 <Typography
@@ -179,7 +208,7 @@ function Overview() {
                   Recent Activities
                 </Typography>
               </Box>
-              <StoryActivities data={activityData} />
+              <StoryActivities data={activityData} startAt={0} stopAt={5} />
             </Box>
           </Grid>
         </Grid>

@@ -22,6 +22,7 @@ import {
   Today,
 } from "@mui/icons-material";
 import Image from "next/image";
+import { convertToReadableDate, convertToReadableTime } from "../common/helpers";
 
 type variationTypes = "swipeable" | "grid" | "pinned";
 
@@ -177,12 +178,12 @@ export default function StoryProjects(props: props) {
                 overflow: "hidden",
                 WebkitBoxOrient: "block-axis",
                 WebkitLineClamp: 1,
-                margin: "5px 0 5px 0",
+                margin: "5px 0 10px 0",
               }}>
               {item.title}
             </Typography>
-            <Stack direction="row" spacing={2}>
-              <Stack direction="row" spacing={1} alignItems="center">
+            <Stack direction="row" spacing={1}>
+              <Stack direction="row" alignItems="center">
                 <PlaceOutlined
                   sx={{ fontSize: "0.9em", color: "#120F0F", opacity: 0.6 }}
                 />
@@ -191,22 +192,22 @@ export default function StoryProjects(props: props) {
                   Lagos Nigeria
                 </Typography>
               </Stack>
-              <Stack direction="row" spacing={1} alignItems="center">
+              <Stack direction="row" alignItems="center">
                 <Today
                   sx={{ fontSize: "0.9em", color: "#120F0F", opacity: 0.6 }}
                 />
                 <Typography
                   sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.6em" }}>
-                  Date
+                  {convertToReadableDate(item.date!)}
                 </Typography>
               </Stack>
-              <Stack direction="row" spacing={1} alignItems="center">
+              <Stack direction="row" alignItems="center">
                 <AccessAlarm
                   sx={{ fontSize: "0.9em", color: "#120F0F", opacity: 0.6 }}
                 />
                 <Typography
                   sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.6em" }}>
-                  Time
+                  {convertToReadableTime(item.date!)}
                 </Typography>
               </Stack>
             </Stack>

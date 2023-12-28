@@ -11,7 +11,7 @@ export const storyDonationData: IStory[] = [
       col: 2,
       row: 3,
     },
-    date: "June 27, 2023",
+    date: "2023-07-31T21:30:20.757Z",
     author: "Clink James",
     title: "Flood in Lamboa! Flood in Lamboa!! Flood in Lamboa!!!",
     content: (
@@ -40,11 +40,11 @@ export const storyDonationData: IStory[] = [
   {
     id: "2",
     image: {
-      src: DonationThumbnail2,
+      src: DonationThumbnail3,
       col: 2,
       row: 3,
     },
-    date: "July 39, 2022",
+    date: "2023-10-31T21:30:20.757Z",
     author: "Clink James",
     title: "Let’s Make Education For All",
     content: (
@@ -92,9 +92,9 @@ export const storyDonationData: IStory[] = [
   {
     id: "3",
     image: {
-      src: DonationThumbnail3,
+      src: DonationThumbnail1,
     },
-    date: "July 19, 2022",
+    date: "2023-10-31T21:30:20.757Z",
     author: "Clink James",
     title: "Help African Children",
     content: (
@@ -144,11 +144,11 @@ export const storyDonationData: IStory[] = [
   {
     id: "4",
     image: {
-      src: DonationThumbnail2,
+      src: DonationThumbnail3,
       col: 2,
       row: 3,
     },
-    date: "July 30, 2022",
+    date: "2023-10-31T21:30:20.757Z",
     author: "Clink James",
     title: "Sianka Forest Fire",
     content:
@@ -167,7 +167,7 @@ export const storyDonationData: IStory[] = [
       col: 2,
       row: 3,
     },
-    date: "Sept 1, 2023",
+    date: "2023-09-01T11:30:20.757Z",
     title: "Soporo Earthquake",
     author: "Clink James",
     content:
@@ -186,7 +186,7 @@ export const storyDonationData: IStory[] = [
       col: 2,
       row: 3,
     },
-    date: "Sept 1, 2023",
+    date: "2023-11-31T13:30:20.757Z",
     author: "Clink James",
     title: "Lidu Land Drought",
     content:

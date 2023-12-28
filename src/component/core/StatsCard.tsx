@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ReactNode } from "react";
-import { convertToCurrencyShort } from "../common/helpers";
+import { convertToCurrency } from "../common/helpers";
 
 type typeProps = "type1" | "type2";
 
@@ -44,7 +44,7 @@ export default function StatsCard(props: props) {
                   fontSize: "1.1em",
                   fontWeight: "bold",
                 }}>
-                {convertToCurrencyShort(props.data.amount, props.data.currency)}
+                {convertToCurrency(props.data.amount, props.data.currency)}
               </Typography>
               <Typography
                 sx={{

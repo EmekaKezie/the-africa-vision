@@ -19,6 +19,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { IStory } from "@/types/IStory";
 import Link from "next/link";
+import { convertToReadableDate } from "../common/helpers";
 
 type props = {
   swipeable?: boolean;
@@ -68,7 +69,7 @@ export default function StoryDonations(props: props) {
                 fontSize: "0.8em",
                 lineHeight: "16px",
               }}>
-              {item.date}
+              {convertToReadableDate(item.date!)}
             </Typography>
             <Typography
               sx={{
