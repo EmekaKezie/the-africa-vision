@@ -11,7 +11,7 @@ export const storyDonationData: IStory[] = [
       col: 2,
       row: 3,
     },
-    date: "2023-07-31T21:30:20.757Z",
+    startDate: "2023-07-31T21:30:20.757Z",
     author: "Clink James",
     title: "Flood in Lamboa! Flood in Lamboa!! Flood in Lamboa!!!",
     content: (
@@ -34,8 +34,14 @@ export const storyDonationData: IStory[] = [
     analytics: {
       contributions: 230,
       percentage: 20,
+      goal: 200000,
+      attanied: 110000,
+      outstanding: 1000,
+      currency: "NGN",
+      countdown: 12,
     },
     url: "/",
+    location:"Lagos, Nigeria"
   },
   {
     id: "2",
@@ -44,7 +50,7 @@ export const storyDonationData: IStory[] = [
       col: 2,
       row: 3,
     },
-    date: "2023-10-31T21:30:20.757Z",
+    startDate: "2023-10-31T21:30:20.757Z",
     author: "Clink James",
     title: "Let’s Make Education For All",
     content: (
@@ -88,13 +94,14 @@ export const storyDonationData: IStory[] = [
       countdown: 12,
     },
     url: "donate/",
+    location:"Rivers, Port Harcourt"
   },
   {
     id: "3",
     image: {
       src: DonationThumbnail1,
     },
-    date: "2023-10-31T21:30:20.757Z",
+    startDate: "2023-10-31T21:30:20.757Z",
     author: "Clink James",
     title: "Help African Children",
     content: (
@@ -138,8 +145,10 @@ export const storyDonationData: IStory[] = [
       goal: 2500000,
       attanied: 1000000,
       currency: "NGN",
+      countdown: 12,
     },
     url: "/",
+    location:"Accra, Ghana"
   },
   {
     id: "4",
@@ -148,7 +157,7 @@ export const storyDonationData: IStory[] = [
       col: 2,
       row: 3,
     },
-    date: "2023-10-31T21:30:20.757Z",
+    startDate: "2023-10-31T21:30:20.757Z",
     author: "Clink James",
     title: "Sianka Forest Fire",
     content:
@@ -157,8 +166,14 @@ export const storyDonationData: IStory[] = [
     categoryId: "2",
     analytics: {
       contributions: 748,
+      percentage: 40,
+      goal: 2500000,
+      attanied: 1000000,
+      currency: "NGN",
+      countdown: 12,
     },
     url: "/",
+    location:"Ikeja, Lagos"
   },
   {
     id: "5",
@@ -167,7 +182,7 @@ export const storyDonationData: IStory[] = [
       col: 2,
       row: 3,
     },
-    date: "2023-09-01T11:30:20.757Z",
+    startDate: "2023-09-01T11:30:20.757Z",
     title: "Soporo Earthquake",
     author: "Clink James",
     content:
@@ -176,8 +191,14 @@ export const storyDonationData: IStory[] = [
     categoryId: "3",
     analytics: {
       contributions: 760,
+      percentage: 40,
+      goal: 2500000,
+      attanied: 1000000,
+      currency: "NGN",
+      countdown: 12,
     },
     url: "/",
+    location:"Lagos, Nigeria"
   },
   {
     id: "6",
@@ -186,7 +207,7 @@ export const storyDonationData: IStory[] = [
       col: 2,
       row: 3,
     },
-    date: "2023-11-31T13:30:20.757Z",
+    startDate: "2023-11-31T13:30:20.757Z",
     author: "Clink James",
     title: "Lidu Land Drought",
     content:
@@ -195,7 +216,14 @@ export const storyDonationData: IStory[] = [
     categoryId: "4",
     analytics: {
       contributions: 760,
+      percentage: 40,
+      goal: 2500000,
+      attanied: 1000000,
+      currency: "NGN",
+      countdown: 12,
     },
     url: "/",
+    location:"Lagos, Nigeria",
+    
   },
 ];

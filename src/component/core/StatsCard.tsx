@@ -34,21 +34,25 @@ export default function StatsCard(props: props) {
             alignItems: "center",
           }}>
           <Box flexGrow={1}>
-            <Typography sx={{ color: "#728095", fontSize: {md:"0.8em", xs:"0.65em"} }}>
+            <Typography
+              sx={{
+                color: "#728095",
+                fontSize: { md: "0.8em", xs: "0.65em" },
+              }}>
               {props.data.title.toUpperCase()}
             </Typography>
             <Stack direction="row" alignItems="center" spacing={1}>
               <Typography
                 sx={{
                   color: "#0F2744",
-                  fontSize:{md:"1.1em", xs:"0.75em"} ,
+                  fontSize: { md: "1.1em", xs: "0.75em" },
                   fontWeight: "bold",
                 }}>
                 {convertToCurrency(props.data.amount, props.data.currency)}
               </Typography>
               <Typography
                 sx={{
-                  fontSize: {md:"0.7em", xs:"0.5em"},
+                  fontSize: { md: "0.7em", xs: "0.5em" },
                   backgroundColor: "#E8F9F5",
                   color: "#16C79A",
                   borderRadius: "5px",
@@ -59,14 +63,86 @@ export default function StatsCard(props: props) {
               </Typography>
             </Stack>
           </Box>
-          <Box sx={{display:{md:"block", xs:"none"}}}>{props.data.icon}</Box>
+          <Box sx={{ display: { md: "block", xs: "none" } }}>
+            {props.data.icon}
+          </Box>
         </CardContent>
       </Card>
     );
   };
 
   const renderType2 = () => {
-    return <Box></Box>;
+    return (
+      <Card elevation={0}>
+        <CardContent
+        
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}>
+          <Box flexGrow={1}>
+            <Typography
+              sx={{
+                color: "#728095",
+                fontSize: { md: "0.8em", xs: "0.65em" },
+              }}>
+              {props.data.title.toUpperCase()}
+            </Typography>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Typography
+                sx={{
+                  color: "#0F2744",
+                  fontSize: { md: "1.1em", xs: "0.75em" },
+                  fontWeight: "bold",
+                }}>
+                {convertToCurrency(props.data.amount, props.data.currency)}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { md: "0.7em", xs: "0.5em" },
+                  backgroundColor: "#E8F9F5",
+                  color: "#16C79A",
+                  borderRadius: "5px",
+                  padding: "0.1rem 0.3rem",
+                  fontWeight: "bold",
+                }}>
+                +10%
+              </Typography>
+            </Stack>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Box>{props.data.icon}</Box>
+              <Typography
+                sx={{
+                  fontSize: { md: "0.8em", xs: "0.6em" },
+                  //backgroundColor: "#E8F9F5",
+                  color: "#16C79A",
+                  //borderRadius: "5px",
+                  //padding: "0.1rem 0.3rem",
+                  fontWeight: "bold",
+                  marginLeft:"5px"
+                }}>
+                +10%
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { md: "0.8em", xs: "0.6em" },
+                  //backgroundColor: "#E8F9F5",
+                  color: "#999999",
+                  //borderRadius: "5px",
+                  //padding: "0.1rem 0.3rem",
+                  fontWeight: "bold",
+                  marginLeft:"5px"
+                }}>
+                vs last week
+              </Typography>
+            </Stack>
+          </Box>
+          {/* <Box sx={{ display: { md: "block", xs: "none" } }}>
+            {props.data.icon}
+          </Box> */}
+        </CardContent>
+      </Card>
+    );
   };
 
   const renderContent = () => {

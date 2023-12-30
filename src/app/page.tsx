@@ -45,7 +45,7 @@ export default function Home() {
           title="Latest Causes ____"
           subtitle="Find The Popular Cause And Donate To Them"
         />
-        <StoryCampaign data={storyDonationData} swipeable />
+        <StoryCampaign data={storyDonationData} variation="swipeable" />
       </Box>
 
       <br />

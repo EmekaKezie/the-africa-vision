@@ -1,10 +1,11 @@
 import { ITransaction } from "@/types/ITransaction";
 import { Box, Tooltip, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import MUIDataTable from "mui-datatables";
 import { convertToCurrency, convertToReadableDate } from "../common/helpers";
 
 type props = {
+  title?: string | ReactNode;
   startAt?: number;
   stopAt?: number;
   data: ITransaction[];
@@ -246,28 +247,29 @@ export default function Transactions(props: props) {
   return (
     <Box>
       <MUIDataTable
-        title={
-          <Box
-            sx={{
-              padding: "0.5rem 0 0 0",
-            }}>
-            <Typography
-              sx={{
-                color: "#120F0F",
-                fontWeight: "bold",
-                fontSize: "1.1em",
-              }}>
-              Transactions
-            </Typography>
-            <Typography
-              sx={{
-                color: "#898989",
-                fontSize: "0.9em",
-              }}>
-              Last 2 Weeks
-            </Typography>
-          </Box>
-        }
+        // title={
+        //   <Box
+        //     sx={{
+        //       padding: "0.5rem 0 0 0",
+        //     }}>
+        //     <Typography
+        //       sx={{
+        //         color: "#120F0F",
+        //         fontWeight: "bold",
+        //         fontSize: "1.1em",
+        //       }}>
+        //       Transactions
+        //     </Typography>
+        //     <Typography
+        //       sx={{
+        //         color: "#898989",
+        //         fontSize: "0.9em",
+        //       }}>
+        //       Last 2 Weeks
+        //     </Typography>
+        //   </Box>
+        // }
+        title={props.title}
         data={data?.slice(offset, limit)}
         columns={columns}
         options={{
@@ -276,8 +278,8 @@ export default function Transactions(props: props) {
           print: "false",
           viewColumns: "false",
           elevation: 0,
-          responsive:"standard",
-          selectableRows:"none"
+          responsive: "standard",
+          selectableRows: "none",
         }}
       />
     </Box>

@@ -1,6 +1,8 @@
 import { IStory } from "@/types/IStory";
 import {
   CalendarMonth,
+  Delete,
+  Edit,
   KeyboardArrowLeft,
   KeyboardArrowRight,
   Person,
@@ -15,15 +17,21 @@ import {
   IconButton,
   LinearProgress,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import PurpleLightButton from "../common/PurpleLightButton";
-import { formatNumberWithSuffix } from "../common/helpers";
+import { convertToCurrency, formatNumberWithSuffix } from "../common/helpers";
+import MUIDataTable from "mui-datatables";
+
+type variationTypes = "swipeable" | "grid" | "pinned" | "tabular";
 
 type props = {
-  swipeable?: boolean;
+  variation: variationTypes;
+  //swipeable?: boolean;
+  swipeButtons?: boolean;
   startAt?: number;
   stopAt?: number;
   data: IStory[];
@@ -38,7 +46,7 @@ export default function StoryCampaign(props: props) {
 
   const offset: number = !props.startAt ? 0 : props.startAt;
   const limit: number = !props.stopAt ? data.length : props.stopAt;
-  const swipeable: boolean = !props.swipeable ? false : props.swipeable;
+  //const swipeable: boolean = !props.swipeable ? false : props.swipeable;
 
   const renderCard = (item: IStory) => {
     return (
@@ -158,24 +166,26 @@ export default function StoryCampaign(props: props) {
     );
   };
 
-  const isSwipeable = () => {
+  const renderSwipeableVariation = () => {
     return (
       <Box>
-        <Stack direction="row" spacing={1} justifyContent="end">
-          <IconButton sx={{ backgroundColor: "#FFE1F5" }}>
-            <KeyboardArrowLeft />
-          </IconButton>
-          <span style={{ marginLeft: "10px" }}></span>
-          <IconButton sx={{ backgroundColor: "#FFE1F5" }}>
-            <KeyboardArrowRight />
-          </IconButton>
-        </Stack>
+        {props.swipeButtons && (
+          <Stack direction="row" spacing={1} justifyContent="end">
+            <IconButton sx={{ backgroundColor: "#FFE1F5" }}>
+              <KeyboardArrowLeft />
+            </IconButton>
+            <span style={{ marginLeft: "10px" }}></span>
+            <IconButton sx={{ backgroundColor: "#FFE1F5" }}>
+              <KeyboardArrowRight />
+            </IconButton>
+          </Stack>
+        )}
         <br />
         <Box
           sx={{
             overflowX: "auto",
             display: "flex",
-            gap: 2,
+            gap: { xs: 2, md: 5 },
             padding: "0.1rem",
             "&::-webkit-scrollbar": {
               backgroundColor: "transparent",
@@ -199,7 +209,7 @@ export default function StoryCampaign(props: props) {
     );
   };
 
-  const isNotSwipeable = () => {
+  const renderGridVariation = () => {
     return (
       <Box
         sx={{
@@ -216,9 +226,218 @@ export default function StoryCampaign(props: props) {
     );
   };
 
+  const renderPinnedVariation = () => {
+    return <Box>Pinned Variation {"->"} Work in Progress</Box>;
+  };
+
+  const renderTabularVariation = () => {
+    const columns = [
+      {
+        name: "title",
+        options: {
+          customHeadLabelRender: (i: any) => {
+            return (
+              <Typography
+                sx={{
+                  textTransform: "capitalize",
+                  color: "#898989",
+                  fontSize: "0.9em",
+                  fontWeight: "bold",
+                }}>
+                Project Name
+              </Typography>
+            );
+          },
+          customBodyRenderLite: (index: number) => {
+            return (
+              <Typography
+                sx={{
+                  color: "#101828",
+                  fontSize: "0.95em",
+                }}>
+                {data[index].title}
+              </Typography>
+            );
+          },
+        },
+      },
+      {
+        name: "location",
+        options: {
+          customHeadLabelRender: (i: any) => {
+            return (
+              <Typography
+                sx={{
+                  textTransform: "capitalize",
+                  color: "#898989",
+                  fontSize: "0.9em",
+                  fontWeight: "bold",
+                }}>
+                Location
+              </Typography>
+            );
+          },
+          customBodyRenderLite: (index: number) => {
+            return (
+              <Typography
+                sx={{
+                  color: "#667085",
+                  fontSize: "0.95em",
+                }}>
+                {data[index].location}
+              </Typography>
+            );
+          },
+        },
+      },
+      {
+        name: "",
+        options: {
+          customHeadLabelRender: (i: any) => {
+            return (
+              <Typography
+                sx={{
+                  textTransform: "capitalize",
+                  color: "#898989",
+                  fontSize: "0.9em",
+                  fontWeight: "bold",
+                }}>
+                Project Amount
+              </Typography>
+            );
+          },
+          customBodyRenderLite: (index: number) => {
+            return (
+              <Typography
+                sx={{
+                  color: "#101828",
+                  fontSize: "0.95em",
+                  fontWeight: "bold",
+                }}>
+                {data[index].analytics?.goal &&
+                  convertToCurrency(
+                    data[index].analytics?.goal!,
+                    data[index].analytics?.currency!
+                  )}
+              </Typography>
+            );
+          },
+        },
+      },
+      {
+        name: "",
+        options: {
+          customHeadLabelRender: (i: any) => {
+            return (
+              <Typography
+                sx={{
+                  textTransform: "capitalize",
+                  color: "#898989",
+                  fontSize: "0.9em",
+                  fontWeight: "bold",
+                }}>
+                Date
+              </Typography>
+            );
+          },
+          customBodyRenderLite: (index: number) => {
+            return (
+              <Typography
+                sx={{
+                  color: "#667085",
+                  fontSize: "0.95em",
+                }}>
+                {data[index].startDate}
+              </Typography>
+            );
+          },
+        },
+      },
+      {
+        name: "",
+        options: {
+          customBodyRenderLite: (index: number) => {
+            return (
+              <Stack direction="row" spacing={1}>
+                <Tooltip title="Delete">
+                  <IconButton size="small">
+                    <Delete sx={{ fontSize: "1em" }} />
+                  </IconButton>
+                </Tooltip>
+
+                <Tooltip title="Edit">
+                  <IconButton size="small">
+                    <Edit sx={{ fontSize: "1em" }} />
+                  </IconButton>
+                </Tooltip>
+              </Stack>
+              //   <Typography
+              //     sx={{
+              //       color: "#667085",
+              //       fontSize: "0.95em",
+              //     }}>
+              //     {data[index].startDate}
+              //   </Typography>
+            );
+          },
+        },
+      },
+    ];
+
+    //return <Box>Tabular variation {"->"} Work in progress</Box>;
+
+    return (
+      <Box>
+        <MUIDataTable
+          title={
+            <Box>
+              <Typography
+                sx={{
+                  color: "#120F0F",
+                  fontWeight: "bold",
+                  fontSize: "1.1em",
+                }}>
+                Recent Campaign
+              </Typography>
+            </Box>
+          }
+          data={data?.slice(offset, limit)}
+          columns={columns}
+          options={{
+            filter: "false",
+            download: "true",
+            print: "true",
+            viewColumns: "false",
+            elevation: 0,
+            responsive: "standard",
+            selectableRows: "none",
+          }}
+        />
+      </Box>
+    );
+  };
+
   const renderContent = () => {
-    if (swipeable) return isSwipeable();
-    else return isNotSwipeable();
+    // if (swipeable) return isSwipeable();
+    // else return isNotSwipeable();
+
+    switch (props.variation) {
+      case "swipeable":
+        return renderSwipeableVariation();
+        break;
+      case "grid":
+        return renderGridVariation();
+        break;
+      case "pinned":
+        return renderPinnedVariation();
+        break;
+      case "tabular":
+        return renderTabularVariation();
+        break;
+      default:
+        return renderGridVariation();
+        break;
+    }
   };
 
   return (

@@ -34,7 +34,7 @@ export default function AuthenticatedNavMenu1() {
               sx={{
                 borderRadius: "5px",
                 backgroundColor:
-                  getPathHome().toLowerCase() === item.name.toLowerCase()
+                  getPathHome().toLowerCase() === item.url.slice(1).toLowerCase()
                     ? "#FFE1F5"
                     : null,
                 ":hover": {
@@ -44,7 +44,7 @@ export default function AuthenticatedNavMenu1() {
               <ListItemIcon
                 sx={{
                   color:
-                    getPathHome().toLowerCase() === item.name.toLowerCase()
+                    getPathHome().toLowerCase() === item.url.slice(1).toLowerCase()
                       ? "#A9518B"
                       : null,
                 }}>
@@ -57,7 +57,7 @@ export default function AuthenticatedNavMenu1() {
                       color: "#202020",
                       fontSize:"0.9em",
                       fontWeight:
-                        getPathHome().toLowerCase() === item.name.toLowerCase()
+                        getPathHome().toLowerCase() === item.url.slice(1).toLowerCase()
                           ? "bold"
                           : "normal",
                     }}>
@@ -81,7 +81,7 @@ export default function AuthenticatedNavMenu1() {
               sx={{
                 borderRadius: "5px",
                 backgroundColor:
-                  getPathHome().toLowerCase() === item.name.toLowerCase()
+                  getPathHome().toLowerCase() === item.name.slice(1).toLowerCase()
                     ? "#FFE1F5"
                     : null,
                 ":hover": {
@@ -91,7 +91,7 @@ export default function AuthenticatedNavMenu1() {
               <ListItemIcon
                 sx={{
                   color:
-                    getPathHome().toLowerCase() === item.name.toLowerCase()
+                    getPathHome().toLowerCase() === item.name.slice(1).toLowerCase()
                       ? "#A9518B"
                       : null,
                 }}>
@@ -104,7 +104,7 @@ export default function AuthenticatedNavMenu1() {
                       color: "#202020",
                       fontSize:"0.9em",
                       fontWeight:
-                        getPathHome().toLowerCase() === item.name.toLowerCase()
+                        getPathHome().toLowerCase() === item.name.slice(1).toLowerCase()
                           ? "bold"
                           : "normal",
                     }}>

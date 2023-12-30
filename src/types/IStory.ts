@@ -5,7 +5,8 @@ export interface IStory {
   image: IStoryImage;
   title: string;
   content: any;
-  date?: string;
+  startDate?:string;
+  endDate?: string;
   likes?: number;
   comments?: number;
   shares?: number;
@@ -15,6 +16,8 @@ export interface IStory {
   url?: string;
   author?: string;
   facilitator?: IContact;
+  location?:string;
+  createdDate?:string;
 }
 
 export interface IStoryAnalytics {

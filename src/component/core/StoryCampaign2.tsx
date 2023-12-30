@@ -217,7 +217,7 @@ export default function StoryCampaign2(props: props) {
           sx={{
             overflowX: "auto",
             display: "flex",
-            gap: 2,
+            gap: { xs: 2, md: 5 },
             padding: "0.1rem",
             "&::-webkit-scrollbar": {
               backgroundColor: "transparent",

@@ -18,24 +18,25 @@ function Overview() {
   const auth = useAppSelector((state) => state.authReducer);
   return (
     <AuthenticatedLayout>
-      <br/>
+      <br />
       <Box>
         <Typography
           sx={{
             color: "#120F0F",
-            fontSize:{md:"2.25em", xs:"1.8em"},
-            fontWeight:"bold",
-            lineHeight:"46px"
+            fontSize: { md: "2.25em", xs: "1.8em" },
+            fontWeight: "bold",
+            lineHeight: "46px",
           }}>
           Hi {auth.firstname} {auth.lastname}
         </Typography>
         <Typography
-        sx={{
-          color:"#898989",
-          fontSize:"0.8em",
-          fontWeight:"bold"
-        }}
-        >Welcome to your dashboard</Typography>
+          sx={{
+            color: "#898989",
+            fontSize: "0.8em",
+            fontWeight: "bold",
+          }}>
+          Welcome to your dashboard
+        </Typography>
       </Box>
 
       <br />
@@ -186,7 +187,33 @@ function Overview() {
                 height: "100%",
                 boxShadow: "1px 1px 5px lightgray",
               }}>
-              <Transactions data={transactionData} startAt={0} stopAt={6} />
+              <Transactions
+                data={transactionData}
+                title={
+                  <Box
+                    sx={{
+                      padding: "0.5rem 0 0 0",
+                    }}>
+                    <Typography
+                      sx={{
+                        color: "#120F0F",
+                        fontWeight: "bold",
+                        fontSize: "1.1em",
+                      }}>
+                      Transactions
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: "#898989",
+                        fontSize: "0.9em",
+                      }}>
+                      Last 2 Weeks
+                    </Typography>
+                  </Box>
+                }
+                startAt={0}
+                stopAt={6}
+              />
             </Box>
           </Grid>
           <Grid item lg={4} md={4} sm={12} xs={12}>

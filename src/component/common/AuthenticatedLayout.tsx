@@ -29,7 +29,7 @@ function AuthenticatedLayout(props: props) {
     <Box
       sx={{
         backgroundColor: "#F9F9F9",
-        height: "100%",
+        minHeight: "100vh",
       }}>
       <AuthenticatedNavDrawer
         drawerWidthMd={drawerWidthMd}

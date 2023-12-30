@@ -69,7 +69,7 @@ export default function StoryDonations(props: props) {
                 fontSize: "0.8em",
                 lineHeight: "16px",
               }}>
-              {convertToReadableDate(item.date!)}
+              {item.startDate! && convertToReadableDate(item.startDate!)}
             </Typography>
             <Typography
               sx={{
@@ -177,7 +177,7 @@ export default function StoryDonations(props: props) {
           sx={{
             overflowX: "auto",
             display: "flex",
-            gap: 2,
+            gap: { xs: 2, md: 5 },
             padding: "0.1rem",
             "&::-webkit-scrollbar": {
               backgroundColor: "transparent",

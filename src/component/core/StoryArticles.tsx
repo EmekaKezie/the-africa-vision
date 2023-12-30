@@ -72,7 +72,7 @@ export default function StoryArticles(props: props) {
                   fontSize: "12px",
                   color: "#999999",
                 }}>
-                {convertToReadableDate(item?.date!)}
+                {convertToReadableDate(item?.startDate!)}
               </Typography>
             </Stack>
           </Box>
@@ -132,7 +132,7 @@ export default function StoryArticles(props: props) {
           sx={{
             overflowX: "auto",
             display: "flex",
-            gap: 2,
+            gap: { xs: 2, md: 5 },
             padding: "0.1rem",
             "&::-webkit-scrollbar": {
               backgroundColor: "transparent",

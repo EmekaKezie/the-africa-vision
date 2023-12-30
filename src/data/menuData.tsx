@@ -77,14 +77,14 @@ export const authenticatedUserAdminMenu: IMenu[] = [
   },
   {
     id: "3",
-    url: "/",
+    url: "/campaign-uadm",
     name: "Campaign",
     visibility: true,
     icon: <Campaign />,
   },
   {
     id: "4",
-    url: "/",
+    url: "/transaction",
     name: "Payment",
     visibility: true,
     icon: <Payment />,

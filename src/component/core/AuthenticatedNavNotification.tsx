@@ -12,6 +12,13 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
+
+type props = {
+    title:string;
+    subtitle?:string;
+    insight?:string
+}
+
 export default function AuthenticatedNavNotification() {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
 

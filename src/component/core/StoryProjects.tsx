@@ -61,7 +61,7 @@ export default function StoryProjects(props: props) {
                 fontSize: "0.8em",
                 lineHeight: "16px",
               }}>
-              {item.date}
+              {item.startDate}
             </Typography>
             <Typography
               sx={{
@@ -198,7 +198,7 @@ export default function StoryProjects(props: props) {
                 />
                 <Typography
                   sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.55em" }}>
-                  {convertToReadableDate(item.date!)}
+                  {convertToReadableDate(item.startDate!)}
                 </Typography>
               </Stack>
               <Stack direction="row" alignItems="center">
@@ -207,7 +207,7 @@ export default function StoryProjects(props: props) {
                 />
                 <Typography
                   sx={{ color: "#120F0F", opacity: 0.6, fontSize: "0.55em" }}>
-                  {convertToReadableTime(item.date!)}
+                  {convertToReadableTime(item.startDate!)}
                 </Typography>
               </Stack>
             </Stack>

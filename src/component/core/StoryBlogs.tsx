@@ -170,7 +170,7 @@ export default function StoryBlogs(props: props) {
           sx={{
             overflowX: "auto",
             display: "flex",
-            gap: 7,
+            gap: { xs: 2, md: 5 },
             padding: "0.1rem",
             "&::-webkit-scrollbar": {
               backgroundColor: "transparent",
