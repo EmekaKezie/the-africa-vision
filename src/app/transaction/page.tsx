@@ -1,15 +1,52 @@
 "use client";
 import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
+import PurpleButton from "@/component/common/PurpleButton";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
-import Transactions from "@/component/core/Transactions";
+import TransactionTable from "@/component/core/TransactionTable";
 import { transactionData } from "@/data/transactionData";
-import { AttachMoney } from "@mui/icons-material";
+import { Add, AttachMoney } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 
-function TransactionPage() {
+function Transaction() {
   return (
     <AuthenticatedLayout>
+      <br />
+      <Box>
+        <Grid container>
+          <Grid item lg={6} md={6} sm={5} xs={5}>
+            <Box
+              sx={{
+                height: "100%",
+                alignItems: "center",
+                display: "flex",
+              }}>
+              <Typography
+                sx={{
+                  fontWeight: "bold",
+                  color: "#0F172A",
+                  fontSize: "1.5em",
+                }}>
+                Payment
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item lg={6} md={6} sm={7} xs={7}>
+            <Box
+              sx={{
+                justifyContent: { md: "end" },
+                float: "right",
+              }}>
+              <PurpleButton
+                text="Request a payout"
+                shade="purple"
+                size="small"
+                startIcon={<Add />}
+              />
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
       <br />
 
       <Box>
@@ -85,7 +122,7 @@ function TransactionPage() {
       </Box>
 
       <br />
-      <Transactions
+      <TransactionTable
         title={
           <Box
             sx={{
@@ -102,9 +139,10 @@ function TransactionPage() {
           </Box>
         }
         data={transactionData}
+        elevation={1}
       />
     </AuthenticatedLayout>
   );
 }
 
-export default ReduxProvider(TransactionPage);
+export default ReduxProvider(Transaction);

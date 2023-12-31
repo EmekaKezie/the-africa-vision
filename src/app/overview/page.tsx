@@ -5,7 +5,7 @@ import StatsCard from "@/component/core/StatsCard";
 import StoryActivities from "@/component/core/StoryActivities";
 import StoryDonations from "@/component/core/StoryDonations";
 import StoryProjects from "@/component/core/StoryProjects";
-import Transactions from "@/component/core/Transactions";
+import TransactionTable from "@/component/core/TransactionTable";
 import { activityData } from "@/data/activityData";
 import { storyDonationData } from "@/data/storyDonationData";
 import { transactionData } from "@/data/transactionData";
@@ -187,7 +187,7 @@ function Overview() {
                 height: "100%",
                 boxShadow: "1px 1px 5px lightgray",
               }}>
-              <Transactions
+              <TransactionTable
                 data={transactionData}
                 title={
                   <Box

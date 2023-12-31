@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { convertToCurrency, formatNumberWithSuffix } from "../common/helpers";
+import { convertToCurrency, convertToReadableDate, convertToReadableTime, formatNumberWithSuffix } from "../common/helpers";
 import MUIDataTable from "mui-datatables";
 import PurpleButton from "../common/PurpleButton";
 
@@ -228,6 +228,15 @@ export default function StoryCampaign(props: props) {
   };
 
   const renderTabularVariation = () => {
+    const flattenedData = (data: IStory[]): any => {
+      return data?.map((item: IStory) => ({
+        title: item.title,
+        location: item.location,
+        amount: item.analytics?.goal,
+        date: item.startDate,
+      }));
+    };
+
     const columns = [
       {
         name: "title",
@@ -288,7 +297,7 @@ export default function StoryCampaign(props: props) {
         },
       },
       {
-        name: "",
+        name: "amount",
         options: {
           customHeadLabelRender: (i: any) => {
             return (
@@ -322,7 +331,7 @@ export default function StoryCampaign(props: props) {
         },
       },
       {
-        name: "",
+        name: "date",
         options: {
           customHeadLabelRender: (i: any) => {
             return (
@@ -344,7 +353,7 @@ export default function StoryCampaign(props: props) {
                   color: "#667085",
                   fontSize: "0.95em",
                 }}>
-                {data[index].startDate}
+                {convertToReadableDate(data[index].startDate!)}, {convertToReadableTime(data[index].startDate!)}
               </Typography>
             );
           },
@@ -389,11 +398,18 @@ export default function StoryCampaign(props: props) {
               </Typography>
             </Box>
           }
-          data={data?.slice(offset, limit)}
+          //data={data?.slice(offset, limit)}
+          data={flattenedData(data?.slice(offset, limit))}
           columns={columns}
           options={{
             filter: "false",
             download: "true",
+            downloadOptions: {
+              filterOptions: {
+                useDisplayedColumnsOnly: true,
+                useDisplayedRowsOnly: true,
+              },
+            },
             print: "true",
             viewColumns: "false",
             elevation: 0,

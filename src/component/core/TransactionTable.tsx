@@ -6,12 +6,13 @@ import { convertToCurrency, convertToReadableDate } from "../common/helpers";
 
 type props = {
   title?: string | ReactNode;
+  elevation?: number;
   startAt?: number;
   stopAt?: number;
   data: ITransaction[];
 };
 
-export default function Transactions(props: props) {
+export default function TransactionTable(props: props) {
   const [data, setData] = useState<ITransaction[]>([]);
 
   const offset: number = !props.startAt ? 0 : props.startAt;
@@ -274,10 +275,10 @@ export default function Transactions(props: props) {
         columns={columns}
         options={{
           filter: "false",
-          download: "false",
-          print: "false",
+          download: "true",
+          print: "true",
           viewColumns: "false",
-          elevation: 0,
+          elevation: !props.elevation ? 0 : props.elevation,
           responsive: "standard",
           selectableRows: "none",
         }}
