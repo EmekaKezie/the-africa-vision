@@ -18,8 +18,8 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import PurpleLightButton from "../common/PurpleLightButton";
 import { convertToReadableDate } from "../common/helpers";
+import PurpleButton from "../common/PurpleButton";
 
 type props = {
   swipeable?: boolean;
@@ -108,7 +108,12 @@ export default function StoryArticles(props: props) {
         </CardContent>
         <CardActions sx={{ padding: "1rem" }}>
           <Link href={item?.url!}>
-            <PurpleLightButton text="Read More" size="small" style={{width:"150px"}}/>
+            <PurpleButton
+              text="Read More"
+              size="small"
+              shade="white"
+              style={{ width: "150px" }}
+            />
           </Link>
         </CardActions>
       </Card>

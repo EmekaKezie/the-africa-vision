@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
 import { useAppSelector } from "@/redux/useReduxHooks";
-import { AttachMoney, Favorite, MoreVert } from "@mui/icons-material";
+import { Add, AttachMoney, Favorite, MoreVert } from "@mui/icons-material";
 import {
   Avatar,
   Badge,
@@ -25,15 +25,63 @@ import { storyDonationData } from "@/data/storyDonationData";
 import TextInput from "@/component/common/TextInput";
 import StoryActivities from "@/component/core/StoryActivities";
 import { activityData } from "@/data/activityData";
+import PurpleButton from "@/component/common/PurpleButton";
 
 function Stories() {
   const auth = useAppSelector((state) => state.authReducer);
   return (
     <AuthenticatedLayout>
-      <Box>
-        
-      </Box>
       <br />
+      <Box>
+        <Grid container>
+          <Grid item lg={6} md={6} sm={12} xs={12}>
+            <Box
+              sx={{
+                height: "100%",
+                alignItems: "center",
+                display: "flex",
+              }}>
+              <Typography
+                sx={{
+                  fontWeight: "bold",
+                  color: "#0F172A",
+                  fontSize: "1.5em",
+                }}>
+                Stories
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item lg={6} md={6} sm={12} xs={12}>
+            <Box
+              sx={{
+                display: "flex",
+                gap: 1,
+                justifyContent: { md: "end" },
+              }}>
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{ marginTop: { xs: "10px", md: "0" } }}>
+                <PurpleButton
+                  text="Create a project"
+                  shade="white"
+                  size="small"
+                  startIcon={<Add/>}
+                />
+                <PurpleButton
+                  text="Create new story"
+                  shade="purple"
+                  size="small"
+                  startIcon={<Add/>}
+                />
+              </Stack>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+      
+      <br />
+      
       <Box
         sx={{
           padding: "1em",
@@ -72,7 +120,7 @@ function Stories() {
             md={3}
             sm={6}
             xs={6}
-            borderRight="1px solid lightgray">
+            sx={{ borderRight: { md: "1px solid lightgray" } }}>
             <StatsCard
               type="type2"
               data={{

@@ -1,11 +1,9 @@
 import { IStory } from "@/types/IStory";
 import {
-  CalendarMonth,
   Delete,
   Edit,
   KeyboardArrowLeft,
   KeyboardArrowRight,
-  Person,
 } from "@mui/icons-material";
 import {
   Box,
@@ -22,15 +20,14 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import PurpleLightButton from "../common/PurpleLightButton";
 import { convertToCurrency, formatNumberWithSuffix } from "../common/helpers";
 import MUIDataTable from "mui-datatables";
+import PurpleButton from "../common/PurpleButton";
 
 type variationTypes = "swipeable" | "grid" | "pinned" | "tabular";
 
 type props = {
   variation: variationTypes;
-  //swipeable?: boolean;
   swipeButtons?: boolean;
   startAt?: number;
   stopAt?: number;
@@ -46,7 +43,6 @@ export default function StoryCampaign(props: props) {
 
   const offset: number = !props.startAt ? 0 : props.startAt;
   const limit: number = !props.stopAt ? data.length : props.stopAt;
-  //const swipeable: boolean = !props.swipeable ? false : props.swipeable;
 
   const renderCard = (item: IStory) => {
     return (
@@ -155,10 +151,11 @@ export default function StoryCampaign(props: props) {
         </CardContent>
         <CardActions sx={{ padding: "1rem" }}>
           <Link href={item?.url!}>
-            <PurpleLightButton
+            <PurpleButton
               text="Donate"
               size="small"
               style={{ width: "150px" }}
+              shade="white"
             />
           </Link>
         </CardActions>
@@ -371,20 +368,11 @@ export default function StoryCampaign(props: props) {
                   </IconButton>
                 </Tooltip>
               </Stack>
-              //   <Typography
-              //     sx={{
-              //       color: "#667085",
-              //       fontSize: "0.95em",
-              //     }}>
-              //     {data[index].startDate}
-              //   </Typography>
             );
           },
         },
       },
     ];
-
-    //return <Box>Tabular variation {"->"} Work in progress</Box>;
 
     return (
       <Box>
@@ -418,9 +406,6 @@ export default function StoryCampaign(props: props) {
   };
 
   const renderContent = () => {
-    // if (swipeable) return isSwipeable();
-    // else return isNotSwipeable();
-
     switch (props.variation) {
       case "swipeable":
         return renderSwipeableVariation();

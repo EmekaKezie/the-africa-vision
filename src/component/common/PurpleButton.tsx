@@ -4,6 +4,8 @@ import { makeStyles } from "@mui/styles";
 type sizeTypes = "small" | "medium" | "large";
 type actionTypes = "submit" | "button";
 
+type shadeTypes = "purple" | "white";
+
 type props = {
   text: string;
   startIcon?: JSX.Element;
@@ -15,10 +17,52 @@ type props = {
   type?: actionTypes;
   disabled?: boolean;
   loading?: boolean;
+  shade?: shadeTypes;
 };
 
 export default function PurpleButton(props: props) {
   const classes = useStyles();
+
+  const renderPurpleShadeSx = () => {
+    return {
+      padding: "0.8rem",
+      textTransform: "none",
+      color: "#FFFFFF",
+      backgroundColor: "#A8518A",
+      "&:hover": {
+        border: "1px solid #A8518A",
+        background: "#FFFFFF",
+        color: "#A8518A",
+      },
+    };
+  };
+
+  const renderWhiteShadeSx = () => {
+    return {
+      border: "1px solid #A8518A",
+      padding: "0.8rem",
+      textTransform: "none",
+      color: "#A8518A",
+      "&:hover": {
+        background: "#A8518A",
+        color: "#FFFFFF",
+      },
+    };
+  };
+
+  const renderShadeSx = () => {
+    switch (props.shade) {
+      case "purple":
+        return renderPurpleShadeSx();
+        break;
+      case "white":
+        return renderWhiteShadeSx();
+      default:
+        return renderPurpleShadeSx();
+        break;
+    }
+  };
+
   return (
     <Button
       startIcon={props.startIcon}
@@ -35,17 +79,7 @@ export default function PurpleButton(props: props) {
       onClick={props.onClick}
       type={!props.type ? "submit" : props.type}
       disabled={!props.disabled ? props.loading : props.disabled}
-      sx={{
-        padding: "0.8rem",
-        textTransform: "none",
-        color: "#FFFFFF",
-        backgroundColor: "#A8518A",
-        "&:hover": {
-          border: "1px solid #A8518A",
-          background: "#FFFFFF",
-          color: "#A8518A",
-        },
-      }}>
+      sx={renderShadeSx()}>
       {props.text}
     </Button>
   );

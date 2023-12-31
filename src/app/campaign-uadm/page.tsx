@@ -1,18 +1,56 @@
 "use client";
 import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
+import PurpleButton from "@/component/common/PurpleButton";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
 import StoryCampaign from "@/component/core/StoryCampaign";
 import StoryCampaign2 from "@/component/core/StoryCampaign2";
 import StoryProjects from "@/component/core/StoryProjects";
 import { storyDonationData } from "@/data/storyDonationData";
-import { AttachMoney } from "@mui/icons-material";
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Add, AttachMoney } from "@mui/icons-material";
+import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 
 function CampaignUAdmn() {
   return (
     <AuthenticatedLayout>
+      <br />
+      <Box>
+        <Grid container>
+          <Grid item lg={6} md={6} sm={5} xs={5}>
+            <Box
+              sx={{
+                height: "100%",
+                alignItems: "center",
+                display: "flex",
+              }}>
+              <Typography
+                sx={{
+                  fontWeight: "bold",
+                  color: "#0F172A",
+                  fontSize: "1.5em",
+                }}>
+                Campaign
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item lg={6} md={6} sm={7} xs={7}>
+            <Box
+              sx={{
+                justifyContent: { md: "end" },
+                float:"right"
+              }}>
+               <PurpleButton
+                  text="Create new campaign"
+                  shade="purple"
+                  size="small"
+                  startIcon={<Add />}
+                />
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
       <br />
 
       <Box>
@@ -122,7 +160,7 @@ function CampaignUAdmn() {
         />
       </Box>
 
-      <br/>
+      <br />
 
       <Box
         sx={{
@@ -131,7 +169,6 @@ function CampaignUAdmn() {
           height: "100%",
           boxShadow: "1px 1px 5px lightgray",
         }}>
-        
         {/* <StoryProjects
           variation="swipeable"
           data={storyDonationData}
