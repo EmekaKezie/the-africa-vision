@@ -7,6 +7,7 @@ import {
   Stack,
   TextField,
   Typography,
+  createTheme,
 } from "@mui/material";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { storyData } from "@/data/storyData";
@@ -24,6 +25,8 @@ import Nav from "@/component/core/Nav";
 import PurpleButton from "@/component/common/PurpleButton";
 import PgFooter from "@/component/core/PgFooter";
 import DonationAnalytics from "@/component/core/DonationAnalytics";
+import { ThemeProvider } from "@mui/styles";
+import MUIRichTextEditor from "mui-rte";
 
 export default function DonateViewPage() {
   const router = useRouter();
@@ -144,7 +147,13 @@ export default function DonateViewPage() {
                   fontSize: "0.9em",
                   lineHeight: "30.45px",
                 }}>
-                {data?.content}
+                <ThemeProvider theme={myTheme}>
+                  <MUIRichTextEditor
+                    defaultValue={!data?.content ? "" : data?.content}
+                    readOnly
+                    controls={[]}
+                  />
+                </ThemeProvider>
               </Box>
 
               <br />
@@ -198,3 +207,7 @@ export default function DonateViewPage() {
     </Box>
   );
 }
+
+const myTheme = createTheme({
+  // Set up your custom MUI theme here
+});
