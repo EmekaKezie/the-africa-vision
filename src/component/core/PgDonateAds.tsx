@@ -19,7 +19,8 @@ export default function PgDonateAds() {
                 fontSize: "3rem",
                 lineHeight: "50px",
                 fontWeight: "bold",
-                letterSpacing: "-2px",
+                letterSpacing: "-1px",
+                color: "#120F0F",
               }}>
               Learn how you can empower someone today!
             </Typography>

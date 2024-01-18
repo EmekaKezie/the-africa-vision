@@ -12,7 +12,7 @@ export default function PgNewsLetter() {
           <Box>
             <Typography
               sx={{
-                lineHeight: "30px",
+                //lineHeight: "30px",
                 fontSize: "1.8rem",
                 fontWeight: "bold",
                 color: "#120F0F",
@@ -21,7 +21,7 @@ export default function PgNewsLetter() {
             </Typography>
             <Typography
               sx={{
-                lineHeight: "30px",
+                //lineHeight: "30px",
                 fontSize: "1.1rem",
                 color: "#120F0F",
               }}>

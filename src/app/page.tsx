@@ -78,14 +78,10 @@ function HomePage() {
 
       <br />
 
-      <Box sx={{ display: { xs: "none", md: "block" }, padding: "0 8rem" }}>
-        <PgNewsLetter />
-      </Box>
-
-      <br />
-      <br />
-
-      <Box sx={{ display: { xs: "block", md: "none" }, padding: "0 1rem" }}>
+      <Box
+        sx={{
+          padding: { xs: "0 1rem", md: "0 8rem" },
+        }}>
         <PgNewsLetter />
       </Box>
 
