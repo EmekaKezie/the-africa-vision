@@ -3,7 +3,6 @@
 import { Box } from "@mui/material";
 import React from "react";
 import HeroHome from "@/component/core/HeroHome";
-import Nav from "@/component/core/Nav";
 import PgAboutUs from "../component/core/PgAboutUs";
 import PgCoreServices from "@/component/core/PgCoreServices";
 import PgProjects from "@/component/core/PgProjects";
@@ -11,15 +10,16 @@ import PgStory from "@/component/core/PgStory";
 import PgDonateAds from "@/component/core/PgDonateAds";
 import PgFooter from "@/component/core/PgFooter";
 import PgNewsLetter from "@/component/core/PgNewsLetter";
-import StoryArticles from "@/component/core/StoryArticles";
-import { storyDonationData } from "@/data/storyDonationData";
-import StoryCampaign from "@/component/core/StoryCampaign";
+import { storyData } from "@/data/storyData";
+import CampaignList from "@/component/core/CampaignList";
 import PgSectionDescription from "@/component/core/PgSectionDescription";
+import UnauthenticatedLayout from "@/component/common/UnauthenticatedLayout";
+import ReduxProvider from "@/component/common/ReduxProvider";
+import BlogList from "@/component/core/BlogList";
 
-export default function Home() {
+function HomePage() {
   return (
-    <Box>
-      <Nav />
+    <UnauthenticatedLayout>
       <HeroHome />
 
       <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
@@ -45,7 +45,12 @@ export default function Home() {
           title="Latest Causes ____"
           subtitle="Find The Popular Cause And Donate To Them"
         />
-        <StoryCampaign data={storyDonationData} variation="swipeable" />
+        <CampaignList
+          data={storyData}
+          variation="swipeable"
+          swipeButtons
+          cardType="type1"
+        />
       </Box>
 
       <br />
@@ -63,7 +68,12 @@ export default function Home() {
           title="Latest News _____"
           subtitle="Articles You May Read"
         />
-        <StoryArticles data={storyDonationData} swipeable />
+        <BlogList
+          variation="swipeable"
+          data={storyData}
+          cardType="type1"
+          swipeButtons
+        />
       </Box>
 
       <br />
@@ -95,6 +105,8 @@ export default function Home() {
         }}>
         <PgFooter />
       </Box>
-    </Box>
+    </UnauthenticatedLayout>
   );
 }
+
+export default ReduxProvider(HomePage);

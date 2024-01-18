@@ -1,200 +1,137 @@
-import { IStory, IStoryCategory } from "@/types/IStory";
-import DonationThumbnail1 from "@/assets/donate-thumbnail-1.jpg";
-import DonationThumbnail2 from "@/assets/donate-thumbnail-2.jpg";
-import DonationThumbnail3 from "@/assets/donate-thumbnail-3.jpg";
-import SupportUsThumbnail1 from "@/assets/supportus-thumbnail-1.png";
-import SupportUsThumbnail2 from "@/assets/supportus-thumbnail-2.png";
-import SupportUsThumbnail3 from "@/assets/supportus-thumbnail-3.png";
-import SupportUsThumbnail4 from "@/assets/supportus-thumbnail-4.png";
-import SupportUsThumbnail5 from "@/assets/supportus-thumbnail-5.png";
-import SupportUsThumbnail6 from "@/assets/supportus-thumbnail-6.png";
+import { IStory } from "@/types/IStory";
+import StoryImage1 from "@/assets/donate-thumbnail-1.jpg";
+import StoryImage2 from "@/assets/donate-thumbnail-2.jpg";
+import StoryImage3 from "@/assets/donate-thumbnail-3.jpg";
+import ProfileSample1 from "@/assets/profile-sample1.jpeg"
 
-
-export const storyCategoryData: IStoryCategory[] = [
+export const storyData: IStory[] = [
   {
     id: "1",
-    name: "Disaster",
+    coverImage: StoryImage1,
+    startDate: "2023-07-31T21:30:20.757Z",
+    endDate: "2023-08-10T21:30:20.757Z",
+    creatorFirstname: "Clink",
+    creatorLastname: "James",
+    creatorImage:ProfileSample1,
+    title: "Flood in Lamboa! Flood in Lamboa!! Flood in Lamboa!!!",
+    content: '{"blocks":[{"key":"dcikp","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"emf3d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"do1nk","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ad0ce","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3omkt","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"44j06","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"9omqe","text":"About","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":5,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"fg1eg","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"a263d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4086l","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3tpef","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"em5sv","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"464p1","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"cjkla","text":"Team","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":4,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"7d4kr","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8ovid","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ramf","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"1qvpl","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"aj587","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}',
+    categoryId: "1",
+    categoryName: "Disaster",
+    budget: 200000,
+    currency: "NGN",
+    revenue: 110000,
+    contributors: 10,
+    venue: "Lagos, Nigeria",
+    createdDate: "2023-07-31T21:30:20.757Z",
+    likes: 10,
+    comments: 20,
+    shares: 3,
   },
   {
     id: "2",
-    name: "Children",
+    coverImage: StoryImage2,
+    startDate: "2023-10-31T21:30:20.757Z",
+    creatorFirstname: "Clink",
+    creatorLastname: "James",
+    creatorImage:ProfileSample1,
+    title: "Let’s Make Education For All",
+    content: '{"blocks":[{"key":"dcikp","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"emf3d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"do1nk","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ad0ce","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3omkt","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"44j06","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"9omqe","text":"About","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":5,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"fg1eg","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"a263d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4086l","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3tpef","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"em5sv","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"464p1","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"cjkla","text":"Team","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":4,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"7d4kr","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8ovid","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ramf","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"1qvpl","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"aj587","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}',
+    categoryName: "Disaster",
+    categoryId: "1",
+    budget: 200000,
+    currency: "NGN",
+    revenue: 110000,
+    contributors: 10,
+    venue: "Rivers, Port Harcourt",
+    createdDate: "2023-07-31T21:30:20.757Z",
+    likes: 10,
+    comments: 20,
+    shares: 3,
   },
   {
     id: "3",
-    name: "Health",
+    coverImage: StoryImage1,
+    startDate: "2023-07-31T21:30:20.757Z",
+    endDate: "2023-08-10T21:30:20.757Z",
+    creatorFirstname: "Clink",
+    creatorLastname: "James",
+    creatorImage:ProfileSample1,
+    title: "Flood in Lamboa! Flood in Lamboa!! Flood in Lamboa!!!",
+    content: '{"blocks":[{"key":"dcikp","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"emf3d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"do1nk","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ad0ce","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3omkt","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"44j06","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"9omqe","text":"About","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":5,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"fg1eg","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"a263d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4086l","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3tpef","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"em5sv","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"464p1","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"cjkla","text":"Team","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":4,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"7d4kr","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8ovid","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ramf","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"1qvpl","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"aj587","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}',
+    categoryId: "1",
+    categoryName: "Disaster",
+    budget: 200000,
+    currency: "NGN",
+    revenue: 110000,
+    contributors: 10,
+    venue: "Lagos, Nigeria",
+    createdDate: "2023-07-31T21:30:20.757Z",
+    likes: 10,
+    comments: 20,
+    shares: 3,
   },
   {
     id: "4",
-    name: "Pandemic",
+    coverImage: StoryImage3,
+    startDate: "2023-07-31T21:30:20.757Z",
+    endDate: "2023-08-10T21:30:20.757Z",
+    creatorFirstname: "Clink",
+    creatorLastname: "James",
+    creatorImage:ProfileSample1,
+    title: "Flood in Lamboa! Flood in Lamboa!! Flood in Lamboa!!!",
+    content: '{"blocks":[{"key":"dcikp","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"emf3d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"do1nk","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ad0ce","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3omkt","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"44j06","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"9omqe","text":"About","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":5,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"fg1eg","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"a263d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4086l","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3tpef","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"em5sv","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"464p1","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"cjkla","text":"Team","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":4,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"7d4kr","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8ovid","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ramf","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"1qvpl","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"aj587","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}',
+    categoryId: "1",
+    categoryName: "Disaster",
+    budget: 200000,
+    currency: "NGN",
+    revenue: 110000,
+    contributors: 10,
+    venue: "Lagos, Nigeria",
+    createdDate: "2023-07-31T21:30:20.757Z",
+    likes: 10,
+    comments: 20,
+    shares: 3,
   },
   {
     id: "5",
-    name: "Food Crises",
+    coverImage: StoryImage2,
+    startDate: "2023-10-31T21:30:20.757Z",
+    creatorFirstname: "Clink",
+    creatorLastname: "James",
+    creatorImage:ProfileSample1,
+    title: "Let’s Make Education For All",
+    content: '{"blocks":[{"key":"dcikp","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"emf3d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"do1nk","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ad0ce","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3omkt","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"44j06","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"9omqe","text":"About","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":5,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"fg1eg","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"a263d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4086l","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3tpef","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"em5sv","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"464p1","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"cjkla","text":"Team","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":4,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"7d4kr","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8ovid","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ramf","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"1qvpl","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"aj587","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}',
+    categoryName: "Disaster",
+    categoryId: "1",
+    budget: 200000,
+    currency: "NGN",
+    revenue: 110000,
+    contributors: 10,
+    venue: "Rivers, Port Harcourt",
+    createdDate: "2023-07-31T21:30:20.757Z",
+    likes: 10,
+    comments: 20,
+    shares: 3,
   },
   {
     id: "6",
-    name: "Education",
-  },
-  {
-    id: "7",
-    name: "Homeless",
-  },
-  {
-    id: "8",
-    name: "Animal",
-  },
-  {
-    id: "9",
-    name: "War Crises",
-  },
-];
-
-export const storyBlogData: IStory[] = [
-  {
-    id: "1",
-    image: {
-      src: SupportUsThumbnail1,
-      col: 2,
-      row: 4,
-    },
-    title:
-      "Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation Land of Hope Foundation",
-    content: (
-      <div>
-        <p>
-          Land of Hope Foundation Land of Hope Foundation Land of Hope
-          Foundation Land of Hope Foundation Land of Hope Foundation Land of
-          Hope Foundation Land of Hope Foundation Land of Hope Foundation
-        </p>
-        <br />
-        <p>
-          Land of Hope Foundation Land of Hope Foundation Land of Hope
-          Foundation Land of Hope Foundation Land of Hope Foundation Land of
-          Hope Foundation Land of Hope Foundation Land of Hope Foundation
-        </p>
-      </div>
-    ),
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
-  },
-  {
-    id: "2",
-    image: {
-      src: SupportUsThumbnail2,
-      col: 2,
-      row: 2,
-    },
-    title: "Yinka Shonibare Foundation",
-    content:
-      "The Land of Hope was founded to fight against the idea that children are witches in Nigeria to be tortured or killed. The Land of Hope was founded to fight against the idea that children are witches in Nigeria to be tortured or killed.",
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
-  },
-  {
-    id: "3",
-    image: {
-      src: SupportUsThumbnail3,
-      col: 2,
-      row: 2,
-    },
-    title: "Yinka Shonibare Foundation",
-    content:
-      "Founded to encourage cultural interchange through residencies and development programmes in the UK and Nigeria.",
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
-  },
-  {
-    id: "4",
-    image: {
-      src: SupportUsThumbnail4,
-      col: 2,
-      row: 4,
-    },
-    title: "The GEANCO Foundation",
-    content:
-      "We organize special surgical missions and run an innovative, life-saving program to fight anemia in Nigeria.",
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
-  },
-  {
-    id: "5",
-    image: {
-      src: SupportUsThumbnail5,
-      row: 4,
-    },
-    title: "Chess in slum Africa",
-    content:
-      "A non-profit organization using the game of chess to help youngsters in slum communities realize their full potential.",
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
-  },
-  {
-    id: "6",
-    image: {
-      src: SupportUsThumbnail6,
-    },
-    title: "Lagos Food Bank Initiative",
-    content:
-      "The Lagos Food Bank Initiative provides low-income communities across Nigeria with basic food and self-care items.",
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
-  },
-  {
-    id: "7",
-    image: {
-      src: SupportUsThumbnail1,
-    },
-    title: "Yinka Shonibare Foundation",
-    content:
-      "Founded to encourage cultural interchange through residencies and development programmes in the UK and Nigeria.",
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
-  },
-  {
-    id: "8",
-    image: {
-      src: SupportUsThumbnail2,
-    },
-    title: "Yinka Shonibare Foundation",
-    content:
-      "Founded to encourage cultural interchange through residencies and development programmes in the UK and Nigeria.",
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
-  },
-  {
-    id: "9",
-    image: {
-      src: SupportUsThumbnail3,
-    },
-    title: "Yinka Shonibare Foundation",
-    content:
-      "Founded to encourage cultural interchange through residencies and development programmes in the UK and Nigeria.",
-    comments: 30,
-    likes: 12,
-    shares: 2,
-    url: "/blog",
+    coverImage: StoryImage2,
+    startDate: "2023-10-31T21:30:20.757Z",
+    creatorFirstname: "Clink",
+    creatorLastname: "James",
+    creatorImage:ProfileSample1,
+    title: "Let’s Make Education For All",
+    content: '{"blocks":[{"key":"dcikp","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"emf3d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"do1nk","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ad0ce","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3omkt","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"44j06","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"9omqe","text":"About","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":5,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"fg1eg","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"a263d","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4086l","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3tpef","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"em5sv","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"464p1","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"cjkla","text":"Team","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":4,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"7d4kr","text":"Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8ovid","text":"Velit eius ab delectus temporibus. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ramf","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"1qvpl","text":"For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes,","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"aj587","text":"figures, images, and figure captions can all be styled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}',
+    categoryName: "Disaster",
+    categoryId: "1",
+    budget: 200000,
+    currency: "NGN",
+    revenue: 110000,
+    contributors: 10,
+    venue: "Rivers, Port Harcourt",
+    createdDate: "2023-07-31T21:30:20.757Z",
+    likes: 10,
+    comments: 20,
+    shares: 3,
   },
 ];
-
-// export const storyImageData:IStory[] = [
-//   {
-//     id:"1",
-//     title:""
-//   }
-// ]

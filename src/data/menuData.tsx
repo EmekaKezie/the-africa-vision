@@ -21,7 +21,7 @@ export const mainMenuData: IMenu[] = [
   },
   {
     id: "1",
-    url: "/project",
+    url: "/campaign",
     name: "Campaigns",
     visibility: true,
   },

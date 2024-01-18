@@ -1,16 +1,16 @@
-import { IStoryCategory } from "@/types/IStory";
+import { ICategory } from "@/types/ICategory";
 import { Box, Chip, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
 
 type props = {
-  data: IStoryCategory[];
+  data: ICategory[];
   onSelected?: (categoryIds: string[]) => void;
 };
 
 export default function StoryCategories(props: props) {
   const classes = useStyles();
-  const [data, setData] = useState<IStoryCategory[]>([]);
+  const [data, setData] = useState<ICategory[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function StoryCategories(props: props) {
             background: isActive("all") ? "#A9518B" : "#FFFFFF",
           }}
         />
-        {data.map((item: IStoryCategory) => (
+        {data.map((item: ICategory) => (
           <Chip
             key={item.id}
             label={item.name}

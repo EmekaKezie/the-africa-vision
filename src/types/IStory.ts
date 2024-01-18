@@ -1,23 +1,39 @@
+import { ReactNode } from "react";
 import { IContact } from "./IContact";
 
 export interface IStory {
   id: string;
-  image: IStoryImage;
   title: string;
-  content: any;
-  startDate?:string;
+  content: ReactNode | string;
+  startDate?: string;
   endDate?: string;
+  venue?: string;
+  categoryId?: string;
+  categoryName?: string;
+  coverImage?: any;
+
+  budget: number;
+  currency: string;
+  revenue: number;
+  contributors: number;
+
   likes?: number;
   comments?: number;
   shares?: number;
-  categoryId?: string;
-  categoryName?: string;
-  analytics?: IStoryAnalytics;
-  url?: string;
-  author?: string;
+
+  creatorId?: string;
+  creatorFirstname?: string;
+  creatorLastname?: string;
+  creatorEmail?: string;
+  creatorImage?: any;
+
+  //analytics?: IStoryAnalytics;
+  //url?: string;
+  //author?: string;
   facilitator?: IContact;
-  location?:string;
-  createdDate?:string;
+
+  createdDate?: string;
+  imageStory?: any[];
 }
 
 export interface IStoryAnalytics {
@@ -36,7 +52,3 @@ interface IStoryImage {
   row?: number;
 }
 
-export interface IStoryCategory {
-  id: string;
-  name: string;
-}

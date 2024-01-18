@@ -3,29 +3,15 @@ import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
 import { useAppSelector } from "@/redux/useReduxHooks";
-import { Add, AttachMoney, Favorite, MoreVert } from "@mui/icons-material";
-import {
-  Avatar,
-  Badge,
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Grid,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Add, AttachMoney } from "@mui/icons-material";
+import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import Link from "next/link";
-import AvatarIcon from "@/assets/avatar.png";
-import StoryThumbnail from "@/assets/story-thumbnail-2.png";
-import StoryProjects from "@/component/core/StoryProjects";
-import { storyDonationData } from "@/data/storyDonationData";
-import TextInput from "@/component/common/TextInput";
-import StoryActivities from "@/component/core/StoryActivities";
+import { storyData } from "@/data/storyData";
+import ActivityList from "@/component/core/ActivityList";
 import { activityData } from "@/data/activityData";
 import PurpleButton from "@/component/common/PurpleButton";
+import BlogCardType2 from "@/component/core/BlogListCardType2";
+import CampaignList from "@/component/core/CampaignList";
 
 function Stories() {
   const auth = useAppSelector((state) => state.authReducer);
@@ -66,22 +52,22 @@ function Stories() {
                   text="Create a project"
                   shade="white"
                   size="small"
-                  startIcon={<Add/>}
+                  startIcon={<Add />}
                 />
                 <PurpleButton
                   text="Create new story"
                   shade="purple"
                   size="small"
-                  startIcon={<Add/>}
+                  startIcon={<Add />}
                 />
               </Stack>
             </Box>
           </Grid>
         </Grid>
       </Box>
-      
+
       <br />
-      
+
       <Box
         sx={{
           padding: "1em",
@@ -212,91 +198,7 @@ function Stories() {
                 </Typography>
               </Box>
               <Box>
-                <Card elevation={0}>
-                  <CardHeader
-                    avatar={
-                      <Badge
-                        overlap="circular"
-                        anchorOrigin={{
-                          vertical: "bottom",
-                          horizontal: "right",
-                        }}
-                        badgeContent={
-                          <Avatar
-                            alt="Remy Sharp"
-                            src={AvatarIcon.src}
-                            sx={{ height: "20px", width: "20px" }}
-                          />
-                        }>
-                        <Avatar sx={{ backgroundColor: "#2563EB" }}>DE</Avatar>
-                      </Badge>
-                    }
-                    action={
-                      <IconButton aria-label="settings">
-                        <MoreVert />
-                      </IconButton>
-                    }
-                    title={
-                      <Typography
-                        sx={{
-                          color: "#0F172A",
-                        }}>
-                        Design Enthusiast
-                      </Typography>
-                    }
-                    subheader={
-                      <Typography
-                        sx={{
-                          fontSize: "0.7em",
-                          color: "#94A3B8",
-                        }}>
-                        Angela Lee • 56 mins ago
-                      </Typography>
-                    }
-                  />
-                  <CardContent>
-                    <Box>
-                      <Typography sx={{ color: "#64748B" }}>
-                        {cardText}
-                      </Typography>
-                    </Box>
-                    <br />
-                    <CardMedia
-                      component="img"
-                      src={StoryThumbnail.src}
-                      height={200}
-                      sx={{
-                        width: "100%",
-                      }}
-                    />
-                    <br />
-                    <Box display="flex">
-                      <Box flexGrow={1}>
-                        <Favorite />
-                        <Typography>2.6k Likes</Typography>
-                      </Box>
-                      <Box flexGrow={1} display="flex" justifyContent="center">
-                        <Favorite />
-                        <Typography>2.6k Likes</Typography>
-                      </Box>
-                      <Box flexGrow={1} display="flex" justifyContent="end">
-                        <Favorite />
-                        <Typography>2.6k Likes</Typography>
-                      </Box>
-                    </Box>
-                  </CardContent>
-
-                  <Box>
-                    <TextInput
-                      size="small"
-                      fullWidth
-                      inputStyle={{
-                        background: "#FFF9FD",
-                        border: "1px solid #CCCCCC",
-                      }}
-                    />
-                  </Box>
-                </Card>
+                <BlogCardType2 item={storyData[3]} elevation={0} showInput />
               </Box>
             </Box>
           </Grid>
@@ -319,9 +221,9 @@ function Stories() {
                   Top Projects
                 </Typography>
               </Box>
-              <StoryProjects
-                data={storyDonationData}
+              <CampaignList
                 variation="pinned"
+                data={storyData}
                 startAt={0}
                 stopAt={4}
               />
@@ -339,7 +241,7 @@ function Stories() {
           height: "100%",
           boxShadow: "1px 1px 5px lightgray",
         }}>
-        <StoryActivities data={activityData} />
+        <ActivityList data={activityData} />
       </Box>
     </AuthenticatedLayout>
   );

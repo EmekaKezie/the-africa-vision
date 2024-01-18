@@ -1,26 +1,29 @@
 "use client";
-import StoryDonations from "@/component/core/StoryDonations";
-import { storyCategoryData } from "@/data/storyData";
-import { storyDonationData } from "@/data/storyDonationData";
+import DonationList from "@/component/core/DonationList";
+import { categoryData } from "@/data/categoryData";
+import { storyData } from "@/data/storyData";
 import { Box } from "@mui/material";
 import StoryCategories from "@/component/core/StoryCategories";
 import { useEffect, useState } from "react";
-import { IStory, IStoryCategory } from "@/types/IStory";
+import { IStory } from "@/types/IStory";
 import Nav from "@/component/core/Nav";
 import HeroHome from "@/component/core/HeroHome";
+import UnauthenticatedLayout from "@/component/common/UnauthenticatedLayout";
+import ReduxProvider from "@/component/common/ReduxProvider";
+import { ICategory } from "@/types/ICategory";
 
-export default function DonatePage() {
+function DonatePage() {
   const [donations, setDonations] = useState<IStory[]>([]);
   const [filteredDonations, setFilteredDonations] = useState<IStory[]>([]);
-  const [categories, setCategories] = useState<IStoryCategory[]>([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
 
   useEffect(() => {
-    setDonations(storyDonationData);
+    setDonations(storyData);
   }, []);
 
   useEffect(() => {
-    setCategories(storyCategoryData);
+    setCategories(categoryData);
   }, []);
 
   useEffect(() => {
@@ -39,14 +42,13 @@ export default function DonatePage() {
   };
 
   return (
-    <Box>
-      <Nav />
-      <HeroHome/>
-      
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+    <UnauthenticatedLayout>
+      <HeroHome />
+
+      <br />
+      <br />
+      <br />
+      <br />
       <Box
         sx={{
           padding: { xs: "0 1rem", md: "0 8rem" },
@@ -60,9 +62,15 @@ export default function DonatePage() {
           />
         </Box>
         <Box>
-          <StoryDonations data={displayDonations()} />
+          <DonationList
+            variation="grid"
+            data={displayDonations()}
+            redirectUrl="donate"
+          />
         </Box>
       </Box>
-    </Box>
+    </UnauthenticatedLayout>
   );
 }
+
+export default ReduxProvider(DonatePage);

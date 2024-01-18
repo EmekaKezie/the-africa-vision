@@ -6,121 +6,16 @@ import { useAppSelector } from "@/redux/useReduxHooks";
 import { AttachMoney, Menu, MoreVert } from "@mui/icons-material";
 import { Box, Grid, IconButton, Paper, Typography } from "@mui/material";
 import Chart from "react-apexcharts";
-import { ApexOptions } from "apexcharts";
 import { convertToCurrency } from "@/component/common/helpers";
 import { useState } from "react";
 
-type apexChartProps = {
-  options?: ApexOptions;
-  series?: ApexAxisChartSeries | ApexNonAxisChartSeries;
-  width?: string | number;
-  height?: string | number;
-};
+
 
 function Dashboard() {
   const auth = useAppSelector((state) => state.authReducer);
 
-  const areaChartData: apexChartProps = {
-    options: {
-      stroke: {
-        curve: "smooth",
-        width: 1,
-      },
-      chart: {
-        toolbar: {
-          show: false,
-        },
-      },
-      legend: {
-        position: "top",
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
-      },
-      yaxis: {
-        min: 100,
-        max: 1000,
-        labels: {
-          show: true,
-          style: {
-            colors: ["#667085"],
-          },
-          formatter: (val, opts) => {
-            return convertToCurrency(val, "NGN");
-          },
-        },
-      },
-    },
-    series: [
-      {
-        name: "Revenue",
-        data: [100, 300, 300, 200, 400, 600, 500, 700, 700, 800, 900, 1000],
-      },
-      {
-        name: "Sales",
-        data: [200, 400, 100, 300, 600, 600, 800, 900, 900, 1000, 1000, 950],
-      },
-    ],
-    width: "100%",
-    height: 300,
-  };
 
-  const circularGuageChartData: apexChartProps = {
-    options: {
-      chart: {},
-      plotOptions: {
-        radialBar: {
-          hollow: {
-            margin: 15,
-            size: "70%",
-          },
-          dataLabels: {
-            show: true,
-            //showOn: "always",
-            name: {
-              offsetY: -10,
-              show: true,
-              color: "#888",
-              fontSize: "13px",
-            },
-            value: {
-              color: "#111",
-              fontSize: "30px",
-              show: true,
-            },
-          },
 
-          //startAngle:270,
-          //endAngle: 150,
-        },
-      },
-      stroke: {
-        lineCap: "round",
-      },
-      labels: ["Progress"],
-    },
-    series: [67],
-  };
-
-  const [data1, setData1] = useState<any>();
-  const [data2, setData2] = useState<any>();
-  
 
   return (
     <AuthenticatedLayout>
@@ -230,11 +125,7 @@ function Dashboard() {
                   </IconButton>
                 </Box>
               </Box>
-              <Chart
-                options={circularGuageChartData.options}
-                series={circularGuageChartData.series}
-                type="radialBar"
-              />
+              
             </Paper>
           </Grid>
           <Grid item lg={8} md={8} sm={12} xs={12}>
@@ -265,13 +156,7 @@ function Dashboard() {
                   </IconButton>
                 </Box>
               </Box>
-              <Chart
-                options={areaChartData.options}
-                series={areaChartData.series}
-                height={areaChartData.height}
-                width={areaChartData.width}
-                type="area"
-              />
+             
             </Paper>
           </Grid>
         </Grid>

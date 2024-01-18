@@ -4,3 +4,9 @@ export interface IPaystackInitialize {
   currency: string;
   callback_url: string;
 }
+
+export interface IPaymentOption {
+  id: string;
+  optionCode: string;
+  name: string;
+}

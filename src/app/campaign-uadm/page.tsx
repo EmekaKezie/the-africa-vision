@@ -3,10 +3,8 @@ import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import PurpleButton from "@/component/common/PurpleButton";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
-import StoryCampaign from "@/component/core/StoryCampaign";
-import StoryCampaign2 from "@/component/core/StoryCampaign2";
-import StoryProjects from "@/component/core/StoryProjects";
-import { storyDonationData } from "@/data/storyDonationData";
+import CampaignList from "@/component/core/CampaignList";
+import { storyData } from "@/data/storyData";
 import { Add, AttachMoney } from "@mui/icons-material";
 import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import Link from "next/link";
@@ -40,12 +38,14 @@ function CampaignUAdmn() {
                 justifyContent: { md: "end" },
                 float:"right"
               }}>
+                <Link href={`campaign-uadm/add`}>
                <PurpleButton
                   text="Create new campaign"
                   shade="purple"
                   size="small"
                   startIcon={<Add />}
                 />
+                </Link>
             </Box>
           </Grid>
         </Grid>
@@ -153,10 +153,10 @@ function CampaignUAdmn() {
           data={storyDonationData}
           swipeButtons={false}
         /> */}
-        <StoryCampaign
+        <CampaignList
           swipeButtons={false}
           variation="swipeable"
-          data={storyDonationData}
+          data={storyData}
         />
       </Box>
 
@@ -174,10 +174,10 @@ function CampaignUAdmn() {
           data={storyDonationData}
           swipeButtons={false}
         /> */}
-        <StoryCampaign
+        <CampaignList
           swipeButtons={false}
           variation="tabular"
-          data={storyDonationData}
+          data={storyData}
         />
       </Box>
     </AuthenticatedLayout>

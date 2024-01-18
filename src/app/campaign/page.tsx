@@ -1,12 +1,15 @@
 "use client";
 
-
+import ReduxProvider from "@/component/common/ReduxProvider";
+import UnauthenticatedLayout from "@/component/common/UnauthenticatedLayout";
 import { Box } from "@mui/material";
 import { usePathname } from "next/navigation";
 
-export default function CampaignPage(){
-    const router = usePathname();
+function CampaignPage() {
+  const router = usePathname();
 
-  console.log(router)
-    return(<Box>Campaign</Box>)
+  console.log(router);
+  return <UnauthenticatedLayout></UnauthenticatedLayout>;
 }
+
+export default ReduxProvider(CampaignPage);

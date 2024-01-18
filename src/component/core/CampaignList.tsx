@@ -7,34 +7,37 @@ import {
 } from "@mui/icons-material";
 import {
   Box,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
   Grid,
   IconButton,
-  LinearProgress,
   Stack,
   Tooltip,
   Typography,
 } from "@mui/material";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { convertToCurrency, convertToReadableDate, convertToReadableTime, formatNumberWithSuffix } from "../common/helpers";
+import {
+  convertToCurrency,
+  convertToReadableDate,
+  convertToReadableTime,
+} from "../common/helpers";
 import MUIDataTable from "mui-datatables";
-import PurpleButton from "../common/PurpleButton";
+import CampaignListCardType1 from "./CampaignListCardType1";
+import CampaignListCardType2 from "./CampaignListCardType2";
+import CampaignListCardType3 from "./CampaignListCardType3";
 
 type variationTypes = "swipeable" | "grid" | "pinned" | "tabular";
+type cardTypes = "type1" | "type2" | "type3";
 
 type props = {
   variation: variationTypes;
+  cardType?: cardTypes;
   swipeButtons?: boolean;
   startAt?: number;
   stopAt?: number;
+  redirectUrl?: string;
   data: IStory[];
 };
 
-export default function StoryCampaign(props: props) {
+export default function CampaignList(props: props) {
   const [data, setData] = useState<IStory[]>([]);
 
   useEffect(() => {
@@ -45,122 +48,24 @@ export default function StoryCampaign(props: props) {
   const limit: number = !props.stopAt ? data.length : props.stopAt;
 
   const renderCard = (item: IStory) => {
-    return (
-      <Card elevation={1}>
-        <CardMedia component="img" height="150px" image={item.image.src.src} />
-        <CardContent>
-          <Typography
-            sx={{
-              color: "#A9518B",
-              fontWeight: "bold",
-              letterSpacing: "-1px",
-            }}>
-            {item.categoryName}
-          </Typography>
-          <br />
-          <Typography
-            component="div"
-            variant="body1"
-            sx={{
-              color: "#0F111D",
-              fontSize: "1.1em",
-              fontWeight: "bold",
-              display: "-webkit-box",
-              overflow: "hidden",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 1,
-            }}>
-            {item.title}
-          </Typography>
-          <br />
-          <Typography
-            component="div"
-            variant="body2"
-            sx={{
-              color: "#7B7D8C",
-              fontSize: "0.9em",
-              display: "-webkit-box",
-              overflow: "hidden",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 3,
-            }}>
-            {item.content}
-          </Typography>
-          <br />
-          <Box>
-            <Stack direction="row" marginBottom="0.3rem">
-              <Typography
-                component="div"
-                sx={{
-                  justifyContent: "start",
-                  flexGrow: 1,
-                  fontSize: "0.7em",
-                }}>
-                Donation
-              </Typography>
-              <Typography
-                component="div"
-                sx={{
-                  justifyContent: "end",
-                  fontSize: "0.7em",
-                }}>
-                {!item?.analytics?.percentage ? 0 : item?.analytics?.percentage}
-                %
-              </Typography>
-            </Stack>
-            <LinearProgress
-              variant="determinate"
-              value={
-                !item?.analytics?.percentage ? 0 : item?.analytics?.percentage
-              }
-              sx={{
-                padding: "0.2rem",
-                borderRadius: "5px",
-                backgroundColor: "#C7E7DF",
-                "&>.MuiLinearProgress-bar": {
-                  background: "#A9518B",
-                },
-              }}
-            />
-            <Stack direction="row" marginTop="0.3rem">
-              <Typography
-                component="div"
-                sx={{
-                  justifyContent: "start",
-                  flexGrow: 1,
-                  fontSize: "0.7em",
-                }}>
-                Raised: {item.analytics?.currency}
-                {formatNumberWithSuffix(
-                  !item?.analytics?.attanied ? 0 : item?.analytics?.attanied
-                )}
-              </Typography>
-              <Typography
-                component="div"
-                sx={{
-                  justifyContent: "end",
-                  fontSize: "0.7em",
-                }}>
-                Goal: {item.analytics?.currency}
-                {formatNumberWithSuffix(
-                  !item?.analytics?.goal ? 0 : item?.analytics?.goal
-                )}
-              </Typography>
-            </Stack>
-          </Box>
-        </CardContent>
-        <CardActions sx={{ padding: "1rem" }}>
-          <Link href={item?.url!}>
-            <PurpleButton
-              text="Donate"
-              size="small"
-              style={{ width: "150px" }}
-              shade="white"
-            />
-          </Link>
-        </CardActions>
-      </Card>
-    );
+    switch (props.cardType) {
+      case "type1":
+        return (
+          <CampaignListCardType1 redirectUrl={props.redirectUrl} item={item} />
+        );
+      case "type2":
+        return (
+          <CampaignListCardType2 redirectUrl={props.redirectUrl} item={item} />
+        );
+      case "type3":
+        return (
+          <CampaignListCardType3 redirectUrl={props.redirectUrl} item={item} />
+        );
+      default:
+        return (
+          <CampaignListCardType1 redirectUrl={props.redirectUrl} item={item} />
+        );
+    }
   };
 
   const renderSwipeableVariation = () => {
@@ -224,15 +129,28 @@ export default function StoryCampaign(props: props) {
   };
 
   const renderPinnedVariation = () => {
-    return <Box>Pinned Variation {"->"} Work in Progress</Box>;
+    return (
+      <Box
+        sx={{
+          paddingBottom: "1rem",
+        }}>
+        <Grid container spacing={2}>
+          {data?.slice(offset, limit)?.map((item: IStory) => (
+            <Grid item lg={12} md={12} sm={6} xs={12} key={item.id}>
+              <CampaignListCardType3 redirectUrl={props.redirectUrl} item={item} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    );
   };
 
   const renderTabularVariation = () => {
     const flattenedData = (data: IStory[]): any => {
       return data?.map((item: IStory) => ({
         title: item.title,
-        location: item.location,
-        amount: item.analytics?.goal,
+        location: item?.venue,
+        amount: item?.budget,
         date: item.startDate,
       }));
     };
@@ -290,7 +208,7 @@ export default function StoryCampaign(props: props) {
                   color: "#667085",
                   fontSize: "0.95em",
                 }}>
-                {data[index].location}
+                {data[index].venue}
               </Typography>
             );
           },
@@ -320,11 +238,8 @@ export default function StoryCampaign(props: props) {
                   fontSize: "0.95em",
                   fontWeight: "bold",
                 }}>
-                {data[index].analytics?.goal &&
-                  convertToCurrency(
-                    data[index].analytics?.goal!,
-                    data[index].analytics?.currency!
-                  )}
+                {data[index].budget &&
+                  convertToCurrency(data[index].budget, data[index]?.currency!)}
               </Typography>
             );
           },
@@ -353,7 +268,8 @@ export default function StoryCampaign(props: props) {
                   color: "#667085",
                   fontSize: "0.95em",
                 }}>
-                {convertToReadableDate(data[index].startDate!)}, {convertToReadableTime(data[index].startDate!)}
+                {convertToReadableDate(data[index].startDate!)},{" "}
+                {convertToReadableTime(data[index].startDate!)}
               </Typography>
             );
           },
@@ -398,7 +314,6 @@ export default function StoryCampaign(props: props) {
               </Typography>
             </Box>
           }
-          //data={data?.slice(offset, limit)}
           data={flattenedData(data?.slice(offset, limit))}
           columns={columns}
           options={{
@@ -425,19 +340,14 @@ export default function StoryCampaign(props: props) {
     switch (props.variation) {
       case "swipeable":
         return renderSwipeableVariation();
-        break;
       case "grid":
         return renderGridVariation();
-        break;
       case "pinned":
         return renderPinnedVariation();
-        break;
       case "tabular":
         return renderTabularVariation();
-        break;
       default:
         return renderGridVariation();
-        break;
     }
   };
 

@@ -1,13 +1,13 @@
 "use client";
 import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import ReduxProvider from "@/component/common/ReduxProvider";
+import CampaignList from "@/component/core/CampaignList";
 import StatsCard from "@/component/core/StatsCard";
-import StoryActivities from "@/component/core/StoryActivities";
-import StoryDonations from "@/component/core/StoryDonations";
-import StoryProjects from "@/component/core/StoryProjects";
+import ActivityList from "@/component/core/ActivityList";
+import DonationList from "@/component/core/DonationList";
 import TransactionTable from "@/component/core/TransactionTable";
 import { activityData } from "@/data/activityData";
-import { storyDonationData } from "@/data/storyDonationData";
+import { storyData } from "@/data/storyData";
 import { transactionData } from "@/data/transactionData";
 import { useAppSelector } from "@/redux/useReduxHooks";
 import { AttachMoney } from "@mui/icons-material";
@@ -139,11 +139,7 @@ function Overview() {
                   <Link href="/overview">See All</Link>
                 </Typography>
               </Box>
-              <StoryDonations
-                swipeable
-                data={storyDonationData}
-                swipeButtons={false}
-              />
+              <DonationList variation="swipeable" data={storyData} />
             </Box>
           </Grid>
           <Grid item lg={4} md={4} sm={12} xs={12}>
@@ -165,9 +161,9 @@ function Overview() {
                   Upcoming Projects
                 </Typography>
               </Box>
-              <StoryProjects
-                data={storyDonationData}
+              <CampaignList
                 variation="pinned"
+                data={storyData}
                 startAt={0}
                 stopAt={4}
               />
@@ -235,7 +231,7 @@ function Overview() {
                   Recent Activities
                 </Typography>
               </Box>
-              <StoryActivities data={activityData} startAt={0} stopAt={5} />
+              <ActivityList data={activityData} startAt={0} stopAt={5} />
             </Box>
           </Grid>
         </Grid>

@@ -23,6 +23,7 @@ type props = {
   fullWidth?: boolean;
   select?: boolean;
   selectedValue?: string;
+  disabled?: boolean;
 };
 
 export default function TextInput(props: props) {
@@ -54,25 +55,29 @@ export default function TextInput(props: props) {
         select={!props.select ? false : true}
         onChange={props.onChange}
         onKeyUp={props.onKeyUp}
+        disabled={!props.disabled ? false : true}
         //autoFocus
         InputProps={{
-          style: props.inputStyle,
+          style: !props.inputStyle
+            ? {
+                background: "#FFF9FD",
+                border: "1px solid #CCCCCC",
+              }
+            : props.inputStyle,
           startAdornment: props.startIcon,
           endAdornment: props.endIcon,
           disableUnderline: true,
         }}
         style={props.style}
         SelectProps={{
-          value: !props.selectedValue
-            ? null
-            : props.selectedValue,
+          value: !props.selectedValue ? null : props.selectedValue,
         }}
         sx={{
           "& fieldset": {
             border: !props.validationMessage ? "none" : "1px solid red",
           },
           "&:hover": {
-            border: "1px solid #A8518A",
+            border: props.validationMessage ? "none" : "1px solid #A8518A",
             borderRadius: "5px",
           },
         }}>

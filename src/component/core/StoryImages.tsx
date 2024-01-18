@@ -26,7 +26,7 @@ export default function StoryImages(props: props) {
         sx={{
           paddingBottom: "1rem",
         }}>
-        <ImageList variant="quilted" cols={8} rowHeight={120}>
+        {/* <ImageList variant="quilted" cols={8} rowHeight={120}>
           {data?.slice(offset, limit)?.map((item) => (
             <ImageListItem
               key={item.id}
@@ -42,7 +42,7 @@ export default function StoryImages(props: props) {
               />
             </ImageListItem>
           ))}
-        </ImageList>
+        </ImageList> */}
       </Box>
     );
   };

@@ -37,3 +37,34 @@ export function convertToReadableTime(date: string) {
     hour12: true,
   });
 }
+
+export function convertToPercentage(totalAmount: number, givenAmount: number) {
+  const percentage = (totalAmount / givenAmount) * 100;
+  return percentage;
+}
+
+export function getDateDifference(oldDate: string, newDate: string) {
+  const toDateOldDate: any = new Date(oldDate);
+  const toDateNewDate: any = new Date(newDate);
+
+  const diff = toDateNewDate - toDateOldDate;
+
+  const diffInMilliSeconds = diff;
+  const diffInSeconds = diff / 1000;
+  const diffInMinutes = diff / (1000 * 60);
+  const diffInHours = diff / (1000 * 60 * 60);
+  const diffInDays = diff / (1000 * 60 * 60 * 24);
+
+  return {
+    diffInMilliSeconds,
+    diffInSeconds,
+    diffInMinutes,
+    diffInHours,
+    diffInDays,
+  };
+}
+
+export const previewImage = (file: Blob) => {
+  const url = URL.createObjectURL(file)
+  return url
+}

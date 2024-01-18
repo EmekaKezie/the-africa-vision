@@ -3,6 +3,7 @@ import { IActivity } from "@/types/IActivity";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { convertToReadableTime } from "../common/helpers";
+import ActivityListCardType1 from "./ActivityListCardType1";
 
 type variationTypes = "swipeable" | "grid" | "pinned";
 
@@ -14,7 +15,7 @@ type props = {
   data: IActivity[];
 };
 
-export default function StoryActivities(props: props) {
+export default function ActivityList(props: props) {
   const [data, setData] = useState<IActivity[]>([]);
 
   const offset: number = !props.startAt ? 0 : props.startAt;
@@ -24,36 +25,12 @@ export default function StoryActivities(props: props) {
     if (props?.data) setData(props?.data);
   }, [props]);
 
-  const renderCard2 = (item: IActivity) => {
-    return (
-      <Card elevation={0} sx={{ backgroundColor: "#FAFAFA", border:"1px solid #E6E6E6" }}>
-        <CardContent>
-          <Typography
-            sx={{
-              color: "#303030",
-              fontSize: "0.85em",
-              marginBottom: "5px",
-            }}>
-            {item.title}
-          </Typography>
-          <Typography
-            sx={{
-              color: "#686868",
-              fontSize: "0.65em",
-            }}>
-            {new Date().toLocaleDateString() ===
-            new Date(item.endDate!).toLocaleDateString()
-              ? "Today"
-              : new Date(item.endDate!).toLocaleDateString("en-NG", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}{" "}
-            - {convertToReadableTime(item.endDate!)}
-          </Typography>
-        </CardContent>
-      </Card>
-    );
+  const renderSwipeableVariation = () => {
+    return <Box>Swipeable Variation {"->"} in progress</Box>;
+  };
+
+  const renderGridVariation = () => {
+    return <Box>Grid Variation {"->"} in progress</Box>;
   };
 
   const renderPinnedVariation = () => {
@@ -65,7 +42,7 @@ export default function StoryActivities(props: props) {
         <Grid container spacing={1}>
           {data?.slice(offset, limit)?.map((item: IActivity) => (
             <Grid item lg={12} md={12} sm={6} xs={12} key={item.id}>
-              <Box>{renderCard2(item)}</Box>
+              <ActivityListCardType1 item={item} />
             </Grid>
           ))}
         </Grid>
@@ -76,19 +53,13 @@ export default function StoryActivities(props: props) {
   const renderContent = () => {
     switch (props.variation) {
       case "swipeable":
-        //return renderSwipeableVariation();
-        return null;
-        break;
+        return renderSwipeableVariation();
       case "grid":
-        //return renderGridVariation();
-        return null;
-        break;
+        return renderGridVariation();
       case "pinned":
         return renderPinnedVariation();
-        break;
       default:
         return renderPinnedVariation();
-        break;
     }
   };
 

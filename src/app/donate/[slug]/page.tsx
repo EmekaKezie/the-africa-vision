@@ -9,10 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { storyDonationData } from "@/data/storyDonationData";
+import { storyData } from "@/data/storyData";
 import { IStory } from "@/types/IStory";
 import { KeyboardArrowLeft } from "@mui/icons-material";
-import { formatNumberWithSuffix } from "@/component/common/helpers";
+import {
+  convertToPercentage,
+  formatNumberWithSuffix,
+  getDateDifference,
+} from "@/component/common/helpers";
 import StoryImages from "@/component/core/StoryImages";
 import { start } from "repl";
 import Image from "next/image";
@@ -27,7 +31,7 @@ export default function DonateViewPage() {
 
   const splitPathname: string[] = pathname.split("/");
   const pageId = splitPathname[splitPathname.length - 1];
-  const data = storyDonationData.filter((x: IStory) => x.id === pageId)[0];
+  const data = storyData.filter((x: IStory) => x.id === pageId)[0];
 
   return (
     <Box>
@@ -78,7 +82,7 @@ export default function DonateViewPage() {
             },
           }}>
           <Image
-            src={data.image.src}
+            src={data.coverImage}
             alt="Image"
             style={{
               width: "100%",
@@ -101,16 +105,15 @@ export default function DonateViewPage() {
                     Donation
                   </Typography>
                   <Typography fontSize="0.7em">
-                    {data?.analytics?.percentage}%
+                    {convertToPercentage(data?.budget, data?.revenue)}
                   </Typography>
                 </Stack>
                 <LinearProgress
                   variant="determinate"
-                  value={
-                    !data?.analytics?.percentage
-                      ? 0
-                      : data?.analytics?.percentage
-                  }
+                  value={convertToPercentage(
+                    data?.budget ?? 0,
+                    data?.revenue ?? 0
+                  )}
                   sx={{
                     padding: "0.2rem",
                     borderRadius: "5px",
@@ -122,16 +125,12 @@ export default function DonateViewPage() {
                 />
                 <Stack direction="row" marginTop="0.5rem">
                   <Typography flexGrow={1} fontSize="0.7em">
-                    Raised: {data.analytics?.currency}
-                    {formatNumberWithSuffix(
-                      !data?.analytics?.attanied ? 0 : data?.analytics?.attanied
-                    )}
+                    Raised: {data.currency}
+                    {formatNumberWithSuffix(!data?.revenue ? 0 : data?.revenue)}
                   </Typography>
                   <Typography fontSize="0.7em">
-                    Goal: {data.analytics?.currency}
-                    {formatNumberWithSuffix(
-                      !data?.analytics?.goal ? 0 : data?.analytics?.goal
-                    )}
+                    Goal: {data?.currency}
+                    {formatNumberWithSuffix(!data?.budget ? 0 : data?.budget)}
                   </Typography>
                 </Stack>
               </Box>
@@ -169,13 +168,16 @@ export default function DonateViewPage() {
             <Box>
               <DonationAnalytics
                 data={{
-                  attanied: data?.analytics?.attanied,
-                  currency: data?.analytics?.currency,
-                  goal: data?.analytics?.goal,
-                  outstanding: data?.analytics?.outstanding,
-                  contributions: data?.analytics?.contributions,
-                  percentage: data?.analytics?.percentage,
-                  countdown: data?.analytics?.countdown,
+                  attanied: data?.revenue,
+                  currency: data?.currency,
+                  goal: data?.budget,
+                  outstanding: data?.budget! - data?.revenue!,
+                  contributions: 120,
+                  percentage: convertToPercentage(
+                    data?.budget ?? 0,
+                    data?.revenue ?? 0
+                  ),
+                  countdown: 10,
                 }}
                 url={`/donate/${pageId}/action`}
               />
