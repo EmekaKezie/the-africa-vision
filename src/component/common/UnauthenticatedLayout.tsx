@@ -11,8 +11,6 @@ function UnauthenticatedLayout(props: props) {
   return (
     <Box>
       <Nav />
-      
-      sdsdsd
       <Box>{props.children}</Box>
     </Box>
   );

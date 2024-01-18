@@ -71,7 +71,7 @@ function HomePage() {
         <BlogList
           variation="swipeable"
           data={storyData}
-          cardType="type1"
+          cardType="type3"
           swipeButtons
         />
       </Box>
