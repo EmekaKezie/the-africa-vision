@@ -6,6 +6,8 @@ type actionTypes = "submit" | "button";
 
 type shadeTypes = "purple" | "white";
 
+type variantTypes = "contained" | "outlined" | "text";
+
 type props = {
   text: string;
   startIcon?: JSX.Element;
@@ -18,6 +20,7 @@ type props = {
   disabled?: boolean;
   loading?: boolean;
   shade?: shadeTypes;
+  //variant?: variantTypes;
 };
 
 export default function PurpleButton(props: props) {
@@ -74,6 +77,7 @@ export default function PurpleButton(props: props) {
         )
       }
       size={!props.size ? "large" : props.size}
+      //variant={!props.variant ? 'contained' : props.variant}
       style={props.style}
       fullWidth={!props.fullWidth ? false : true}
       onClick={props.onClick}

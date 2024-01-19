@@ -1,23 +1,22 @@
-"use client";
+"use client"
 import ReduxProvider from "@/component/common/ReduxProvider";
+import AuthUserBanner from "@/component/core/AuthUserBanner";
+import AuthUserPasswordForgot from "@/component/core/AuthUserPasswordForgot";
 import { Box, Grid } from "@mui/material";
 
-import AuthUserLogin from "@/component/core/AuthUserLogin";
-import AuthUserBanner from "@/component/core/AuthUserBanner";
-
-function Login() {
+function ForgotPassword() {
   return (
     <Box>
       <Grid container>
         <Grid item lg={6} md={6} sm={12} xs={12}>
-          <AuthUserLogin />
+          <AuthUserBanner />
         </Grid>
         <Grid item lg={6} md={6} sm={12} xs={12}>
-          <AuthUserBanner />
+          <AuthUserPasswordForgot />
         </Grid>
       </Grid>
     </Box>
   );
 }
 
-export default ReduxProvider(Login);
+export default ReduxProvider(ForgotPassword)
