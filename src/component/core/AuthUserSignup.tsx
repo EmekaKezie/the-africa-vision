@@ -107,7 +107,7 @@ function AuthUserSignup() {
               fontSize: "1.2em",
               color: "#120F0F",
             }}>
-            Let's get you started
+            {"Let's get you started"}
           </Typography>
           <br />
           <form onSubmit={formik.handleSubmit}>

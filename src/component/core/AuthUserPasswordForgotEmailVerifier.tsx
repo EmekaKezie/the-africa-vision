@@ -16,19 +16,14 @@ function AuthUserPasswordForgotEmailVerifier(props: props) {
   const [otp, setOtp] = useState(Array(optLength).fill(""));
   const [loading, setLoading] = useState<boolean>(false);
 
-  const inputRefs = Array.from({ length }, () =>
-    useRef<HTMLInputElement>(null)
-  );
+
 
   const handleChange = (index: any, value: any) => {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Move focus to the next TextField if a digit is entered
-    if (value !== "" && index < length - 1 && inputRefs[index + 1]?.current) {
-      inputRefs[index + 1].current?.focus();
-    }
+   
   };
 
   const handleVerify = () => {
@@ -112,7 +107,6 @@ function AuthUserPasswordForgotEmailVerifier(props: props) {
                       },
                       maxLength: 1,
                     }}
-                    inputRef={inputRefs[index]}
                     //maxLength={1}
                     //style={{ marginRight: "8px" }}
                   />
@@ -140,7 +134,7 @@ function AuthUserPasswordForgotEmailVerifier(props: props) {
                   textDecoration: "underline",
                 },
               }}>
-              Didn't receive an email?{" "}
+              {"Didn't receive an email? "}
               <Button
                 variant="text"
                 size="small"
