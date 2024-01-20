@@ -15,6 +15,7 @@ export default function PayoutSummary(props: props) {
 
         return (
           <Box
+            key={index}
             sx={{
               display: "flex",
               padding: "0.5em 0",
