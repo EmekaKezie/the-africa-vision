@@ -114,7 +114,7 @@ function AuthUserSignup() {
             <TextInput
               label="Full Name"
               name="fullname"
-              placeholder="AdeTiger"
+              placeholder="Ade Tiger"
               value={formik.values.fullname}
               validate={formik.touched.fullname}
               validationMessage={formik.errors.fullname}

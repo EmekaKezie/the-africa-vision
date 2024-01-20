@@ -4,6 +4,7 @@ import InputFile from "@/component/common/InputFile";
 import PurpleButton from "@/component/common/PurpleButton";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import TextInput from "@/component/common/TextInput";
+import BreadCrumb from "@/component/core/BreadCrumb";
 import CampaignCreationForm from "@/component/core/CampaignCreationForm";
 import { categoryData } from "@/data/categoryData";
 import { paymentOptionData } from "@/data/paymentOptionData";
@@ -33,17 +34,34 @@ function CreateCampaign() {
     <AuthenticatedLayout>
       <Box>
         <Box>
+          <BreadCrumb
+            data={[
+              {
+                displayName: "Campaign",
+                url: "/campaign-uadm",
+                isActive: false,
+                divider: "/",
+              },
+              {
+                displayName: "Create Campaign",
+                isActive: true,
+              },
+            ]}
+          />
+        </Box>
+        <br/>
+        <Box>
           <Typography
             component="div"
             sx={{
               color: "#120F0F",
-              fontSize: { md: "2em", xs: "1.5em" },
-              fontWeight:"bold"
+              fontSize: { md: "1.8em", xs: "1.3em" },
+              fontWeight: "bold",
             }}>
             Create a New Project
           </Typography>
         </Box>
-        <br/>
+        <br />
         <Box>
           <Grid container>
             <Grid item lg={8} md={8} sm={12} xs={12}>
@@ -52,7 +70,6 @@ function CreateCampaign() {
           </Grid>
         </Box>
       </Box>
-
     </AuthenticatedLayout>
   );
 }

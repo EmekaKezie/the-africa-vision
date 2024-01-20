@@ -7,6 +7,7 @@ import TransactionTable from "@/component/core/TransactionTable";
 import { transactionData } from "@/data/transactionData";
 import { Add, AttachMoney } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
+import Link from "next/link";
 
 function Transaction() {
   return (
@@ -37,12 +38,14 @@ function Transaction() {
                 justifyContent: { md: "end" },
                 float: "right",
               }}>
-              <PurpleButton
-                text="Request a payout"
-                shade="purple"
-                size="small"
-                startIcon={<Add />}
-              />
+              <Link href={`/transaction/payout`}>
+                <PurpleButton
+                  text="Request a payout"
+                  shade="purple"
+                  size="small"
+                  startIcon={<Add />}
+                />
+              </Link>
             </Box>
           </Grid>
         </Grid>
