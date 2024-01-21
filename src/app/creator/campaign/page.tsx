@@ -8,47 +8,57 @@ import { storyData } from "@/data/storyData";
 import { Add, AttachMoney } from "@mui/icons-material";
 import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import BreadCrumb from "@/component/core/BreadCrumb";
 
 function CampaignUAdmn() {
   return (
     <AuthenticatedLayout>
       <br />
-      <Box>
-        <Grid container>
-          <Grid item lg={6} md={6} sm={5} xs={5}>
-            <Box
-              sx={{
-                height: "100%",
-                alignItems: "center",
-                display: "flex",
-              }}>
-              <Typography
-                sx={{
-                  fontWeight: "bold",
-                  color: "#0F172A",
-                  fontSize: "1.5em",
-                }}>
-                Campaign
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item lg={6} md={6} sm={7} xs={7}>
-            <Box
-              sx={{
-                justifyContent: { md: "end" },
-                float:"right"
-              }}>
-                <Link href={`/creator/campaign/create`}>
-               <PurpleButton
-                  text="Create New Campaign"
-                  shade="purple"
-                  size="small"
-                  startIcon={<Add />}
-                />
-                </Link>
-            </Box>
-          </Grid>
-        </Grid>
+      <Box
+        sx={{
+          display: { md: "flex", xs: "flex" },
+        }}>
+        <Box flexGrow={1}>
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              color: "#0F172A",
+              fontSize: "1.5em",
+            }}>
+            Campaign
+          </Typography>
+
+          <Box>
+            <BreadCrumb
+              data={[
+                {
+                  displayName: "Dashboard",
+                  url: "/creator/dashboard",
+                  isActive: false,
+                  divider: "/",
+                },
+                {
+                  displayName: "Campaign",
+                  isActive: true,
+                },
+              ]}
+            />
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            justifyContent: { md: "end" },
+          }}>
+          <Link href={`/creator/campaign/create`}>
+            <PurpleButton
+              text="Create Campaign"
+              shade="purple"
+              size="small"
+              startIcon={<Add />}
+            />
+          </Link>
+        </Box>
       </Box>
 
       <br />

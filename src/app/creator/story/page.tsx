@@ -12,60 +12,58 @@ import { activityData } from "@/data/activityData";
 import PurpleButton from "@/component/common/PurpleButton";
 import BlogCardType2 from "@/component/core/BlogListCardType2";
 import CampaignList from "@/component/core/CampaignList";
+import BreadCrumb from "@/component/core/BreadCrumb";
 
 function Stories() {
   const auth = useAppSelector((state) => state.authReducer);
   return (
     <AuthenticatedLayout>
       <br />
-      <Box>
-        <Grid container>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Box
-              sx={{
-                height: "100%",
-                alignItems: "center",
-                display: "flex",
-              }}>
-              <Typography
-                sx={{
-                  fontWeight: "bold",
-                  color: "#0F172A",
-                  fontSize: "1.5em",
-                }}>
-                Stories
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Box
-              sx={{
-                display: "flex",
-                gap: 1,
-                justifyContent: { md: "end" },
-              }}>
-              <Stack
-                direction="row"
-                spacing={1}
-                sx={{ marginTop: { xs: "10px", md: "0" } }}>
-                {/* <PurpleButton
-                  text="Create a project"
-                  shade="white"
-                  size="small"
-                  startIcon={<Add />}
-                /> */}
-                <Link href={`/creator/story/create`}>
-                  <PurpleButton
-                    text="Create New Story"
-                    shade="purple"
-                    size="small"
-                    startIcon={<Add />}
-                  />
-                </Link>
-              </Stack>
-            </Box>
-          </Grid>
-        </Grid>
+      <Box
+        sx={{
+          display: { md: "flex", xs: "flex" },
+        }}>
+        <Box flexGrow={1}>
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              color: "#0F172A",
+              fontSize: "1.5em",
+            }}>
+            Stories
+          </Typography>
+
+          <Box>
+            <BreadCrumb
+              data={[
+                {
+                  displayName: "Dashboard",
+                  url: "/creator/dashboard",
+                  isActive: false,
+                  divider: "/",
+                },
+                {
+                  displayName: "Stories",
+                  isActive: true,
+                },
+              ]}
+            />
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            justifyContent: { md: "end" },
+          }}>
+          <Link href={`/creator/story/create`}>
+            <PurpleButton
+              text="Create Story"
+              shade="purple"
+              size="small"
+              startIcon={<Add />}
+            />
+          </Link>
+        </Box>
       </Box>
 
       <br />
