@@ -32,35 +32,46 @@ import * as Yup from "yup";
 function CreateCampaign() {
   return (
     <AuthenticatedLayout>
-      <Box>
-        <Box>
-          <BreadCrumb
-            data={[
-              {
-                displayName: "Campaign",
-                url: "/creator/campaign",
-                isActive: false,
-                divider: "/",
-              },
-              {
-                displayName: "Create Campaign",
-                isActive: true,
-              },
-            ]}
-          />
+      <br/>
+        <Box
+          sx={{
+            display: { md: "flex", xs: "Block" },
+          }}>
+          <Box flexGrow={1}>
+            <Typography
+              sx={{
+                fontWeight: "bold",
+                color: "#0F172A",
+                fontSize: "1.5em",
+              }}>
+              Create Campaign
+            </Typography>
+
+            <Box>
+              <BreadCrumb
+                data={[
+                  {
+                    displayName: "Dashboard",
+                    url: "/creator/dashboard",
+                    isActive: false,
+                    divider: "/",
+                  },
+                  {
+                    displayName: "Campaign",
+                    url: "/creator/campaign",
+                    isActive: false,
+                    divider: "/",
+                  },
+                  {
+                    displayName: "Create",
+                    isActive: true,
+                  },
+                ]}
+              />
+            </Box>
+          </Box>
         </Box>
-        <br/>
-        <Box>
-          <Typography
-            component="div"
-            sx={{
-              color: "#120F0F",
-              fontSize: { md: "1.8em", xs: "1.3em" },
-              fontWeight: "bold",
-            }}>
-            Create a New Project
-          </Typography>
-        </Box>
+        <br />
         <br />
         <Box>
           <Grid container>
@@ -69,7 +80,6 @@ function CreateCampaign() {
             </Grid>
           </Grid>
         </Box>
-      </Box>
     </AuthenticatedLayout>
   );
 }

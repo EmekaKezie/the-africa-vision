@@ -8,34 +8,47 @@ import { Box, Grid, Typography } from "@mui/material";
 function CreateStory() {
   return (
     <AuthenticatedLayout>
-      <Box>
-        <BreadCrumb
-          data={[
-            {
-              displayName: "Stories",
-              url: "/creator/blog",
-              isActive: false,
-              divider: "/",
-            },
-            {
-              displayName: "Create Story",
-              isActive: true,
-            },
-          ]}
-        />
+      <br/>
+      <Box
+        sx={{
+          display: { md: "flex", xs: "Block" },
+        }}>
+        <Box flexGrow={1}>
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              color: "#0F172A",
+              fontSize: "1.5em",
+            }}>
+            Create Blog Story
+          </Typography>
+
+          <Box>
+            <BreadCrumb
+              data={[
+                {
+                  displayName: "Dashboard",
+                  url: "/creator/dashboard",
+                  isActive: false,
+                  divider: "/",
+                },
+                {
+                  displayName: "Stories",
+                  url: "/creator/story",
+                  isActive: false,
+                  divider: "/",
+                },
+                {
+                  displayName: "Create",
+                  isActive: true,
+                },
+              ]}
+            />
+          </Box>
+        </Box>
       </Box>
       <br />
       <Box>
-        <Typography
-          component="div"
-          sx={{
-            color: "#120F0F",
-            fontSize: { md: "1.8em", xs: "1.3em" },
-            fontWeight: "bold",
-          }}>
-          Create a New Blog Post
-        </Typography>
-        <br />
         <Typography
           sx={{
             color: "#120F0F",
@@ -45,7 +58,7 @@ function CreateStory() {
         </Typography>
       </Box>
       <br />
-      <br/>
+      <br />
       <Box>
         <Grid container>
           <Grid item lg={8} md={8} sm={12} xs={12}>

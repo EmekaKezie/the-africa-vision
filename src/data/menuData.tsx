@@ -70,7 +70,7 @@ export const authenticatedCreatorMenu1: IMenu[] = [
   },
   {
     id: "2",
-    url: "/creator/blog",
+    url: "/creator/story",
     name: "Stories",
     visibility: true,
     icon: <AutoStories />,

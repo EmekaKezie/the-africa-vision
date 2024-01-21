@@ -54,7 +54,7 @@ function Stories() {
                   size="small"
                   startIcon={<Add />}
                 /> */}
-                <Link href={`/creator/blog/create`}>
+                <Link href={`/creator/story/create`}>
                   <PurpleButton
                     text="Create New Story"
                     shade="purple"
