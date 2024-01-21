@@ -23,8 +23,9 @@ import MUIDataTable from "mui-datatables";
 import CampaignListCardType1 from "./CampaignListCardType1";
 import CampaignListCardType2 from "./CampaignListCardType2";
 import CampaignListCardType3 from "./CampaignListCardType3";
+import CampaignListCardType4 from "./CampaignListCardType4";
 
-type variationTypes = "swipeable" | "grid" | "pinned" | "tabular";
+type variationTypes = "swipeable" | "grid" | "pinned" | "tabular" | "docked";
 type cardTypes = "type1" | "type2" | "type3";
 
 type props = {
@@ -137,7 +138,30 @@ export default function CampaignList(props: props) {
         <Grid container spacing={2}>
           {data?.slice(offset, limit)?.map((item: IStory) => (
             <Grid item lg={12} md={12} sm={6} xs={12} key={item.id}>
-              <CampaignListCardType3 redirectUrl={props.redirectUrl} item={item} />
+              <CampaignListCardType3
+                redirectUrl={props.redirectUrl}
+                item={item}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    );
+  };
+
+  const renderDockedVariation = () => {
+    return (
+      <Box
+        sx={{
+          paddingBottom: "1rem",
+        }}>
+        <Grid container spacing={2}>
+          {data?.slice(offset, limit)?.map((item: IStory) => (
+            <Grid item lg={12} md={12} sm={6} xs={12} key={item.id}>
+              <CampaignListCardType4
+                redirectUrl={props.redirectUrl}
+                item={item}
+              />
             </Grid>
           ))}
         </Grid>
@@ -346,8 +370,10 @@ export default function CampaignList(props: props) {
         return renderPinnedVariation();
       case "tabular":
         return renderTabularVariation();
+      case "docked":
+        return renderDockedVariation();
       default:
-        return renderGridVariation();
+        return renderDockedVariation();
     }
   };
 

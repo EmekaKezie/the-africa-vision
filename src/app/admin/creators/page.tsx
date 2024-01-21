@@ -7,7 +7,7 @@ import CreatorList from "@/component/core/CreatorList";
 import { creatorMockData } from "@/data/creatorMockData";
 import { IUser } from "@/types/IUser";
 import { Add } from "@mui/icons-material";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

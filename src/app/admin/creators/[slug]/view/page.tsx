@@ -3,25 +3,17 @@ import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import PurpleButton from "@/component/common/PurpleButton";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import BreadCrumb from "@/component/core/BreadCrumb";
-import { Add, Delete, Email } from "@mui/icons-material";
+import { Delete } from "@mui/icons-material";
 import {
   Box,
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Divider,
   Grid,
-  Paper,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
 import Link from "next/link";
-import ProfileImage from "@/assets/profile-sample1.jpeg";
 import { useEffect, useState } from "react";
 import { IUser } from "@/types/IUser";
 import { creatorMockData } from "@/data/creatorMockData";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import CreatorDetail from "@/component/core/CreatorDetail";
 import CreatorStatCards from "@/component/core/CreatorStatCards";
 import TransactionTable from "@/component/core/TransactionTable";

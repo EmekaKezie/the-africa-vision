@@ -3,19 +3,42 @@ import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
 import { useAppSelector } from "@/redux/useReduxHooks";
-import { AttachMoney, Menu, MoreVert } from "@mui/icons-material";
+import { ArrowUpward, AttachMoney, MoreVert } from "@mui/icons-material";
 import { Box, Grid, IconButton, Paper, Typography } from "@mui/material";
 import Chart from "react-apexcharts";
 import { convertToCurrency } from "@/component/common/helpers";
 import { useState } from "react";
-
-
+import {
+  Area,
+  AreaChart,
+  Bar,
+  CartesianGrid,
+  ComposedChart,
+  Legend,
+  Line,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import GraphRevenueOutflow from "@/component/core/GraphRevenueOutflow";
+import {
+  activeVisitorsData,
+  graphConversionRateData,
+  graphRevenueOutflowData,
+} from "@/data/graphData";
+import GraphActiveVisitors from "@/component/core/GraphActiveVisitors";
+import GraphConversionRate from "@/component/core/GraphConversionRate";
+import CampaignList from "@/component/core/CampaignList";
+import { storyData } from "@/data/storyData";
+import TransactionTable from "@/component/core/TransactionTable";
+import { transactionData } from "@/data/transactionData";
+import CreatorPayoutList from "@/component/core/CreatorPayoutList";
+import { userData } from "@/data/userData";
+import { creatorMockData } from "@/data/creatorMockData";
 
 function Dashboard() {
   const auth = useAppSelector((state) => state.authReducer);
-
-
-
 
   return (
     <AuthenticatedLayout>
@@ -98,7 +121,14 @@ function Dashboard() {
       <Box>
         <Grid container spacing={2}>
           <Grid item lg={4} md={4} sm={12} xs={12}>
-            <Paper elevation={1} sx={{ padding: "1rem", height: "100%" }}>
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+                borderRadius: "5px",
+              }}>
               <Box display="flex" alignItems="center">
                 <Box flexGrow={1} padding="0.5rem 1rem 0 1rem">
                   <Typography
@@ -108,7 +138,7 @@ function Dashboard() {
                       fontWeight: "bold",
                       fontSize: "1.1rem",
                     }}>
-                    Sales Progress
+                    Revenue Progress
                   </Typography>
                   <Typography
                     sx={{
@@ -125,41 +155,158 @@ function Dashboard() {
                   </IconButton>
                 </Box>
               </Box>
-              
-            </Paper>
+              <Box></Box>
+            </Box>
           </Grid>
           <Grid item lg={8} md={8} sm={12} xs={12}>
-            <Paper elevation={1} sx={{ padding: "1rem", height: "100%" }}>
-              <Box display="flex" alignItems="center">
-                <Box flexGrow={1} padding="0.5rem 1rem 0 1rem">
-                  <Typography
-                    sx={{
-                      flexGrow: 1,
-                      color: "#333843",
-                      fontWeight: "bold",
-                      fontSize: "1.1rem",
-                    }}>
-                    Statistics
-                  </Typography>
-                  <Typography
-                    sx={{
-                      flexGrow: 1,
-                      color: "#667085",
-                      fontSize: "0.8em",
-                    }}>
-                    Revenue and Sales
-                  </Typography>
-                </Box>
-                <Box>
-                  <IconButton>
-                    <MoreVert />
-                  </IconButton>
-                </Box>
-              </Box>
-             
-            </Paper>
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+                borderRadius: "5px",
+              }}>
+              <GraphRevenueOutflow data={graphRevenueOutflowData} />
+            </Box>
           </Grid>
         </Grid>
+      </Box>
+
+      <br />
+
+      <Box>
+        <Grid container spacing={2}>
+          <Grid item lg={3} md={3} sm={6} xs={12}>
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+                borderRadius: "5px",
+              }}>
+              <GraphActiveVisitors
+                height={150}
+                color="#413ea0"
+                data={activeVisitorsData}
+              />
+            </Box>
+          </Grid>
+          <Grid item lg={3} md={3} sm={6} xs={12}>
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+                borderRadius: "5px",
+              }}>
+              <GraphConversionRate
+                height={150}
+                color="#FFD599"
+                data={graphConversionRateData}
+              />
+            </Box>
+          </Grid>
+          <Grid item lg={3} md={3} sm={6} xs={12}>
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+                borderRadius: "5px",
+              }}>
+              <GraphActiveVisitors
+                height={150}
+                color="#413ea0"
+                data={activeVisitorsData}
+              />
+            </Box>
+          </Grid>
+          <Grid item lg={3} md={3} sm={6} xs={12}>
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+                borderRadius: "5px",
+              }}>
+              <GraphConversionRate
+                height={150}
+                color="#FFD599"
+                data={graphConversionRateData}
+              />
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <br />
+
+      <Box>
+        <Grid container spacing={2}>
+          <Grid item lg={8} md={8} sm={12} xs={12}>
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+                borderRadius: "5px",
+              }}>
+              <Box display="flex" alignItems="center">
+                <Typography
+                  sx={{
+                    flexGrow: 1,
+                    color: "#120F0F",
+                    fontWeight: "bold",
+                    fontSize: "1.1em",
+                  }}>
+                  Top Projects
+                </Typography>
+              </Box>
+              <br />
+              <Box>
+                <CampaignList data={storyData} variation="docked" />
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item lg={4} md={4} sm={12} xs={12}>
+            <Box
+              sx={{
+                padding: "1rem",
+                backgroundColor: "#FFFFFF",
+                height: "100%",
+                boxShadow: "1px 1px 5px lightgray",
+                borderRadius: "5px",
+              }}>
+              <Box display="flex" alignItems="center">
+                <Typography
+                  sx={{
+                    flexGrow: 1,
+                    color: "#120F0F",
+                    fontWeight: "bold",
+                    fontSize: "1.1em",
+                  }}>
+                  Pending Creator Payouts
+                </Typography>
+              </Box>
+              <br />
+              <Box>
+                <CreatorPayoutList data={creatorMockData} />
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <br />
+
+      <Box>
+        <TransactionTable data={transactionData} />
       </Box>
     </AuthenticatedLayout>
   );

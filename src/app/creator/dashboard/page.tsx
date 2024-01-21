@@ -10,7 +10,7 @@ import { activityData } from "@/data/activityData";
 import { storyData } from "@/data/storyData";
 import { transactionData } from "@/data/transactionData";
 import { useAppSelector } from "@/redux/useReduxHooks";
-import { AttachMoney, BarChart } from "@mui/icons-material";
+import { BarChart } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 

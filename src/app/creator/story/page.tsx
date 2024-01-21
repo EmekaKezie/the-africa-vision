@@ -4,7 +4,7 @@ import ReduxProvider from "@/component/common/ReduxProvider";
 import StatsCard from "@/component/core/StatsCard";
 import { useAppSelector } from "@/redux/useReduxHooks";
 import { Add, AttachMoney } from "@mui/icons-material";
-import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 import { storyData } from "@/data/storyData";
 import ActivityList from "@/component/core/ActivityList";
