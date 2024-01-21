@@ -38,7 +38,7 @@ function CreateCampaign() {
             data={[
               {
                 displayName: "Campaign",
-                url: "/campaign-uadm",
+                url: "/creator/campaign",
                 isActive: false,
                 divider: "/",
               },

@@ -38,9 +38,9 @@ function CampaignUAdmn() {
                 justifyContent: { md: "end" },
                 float:"right"
               }}>
-                <Link href={`campaign-uadm/add`}>
+                <Link href={`/campaign/create`}>
                <PurpleButton
-                  text="Create new campaign"
+                  text="Create New Campaign"
                   shade="purple"
                   size="small"
                   startIcon={<Add />}

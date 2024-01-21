@@ -68,3 +68,15 @@ export const previewImage = (file: Blob) => {
   const url = URL.createObjectURL(file)
   return url
 }
+
+
+export const getFileBase64 = (file:File) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.onerror = reject;
+  });
+}

@@ -38,7 +38,7 @@ function Transaction() {
                 justifyContent: { md: "end" },
                 float: "right",
               }}>
-              <Link href={`/transaction/payout`}>
+              <Link href={`/creator/payout/requestpayout`}>
                 <PurpleButton
                   text="Request a payout"
                   shade="purple"

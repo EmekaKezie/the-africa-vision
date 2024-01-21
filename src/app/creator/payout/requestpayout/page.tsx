@@ -8,6 +8,7 @@ import PayoutSummary from "@/component/core/PayoutSummary";
 import { payoutSummaryData } from "@/data/transactionData";
 import { Close } from "@mui/icons-material";
 import {
+  Alert,
   Box,
   Dialog,
   DialogActions,
@@ -19,12 +20,15 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 import { useState } from "react";
 import * as Yup from "yup";
 
 function Payout() {
+  const router = useRouter();
   const [showDialog, setShowDialog] = useState<boolean>(false);
-  const [confirmPayoutLoading, setConfirmPayoutLoading] =
+  const [confirmPayoutDetailLoading, setConfirmPayoutDetailLoading] =
     useState<boolean>(false);
   const [requestPayoutLoading, setRequestPayoutLoading] =
     useState<boolean>(false);
@@ -44,9 +48,32 @@ function Payout() {
   });
 
   const handleSubmit = (values: any) => {
-    console.log(values);
-    setConfirmPayoutLoading(true);
+    setConfirmPayoutDetailLoading(true);
     setShowDialog(true);
+  };
+
+  const handleRequestPayout = () => {
+    setRequestPayoutLoading(true);
+    const param = {
+      bankName: formik.values.bankName,
+      bankAccountNo: formik.values.bankAccountNo,
+      bankAccountName: formik.values.bankAccountName,
+    };
+    if (param) {
+      setTimeout(() => {
+        setShowDialog(false);
+        enqueueSnackbar("Payour requested successfully", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      }, 2000);
+      setTimeout(() => {
+        router.push("../transaction");
+      }, 3000);
+    }
   };
 
   return (
@@ -103,6 +130,7 @@ function Payout() {
             <Box>
               <PayoutSummary data={payoutSummaryData} />
               <br />
+              <br />
               <Typography
                 sx={{
                   //   border: "1",
@@ -111,8 +139,20 @@ function Payout() {
                   border: "1px dashed gray",
                 }}></Typography>
               <br />
+              <br />
               <Box>
-                <Box></Box>
+                <Box display={`flex`}>
+                  <Typography flexGrow={1}>Bank Account</Typography>
+                  <Typography>Use saved bank account</Typography>
+                </Box>
+                <br />
+                <Alert severity="warning">
+                  <Typography
+                    fontSize="0.9em"
+                    fontWeight="bold">{`Please make sure the name of the account is the same name on the project creator as admin won't accept bank detail of secondary holder`}</Typography>
+                </Alert>
+                <br />
+                <br />
                 <Box>
                   <form onSubmit={formik.handleSubmit}>
                     <TextInput
@@ -148,11 +188,11 @@ function Payout() {
                       validationMessage={formik.errors.bankAccountName}
                     />
                     <br />
-                    <br />
                     <PurpleButton
                       text="Confirm Bank Details"
-                      disabled={confirmPayoutLoading}
-                      loading={confirmPayoutLoading}
+                      disabled={confirmPayoutDetailLoading}
+                      //loading={confirmPayoutDetailLoading}
+                      fullWidth
                     />
                   </form>
                 </Box>
@@ -168,7 +208,11 @@ function Payout() {
             <Typography flexGrow={1} fontWeight="bold">
               Confirm Details
             </Typography>
-            <IconButton onClick={() => setShowDialog(false)}>
+            <IconButton
+              onClick={() => {
+                setShowDialog(false);
+                setConfirmPayoutDetailLoading(false);
+              }}>
               <Close />
             </IconButton>
           </Box>
@@ -190,7 +234,13 @@ function Payout() {
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ padding: "0 1rem 1rem 1rem" }}>
-          <PurpleButton text="Request Payout" size="small" />
+          <PurpleButton
+            text="Request Payout"
+            size="small"
+            onClick={handleRequestPayout}
+            disabled={requestPayoutLoading}
+            loading={requestPayoutLoading}
+          />
         </DialogActions>
       </Dialog>
     </AuthenticatedLayout>

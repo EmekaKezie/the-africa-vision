@@ -80,10 +80,10 @@ function AuthUserLogin() {
   const handleRedirect = (roleName: string) => {
     switch (roleName.toUpperCase()) {
       case "USER":
-        router.push("../overview");
+        router.push("../creator/dashboard");
         break;
       case "SUPER ADMIN":
-        router.push("../dashboard");
+        router.push("../admin/dashboard");
         break;
       default:
         enqueueSnackbar("User has no defined role. Please contact admin", {
@@ -180,7 +180,7 @@ function AuthUserLogin() {
                       />
                     }
                     label={
-                      <Typography fontSize="0.75em" color="#CCCCCC">
+                      <Typography fontSize="0.75em" color="#667085">
                         Remember Password
                       </Typography>
                     }
@@ -192,8 +192,8 @@ function AuthUserLogin() {
                 </FormGroup>
                 <Typography
                   sx={{
-                    fontSize: "0.8em",
-                    color: "#CCCCCC",
+                    fontSize: "0.75em",
+                    color: "#667085",
                     ":hover": {
                       textDecoration: "underline",
                     },
@@ -220,7 +220,7 @@ function AuthUserLogin() {
             sx={{
               textAlign: "center",
               fontSize: "0.8em",
-              color: "#CCCCCC",
+              color: "#667085",
               ":hover > a": {
                 textDecoration: "underline",
               },

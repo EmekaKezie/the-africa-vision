@@ -48,18 +48,20 @@ function Stories() {
                 direction="row"
                 spacing={1}
                 sx={{ marginTop: { xs: "10px", md: "0" } }}>
-                <PurpleButton
+                {/* <PurpleButton
                   text="Create a project"
                   shade="white"
                   size="small"
                   startIcon={<Add />}
-                />
-                <PurpleButton
-                  text="Create new story"
-                  shade="purple"
-                  size="small"
-                  startIcon={<Add />}
-                />
+                /> */}
+                <Link href={`/creator/blog/create`}>
+                  <PurpleButton
+                    text="Create New Story"
+                    shade="purple"
+                    size="small"
+                    startIcon={<Add />}
+                  />
+                </Link>
               </Stack>
             </Box>
           </Grid>

@@ -60,31 +60,31 @@ export const authMenuData: IMenu[] = [
   },
 ];
 
-export const authenticatedUserAdminMenu: IMenu[] = [
+export const authenticatedCreatorMenu1: IMenu[] = [
   {
     id: "1",
-    url: "/overview",
+    url: "/creator/dashboard",
     name: "Overview",
     visibility: true,
     icon: <Dashboard />,
   },
   {
     id: "2",
-    url: "/stories",
+    url: "/creator/blog",
     name: "Stories",
     visibility: true,
     icon: <AutoStories />,
   },
   {
     id: "3",
-    url: "/campaign-uadm",
+    url: "/creator/campaign",
     name: "Campaign",
     visibility: true,
     icon: <Campaign />,
   },
   {
     id: "4",
-    url: "/transaction",
+    url: "/creator/payout",
     name: "Payment",
     visibility: true,
     icon: <Payment />,
@@ -98,48 +98,65 @@ export const authenticatedUserAdminMenu: IMenu[] = [
   },
 ];
 
-export const authenticatedSuperAdminMenu: IMenu[] = [
+export const authenticatedSuperAdminMenu1: IMenu[] = [
   {
     id: "1",
-    url: "/dashboard",
+    url: "/admin/dashboard",
     name: "Dashboard",
     visibility: true,
     icon: <Dashboard />,
   },
   {
     id: "2",
-    url: "/",
+    url: "/admin/creators",
     name: "Creators",
     visibility: true,
     icon: <People />,
   },
   {
     id: "3",
-    url: "/",
+    url: "/admin/analytics",
     name: "Analytics",
     visibility: true,
     icon: <AutoGraph />,
   },
   {
     id: "4",
-    url: "/",
-    name: "Payment",
+    url: "/admin/payments",
+    name: "Payments",
     visibility: true,
     icon: <Payment />,
   },
   {
     id: "5",
-    url: "/",
-    name: "Approval",
+    url: "/admin/approvals",
+    name: "Approvals",
     visibility: true,
     icon: <Task />,
   },
 ];
 
-export const authenticatedMenu: IMenu[] = [
+export const authenticatedCreatorMenu2: IMenu[] = [
   {
     id: "1",
-    url: "/Setting",
+    url: "/creator/setting",
+    name: "Setting",
+    visibility: true,
+    icon: <Settings />,
+  },
+  {
+    id: "2",
+    url: "../auth/logout",
+    name: "Log Out",
+    visibility: true,
+    icon: <Logout />,
+  },
+];
+
+export const authenticatedSuperAdminMenu2: IMenu[] = [
+  {
+    id: "1",
+    url: "/admin/setting",
     name: "Setting",
     visibility: true,
     icon: <Settings />,

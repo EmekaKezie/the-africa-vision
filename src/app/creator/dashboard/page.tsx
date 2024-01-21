@@ -10,7 +10,7 @@ import { activityData } from "@/data/activityData";
 import { storyData } from "@/data/storyData";
 import { transactionData } from "@/data/transactionData";
 import { useAppSelector } from "@/redux/useReduxHooks";
-import { AttachMoney } from "@mui/icons-material";
+import { AttachMoney, BarChart } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 
@@ -53,7 +53,7 @@ function Overview() {
                 amount: 1224600,
                 icon: (
                   <IconButton sx={{ backgroundColor: "#D4E3FF" }}>
-                    <AttachMoney sx={{ color: "#2773FF" }} />
+                    <BarChart sx={{ color: "#2773FF" }} />
                   </IconButton>
                 ),
               }}
@@ -70,7 +70,7 @@ function Overview() {
                 amount: 32424600,
                 icon: (
                   <IconButton sx={{ backgroundColor: "#D4E3FF" }}>
-                    <AttachMoney sx={{ color: "#2773FF" }} />
+                    <BarChart sx={{ color: "#2773FF" }} />
                   </IconButton>
                 ),
               }}
@@ -87,7 +87,7 @@ function Overview() {
                 amount: 24600,
                 icon: (
                   <IconButton sx={{ backgroundColor: "#D4E3FF" }}>
-                    <AttachMoney sx={{ color: "#2773FF" }} />
+                    <BarChart sx={{ color: "#2773FF" }} />
                   </IconButton>
                 ),
               }}
@@ -104,7 +104,7 @@ function Overview() {
                 amount: 32424600,
                 icon: (
                   <IconButton sx={{ backgroundColor: "#D4E3FF" }}>
-                    <AttachMoney sx={{ color: "#2773FF" }} />
+                    <BarChart sx={{ color: "#2773FF" }} />
                   </IconButton>
                 ),
               }}

@@ -194,10 +194,10 @@ function AuthUserSignup() {
                 )
               }
             />
-            <Typography sx={{ color: "#CCCCCC", fontSize: "0.8em" }}>
+            <Typography sx={{ color: "#667085", fontSize: "0.8em" }}>
               {`Password must contain a minimum of 8 characters.`}
             </Typography>
-            <Typography sx={{ color: "#CCCCCC", fontSize: "0.8em" }}>
+            <Typography sx={{ color: "#667085", fontSize: "0.8em" }}>
               {`Password must contain at lease on symbol e.g @`}
             </Typography>
             <br />
@@ -248,7 +248,7 @@ function AuthUserSignup() {
             sx={{
               textAlign: "center",
               fontSize: "0.8em",
-              color: "#CCCCCC",
+              color: "#667085",
               ":hover > a": {
                 textDecoration: "underline",
               },

@@ -129,7 +129,7 @@ function AuthUserPasswordForgotEmailVerifier(props: props) {
               sx={{
                 textAlign: "center",
                 fontSize: "0.8em",
-                color: "#CCCCCC",
+                color: "#667085",
                 ":hover > a": {
                   textDecoration: "underline",
                 },

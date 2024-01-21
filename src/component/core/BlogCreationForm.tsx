@@ -16,19 +16,22 @@ import {
   DialogTitle,
   Grid,
   MenuItem,
+  Typography,
   createTheme,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/styles";
 import { useFormik } from "formik";
 import MUIRichTextEditor from "mui-rte";
 import { enqueueSnackbar } from "notistack";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import * as Yup from "yup";
-import { getDateDifference } from "../common/helpers";
+import { getFileBase64 } from "../common/helpers";
+import { useRouter } from "next/navigation";
 
-export default function CampaignCreationForm() {
-  const [selectedPartners, setSelectedPartners] = useState<ICategory[]>([]);
+export default function BlogCreationForm() {
+  const router = useRouter();
   const [imageBase64, setImageBase64] = useState<any>(null);
+  const [powerPointBase64, setPowerPointBase64] = useState<any>(null);
   const [richContent, setRichContent] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [isSavedRichContentUpdate, setIsSavedRichContentUpdate] =
@@ -39,8 +42,8 @@ export default function CampaignCreationForm() {
     "Your content is empty. Ensure to fill it and save before submitting"
   );
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-
-  console.log(richContent);
+  const [dialogActionLoading, setDialogActionLoading] =
+    useState<boolean>(false);
 
   const handleEditorSave = (state: any) => {
     setRichContent(state);
@@ -64,25 +67,40 @@ export default function CampaignCreationForm() {
     }
   };
 
-  const handleSelectPartner = (event: any) => {
-    const value = event.target.value;
-    const selected = categoryData.filter((i: ICategory) => i.id === value)[0];
-    if (!selectedPartners.includes(selected)) {
-      setSelectedPartners((prev) => [...prev, selected]);
+  const handlePowerPointUpload = (event: ChangeEvent) => {
+    const { files } = event.target as HTMLInputElement;
+    const acceptedType =
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+    if (files?.length) {
+      const file = (files as FileList)[0];
+      if (file.type === acceptedType) {
+        getFileBase64(file)
+          .then((base64) => {
+            setPowerPointBase64(base64);
+          })
+          .catch((err) => {});
+      } else {
+        enqueueSnackbar("Only Power Point files are accepted", {
+          variant: "warning",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      }
     }
   };
 
   const formik = useFormik({
     initialValues: {
       title: "",
-      startDate: "",
-      endDate: "",
+      videoUrl: "",
+      seoKeywords: "",
       categoryId: "",
-      budget: "",
-      paymentOptionId: "",
+      referenceUrl: "",
     },
     validationSchema: Yup.object({
-      title: Yup.string().required("Please enter the Camplaign Title"),
+      title: Yup.string().required("Please enter the Blog Title"),
     }),
     onSubmit: (values) => {
       handleSubmit(values);
@@ -128,20 +146,15 @@ export default function CampaignCreationForm() {
     if (isValidInput < 1) {
       setLoading(true);
 
-      const selectedPartnerIds = selectedPartners.map((i: ICategory) => {
-        return i.id;
-      });
-
       const param = {
         title: values.title,
         content: richContent,
         imageBase64: imageBase64,
-        startDate: values.startDate,
-        endDate: values.endDate,
+        powerPointbase64: powerPointBase64,
         categoryId: values.categoryId,
-        budget: values.budget,
-        paymentOptionId: values.paymentOptionId,
-        selectedPartnerIds: selectedPartnerIds,
+        videoUrl: values.videoUrl,
+        seoKeywords: values.seoKeywords,
+        referenceUrl: values.referenceUrl,
       };
       console.log(param);
 
@@ -168,9 +181,9 @@ export default function CampaignCreationForm() {
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <TextInput
                 name="title"
-                placeholder="Enter Campaign Title"
+                placeholder="Enter Blog Title"
                 fullWidth
-                label="Campaign Title"
+                label="Blog Title"
                 onChange={formik.handleChange}
                 value={formik.values.title}
                 validate={formik.touched.title}
@@ -186,16 +199,6 @@ export default function CampaignCreationForm() {
                 }}
               />
             </Grid>
-
-            {/* <Grid item lg={12} md={12} sm={12} xs={12}>
-              <ThemeProvider theme={myTheme}>
-                <MUIRichTextEditor
-                  defaultValue={!richContent ? "" : richContent}
-                  readOnly
-                  controls={[]}
-                />
-              </ThemeProvider>
-            </Grid> */}
 
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <Box sx={{ border: "1px solid gray" }}>
@@ -223,69 +226,27 @@ export default function CampaignCreationForm() {
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <TextInput
-                name="startDate"
-                type="datetime-local"
+                name="videoUrl"
+                value={formik.values.videoUrl}
+                placeholder="Enter Video Url"
+                type="text"
                 fullWidth
-                label="Start Date"
-                selectedValue={formik.values.startDate}
+                label="Video Url (optional)"
                 onChange={formik.handleChange}
               />
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <TextInput
-                name="endDate"
-                type="datetime-local"
+                name="powerPointUpload"
+                placeholder="Upload Power Point Slide"
+                type="file"
                 fullWidth
-                label="End Date"
-                onChange={formik.handleChange}
+                label="Power Point slide Upload (Optional)"
+                onChange={(event) => {
+                  handlePowerPointUpload(event);
+                }}
               />
-            </Grid>
-
-            <Grid item lg={12} md={12} sm={12} xs={12}>
-              <TextInput
-                name="budget"
-                value={formik.values.budget}
-                placeholder="Enter Funding Amount"
-                type="number"
-                fullWidth
-                label="Funding Amount"
-                onChange={formik.handleChange}
-              />
-            </Grid>
-
-            <Grid item lg={12} md={12} sm={12} xs={12}>
-              <TextInput
-                select
-                fullWidth
-                label="Add team or partners"
-                onChange={(e) => handleSelectPartner(e)}>
-                {categoryData?.map((item: ICategory) => (
-                  <MenuItem key={item.id} value={item.id}>
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </TextInput>
-              <Box sx={{ padding: "0.5rem 0" }}>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selectedPartners?.map((item: ICategory) => (
-                    <Chip
-                      key={item.id}
-                      label={item.name}
-                      onDelete={
-                        item.name === "React"
-                          ? undefined
-                          : () => {
-                              const index = selectedPartners.indexOf(item);
-                              const newPartners = [...selectedPartners];
-                              newPartners.splice(index, 1);
-                              setSelectedPartners(newPartners);
-                            }
-                      }
-                    />
-                  ))}
-                </Box>
-              </Box>
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -307,31 +268,27 @@ export default function CampaignCreationForm() {
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <TextInput
-                name="paymentOptionId"
-                placeholder="Select Payment Option"
-                select
+                name="seoKeywords"
+                placeholder="Enter SEO Keywords"
                 fullWidth
-                label="Payment Option"
-                selectedValue={formik.values.paymentOptionId}
-                onChange={formik.handleChange}>
-                {paymentOptionData?.map((item: IPaymentOption) => (
-                  <MenuItem key={item.id} value={item.id}>
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </TextInput>
+                label="SEO Keywords"
+                selectedValue={formik.values.seoKeywords}
+                onChange={formik.handleChange}
+              />
+              <Typography color="#667085" fontSize="13px">
+                seperate each word with a comma
+              </Typography>
             </Grid>
 
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <TextInput
-                type="number"
+                name="referenceUrl"
+                value={formik.values.referenceUrl}
+                placeholder="Enter Reference URL"
+                type="text"
                 fullWidth
-                label="Campaign Duration"
-                disabled
-                value={getDateDifference(
-                  formik.values.startDate,
-                  formik.values.endDate
-                ).diffInDays.toString()}
+                label="Reference URL"
+                onChange={formik.handleChange}
               />
             </Grid>
 
@@ -357,7 +314,7 @@ export default function CampaignCreationForm() {
       </Box>
 
       <Box>
-        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <Dialog open={openDialog}>
           <DialogTitle>Saved and awaiting approval</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -365,11 +322,16 @@ export default function CampaignCreationForm() {
               it is approve your post will be Uploaded on the Blog.`}
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
+          <DialogActions sx={{ padding: "0 1rem 1rem 1rem" }}>
             <PurpleButton
               text="Continue"
               size="small"
-              onClick={() => setOpenDialog(false)}
+              disabled={dialogActionLoading}
+              loading={dialogActionLoading}
+              onClick={() => {
+                setDialogActionLoading(true);
+                router.push("/stories");
+              }}
             />
           </DialogActions>
         </Dialog>

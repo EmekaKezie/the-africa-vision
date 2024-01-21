@@ -1,6 +1,6 @@
 import {
-  authenticatedSuperAdminMenu,
-  authenticatedUserAdminMenu,
+  authenticatedSuperAdminMenu1,
+  authenticatedCreatorMenu1,
 } from "@/data/menuData";
 import { useAppSelector } from "@/redux/useReduxHooks";
 import { IMenu } from "@/types/IMenu";
@@ -20,13 +20,13 @@ export default function AuthenticatedNavMenu1() {
 
   const getPathHome = (): string => {
     const splitPath: string[] = pathname.split("/");
-    const pathHome = splitPath[1];
+    const pathHome = `${splitPath[1]}/${splitPath[2]}`;
     return pathHome;
   };
   getPathHome();
 
-  const renderUserAdminMenu = () => {
-    return authenticatedUserAdminMenu?.map((item: IMenu) => {
+  const renderCreatorMenu = () => {
+    return authenticatedCreatorMenu1?.map((item: IMenu) => {
       if (item.visibility) {
         return (
           <Link key={item.id} href={item.url}>
@@ -73,7 +73,7 @@ export default function AuthenticatedNavMenu1() {
   };
 
   const renderSuperAdminMenu = () => {
-    return authenticatedSuperAdminMenu?.map((item: IMenu) => {
+    return authenticatedSuperAdminMenu1?.map((item: IMenu) => {
       if (item.visibility) {
         return (
           <Link key={item.id} href={item.url}>
@@ -81,7 +81,7 @@ export default function AuthenticatedNavMenu1() {
               sx={{
                 borderRadius: "5px",
                 backgroundColor:
-                  getPathHome().toLowerCase() === item.name.slice(1).toLowerCase()
+                  getPathHome().toLowerCase() === item.url.slice(1).toLowerCase()
                     ? "#FFE1F5"
                     : null,
                 ":hover": {
@@ -91,7 +91,7 @@ export default function AuthenticatedNavMenu1() {
               <ListItemIcon
                 sx={{
                   color:
-                    getPathHome().toLowerCase() === item.name.slice(1).toLowerCase()
+                    getPathHome().toLowerCase() === item.url.slice(1).toLowerCase()
                       ? "#A9518B"
                       : null,
                 }}>
@@ -104,7 +104,7 @@ export default function AuthenticatedNavMenu1() {
                       color: "#202020",
                       fontSize:"0.9em",
                       fontWeight:
-                        getPathHome().toLowerCase() === item.name.slice(1).toLowerCase()
+                        getPathHome().toLowerCase() === item.url.slice(1).toLowerCase()
                           ? "bold"
                           : "normal",
                     }}>
@@ -122,11 +122,9 @@ export default function AuthenticatedNavMenu1() {
   const renderContent = () => {
     switch (authStore.roleName.toUpperCase()) {
       case "USER":
-        return renderUserAdminMenu();
-        break;
+        return renderCreatorMenu();
       case "SUPER ADMIN":
         return renderSuperAdminMenu();
-        break;
       default:
         //return "No roles found";
         break;
