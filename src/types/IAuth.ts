@@ -4,9 +4,8 @@ export interface IAuth {
   id: string;
   token: string;
   email: string;
-  firstname: string;
-  lastname: string;
-  role: IRole;
+  fullname: string;
+  role: string;
 }
 
 export interface IAuthStore {
@@ -14,8 +13,6 @@ export interface IAuthStore {
   id: string;
   token: string;
   email: string;
-  firstname: string;
-  lastname: string;
-  roleId: string;
-  roleName: string;
+  fullname: string;
+  role: string;
 }

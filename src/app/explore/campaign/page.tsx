@@ -5,11 +5,11 @@ import UnauthenticatedLayout from "@/component/common/UnauthenticatedLayout";
 import { Box } from "@mui/material";
 import { usePathname } from "next/navigation";
 
-function CampaignPage() {
+function ExploreCampaignPage() {
   const router = usePathname();
 
   console.log(router);
   return <UnauthenticatedLayout></UnauthenticatedLayout>;
 }
 
-export default ReduxProvider(CampaignPage);
+export default ReduxProvider(ExploreCampaignPage);

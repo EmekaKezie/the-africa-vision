@@ -27,7 +27,7 @@ function Overview() {
             fontWeight: "bold",
             lineHeight: "46px",
           }}>
-          Hi {auth.firstname} {auth.lastname}
+          Hi {auth.fullname}
         </Typography>
         <Typography
           sx={{

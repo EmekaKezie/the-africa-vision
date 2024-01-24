@@ -1,18 +1,17 @@
 "use client";
+import ReduxProvider from "@/component/common/ReduxProvider";
+import UnauthenticatedLayout from "@/component/common/UnauthenticatedLayout";
 import DonationList from "@/component/core/DonationList";
+import HeroHome from "@/component/core/HeroHome";
+import StoryCategories from "@/component/core/StoryCategories";
 import { categoryData } from "@/data/categoryData";
 import { storyData } from "@/data/storyData";
-import { Box } from "@mui/material";
-import StoryCategories from "@/component/core/StoryCategories";
-import { useEffect, useState } from "react";
-import { IStory } from "@/types/IStory";
-import Nav from "@/component/core/Nav";
-import HeroHome from "@/component/core/HeroHome";
-import UnauthenticatedLayout from "@/component/common/UnauthenticatedLayout";
-import ReduxProvider from "@/component/common/ReduxProvider";
 import { ICategory } from "@/types/ICategory";
+import { IStory } from "@/types/IStory";
+import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
 
-function DonatePage() {
+function ExploreDonatePage() {
   const [donations, setDonations] = useState<IStory[]>([]);
   const [filteredDonations, setFilteredDonations] = useState<IStory[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -40,7 +39,6 @@ function DonatePage() {
       return filteredDonations;
     }
   };
-
   return (
     <UnauthenticatedLayout>
       <HeroHome />
@@ -73,4 +71,4 @@ function DonatePage() {
   );
 }
 
-export default ReduxProvider(DonatePage);
+export default ReduxProvider(ExploreDonatePage);

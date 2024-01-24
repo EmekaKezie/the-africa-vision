@@ -29,7 +29,7 @@ export default function AuthenticatedNavUserMenu() {
               fontSize: "14px",
               lineHeight: "16.94px",
             }}>
-            {authStore?.firstname} {authStore?.lastname}
+            {authStore?.fullname}
           </Typography>
           <Typography
             sx={{
@@ -37,7 +37,7 @@ export default function AuthenticatedNavUserMenu() {
               fontSize: "12px",
               lineHeight: "14.52px",
             }}>
-            {authStore.roleName}
+            {authStore.role}
           </Typography>
         </Box>
       </Box>

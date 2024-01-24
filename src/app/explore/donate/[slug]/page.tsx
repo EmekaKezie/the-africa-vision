@@ -28,7 +28,7 @@ import DonationAnalytics from "@/component/core/DonationAnalytics";
 import { ThemeProvider } from "@mui/styles";
 import MUIRichTextEditor from "mui-rte";
 
-export default function DonateViewPage() {
+export default function ExploreDonateViewPage() {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -188,7 +188,7 @@ export default function DonateViewPage() {
                   ),
                   countdown: 10,
                 }}
-                url={`/donate/${pageId}/action`}
+                url={`/explore/donate/${pageId}/action`}
               />
             </Box>
           </Grid>

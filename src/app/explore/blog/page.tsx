@@ -6,7 +6,7 @@ import StoryImages from "@/component/core/StoryImages";
 import { storyData } from "@/data/storyData";
 import { Box } from "@mui/material";
 
-function BlogPage() {
+function ExploreBlogPage() {
   return (
     <UnauthenticatedLayout>
       <br />
@@ -35,4 +35,4 @@ function BlogPage() {
   );
 }
 
-export default ReduxProvider(BlogPage);
+export default ReduxProvider(ExploreBlogPage);

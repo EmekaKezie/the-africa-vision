@@ -62,14 +62,12 @@ function AuthUserLogin() {
           isLoggedIn: true,
           token: getuser.token,
           id: getuser.id,
-          firstname: getuser.firstname,
-          lastname: getuser.lastname,
+          fullname: getuser.fullname,
           email: getuser.email,
-          roleId: getuser.role.id,
-          roleName: getuser.role.roleName,
+          role: getuser.role,
         };
         dispatch(onLogin(payload));
-        handleRedirect(getuser.role.roleName);
+        handleRedirect(getuser.role);
       } else {
         setLoginMesage("Invalid credential!");
         setLoading(false);

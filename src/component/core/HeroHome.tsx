@@ -7,7 +7,7 @@ import Image from "next/image";
 import Banner from "@/assets/banner1.jpg";
 import PurpleButton from "@/component/common/PurpleButton";
 
-export default function Hero() {
+export default function HeroHome() {
   return (
     <Box
       sx={{

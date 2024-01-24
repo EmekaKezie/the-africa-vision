@@ -6,10 +6,8 @@ const initialState = {
   id: "",
   token: "",
   email: "",
-  firstname: "",
-  lastname: "",
-  roleId: "",
-  roleName: "",
+  fullname: "",
+  role: "",
 };
 
 export const authSlice = createSlice({
@@ -22,10 +20,8 @@ export const authSlice = createSlice({
         id: action.payload.id,
         token: action.payload.token,
         email: action.payload.email,
-        firstname: action.payload.firstname,
-        lastname: action.payload.lastname,
-        roleId: action.payload.roleId,
-        roleName: action.payload.roleName,
+        fullname: action.payload.fullname,
+        role: action.payload.role,
       };
     },
 
@@ -34,11 +30,9 @@ export const authSlice = createSlice({
         isLoggedIn: false,
         id: "",
         token: "",
-        firstname: "",
-        lastname: "",
+        fullname: "",
         email: "",
-        roleId: "",
-        roleName: "",
+        role: "",
       };
     },
   },

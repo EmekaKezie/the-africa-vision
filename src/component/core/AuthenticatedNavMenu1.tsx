@@ -120,7 +120,7 @@ export default function AuthenticatedNavMenu1() {
   };
 
   const renderContent = () => {
-    switch (authStore.roleName.toUpperCase()) {
+    switch (authStore.role.toUpperCase()) {
       case "USER":
         return renderCreatorMenu();
       case "SUPER ADMIN":

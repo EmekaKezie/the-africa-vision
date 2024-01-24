@@ -25,7 +25,7 @@ import {
   useSnackbar,
 } from "notistack";
 
-function DonateAction() {
+function ExploreDonateAction() {
   const router = useRouter();
   const testReducerStore = useAppSelector((state) => state.testReducer);
   const store = useAppSelector((state) => state.donateReducer);
@@ -126,4 +126,4 @@ function DonateAction() {
   );
 }
 
-export default ReduxProvider(DonateAction);
+export default ReduxProvider(ExploreDonateAction);

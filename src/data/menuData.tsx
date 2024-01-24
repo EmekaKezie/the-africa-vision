@@ -15,31 +15,31 @@ import {
 export const mainMenuData: IMenu[] = [
   {
     id: "1",
-    url: "/",
+    url: "/explore/home",
     name: "Home",
     visibility: true,
   },
   {
     id: "1",
-    url: "/campaign",
+    url: "/explore/campaign",
     name: "Campaigns",
     visibility: true,
   },
   {
     id: "1",
-    url: "/donate",
+    url: "/explore/donate",
     name: "Donate",
     visibility: true,
   },
   {
     id: "1",
-    url: "/blog",
+    url: "/explore/blog",
     name: "Blog",
     visibility: true,
   },
   {
     id: "1",
-    url: "/contactus",
+    url: "/explore/contactus",
     name: "Contact us",
     visibility: true,
   },
