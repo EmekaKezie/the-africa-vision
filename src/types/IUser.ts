@@ -9,4 +9,5 @@ export interface IUser {
   totalEarning?: number;
   totalPayout?: number;
   currencyCode?:string
+  photo?:any
 }

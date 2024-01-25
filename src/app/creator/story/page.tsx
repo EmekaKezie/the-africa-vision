@@ -10,9 +10,10 @@ import { storyData } from "@/data/storyData";
 import ActivityList from "@/component/core/ActivityList";
 import { activityData } from "@/data/activityData";
 import PurpleButton from "@/component/common/PurpleButton";
-import BlogCardType2 from "@/component/core/BlogListCardType2";
+import BlogListCardType2 from "@/component/core/BlogListCardType2";
 import CampaignList from "@/component/core/CampaignList";
 import BreadCrumb from "@/component/core/BreadCrumb";
+import BlogListCardType3 from "@/component/core/BlogListCardType3";
 
 function Stories() {
   const auth = useAppSelector((state) => state.authReducer);
@@ -198,7 +199,7 @@ function Stories() {
                 </Typography>
               </Box>
               <Box>
-                <BlogCardType2 item={storyData[3]} elevation={0} showInput />
+                <BlogListCardType2 item={storyData[3]} elevation={0} showInput />
               </Box>
             </Box>
           </Grid>

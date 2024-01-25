@@ -2,12 +2,12 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function ExplorePage() {
+export default function AdminAprovalCampaignPage() {
   const router = useRouter();
   useEffect(() => {
-    router.push("explore/home");
+    router.push("/admin/approvals");
      // eslint-disable-next-line
   }, []);
 
-  return <></>;
+  return null;
 }

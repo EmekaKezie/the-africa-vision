@@ -1,4 +1,4 @@
-import { IStory } from "@/types/IStory";
+import { IActionOption, IStory } from "@/types/IStory";
 import {
   Delete,
   Edit,
@@ -24,6 +24,8 @@ import CampaignListCardType1 from "./CampaignListCardType1";
 import CampaignListCardType2 from "./CampaignListCardType2";
 import CampaignListCardType3 from "./CampaignListCardType3";
 import CampaignListCardType4 from "./CampaignListCardType4";
+import CampaignListTable from "./CampaignListTable";
+import { storyData } from "@/data/storyData";
 
 type variationTypes = "swipeable" | "grid" | "pinned" | "tabular" | "docked";
 type cardTypes = "type1" | "type2" | "type3";
@@ -36,6 +38,8 @@ type props = {
   stopAt?: number;
   redirectUrl?: string;
   data: IStory[];
+  onActionClick?: (item: IStory, url: string, action: string) => void;
+  actionOptions?: IActionOption;
 };
 
 export default function CampaignList(props: props) {
@@ -324,39 +328,51 @@ export default function CampaignList(props: props) {
     ];
 
     return (
-      <Box>
-        <MUIDataTable
-          title={
-            <Box>
-              <Typography
-                sx={{
-                  color: "#120F0F",
-                  fontWeight: "bold",
-                  fontSize: "1.1em",
-                }}>
-                Recent Campaign
-              </Typography>
-            </Box>
-          }
-          data={flattenedData(data?.slice(offset, limit))}
-          columns={columns}
-          options={{
-            filter: "false",
-            download: "true",
-            downloadOptions: {
-              filterOptions: {
-                useDisplayedColumnsOnly: true,
-                useDisplayedRowsOnly: true,
-              },
-            },
-            print: "true",
-            viewColumns: "false",
-            elevation: 0,
-            responsive: "standard",
-            selectableRows: "none",
-          }}
-        />
-      </Box>
+      <CampaignListTable
+        data={data}
+        onActionClick={props.onActionClick}
+        startAt={props.startAt}
+        stopAt={props.stopAt}
+        redirectUrl={props.redirectUrl}
+        actionOptions={{
+          showView: props.actionOptions?.showView ?? true,
+          showDelete: props.actionOptions?.showDelete ?? true,
+          showEdit: props.actionOptions?.showEdit ?? true,
+        }}
+      />
+      // <Box>
+      //   <MUIDataTable
+      //     title={
+      //       <Box>
+      //         <Typography
+      //           sx={{
+      //             color: "#120F0F",
+      //             fontWeight: "bold",
+      //             fontSize: "1.1em",
+      //           }}>
+      //           Recent Campaign
+      //         </Typography>
+      //       </Box>
+      //     }
+      //     data={flattenedData(data?.slice(offset, limit))}
+      //     columns={columns}
+      //     options={{
+      //       filter: "false",
+      //       download: "true",
+      //       downloadOptions: {
+      //         filterOptions: {
+      //           useDisplayedColumnsOnly: true,
+      //           useDisplayedRowsOnly: true,
+      //         },
+      //       },
+      //       print: "true",
+      //       viewColumns: "false",
+      //       elevation: 0,
+      //       responsive: "standard",
+      //       selectableRows: "none",
+      //     }}
+      //   />
+      // </Box>
     );
   };
 

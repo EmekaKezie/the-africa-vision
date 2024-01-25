@@ -1,4 +1,5 @@
 import { IUser } from "@/types/IUser";
+import ProfileSample1 from "@/assets/profile-sample1.jpeg";
 
 export const creatorMockData: IUser[] = [
   {
@@ -7,11 +8,12 @@ export const creatorMockData: IUser[] = [
     fullname: "John Bushmill",
     phone: "08394305354",
     role: "USER",
-    status:"active",
-    entryDate:"2023-10-31T21:30:20.757Z",
-    totalEarning:100000,
-    totalPayout:50000,
-    currencyCode:"NGN"
+    status: "active",
+    entryDate: "2023-10-31T21:30:20.757Z",
+    totalEarning: 100000,
+    totalPayout: 50000,
+    currencyCode: "NGN",
+    photo: ProfileSample1,
   },
   {
     id: "2",
@@ -19,11 +21,12 @@ export const creatorMockData: IUser[] = [
     fullname: "Laura Prichet",
     phone: "08394305354",
     role: "USER",
-    status:"deactivated",
-    entryDate:"2023-10-31T21:30:20.757Z",
-    totalEarning:80000,
-    totalPayout:55000,
-    currencyCode:"NGN"
+    status: "deactivated",
+    entryDate: "2023-10-31T21:30:20.757Z",
+    totalEarning: 80000,
+    totalPayout: 55000,
+    currencyCode: "NGN",
+    photo: ProfileSample1,
   },
   {
     id: "3",
@@ -31,11 +34,12 @@ export const creatorMockData: IUser[] = [
     fullname: "John Bushmill",
     phone: "08394305354",
     role: "USER",
-    status:"pending",
-    entryDate:"2023-10-31T21:30:20.757Z",
-    totalEarning:100000,
-    totalPayout:110000,
-    currencyCode:"NGN"
+    status: "pending",
+    entryDate: "2023-10-31T21:30:20.757Z",
+    totalEarning: 100000,
+    totalPayout: 110000,
+    currencyCode: "NGN",
+    photo: ProfileSample1,
   },
   {
     id: "4",
@@ -43,11 +47,12 @@ export const creatorMockData: IUser[] = [
     fullname: "John Bushmill",
     phone: "08394305354",
     role: "USER",
-    status:"active",
-    entryDate:"2023-10-31T21:30:20.757Z",
-    totalEarning:80000,
-    totalPayout:80000,
-    currencyCode:"NGN"
+    status: "active",
+    entryDate: "2023-10-31T21:30:20.757Z",
+    totalEarning: 80000,
+    totalPayout: 80000,
+    currencyCode: "NGN",
+    photo: ProfileSample1,
   },
   {
     id: "5",
@@ -55,10 +60,11 @@ export const creatorMockData: IUser[] = [
     fullname: "John Bushmill",
     phone: "08394305354",
     role: "USER",
-    status:"active",
-    entryDate:"2023-10-31T21:30:20.757Z",
-    totalEarning:80000,
-    totalPayout:80000,
-    currencyCode:"NGN"
+    status: "active",
+    entryDate: "2023-10-31T21:30:20.757Z",
+    totalEarning: 80000,
+    totalPayout: 80000,
+    currencyCode: "NGN",
+    photo: ProfileSample1,
   },
 ];

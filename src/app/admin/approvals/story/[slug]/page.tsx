@@ -1,33 +1,32 @@
 "use client";
 import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
-import PurpleButton from "@/component/common/PurpleButton";
 import ReduxProvider from "@/component/common/ReduxProvider";
 import BreadCrumb from "@/component/core/BreadCrumb";
-import CreatorList from "@/component/core/CreatorList";
-import { creatorMockData } from "@/data/creatorMockData";
-import { IUser } from "@/types/IUser";
-import { Add } from "@mui/icons-material";
+import { storyData } from "@/data/storyData";
+import { IStory } from "@/types/IStory";
 import { Box, Typography } from "@mui/material";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
-function Creators() {
-  const router = useRouter();
+function AdminApproveStoryView() {
+  const pathname = usePathname();
+  const splitPathname: string[] = pathname.split("/");
+  const pageId = splitPathname[4];
 
-  const handleOnClickCampaignActions = (
-    item: IUser,
-    url: string,
-    action: string
-  ) => {
-    if (action === "view") {
-      router.push(`${url}/${item.id}`);
-    }
-  };
+  const [data, setData] = useState<IStory>({} as IStory);
+
+  useEffect(() => {
+    const item = storyData.filter((i: IStory) => i.id === pageId)[0];
+    setData(item);
+     // eslint-disable-next-line
+  }, []);
+
   return (
     <AuthenticatedLayout>
+      <br />
       <Box
         sx={{
-          display: { md: "flex", xs: "flex" },
+          display: { md: "flex" },
         }}>
         <Box flexGrow={1}>
           <Typography
@@ -36,7 +35,7 @@ function Creators() {
               color: "#0F172A",
               fontSize: "1.5em",
             }}>
-            Creators
+            {data?.title}
           </Typography>
 
           <Box>
@@ -49,7 +48,13 @@ function Creators() {
                   divider: "/",
                 },
                 {
-                  displayName: "Creators",
+                  displayName: "Approvals > Story",
+                  url: "/admin/approvals",
+                  isActive: false,
+                  divider: "/",
+                },
+                {
+                  displayName: data.title,
                   isActive: true,
                 },
               ]}
@@ -61,28 +66,18 @@ function Creators() {
           sx={{
             justifyContent: { md: "end" },
           }}>
-          <Link href={`/creators/create`}>
+          {/* <Link href={`/creators/create`}>
             <PurpleButton
               text="Add Creator"
               shade="purple"
               size="small"
               startIcon={<Add />}
             />
-          </Link>
+          </Link> */}
         </Box>
-      </Box>
-      <Box>
-        <CreatorList
-          data={creatorMockData}
-          variation="tabular"
-          redirectUrl="creators"
-          onActionClick={(item: IUser, url, action) => {
-            handleOnClickCampaignActions(item, url, action);
-          }}
-        />
       </Box>
     </AuthenticatedLayout>
   );
 }
 
-export default ReduxProvider(Creators);
+export default ReduxProvider(AdminApproveStoryView);

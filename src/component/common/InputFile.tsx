@@ -54,10 +54,12 @@ export default function InputFile(props: props) {
     return (
       <Box>
         {imagePreview && (
-          <img
+          <Image
             src={imagePreview}
             alt="Upload Assignment Cover"
             className={classes.imageFit}
+            width={100}
+            height={100}
           />
         )}
       </Box>

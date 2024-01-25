@@ -20,10 +20,12 @@ export interface IStory {
   likes?: number;
   comments?: number;
   shares?: number;
+  approvalStatus?: string;
 
   creatorId?: string;
-  creatorFirstname?: string;
-  creatorLastname?: string;
+  creatorFullname?: string;
+  //creatorFirstname?: string;
+  //creatorLastname?: string;
   creatorEmail?: string;
   creatorImage?: any;
 
@@ -46,9 +48,10 @@ export interface IStoryAnalytics {
   countdown?: number;
 }
 
-interface IStoryImage {
-  src: any;
-  col?: number;
-  row?: number;
-}
+
+export interface IActionOption{
+  showView?: boolean;
+  showDelete?: boolean;
+  showEdit?: boolean;
+};
 

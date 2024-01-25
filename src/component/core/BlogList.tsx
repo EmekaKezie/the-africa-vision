@@ -1,10 +1,11 @@
-import { IStory } from "@/types/IStory";
+import { IActionOption, IStory } from "@/types/IStory";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { Box, Grid, IconButton, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import BlogListCardType1 from "./BlogListCardType1";
 import BlogListCardType2 from "./BlogListCardType2";
 import BlogListCardType3 from "./BlogListCardType3";
+import BlogListTable from "./BlogListTable";
 
 type variationTypes = "swipeable" | "grid" | "pinned" | "tabular";
 type cardTypes = "type1" | "type2" | "type3";
@@ -17,6 +18,8 @@ type props = {
   stopAt?: number;
   redirectUrl?: string;
   data: IStory[];
+  onActionClick?: (item: IStory, url: string, action: string) => void;
+  actionOptions?: IActionOption;
 };
 
 export default function BlogList(props: props) {
@@ -32,13 +35,21 @@ export default function BlogList(props: props) {
   const renderCard = (item: IStory) => {
     switch (props.cardType) {
       case "type1":
-        return <BlogListCardType1 redirectUrl={props.redirectUrl} item={item} />;
+        return (
+          <BlogListCardType1 redirectUrl={props.redirectUrl} item={item} />
+        );
       case "type2":
-        return <BlogListCardType2 redirectUrl={props.redirectUrl} item={item} />;
+        return (
+          <BlogListCardType2 redirectUrl={props.redirectUrl} item={item} />
+        );
       case "type3":
-        return <BlogListCardType3 redirectUrl={props.redirectUrl} item={item} />;
+        return (
+          <BlogListCardType3 redirectUrl={props.redirectUrl} item={item} />
+        );
       default:
-        return <BlogListCardType1 redirectUrl={props.redirectUrl} item={item} />;
+        return (
+          <BlogListCardType1 redirectUrl={props.redirectUrl} item={item} />
+        );
     }
   };
 
@@ -106,7 +117,20 @@ export default function BlogList(props: props) {
   };
 
   const renderTabularVariation = () => {
-    return <Box></Box>;
+    return (
+      <BlogListTable
+        data={data}
+        onActionClick={props.onActionClick}
+        startAt={props.startAt}
+        stopAt={props.stopAt}
+        redirectUrl={props.redirectUrl}
+        actionOptions={{
+          showView: props.actionOptions?.showView ?? true,
+          showDelete: props.actionOptions?.showDelete ?? true,
+          showEdit: props.actionOptions?.showEdit ?? true,
+        }}
+      />
+    );
   };
 
   const renderContent = () => {

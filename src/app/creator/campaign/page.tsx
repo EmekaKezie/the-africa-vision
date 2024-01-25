@@ -188,6 +188,9 @@ function CampaignUAdmn() {
           swipeButtons={false}
           variation="tabular"
           data={storyData}
+          actionOptions={{
+            //showDelete: false,
+          }}
         />
       </Box>
     </AuthenticatedLayout>

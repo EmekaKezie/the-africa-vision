@@ -41,13 +41,13 @@ export default function BlogListCardType2(props: props) {
               badgeContent={
                 <Avatar
                   alt="Remy Sharp"
-                  src={props.item.creatorImage.src}
+                  src={props.item.creatorImage}
                   sx={{ height: "20px", width: "20px" }}
                 />
               }>
               <Avatar sx={{ backgroundColor: "#2563EB" }}>
-                {props.item.creatorFirstname?.charAt(0)}
-                {props.item.creatorLastname?.charAt(0)}
+                {props.item.creatorFullname?.split("")[0].charAt(0)}
+                {props.item.creatorFullname?.split("")[1]?.charAt(0)}
               </Avatar>
             </Badge>
           }
@@ -79,7 +79,7 @@ export default function BlogListCardType2(props: props) {
                 fontSize: "0.7em",
                 color: "#94A3B8",
               }}>
-              {props.item.creatorFirstname} {props.item.creatorLastname} •{" "}
+              {props.item.creatorFullname} •{" "}
               {
                 getDateDifference(
                   props.item.createdDate!,

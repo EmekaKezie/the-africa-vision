@@ -45,7 +45,7 @@ export default function BlogListCardType3(props: props) {
                   fontSize: "12px",
                   color: "#999999",
                 }}>
-                {props?.item?.creatorFirstname} {props?.item?.creatorLastname}
+                {props?.item?.creatorFullname}
               </Typography>
             </Stack>
             <Stack direction="row" spacing={0.5}>

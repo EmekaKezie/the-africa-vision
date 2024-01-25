@@ -5,7 +5,7 @@ import ReduxProvider from "@/component/common/ReduxProvider";
 import { useAppSelector } from "@/redux/useReduxHooks";
 import { useRouter } from "next/navigation";
 
-function HomePage() {
+function AppLanding() {
   const router = useRouter();
   const authStore = useAppSelector((state) => state.authReducer);
 
@@ -17,9 +17,10 @@ function HomePage() {
     } else {
       router.push("explore/home");
     }
+     // eslint-disable-next-line
   }, [authStore.role]);
 
-  return <></>;
+  return null;
 }
 
-export default ReduxProvider(HomePage);
+export default ReduxProvider(AppLanding);
