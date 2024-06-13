@@ -5,6 +5,7 @@ import { ReactNode, useEffect, useState } from "react";
 import AuthenticatedNavDrawer from "../core/AuthenticatedNavDrawer";
 import { useAppSelector } from "@/redux/useReduxHooks";
 import { useRouter } from "next/navigation";
+import ExpiredSessionModal from "./ExpiredSessionModal";
 
 type props = {
   children: ReactNode;
@@ -13,6 +14,7 @@ type props = {
 function AuthenticatedLayout(props: props) {
   const router = useRouter();
   const authStore = useAppSelector((state) => state.authReducer);
+  const sessionStore = useAppSelector(state => state.sessionReducer);
 
   useEffect(() => {
     if (!authStore.isLoggedIn) {
@@ -63,6 +65,8 @@ function AuthenticatedLayout(props: props) {
           {props.children}
         </Box>
       </Box>
+
+      {!sessionStore.isValid && <ExpiredSessionModal/>}
     </Box>
   );
 }

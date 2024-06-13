@@ -1,5 +1,4 @@
-import { IStory } from "@/types/IStory";
-import { Box, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
+import { Box } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -7,18 +6,18 @@ import { useEffect, useState } from "react";
 type props = {
   startAt?: number;
   stopAt?: number;
-  data: IStory[];
+  //data: IStory[];
 };
 
 export default function StoryImages(props: props) {
-  const [data, setData] = useState<IStory[]>([]);
+  //const [data, setData] = useState<IStory[]>([]);
 
-  useEffect(() => {
-    if (props?.data) setData(props?.data);
-  }, [props]);
+  // useEffect(() => {
+  //   if (props?.data) setData(props?.data);
+  // }, [props]);
 
   const offset: number = !props.startAt ? 0 : props.startAt;
-  const limit: number = !props.stopAt ? data.length : props.stopAt;
+  //const limit: number = !props.stopAt ? data.length : props.stopAt;
 
   const renderContent = () => {
     return (

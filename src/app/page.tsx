@@ -1,26 +1,161 @@
 "use client";
-
-import React, { useEffect } from "react";
 import ReduxProvider from "@/component/common/ReduxProvider";
-import { useAppSelector } from "@/redux/useReduxHooks";
-import { useRouter } from "next/navigation";
+import UnauthenticatedLayout from "@/component/common/UnauthenticatedLayout";
+import HeroHome from "@/component/core/HeroHome";
+import BlogList from "@/component/core/BlogList";
+import CampaignList from "@/component/core/CampaignList";
+import PgAboutUs from "@/component/core/PgAboutUs";
+import PgCoreServices from "@/component/core/PgCoreServices";
+import PgDonateAds from "@/component/core/PgDonateAds";
+import PgFooter from "@/component/core/PgFooter";
+import PgNewsLetter from "@/component/core/PgNewsLetter";
+import PgProjects from "@/component/core/PgProjects";
+import PgSectionDescription from "@/component/core/PgSectionDescription";
+import PgStory from "@/component/core/PgStory";
+import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
+import { ICampaignData } from "@/types/ICampaign";
+import { IBlogData } from "@/types/IBlog";
+import { ApiGetCampaignsForAll } from "@/component/api/campaignApi";
+import { enqueueSnackbar } from "notistack";
+import { ApiGetBlogsForAll } from "@/component/api/blogApi";
 
-function AppLanding() {
-  const router = useRouter();
-  const authStore = useAppSelector((state) => state.authReducer);
+function ExploreHomePage() {
+  const [campaigns, setCampaigns] = useState<ICampaignData[]>([]);
+  const [loadingCampaigns, setLoadingCampaigns] = useState<boolean>(false);
+  const [blogs, setBlogs] = useState<IBlogData[]>([]);
+  const [loadingBlogs, setLoadingBlogs] = useState<boolean>(false);
 
   useEffect(() => {
-    if (authStore.role.toUpperCase() === "USER") {
-      router.push("creator/dashboard");
-    } else if (authStore.role.toUpperCase() === "SUPER ADMIN") {
-      router.push("admin/dashboard");
-    } else {
-      router.push("explore/home");
-    }
-     // eslint-disable-next-line
-  }, [authStore.role]);
+    fetchCampaigns();
+    // eslint-disable-next-line
+  }, []);
 
-  return null;
+  useEffect(() => {
+    fetchBlogs();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchCampaigns = () => {
+    setLoadingCampaigns(true);
+    ApiGetCampaignsForAll()
+      .then((response) => {
+        const campaignData = response?.data?.campaigns;
+        setCampaigns(campaignData);
+        setLoadingCampaigns(false);
+      })
+      .catch((error: any) => {
+        setLoadingCampaigns(false);
+        enqueueSnackbar("Error fetching some content", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
+
+  const fetchBlogs = () => {
+    setLoadingBlogs(true);
+    ApiGetBlogsForAll()
+      .then((response) => {
+        const blogData = response.data.posts;
+        setBlogs(blogData);
+        setLoadingBlogs(false);
+      })
+      .catch((error: any) => {
+        setLoadingBlogs(false);
+        enqueueSnackbar("Error fetching blogs", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
+
+  return (
+    <UnauthenticatedLayout>
+      <HeroHome />
+
+      <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
+        <PgAboutUs />
+      </Box>
+
+      <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
+        <PgCoreServices />
+      </Box>
+
+      <Box
+        sx={{
+          padding: { xs: "0 1rem", md: "0 8rem" },
+          background: "#F5F7FA",
+        }}>
+        <PgProjects />
+      </Box>
+
+      <br/>
+      <br/>
+      <br/>
+
+      {/* <PgStory /> */}
+
+      <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
+        <PgSectionDescription
+          title="Latest Causes & Groundbreaking Ideas ____"
+          subtitle="Find popular causes & innovative ideas and donate to support them. Be a part of something meaningful." 
+        />
+        <CampaignList
+          data={campaigns}
+          variation="swipeable"
+          swipeButtons
+          cardType="type1"
+        />
+      </Box>
+
+      <br />
+      <br />
+      <br />
+
+      <PgDonateAds />
+
+      <br />
+      <br />
+      <br />
+
+      {/* <Box sx={{ padding: { xs: "0 1rem", md: "0 8rem" } }}>
+        <PgSectionDescription
+          title="Latest News _____"
+          subtitle="Articles You May Read"
+        />
+        <BlogList
+          variation="swipeable"
+          data={blogs}
+          cardType="type3"
+          swipeButtons
+        />
+      </Box> */}
+
+      <br />
+
+      <Box
+        sx={{
+          padding: { xs: "0 1rem", md: "0 8rem" },
+        }}>
+        <PgNewsLetter />
+      </Box>
+
+      <Box
+        sx={{
+          padding: { md: "0 8rem", xs: "0 1rem" },
+          backgroundColor: "#FFF9FD",
+        }}>
+        <PgFooter />
+      </Box>
+    </UnauthenticatedLayout>
+  );
 }
 
-export default ReduxProvider(AppLanding);
+export default ReduxProvider(ExploreHomePage);

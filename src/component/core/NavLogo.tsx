@@ -8,8 +8,8 @@ export default function NavLogo() {
       <Box
         sx={{
           display: { xs: "none", md: "block" },
-          width: "150px",
-          height: "50px",
+          width: "200px",
+          //height: "50px",
         }}>
         <Image
           src={Logo}

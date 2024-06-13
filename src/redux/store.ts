@@ -15,19 +15,21 @@ import {
 import _testSlice from "./slices/_testSlice";
 import donateSlice from "./slices/donateSlice";
 import authSlice from "./slices/authSlice";
+import sessionSlice from "./slices/sessionSlice";
 
 const persistConfig = {
   key: "root",
   //storage:AsyncStorage,
   storage,
   whiteLists: ["authSlice"],
-  blacklist: ["testReducer", "donateSlice"],
+  blacklist: ["testReducer", "donateSlice", "sessionReducer"],
 };
 
 const reducers = combineReducers({
   testReducer: _testSlice,
   donateReducer: donateSlice,
   authReducer: authSlice,
+  sessionReducer: sessionSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

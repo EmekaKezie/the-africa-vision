@@ -1,14 +1,16 @@
-import { IActionOption, IStory } from "@/types/IStory";
+import { IActionOption } from "@/types/IStory";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { Box, Grid, IconButton, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import BlogListCardType1 from "./BlogListCardType1";
 import BlogListCardType2 from "./BlogListCardType2";
 import BlogListCardType3 from "./BlogListCardType3";
 import BlogListTable from "./BlogListTable";
+import { IBlogData } from "@/types/IBlog";
+import BlogListCardType4 from "./BlogListCardType4";
 
 type variationTypes = "swipeable" | "grid" | "pinned" | "tabular";
-type cardTypes = "type1" | "type2" | "type3";
+type cardTypes = "type1" | "type2" | "type3" | "type4";
 
 type props = {
   variation: variationTypes;
@@ -17,13 +19,14 @@ type props = {
   startAt?: number;
   stopAt?: number;
   redirectUrl?: string;
-  data: IStory[];
-  onActionClick?: (item: IStory, url: string, action: string) => void;
+  data: IBlogData[];
+  onActionClick?: (item: IBlogData, url: string, action: string) => void;
   actionOptions?: IActionOption;
+  otherInfo?: ReactNode | string;
 };
 
 export default function BlogList(props: props) {
-  const [data, setData] = useState<IStory[]>([]);
+  const [data, setData] = useState<IBlogData[]>([]);
 
   useEffect(() => {
     if (props?.data) setData(props?.data);
@@ -32,7 +35,7 @@ export default function BlogList(props: props) {
   const offset: number = !props.startAt ? 0 : props.startAt;
   const limit: number = !props.stopAt ? data.length : props.stopAt;
 
-  const renderCard = (item: IStory) => {
+  const renderCard = (item: IBlogData) => {
     switch (props.cardType) {
       case "type1":
         return (
@@ -77,7 +80,7 @@ export default function BlogList(props: props) {
               backgroundColor: "transparent",
             },
           }}>
-          {data?.slice(offset, limit)?.map((item: IStory) => (
+          {data?.slice(offset, limit)?.map((item: IBlogData) => (
             <Box
               key={item.id}
               sx={{
@@ -102,7 +105,7 @@ export default function BlogList(props: props) {
           paddingBottom: "1rem",
         }}>
         <Grid container spacing={7}>
-          {data?.slice(offset, limit)?.map((item: IStory) => (
+          {data?.slice(offset, limit)?.map((item: IBlogData) => (
             <Grid item lg={4} md={4} sm={6} xs={12} key={item.id}>
               {renderCard(item)}
             </Grid>
@@ -113,7 +116,20 @@ export default function BlogList(props: props) {
   };
 
   const renderPinnedVariation = () => {
-    return <Box></Box>;
+    return (
+      <Box
+        sx={{
+          paddingBottom: "1rem",
+        }}>
+        <Grid container spacing={1}>
+          {data?.slice(offset, limit)?.map((item: IBlogData) => (
+            <Grid item lg={12} md={12} sm={6} xs={12} key={item.id}>
+              <BlogListCardType4 item={item} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    );
   };
 
   const renderTabularVariation = () => {

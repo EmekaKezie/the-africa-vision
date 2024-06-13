@@ -1,5 +1,3 @@
-
-
 export interface ICountry {
   name: {
     common: string;
@@ -8,4 +6,9 @@ export interface ICountry {
   flags: {
     png: string;
   };
+  idd: {
+    root: string;
+    suffixes: string[];
+  };
+  currencies: any;
 }

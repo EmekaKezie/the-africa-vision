@@ -2,13 +2,14 @@ import InputFile from "@/component/common/InputFile";
 import PurpleButton from "@/component/common/PurpleButton";
 import TextInput from "@/component/common/TextInput";
 import { categoryData } from "@/data/categoryData";
-import { paymentOptionData } from "@/data/paymentOptionData";
+// import { paymentOptionData } from "@/data/paymentOptionData";
 import { ICategory } from "@/types/ICategory";
 import { IPaymentOption } from "@/types/IPayment";
 import {
   Alert,
   Box,
   Chip,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -22,11 +23,24 @@ import { ThemeProvider } from "@mui/styles";
 import { useFormik } from "formik";
 import MUIRichTextEditor from "mui-rte";
 import { enqueueSnackbar } from "notistack";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { getDateDifference } from "../common/helpers";
+import { useAppSelector } from "@/redux/useReduxHooks";
+import {
+  ApiCreateCampaign,
+  ApiGetCampaignCategories,
+} from "../api/campaignApi";
+import { IResponse, ResponseEnum } from "@/types/IAppbaseTypes";
+import { ICampaignInput } from "@/types/ICampaign";
+import { useRouter } from "next/navigation";
 
 export default function CampaignCreationForm() {
+  const router = useRouter();
+  const authStore = useAppSelector((state) => state.authReducer);
+
+  const [categories, setCategories] = useState<ICategory[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState<boolean>(false);
   const [selectedPartners, setSelectedPartners] = useState<ICategory[]>([]);
   const [imageBase64, setImageBase64] = useState<any>(null);
   const [richContent, setRichContent] = useState<any>(null);
@@ -40,7 +54,39 @@ export default function CampaignCreationForm() {
   );
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
-  console.log(richContent);
+  useEffect(() => {
+    fetchCategories();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchCategories = () => {
+    setLoadingCategories(true);
+    ApiGetCampaignCategories(authStore.token)
+      .then((response: IResponse<ICategory[]>) => {
+        setLoadingCategories(false);
+        if ((response.status = ResponseEnum.success)) {
+          setCategories(response.data);
+        } else {
+          enqueueSnackbar(response.message, {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        }
+      })
+      .catch((error: any) => {
+        setLoadingCategories(false);
+        enqueueSnackbar("Something went wrong", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
 
   const handleEditorSave = (state: any) => {
     setRichContent(state);
@@ -132,31 +178,67 @@ export default function CampaignCreationForm() {
         return i.id;
       });
 
-      const param = {
+      const payload: ICampaignInput = {
         title: values.title,
         content: richContent,
         imageBase64: imageBase64,
-        startDate: values.startDate,
-        endDate: values.endDate,
-        categoryId: values.categoryId,
-        budget: values.budget,
-        paymentOptionId: values.paymentOptionId,
-        selectedPartnerIds: selectedPartnerIds,
+        start_date: values.startDate,
+        end_date: values.endDate,
+        category_id: values.categoryId,
+        target_amount: values.budget,
+        payment_options: ["paystack", "flutterwave"],
+        //selectedPartnerIds: selectedPartnerIds,
+        partners: [""],
+        venue: "Lagos",
+        draft: true,
       };
-      console.log(param);
+      //console.log(payload);
 
-      setTimeout(() => {
-        setLoading(false);
-        enqueueSnackbar("Save and awaiting approval", {
-          variant: "success",
-          autoHideDuration: 6000,
-          anchorOrigin: {
-            vertical: "top",
-            horizontal: "right",
-          },
+      ApiCreateCampaign(payload, authStore.token)
+        .then((response) => {
+          setLoading(false);
+          if (response.status === ResponseEnum.success) {
+            enqueueSnackbar(response.message, {
+              variant: "success",
+              anchorOrigin: {
+                vertical: "top",
+                horizontal: "right",
+              },
+            });
+            setOpenDialog(true);
+          } else {
+            enqueueSnackbar(response.message, {
+              variant: "error",
+              anchorOrigin: {
+                vertical: "top",
+                horizontal: "right",
+              },
+            });
+          }
+        })
+        .catch((error: any) => {
+          setLoading(false);
+          enqueueSnackbar("Something went wrong", {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
         });
-        setOpenDialog(true);
-      }, 2000);
+
+      // setTimeout(() => {
+      //   setLoading(false);
+      //   enqueueSnackbar("Save and awaiting approval", {
+      //     variant: "success",
+      //     autoHideDuration: 6000,
+      //     anchorOrigin: {
+      //       vertical: "top",
+      //       horizontal: "right",
+      //     },
+      //   });
+      //   setOpenDialog(true);
+      // }, 2000);
     }
   };
 
@@ -209,6 +291,7 @@ export default function CampaignCreationForm() {
                     minHeight: "300px",
                     padding: "1rem",
                     overflow: "scroll",
+                    color: "#667085",
                   }}>
                   <ThemeProvider theme={myTheme}>
                     <MUIRichTextEditor
@@ -296,8 +379,11 @@ export default function CampaignCreationForm() {
                 fullWidth
                 label="Category"
                 selectedValue={formik.values?.categoryId}
-                onChange={formik.handleChange}>
-                {categoryData?.map((item: ICategory) => (
+                onChange={formik.handleChange}
+                startIcon={
+                  loadingCategories ? <CircularProgress size={20} /> : <></>
+                }>
+                {categories?.map((item: ICategory) => (
                   <MenuItem key={item.id} value={item.id}>
                     {item.name}
                   </MenuItem>
@@ -305,7 +391,7 @@ export default function CampaignCreationForm() {
               </TextInput>
             </Grid>
 
-            <Grid item lg={6} md={6} sm={12} xs={12}>
+            {/* <Grid item lg={6} md={6} sm={12} xs={12}>
               <TextInput
                 name="paymentOptionId"
                 placeholder="Select Payment Option"
@@ -320,7 +406,7 @@ export default function CampaignCreationForm() {
                   </MenuItem>
                 ))}
               </TextInput>
-            </Grid>
+            </Grid> */}
 
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <TextInput
@@ -331,7 +417,7 @@ export default function CampaignCreationForm() {
                 value={getDateDifference(
                   formik.values.startDate,
                   formik.values.endDate
-                ).diffInDays.toString()}
+                ).diffInDays.toFixed(0)}
               />
             </Grid>
 
@@ -369,7 +455,10 @@ export default function CampaignCreationForm() {
             <PurpleButton
               text="Continue"
               size="small"
-              onClick={() => setOpenDialog(false)}
+              onClick={() => {
+                setOpenDialog(false);
+                router.push("/creator/campaign");
+              }}
             />
           </DialogActions>
         </Dialog>

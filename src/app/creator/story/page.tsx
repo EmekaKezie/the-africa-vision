@@ -6,17 +6,201 @@ import { useAppSelector } from "@/redux/useReduxHooks";
 import { Add, AttachMoney } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
-import { storyData } from "@/data/storyData";
-import ActivityList from "@/component/core/ActivityList";
-import { activityData } from "@/data/activityData";
 import PurpleButton from "@/component/common/PurpleButton";
 import BlogListCardType2 from "@/component/core/BlogListCardType2";
 import CampaignList from "@/component/core/CampaignList";
 import BreadCrumb from "@/component/core/BreadCrumb";
-import BlogListCardType3 from "@/component/core/BlogListCardType3";
+import { useEffect, useState } from "react";
+import { IBlogComment, IBlogData } from "@/types/IBlog";
+import { ICampaignData } from "@/types/ICampaign";
+import { ApiGetCampaignsForUser } from "@/component/api/campaignApi";
+import SkeletonList from "@/component/core/SkeletonList";
+import PageEmpty from "@/component/core/PageEmpty";
+import { ApiGetBlogsForUser } from "@/component/api/blogApi";
+import { enqueueSnackbar } from "notistack";
+import { IResponse, ResponseEnum } from "@/types/IAppbaseTypes";
+import BlogCommentForm from "@/component/core/BlogCommentForm";
+import BlogCommentList from "@/component/core/BlogCommentList";
+import { useDispatch } from "react-redux";
+import { onSessionValid } from "@/redux/slices/sessionSlice";
 
-function Stories() {
-  const auth = useAppSelector((state) => state.authReducer);
+function UserBlogs() {
+  const authStore = useAppSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
+
+  const [blogs, setBlogs] = useState<IBlogData[]>([]);
+  const [loadingBlogs, setLoadingBlogs] = useState<boolean>(false);
+  const [campaigns, setCampaigns] = useState<ICampaignData[]>([]);
+  const [loadingCampaigns, setLoadingCampaigns] = useState<boolean>(false);
+  const [isSessionValid, setIsSessionValid] = useState<boolean>(true);
+  const [tempComments, setTempComments] = useState<IBlogComment[]>([]);
+
+  useEffect(() => {
+    fetchBlogs();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    fetchCampaigns();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchBlogs = () => {
+    setLoadingBlogs(true);
+    ApiGetBlogsForUser(authStore.token)
+      .then((response: IResponse<any>) => {
+        setLoadingBlogs(false);
+        if (response.status === ResponseEnum.success) {
+          const blogData = response.data.posts;
+          setBlogs(blogData);
+        }
+        if (response.status === ResponseEnum.fail) {
+          enqueueSnackbar(response.message, {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        }
+        if (response.status === ResponseEnum.expired_token) {
+          dispatch(onSessionValid({ isValid: false }));
+        }
+      })
+      .catch((error: any) => {
+        setLoadingBlogs(false);
+        enqueueSnackbar("Error fetching stories", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
+
+  const fetchCampaigns = () => {
+    setLoadingCampaigns(true);
+    ApiGetCampaignsForUser(authStore.token)
+      .then((response: IResponse<any>) => {
+        setLoadingCampaigns(false);
+        if (response.status === ResponseEnum.success) {
+          const campaignData = response?.data?.campaigns;
+          setCampaigns(campaignData);
+        }
+        if (response.status === ResponseEnum.fail) {
+          enqueueSnackbar(response.message, {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        }
+        if (response.status === ResponseEnum.expired_token) {
+          setIsSessionValid(false);
+        }
+      })
+      .catch((error: any) => {
+        setLoadingCampaigns(false);
+        enqueueSnackbar("Error fetching projects", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
+
+  const renderBlogs = () => {
+    if (loadingBlogs) {
+      return <SkeletonList itemcount={1} cardType="type3" />;
+    }
+
+    if (!loadingBlogs && blogs.length > 0) {
+      return (
+        <Box>
+          <BlogListCardType2
+            item={blogs[0]}
+            elevation={0}
+            redirectUrl="story"
+          />
+
+          <BlogCommentForm
+            blogId={blogs[0].id}
+            submitWithButtonClick={false}
+            submitWithEnterKey={true}
+            inputFieldHeight={2}
+            onReturnComment={(comments: any[]) => {
+              setTempComments(comments);
+            }}
+          />
+        </Box>
+      );
+    }
+
+    if (!loadingBlogs && blogs.length < 1) {
+      return (
+        <PageEmpty
+          title="You have no story"
+          subtitle={
+            <Box>
+              Click{" "}
+              <Link
+                href={`/creator/story/create`}
+                style={{ color: "#A8518A", fontWeight: "bold" }}>
+                Here
+              </Link>{" "}
+              to create a project{" "}
+            </Box>
+          }
+        />
+      );
+    }
+  };
+
+  const renderCampaigns = () => {
+    if (loadingCampaigns) {
+      return (
+        <Box sx={{ paddingTop: "1rem" }}>
+          <SkeletonList itemcount={3} cardType="type2" />
+        </Box>
+      );
+    }
+
+    if (!loadingCampaigns && campaigns.length > 0) {
+      return (
+        <CampaignList
+          variation="pinned"
+          data={campaigns}
+          startAt={0}
+          stopAt={4}
+          redirectUrl="campaign"
+        />
+      );
+    }
+
+    if (!loadingCampaigns && campaigns.length < 1) {
+      return (
+        <PageEmpty
+          title="You have no project"
+          subtitle={
+            <Box>
+              Click{" "}
+              <Link
+                href={`/creator/campaign/create`}
+                style={{ color: "#A8518A", fontWeight: "bold" }}>
+                Here
+              </Link>{" "}
+              to create a project{" "}
+            </Box>
+          }
+        />
+      );
+    }
+  };
+
   return (
     <AuthenticatedLayout>
       <br />
@@ -69,7 +253,7 @@ function Stories() {
 
       <br />
 
-      <Box
+      {/* <Box
         sx={{
           padding: "1em",
           background: "#FFFFFF",
@@ -172,7 +356,7 @@ function Stories() {
         </Grid>
       </Box>
 
-      <br />
+      <br /> */}
 
       <Box>
         <Grid container spacing={2}>
@@ -195,12 +379,10 @@ function Stories() {
                   Recent Story
                 </Typography>
                 <Typography sx={{ color: "#2F840B", fontSize: "0.7em" }}>
-                  <Link href="/stories">See All</Link>
+                  <Link href="story/all">See All</Link>
                 </Typography>
               </Box>
-              <Box>
-                <BlogListCardType2 item={storyData[3]} elevation={0} showInput />
-              </Box>
+              <Box>{renderBlogs()}</Box>
             </Box>
           </Grid>
           <Grid item lg={4} md={4} sm={12} xs={12}>
@@ -222,33 +404,15 @@ function Stories() {
                   Top Projects
                 </Typography>
               </Box>
-              <CampaignList
-                variation="pinned"
-                data={storyData}
-                startAt={0}
-                stopAt={4}
-              />
+              {renderCampaigns()}
             </Box>
           </Grid>
         </Grid>
       </Box>
 
       <br />
-
-      <Box
-        sx={{
-          padding: "1rem",
-          backgroundColor: "#FFFFFF",
-          height: "100%",
-          boxShadow: "1px 1px 5px lightgray",
-        }}>
-        <ActivityList data={activityData} />
-      </Box>
     </AuthenticatedLayout>
   );
 }
 
-const cardText =
-  "Conduct design process best practices across projects such as gathering insights, validating problems & solutions, delivering multiple fidelity levels of design, and ensure the final design is implemented properly on.";
-
-export default ReduxProvider(Stories);
+export default ReduxProvider(UserBlogs);

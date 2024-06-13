@@ -129,7 +129,7 @@ export default function AuthenticatedNavDrawer(props: props) {
               flexGrow: { md: 0, xs: 1 },
               alignItems: "center",
             }}>
-            <AuthenticatedNavNotification />
+            {/* <AuthenticatedNavNotification /> */}
             <AuthenticatedNavUserMenu />
           </Box>
         </Toolbar>

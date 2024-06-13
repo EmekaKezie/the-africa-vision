@@ -7,6 +7,20 @@ export interface IPaystackInitialize {
 
 export interface IPaymentOption {
   id: string;
-  optionCode: string;
+  desc: string;
   name: string;
 }
+
+export interface IPaymentInitiate {
+  amount: number;
+  campaign_id: string;
+  payment_gateway: string;
+  currency: string;
+  description: string;
+  email: string;
+  name: string;
+}
+
+
+
+

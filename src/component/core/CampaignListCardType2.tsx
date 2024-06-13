@@ -1,30 +1,41 @@
-import { IStory } from "@/types/IStory";
 import {
   Box,
   Card,
   CardContent,
+  CardMedia,
   Grid,
   LinearProgress,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
 import { convertToPercentage, formatNumberWithSuffix } from "../common/helpers";
+import { ICampaignData } from "@/types/ICampaign";
+import Link from "next/link";
 
 type props = {
   redirectUrl?: string;
-  item: IStory;
+  item: ICampaignData;
 };
 
 export default function CampaignListCardType2(props: props) {
   return (
     <Box component="div">
-      <Box sx={{ height: "150px" }}>
-        <Image
-          src={props.item.coverImage}
-          alt={props.item.id}
-          style={{ objectFit: "cover", width: "100%" }}
-        />
-      </Box>
+      <Link
+        href={
+          !props?.redirectUrl ? "" : `${props.redirectUrl}/${props.item.id}`
+        }>
+        <Box sx={{ height: "150px" }}>
+          <CardMedia
+            component="img"
+            src={props.item.image}
+            alt={props.item.title}
+            height="100%"
+            sx={{
+              width: "100%",
+            }}
+          />
+        </Box>
+      </Link>
       <Box
         sx={{
           background: "#FFFFF",
@@ -46,7 +57,7 @@ export default function CampaignListCardType2(props: props) {
                 marginBottom: "1rem",
                 border: "1px solid gray",
               }}>
-              {props.item.categoryName}
+              {props.item.category.name}
             </Typography>
             <Typography
               component="div"
@@ -67,8 +78,8 @@ export default function CampaignListCardType2(props: props) {
               <LinearProgress
                 variant="determinate"
                 value={convertToPercentage(
-                  props.item?.budget,
-                  props.item?.revenue
+                  props.item?.target_amount,
+                  props.item?.raised_amount ?? 0
                 )}
                 sx={{
                   padding: "0.2rem",
@@ -98,8 +109,10 @@ export default function CampaignListCardType2(props: props) {
                           fontWeight: "bold",
                           color: "#2E4049",
                         }}>
-                        {!props.item?.currency ? "NGN" : props.item?.currency}
-                        {formatNumberWithSuffix(props.item?.budget)}
+                        {!props.item?.base_currency
+                          ? "NGN"
+                          : props.item?.base_currency}
+                        {formatNumberWithSuffix(props.item?.target_amount)}
                       </Typography>
                     </Box>
                   </Grid>
@@ -120,8 +133,10 @@ export default function CampaignListCardType2(props: props) {
                           fontWeight: "bold",
                           color: "#2E4049",
                         }}>
-                        {!props.item?.currency ? "NGN" : props.item?.currency}
-                        {formatNumberWithSuffix(props.item?.revenue)}
+                        {!props.item?.base_currency
+                          ? "NGN"
+                          : props.item?.base_currency}
+                        {formatNumberWithSuffix(props.item?.raised_amount ?? 0)}
                       </Typography>
                     </Box>
                   </Grid>
@@ -142,9 +157,12 @@ export default function CampaignListCardType2(props: props) {
                           fontWeight: "bold",
                           color: "#2E4049",
                         }}>
-                        {!props.item?.currency ? "NGN" : props.item?.currency}
+                        {!props.item?.base_currency
+                          ? "NGN"
+                          : props.item?.base_currency}
                         {formatNumberWithSuffix(
-                          props.item?.budget - props.item?.revenue
+                          props.item?.target_amount -
+                            (props.item?.raised_amount ?? 0)
                         )}
                       </Typography>
                     </Box>

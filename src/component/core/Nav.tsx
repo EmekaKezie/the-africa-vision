@@ -18,6 +18,7 @@ export default function Nav() {
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
               justifyContent: "center",
+              //border:"1px solid gray"
             }}>
             <NavMenuMd />
           </Box>

@@ -1,4 +1,3 @@
-import { IStory } from "@/types/IStory";
 import { Favorite, MoreVert } from "@mui/icons-material";
 import {
   Avatar,
@@ -17,112 +16,128 @@ import { getDateDifference } from "../common/helpers";
 import Link from "next/link";
 import MUIRichTextEditor from "mui-rte";
 import { ThemeProvider } from "@mui/styles";
+import { IBlog, IBlogData } from "@/types/IBlog";
+import BlogReactions from "./BlogReactions";
 
 type props = {
   elevation?: number;
   showInput?: boolean;
   redirectUrl?: string;
-  item: IStory;
+  item: IBlogData;
 };
 
 export default function BlogListCardType2(props: props) {
   return (
-    <Link
-      href={!props?.redirectUrl ? "" : `${props.redirectUrl}/${props.item.id}`}>
-      <Card elevation={props.elevation}>
-        <CardHeader
-          avatar={
-            <Badge
-              overlap="circular"
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              badgeContent={
-                <Avatar
-                  alt="Remy Sharp"
-                  src={props.item.creatorImage}
-                  sx={{ height: "20px", width: "20px" }}
-                />
-              }>
-              <Avatar sx={{ backgroundColor: "#2563EB" }}>
-                {props.item.creatorFullname?.split("")[0].charAt(0)}
-                {props.item.creatorFullname?.split("")[1]?.charAt(0)}
-              </Avatar>
-            </Badge>
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVert />
-            </IconButton>
-          }
-          title={
-            <Typography
-              component="div"
-              variant="body1"
-              sx={{
-                color: "#0F172A",
-                fontSize: "1.1em",
-                fontWeight: "bold",
-                letterSpacing: "-1px",
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 1,
-              }}>
-              {props.item.title}
-            </Typography>
-          }
-          subheader={
-            <Typography
-              sx={{
-                fontSize: "0.7em",
-                color: "#94A3B8",
-              }}>
-              {props.item.creatorFullname} •{" "}
-              {
-                getDateDifference(
-                  props.item.createdDate!,
-                  new Date().toDateString()
-                ).diffInDays
-              }{" "}
-              days
-            </Typography>
-          }
-        />
-        <CardContent>
-          <Box>
-            <Typography
-              component="div"
-              variant="body2"
-              sx={{
-                color: "#64748B",
-                fontSize: "0.9em",
-                display: "-webkit-box",
-                overflow: "hidden",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 3,
-              }}>
-              <ThemeProvider theme={myTheme}>
-                <MUIRichTextEditor
-                  defaultValue={!props.item.content ? "" : props.item.content}
-                  readOnly
-                  controls={[]}
-                />
-              </ThemeProvider>
-            </Typography>
-          </Box>
-          <br />
-          <CardMedia
-            component="img"
-            src={props.item.coverImage.src}
-            height={200}
-            sx={{
-              width: "100%",
+    <Card elevation={props.elevation}>
+      <CardHeader
+        avatar={
+          <Badge
+            overlap="circular"
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
             }}
-          />
-          <br />
-          <Box display="flex">
+            badgeContent={
+              <Avatar
+                alt="Remy Sharp"
+                //src={props.item.user}
+                src={""}
+                sx={{ height: "20px", width: "20px" }}
+              />
+            }>
+            <Avatar sx={{ backgroundColor: "#2563EB" }}>
+              {props.item.user?.fullname?.split("")[0].charAt(0)}
+              {props.item.user?.fullname?.split("")[1]?.charAt(0)}
+            </Avatar>
+          </Badge>
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVert />
+          </IconButton>
+        }
+        title={
+          <Typography
+            component="div"
+            variant="body1"
+            sx={{
+              color: "#0F172A",
+              fontSize: "1.1em",
+              fontWeight: "bold",
+              letterSpacing: "-1px",
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 1,
+              "&:hover": {
+                opacity: 0.8,
+              },
+            }}>
+            <Link
+              href={
+                !props?.redirectUrl
+                  ? ""
+                  : `${props.redirectUrl}/${props.item.id}`
+              }>
+              {props.item.title}
+            </Link>
+          </Typography>
+        }
+        subheader={
+          <Typography
+            sx={{
+              fontSize: "0.7em",
+              color: "#94A3B8",
+            }}>
+            {props.item.user.fullname} •{" "}
+            {getDateDifference(
+              props.item.created_at!,
+              new Date().toDateString()
+            ).diffInDays.toFixed(0)}{" "}
+            days ago
+          </Typography>
+        }
+      />
+      <CardContent>
+        <Box>
+          <Typography
+            component="div"
+            variant="body2"
+            sx={{
+              color: "#64748B",
+              fontSize: "0.9em",
+              display: "-webkit-box",
+              overflow: "hidden",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+            }}>
+            <ThemeProvider theme={myTheme}>
+              <MUIRichTextEditor
+                defaultValue={!props.item.content ? "" : props.item.content}
+                readOnly
+                controls={[]}
+              />
+            </ThemeProvider>
+          </Typography>
+        </Box>
+        <br />
+        <CardMedia
+          component="img"
+          src={props.item.image}
+          height="200px"
+          sx={{
+            width: "100%",
+          }}
+        />
+        <br />
+        <BlogReactions
+          blogId={props.item.id}
+          likes={props.item.likes}
+          dislikes={props.item.dislikes}
+          comments={props.item.comments}
+          shares={props.item.shares}
+        />
+        {/* <Box display="flex">
             <Box
               flexGrow={1}
               display="flex"
@@ -147,24 +162,23 @@ export default function BlogListCardType2(props: props) {
               <Favorite sx={{ fontSize: "14px", marginRight: "5px" }} />
               <Typography sx={{ fontSize: "14px" }}>2.6k Likes</Typography>
             </Box>
-          </Box>
-        </CardContent>
+          </Box> */}
+      </CardContent>
 
-        {props.showInput && (
-          <Box>
-            <TextInput
-              size="small"
-              fullWidth
-              inputStyle={{
-                background: "#FFF9FD",
-                border: "1px solid #CCCCCC",
-              }}
-            />
-          </Box>
-        )}
-        {/* */}
-      </Card>
-    </Link>
+      {props.showInput && (
+        <Box>
+          <TextInput
+            size="small"
+            fullWidth
+            inputStyle={{
+              background: "#FFF9FD",
+              border: "1px solid #CCCCCC",
+            }}
+          />
+        </Box>
+      )}
+      {/* */}
+    </Card>
   );
 }
 

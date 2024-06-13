@@ -19,7 +19,7 @@ export default function NavMenuMd() {
               <Typography
                 sx={{
                   padding: "0.5rem 1rem",
-                  fontSize: "16px",
+                  fontSize: "1.2em",
                   color: pathname === item.url ? "#A8518A" : "#120F0F",
                   fontWeight: pathname === item.url ? "bold" : "normal",
                   "&:hover": {

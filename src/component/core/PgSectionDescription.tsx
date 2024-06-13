@@ -22,7 +22,7 @@ export default function PgSectionDescription(props: props) {
           fontSize: { md: "2em", xs: "1.5em" },
           fontWeight: "bold",
           lineHeight: { md: "40px", xs: "30px" },
-          width: { md: "40%", xs: "100%" },
+          //width: { md: "40%", xs: "100%" },
         }}>
         {props.subtitle}
       </Typography>

@@ -7,7 +7,7 @@ import { ArrowUpward, AttachMoney, MoreVert } from "@mui/icons-material";
 import { Box, Grid, IconButton, Paper, Typography } from "@mui/material";
 import Chart from "react-apexcharts";
 import { convertToCurrency } from "@/component/common/helpers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -30,21 +30,100 @@ import {
 import GraphActiveVisitors from "@/component/core/GraphActiveVisitors";
 import GraphConversionRate from "@/component/core/GraphConversionRate";
 import CampaignList from "@/component/core/CampaignList";
-import { storyData } from "@/data/storyData";
 import TransactionTable from "@/component/core/TransactionTable";
 import { transactionData } from "@/data/transactionData";
-import CreatorPayoutList from "@/component/core/CreatorPayoutList";
-import { userData } from "@/data/userData";
+import PayoutListView from "@/component/core/PayoutListView";
 import { creatorMockData } from "@/data/creatorMockData";
+import { ICampaignData } from "@/types/ICampaign";
+import { ApiGetCampaignsForAdmin } from "@/component/api/campaignApi";
+import { enqueueSnackbar } from "notistack";
+import PageEmpty from "@/component/core/PageEmpty";
+import SkeletonList from "@/component/core/SkeletonList";
+import Link from "next/link";
+import DonationHistoryTable from "@/component/core/DonationHistoryTable";
 
 function Dashboard() {
-  const auth = useAppSelector((state) => state.authReducer);
+  const authStore = useAppSelector((state) => state.authReducer);
+
+  const [campaigns, setCampaigns] = useState<ICampaignData[]>([]);
+  const [loadingCampaigns, setLoadingCampaigns] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchCampaigns();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchCampaigns = () => {
+    setLoadingCampaigns(true);
+    ApiGetCampaignsForAdmin(authStore.token)
+      .then((response) => {
+        const campaignData = response?.data?.campaigns;
+        setCampaigns(campaignData);
+        setLoadingCampaigns(false);
+      })
+      .catch((error: any) => {
+        setLoadingCampaigns(false);
+        enqueueSnackbar("Error fetching top projects", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
+
+  const renderCampaigns = () => {
+    if (loadingCampaigns) {
+      return (
+        <Box sx={{ paddingTop: "1rem" }}>
+          <SkeletonList itemcount={3} cardType="type2" />
+        </Box>
+      );
+    }
+
+    if (!loadingCampaigns && campaigns?.length > 0) {
+      return (
+        <CampaignList
+          variation="docked"
+          data={campaigns}
+          startAt={0}
+          stopAt={4}
+        />
+      );
+    }
+
+    if (!loadingCampaigns && campaigns?.length < 1) {
+      return <PageEmpty title="there are not projects yet" />;
+    }
+  };
 
   return (
     <AuthenticatedLayout>
       <br />
-
       <Box>
+        <Typography
+          sx={{
+            color: "#120F0F",
+            fontSize: { md: "2.25em", xs: "1.8em" },
+            fontWeight: "bold",
+            lineHeight: "46px",
+          }}>
+          Hi {authStore.fullname}
+        </Typography>
+        <Typography
+          sx={{
+            color: "#898989",
+            fontSize: "0.8em",
+            fontWeight: "bold",
+          }}>
+          Welcome to your dashboard
+        </Typography>
+      </Box>
+
+      <br />
+
+      {/* <Box>
         <Grid container spacing={2}>
           <Grid item lg={3} md={3} sm={6} xs={6}>
             <StatsCard
@@ -116,9 +195,9 @@ function Dashboard() {
         </Grid>
       </Box>
 
-      <br />
+      <br /> */}
 
-      <Box>
+      {/* <Box>
         <Grid container spacing={2}>
           <Grid item lg={4} md={4} sm={12} xs={12}>
             <Box
@@ -173,9 +252,9 @@ function Dashboard() {
         </Grid>
       </Box>
 
-      <br />
+      <br /> */}
 
-      <Box>
+      {/* <Box>
         <Grid container spacing={2}>
           <Grid item lg={3} md={3} sm={6} xs={12}>
             <Box
@@ -244,11 +323,11 @@ function Dashboard() {
         </Grid>
       </Box>
 
-      <br />
+      <br /> */}
 
       <Box>
         <Grid container spacing={2}>
-          <Grid item lg={8} md={8} sm={12} xs={12}>
+          <Grid item lg={7} md={7} sm={12} xs={12}>
             <Box
               sx={{
                 padding: "1rem",
@@ -269,12 +348,10 @@ function Dashboard() {
                 </Typography>
               </Box>
               <br />
-              <Box>
-                <CampaignList data={storyData} variation="docked" />
-              </Box>
+              <Box>{renderCampaigns()}</Box>
             </Box>
           </Grid>
-          <Grid item lg={4} md={4} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             <Box
               sx={{
                 padding: "1rem",
@@ -291,12 +368,15 @@ function Dashboard() {
                     fontWeight: "bold",
                     fontSize: "1.1em",
                   }}>
-                  Pending Creator Payouts
+                  Pending Payouts
+                </Typography>
+                <Typography sx={{ color: "#2F840B", fontSize: "0.7em" }}>
+                  <Link href="payments">See all</Link>
                 </Typography>
               </Box>
               <br />
               <Box>
-                <CreatorPayoutList data={creatorMockData} />
+                <PayoutListView />
               </Box>
             </Box>
           </Grid>
@@ -305,9 +385,7 @@ function Dashboard() {
 
       <br />
 
-      <Box>
-        <TransactionTable data={transactionData} />
-      </Box>
+      
     </AuthenticatedLayout>
   );
 }

@@ -1,4 +1,3 @@
-import { IStory } from "@/types/IStory";
 import {
   Box,
   Card,
@@ -15,22 +14,25 @@ import Link from "next/link";
 import PurpleButton from "../common/PurpleButton";
 import { ThemeProvider } from "@mui/styles";
 import MUIRichTextEditor from "mui-rte";
+import { ICampaignData } from "@/types/ICampaign";
 
 type props = {
   elevation?: number;
   redirectUrl?: string;
-  item: IStory;
+  item: ICampaignData;
+  buttonText?: string;
 };
 
 export default function CampaignListCardType1(props: props) {
   return (
     <Box>
       <Card elevation={props.elevation}>
-        <CardMedia
-          component="img"
-          height="150px"
-          image={props.item.coverImage.src}
-        />
+        <Link
+          href={
+            !props?.redirectUrl ? "" : `${props.redirectUrl}/${props.item.id}`
+          }>
+          <CardMedia component="img" height="150px" image={props.item.image} />
+        </Link>
         <CardContent>
           <Typography
             sx={{
@@ -38,7 +40,7 @@ export default function CampaignListCardType1(props: props) {
               fontWeight: "bold",
               letterSpacing: "-1px",
             }}>
-            {props.item.categoryName}
+            {props.item.category?.name}
           </Typography>
           <br />
           <Typography
@@ -93,14 +95,18 @@ export default function CampaignListCardType1(props: props) {
                   justifyContent: "end",
                   fontSize: "0.7em",
                 }}>
-                {convertToPercentage(props.item?.budget, props.item?.revenue)}%
+                {convertToPercentage(
+                  props.item?.target_amount,
+                  props.item?.raised_amount ?? 0
+                )}
+                %
               </Typography>
             </Stack>
             <LinearProgress
               variant="determinate"
               value={convertToPercentage(
-                props.item?.budget,
-                props.item?.revenue
+                props.item?.target_amount,
+                props.item?.raised_amount ?? 0
               )}
               sx={{
                 padding: "0.2rem",
@@ -119,8 +125,8 @@ export default function CampaignListCardType1(props: props) {
                   flexGrow: 1,
                   fontSize: "0.7em",
                 }}>
-                Raised: {props.item?.currency}
-                {formatNumberWithSuffix(props.item?.revenue)}
+                Raised: {props.item?.base_currency}
+                {formatNumberWithSuffix(props.item?.raised_amount ?? 0)}
               </Typography>
               <Typography
                 component="div"
@@ -128,8 +134,8 @@ export default function CampaignListCardType1(props: props) {
                   justifyContent: "end",
                   fontSize: "0.7em",
                 }}>
-                Goal: {props.item?.currency}
-                {formatNumberWithSuffix(props.item?.budget)}
+                Goal: {props.item?.base_currency}
+                {formatNumberWithSuffix(props.item?.target_amount)}
               </Typography>
             </Stack>
           </Box>
@@ -140,7 +146,7 @@ export default function CampaignListCardType1(props: props) {
               !props?.redirectUrl ? "" : `${props.redirectUrl}/${props.item.id}`
             }>
             <PurpleButton
-              text="Donate"
+              text={props.buttonText ?? "See More..."}
               size="small"
               style={{ width: "150px" }}
               shade="white"

@@ -14,9 +14,10 @@ type typeProps = "type1" | "type2";
 type dataProps = {
   icon: ReactNode;
   title: string;
-  amount: number;
+  amount?: number;
   currency: string;
-  label: string;
+  label?: string;
+  total?: number;
 };
 
 type props = {
@@ -42,25 +43,41 @@ export default function StatsCard(props: props) {
               {props.data.title.toUpperCase()}
             </Typography>
             <Stack direction="row" alignItems="center" spacing={1}>
-              <Typography
-                sx={{
-                  color: "#0F2744",
-                  fontSize: { md: "1.1em", xs: "0.75em" },
-                  fontWeight: "bold",
-                }}>
-                {convertToCurrency(props.data.amount, props.data.currency)}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { md: "0.7em", xs: "0.5em" },
-                  backgroundColor: "#E8F9F5",
-                  color: "#16C79A",
-                  borderRadius: "5px",
-                  padding: "0.1rem 0.3rem",
-                  fontWeight: "bold",
-                }}>
-                +10%
-              </Typography>
+              {props.data.amount && (
+                <Typography
+                  sx={{
+                    color: "#0F2744",
+                    fontSize: { md: "1.1em", xs: "0.75em" },
+                    fontWeight: "bold",
+                  }}>
+                  {convertToCurrency(props.data.amount, props.data.currency)}
+                </Typography>
+              )}
+
+              {props.data.total && (
+                <Typography
+                  sx={{
+                    color: "#0F2744",
+                    fontSize: { md: "1.1em", xs: "0.75em" },
+                    fontWeight: "bold",
+                  }}>
+                  {props.data.total}
+                </Typography>
+              )}
+
+              {props.data.label && (
+                <Typography
+                  sx={{
+                    fontSize: { md: "0.7em", xs: "0.5em" },
+                    backgroundColor: "#E8F9F5",
+                    color: "#16C79A",
+                    borderRadius: "5px",
+                    padding: "0.1rem 0.3rem",
+                    fontWeight: "bold",
+                  }}>
+                  {props.data.label}
+                </Typography>
+              )}
             </Stack>
           </Box>
           <Box sx={{ display: { md: "block", xs: "none" } }}>
@@ -75,7 +92,6 @@ export default function StatsCard(props: props) {
     return (
       <Card elevation={0}>
         <CardContent
-        
           sx={{
             display: "flex",
             alignItems: "center",
@@ -89,25 +105,30 @@ export default function StatsCard(props: props) {
               {props.data.title.toUpperCase()}
             </Typography>
             <Stack direction="row" alignItems="center" spacing={1}>
-              <Typography
-                sx={{
-                  color: "#0F2744",
-                  fontSize: { md: "1.1em", xs: "0.75em" },
-                  fontWeight: "bold",
-                }}>
-                {convertToCurrency(props.data.amount, props.data.currency)}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { md: "0.7em", xs: "0.5em" },
-                  backgroundColor: "#E8F9F5",
-                  color: "#16C79A",
-                  borderRadius: "5px",
-                  padding: "0.1rem 0.3rem",
-                  fontWeight: "bold",
-                }}>
-                +10%
-              </Typography>
+              {props.data.amount && (
+                <Typography
+                  sx={{
+                    color: "#0F2744",
+                    fontSize: { md: "1.1em", xs: "0.75em" },
+                    fontWeight: "bold",
+                  }}>
+                  {convertToCurrency(props.data.amount, props.data.currency)}
+                </Typography>
+              )}
+
+              {props.data.label && (
+                <Typography
+                  sx={{
+                    fontSize: { md: "0.7em", xs: "0.5em" },
+                    backgroundColor: "#E8F9F5",
+                    color: "#16C79A",
+                    borderRadius: "5px",
+                    padding: "0.1rem 0.3rem",
+                    fontWeight: "bold",
+                  }}>
+                  {props.data.label}
+                </Typography>
+              )}
             </Stack>
             <Stack direction="row" alignItems="center" spacing={1}>
               <Box>{props.data.icon}</Box>
@@ -119,7 +140,7 @@ export default function StatsCard(props: props) {
                   //borderRadius: "5px",
                   //padding: "0.1rem 0.3rem",
                   fontWeight: "bold",
-                  marginLeft:"5px"
+                  marginLeft: "5px",
                 }}>
                 +10%
               </Typography>
@@ -131,7 +152,7 @@ export default function StatsCard(props: props) {
                   //borderRadius: "5px",
                   //padding: "0.1rem 0.3rem",
                   fontWeight: "bold",
-                  marginLeft:"5px"
+                  marginLeft: "5px",
                 }}>
                 vs last week
               </Typography>

@@ -1,10 +1,48 @@
 import { ReactNode } from "react";
 import { IContact } from "./IContact";
+import { IUser2 } from "./IUser";
 
 export interface IStory {
-  id: string;
+  id: number;
   title: string;
   content: ReactNode | string;
+  slug?: string;
+  email?: string;
+  image?: any;
+  category_id: number;
+  category: string;
+  seo_keywords: string;
+
+  ////////////////////////////////////
+
+  power_point_url?: string;
+  video_url?: string;
+  reference_url?: string;
+
+  /////////////////////////////////////
+
+  created_at: string;
+  updated_at: string;
+  deleted_at: string;
+  is_published: number;
+  is_approved: number;
+
+  /////////////////////////////////////
+
+  views: number;
+  likes?: number;
+  dislikes?: number;
+  comments?: number;
+  shares?: number;
+  reports?: number;
+  user_comments: any[];
+
+  ///////////////////////////////////////////////////////
+
+  user: IUser2;
+
+  //==================================================///
+
   startDate?: string;
   endDate?: string;
   venue?: string;
@@ -17,9 +55,6 @@ export interface IStory {
   revenue: number;
   contributors: number;
 
-  likes?: number;
-  comments?: number;
-  shares?: number;
   approvalStatus?: string;
 
   creatorId?: string;
@@ -48,10 +83,8 @@ export interface IStoryAnalytics {
   countdown?: number;
 }
 
-
-export interface IActionOption{
+export interface IActionOption {
   showView?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
-};
-
+}

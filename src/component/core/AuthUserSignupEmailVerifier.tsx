@@ -6,33 +6,104 @@ import Logo from "@/assets/tavlogo.png";
 import TextInput from "../common/TextInput";
 import { useRef, useState } from "react";
 import PurpleButton from "../common/PurpleButton";
+import { resentVerificationCodeApi, verifyEmailApi } from "../api/authApi";
+import { IResendVerificationCode, IVerifyEmail } from "@/types/IAuth";
+import { useAppDispatch, useAppSelector } from "@/redux/useReduxHooks";
+import { onLogout } from "@/redux/slices/authSlice";
+import { enqueueSnackbar } from "notistack";
 
 type props = {
-  onVerify: (isVerified: boolean, ) => void;
+  onVerify: (isVerified: boolean) => void;
 };
 
 function AuthUserSignupEmailVerifier(props: props) {
-  const optLength = 4;
+  const authStore = useAppSelector((state) => state.authReducer);
+  const dispatch = useAppDispatch();
+  const optLength = 6;
   const [otp, setOtp] = useState(Array(optLength).fill(""));
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [loadingResendCode, setLoadingResendCode] = useState<boolean>(false);
 
   const handleChange = (index: any, value: any) => {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-
   };
 
   const handleVerify = () => {
+    setLoading(true);
     const concatedOtp = otp.join("");
-    if (concatedOtp.length === optLength) {
-      setLoading(true);
-      setTimeout(() => {
-        if (props.onVerify) props.onVerify(true);
-      }, 2000);
-    }
-    //if (props.onVerify) props.onVerify(true);
+    const payload: IVerifyEmail = {
+      email: authStore.email,
+      otp: concatedOtp,
+    };
+
+    verifyEmailApi(payload)
+      .then((response) => {
+        if (response.status === "success") {
+          enqueueSnackbar(response.message, {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+          dispatch(onLogout());
+
+          setTimeout(() => {
+            if (props.onVerify) props.onVerify(true);
+          }, 1000);
+          setLoading(false);
+        } else {
+          enqueueSnackbar(response.message, {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+          setLoading(false);
+        }
+      })
+      .catch((error: any) => {});
+  };
+
+  const handleResendVerificationCode = () => {
+    setLoadingResendCode(true);
+    const payload: IResendVerificationCode = {
+      email: authStore.email,
+    };
+    resentVerificationCodeApi(payload)
+      .then((response) => {
+        setLoadingResendCode(false);
+        if (response.status === "success") {
+          enqueueSnackbar(response.message, {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        } else {
+          setLoadingResendCode(false);
+          enqueueSnackbar(response.message, {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        }
+      })
+      .catch((error: any) => {
+        enqueueSnackbar("Something went wrong.", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
   };
 
   return (
@@ -76,7 +147,7 @@ function AuthUserSignupEmailVerifier(props: props) {
                 color: "#120F0F",
                 textAlign: "center",
               }}>
-              {`Input the four digit pin sent to your email address to verify your account.`}
+              {`A verification code was sent to your email. Please input the code in the boxes below to verify your account.`}
             </Typography>
             <br />
             <br />
@@ -134,10 +205,11 @@ function AuthUserSignupEmailVerifier(props: props) {
               }}>
               {"Didn't receive an email? "}
               <Button
+                onClick={handleResendVerificationCode}
                 variant="text"
                 size="small"
                 style={{ textTransform: "none" }}>
-                Resend
+                {!loadingResendCode ? "Resend" : "Resending . . "}
               </Button>
             </Typography>
           </Box>

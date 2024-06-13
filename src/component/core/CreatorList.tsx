@@ -1,10 +1,6 @@
-import { IStory } from "@/types/IStory";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { Box, Grid, IconButton, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import CampaignListCardType1 from "./CampaignListCardType1";
-import CampaignListCardType2 from "./CampaignListCardType2";
-import CampaignListCardType3 from "./CampaignListCardType3";
 import CreatorListTable from "./CreatorListTable";
 import { IUser } from "@/types/IUser";
 
@@ -31,17 +27,6 @@ export default function CreatorList(props: props) {
 
   const offset: number = !props.startAt ? 0 : props.startAt;
   const limit: number = !props.stopAt ? data.length : props.stopAt;
-
-  const renderCard = (item: IStory) => {
-    switch (props.cardType) {
-      case "type1":
-        return null;
-      default:
-        return (
-          <CampaignListCardType1 redirectUrl={props.redirectUrl} item={item} />
-        );
-    }
-  };
 
   const renderSwipeableVariation = () => {
     return (

@@ -1,4 +1,4 @@
-import { IStory } from "@/types/IStory";
+import { IBlogData } from "@/types/IBlog";
 import { Comment, Share, ThumbUp } from "@mui/icons-material";
 import {
   Badge,
@@ -13,72 +13,97 @@ import {
 import { ThemeProvider } from "@mui/styles";
 import MUIRichTextEditor from "mui-rte";
 import Link from "next/link";
+import BlogReactions from "./BlogReactions";
 
 type props = {
   elevation?: number;
   redirectUrl?: string;
-  item: IStory;
+  item: IBlogData;
 };
 
 export default function BlogListCardType1(props: props) {
   return (
-    <Link
-      href={!props?.redirectUrl ? "" : `${props.redirectUrl}/${props.item.id}`}>
-      <Card
-        elevation={props.elevation}
-        sx={{
-          padding: "1rem",
-          borderRadius: "20px",
-          "&:hover": {
-            backgroundColor: "#EFF8FF",
-            opacity: 0.9,
-          },
-        }}>
+    <Card
+      elevation={props.elevation}
+      sx={{
+        padding: "1rem",
+        borderRadius: "20px",
+        "&:hover": {
+          backgroundColor: "#EFF8FF",
+          opacity: 0.9,
+        },
+      }}>
+      <Link
+        href={
+          !props?.redirectUrl ? "" : `${props.redirectUrl}/${props.item.id}`
+        }>
         <CardMedia
           component="img"
           height="150px"
-          image={props.item.coverImage.src}
+          image={props.item.image}
           sx={{ borderRadius: "20px" }}
         />
-        <CardContent>
-          <Tooltip title={props.item.title}>
-            <Typography
-              component="div"
-              variant="body1"
-              sx={{
-                fontSize: "1.1em",
-                fontWeight: "bold",
-                letterSpacing: "-1px",
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 1,
-              }}>
-              {props.item.title}
-            </Typography>
-          </Tooltip>
-          <br />
+      </Link>
+      <CardContent>
+        <Tooltip title={props.item.title}>
           <Typography
             component="div"
-            variant="body2"
+            variant="body1"
             sx={{
-              color: "#7B7D8C",
-              fontSize: "0.9em",
-              display: "-webkit-box",
+              fontSize: "1.1em",
+              fontWeight: "bold",
+              letterSpacing: "-1px",
               overflow: "hidden",
+              display: "-webkit-box",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 3,
+              WebkitLineClamp: 1,
+              "&:hover": {
+                opacity: 0.8,
+              },
             }}>
-            <ThemeProvider theme={myTheme}>
-              <MUIRichTextEditor
-                defaultValue={!props.item.content ? "" : props.item.content}
-                readOnly
-                controls={[]}
-              />
-            </ThemeProvider>
+            <Link
+              href={
+                !props?.redirectUrl
+                  ? ""
+                  : `${props.redirectUrl}/${props.item.id}`
+              }>
+              {props.item.title}
+            </Link>
           </Typography>
-          <br />
-          <Stack direction="row" spacing={4}>
+        </Tooltip>
+
+        <br />
+        <Typography
+          component="div"
+          variant="body2"
+          sx={{
+            color: "#7B7D8C",
+            fontSize: "0.9em",
+            display: "-webkit-box",
+            overflow: "hidden",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 3,
+          }}>
+          <ThemeProvider theme={myTheme}>
+            <MUIRichTextEditor
+              defaultValue={!props.item.content ? "" : props.item.content}
+              readOnly
+              controls={[]}
+            />
+          </ThemeProvider>
+        </Typography>
+        <br />
+        <Link
+          href={
+            !props?.redirectUrl ? "" : `${props.redirectUrl}/${props.item.id}`
+          }>
+          <BlogReactions
+            blogId={props.item.id}
+            likes={props.item.likes}
+            comments={props.item.comments}
+          />
+        </Link>
+        {/* <Stack direction="row" spacing={4}>
             <Tooltip title="Shares">
               <Badge badgeContent={props.item.shares} color="success">
                 <Share
@@ -109,10 +134,10 @@ export default function BlogListCardType1(props: props) {
                 />
               </Badge>
             </Tooltip>
-          </Stack>
+          </Stack> */}
 
-          {/* <br /> */}
-          {/* <Box
+        {/* <br /> */}
+        {/* <Box
                 sx={{
                   display: "flex",
                   gap: 1,
@@ -135,12 +160,10 @@ export default function BlogListCardType1(props: props) {
                   <ThumbDown sx={{ fontSize: "14px" }} />
                 </Stack>
               </Box> */}
-        </CardContent>
-      </Card>
-    </Link>
+      </CardContent>
+    </Card>
   );
 }
-
 
 const myTheme = createTheme({
   // Set up your custom MUI theme here

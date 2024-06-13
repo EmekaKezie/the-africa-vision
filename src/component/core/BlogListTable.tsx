@@ -1,4 +1,4 @@
-import { IActionOption, IStory } from "@/types/IStory";
+import { IActionOption } from "@/types/IStory";
 import {
   DeleteOutline,
   EditOutlined,
@@ -8,6 +8,7 @@ import {
 import {
   Avatar,
   Box,
+  Chip,
   IconButton,
   Stack,
   Tooltip,
@@ -15,7 +16,8 @@ import {
 } from "@mui/material";
 import MUIDataTable from "mui-datatables";
 import { ReactNode, useEffect, useState } from "react";
-import { convertToReadableDate } from "../common/helpers";
+import { convertToReadableDate, statusHandler } from "../common/helpers";
+import { IBlogData } from "@/types/IBlog";
 
 type props = {
   title?: string | ReactNode;
@@ -23,13 +25,13 @@ type props = {
   startAt?: number;
   stopAt?: number;
   redirectUrl?: string;
-  data: IStory[];
-  onActionClick?: (item: IStory, url: string, action: string) => void;
+  data: IBlogData[];
+  onActionClick?: (item: IBlogData, url: string, action: string) => void;
   actionOptions?: IActionOption;
 };
 
 export default function BlogListTable(props: props) {
-  const [data, setData] = useState<IStory[]>([]);
+  const [data, setData] = useState<IBlogData[]>([]);
   const [loadingView, setLoadingView] = useState<boolean>(false);
 
   const offset: number = !props.startAt ? 0 : props.startAt;
@@ -40,7 +42,7 @@ export default function BlogListTable(props: props) {
     // eslint-disable-next-line
   }, [props]);
 
-  const handleActionClick = (item: IStory, action: string) => {
+  const handleActionClick = (item: IBlogData, action: string) => {
     if (props.onActionClick)
       props.onActionClick(item, props.redirectUrl ?? "", action);
   };
@@ -68,12 +70,12 @@ export default function BlogListTable(props: props) {
           return (
             <Box display={"flex"} gap={1}>
               <Box>
-                {!item.creatorImage ? (
+                {!item.image ? (
                   <Avatar>
                     <Person />
                   </Avatar>
                 ) : (
-                  <Avatar src={item.creatorImage.src} />
+                  <Avatar src={item.image} />
                 )}
               </Box>
               <Box>
@@ -81,16 +83,16 @@ export default function BlogListTable(props: props) {
                   sx={{
                     color: "#333843",
                     fontSize: "0.95em",
-                    fontWeight:"bold"
+                    fontWeight: "bold",
                   }}>
-                  {data[index].creatorFullname}
+                  {data[index].user.fullname}
                 </Typography>
                 <Typography
                   sx={{
                     color: "#667085",
                     fontSize: "0.8em",
                   }}>
-                  {data[index].creatorEmail}
+                  {data[index].user.email}
                 </Typography>
               </Box>
             </Box>
@@ -158,7 +160,7 @@ export default function BlogListTable(props: props) {
                 color: "#667085",
                 fontSize: "0.95em",
               }}>
-              {convertToReadableDate(data[index].createdDate!)},{" "}
+              {convertToReadableDate(data[index].created_at!)},{" "}
               {/* {convertToReadableTime(data[index].startDate!)} */}
             </Typography>
           );
@@ -186,7 +188,7 @@ export default function BlogListTable(props: props) {
           let backgroundColor = "";
           let color = "";
 
-          switch (data[index].approvalStatus) {
+          switch (data[index].approval_status) {
             case "approved":
               backgroundColor = "#ECFDF3";
               color = "#027A48";
@@ -201,23 +203,24 @@ export default function BlogListTable(props: props) {
               break;
           }
 
+          const approvalStatus =
+            data[index].is_approved === 0 ? "pending" : "approved";
+
           return (
-            <Typography
-              //component="span"
+            <Chip
               sx={{
+                backgroundColor: statusHandler(
+                  data[index].is_approved === 0 ? "pending" : "approved"
+                ).backgroundColor,
+                color: statusHandler(
+                  data[index].is_approved === 0 ? "pending" : "approved"
+                ).color,
+                padding: " 0.5rem",
                 textTransform: "capitalize",
-                //color: "#101828",
-                fontSize: "0.95em",
-                backgroundColor: backgroundColor,
-                color: color,
-                fontWeight: "bold",
-                padding: "0.2em",
-                borderRadius: "10px",
-                width: "70px",
-                textAlign: "center",
-              }}>
-              {data[index].approvalStatus}
-            </Typography>
+                width: "100px",
+              }}
+              label={approvalStatus}
+            />
           );
         },
       },

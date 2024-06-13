@@ -13,7 +13,7 @@ import Logo from "@/assets/tavlogo.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../common/TextInput";
-import { RemoveRedEye, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { ICountry } from "@/types/ICountry";
 import { getCountries } from "../api/locationApi";
@@ -21,14 +21,22 @@ import PurpleButton from "../common/PurpleButton";
 import Link from "next/link";
 import { enqueueSnackbar } from "notistack";
 import { useRouter } from "next/navigation";
+import { IAuthStore, ISignup } from "@/types/IAuth";
+import { signupApi } from "../api/authApi";
+import { useAppDispatch } from "@/redux/useReduxHooks";
+import { onLogin } from "@/redux/slices/authSlice";
 
 function AuthUserSignup() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const [countries, setCountries] = useState<ICountry[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCountries, setLoadingCountries] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isDialCode, setIsDialCode] = useState<boolean>(false);
+
+  //console.log(isDialCode);
 
   useEffect(() => {
     setLoadingCountries(true);
@@ -53,7 +61,34 @@ function AuthUserSignup() {
         );
         setLoadingCountries(false);
       });
+    // eslint-disable-next-line
   }, []);
+
+  const getCountryName = (countryCode: string): string => {
+    const country = countries.filter(
+      (x: ICountry) => x.cca2 === countryCode
+    )[0];
+    const countryName = country?.name?.common;
+    return countryName;
+  };
+
+  const getCountryDialCode = (countryCode: string): string => {
+    const country = countries.filter(
+      (x: ICountry) => x.cca2 === countryCode
+    )[0];
+    const dialCode = `${country?.idd?.root}${country?.idd?.suffixes[0]}`;
+    return dialCode;
+  };
+
+  const getPhoneNumberValueIfDialcodeExists = (
+    dialCode: string,
+    phoneNumber: string
+  ) => {
+    if (dialCode) {
+      if (phoneNumber.charAt(0) === "0") return phoneNumber.substring(1);
+      else return phoneNumber;
+    } else phoneNumber;
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -69,6 +104,7 @@ function AuthUserSignup() {
       phone: Yup.string().required("Please enter your phone number"),
       email: Yup.string().required("Please enter your email address"),
       password: Yup.string().required("Please enter your password"),
+      country: Yup.string().required("Please enter your location"),
     }),
     onSubmit: (values) => {
       handleSubmit(values);
@@ -77,10 +113,75 @@ function AuthUserSignup() {
 
   const handleSubmit = (values: any) => {
     setLoading(true);
-    console.log(values);
-    setTimeout(() => {
-      router.push("../auth/verify");
-    }, 2000);
+
+    let phoneNumber;
+
+    if (isDialCode) {
+      const dial = getCountryDialCode(values.country);
+      const mob = getPhoneNumberValueIfDialcodeExists(dial, values.phone);
+      phoneNumber = `${dial}${mob}`;
+    } else {
+      phoneNumber = values.phone;
+    }
+
+    if (phoneNumber.charAt(0) === "+") {
+      phoneNumber = phoneNumber.substring(1);
+    }
+
+    const payload: ISignup = {
+      fullname: values.fullname,
+      email: values.email,
+      phone: phoneNumber,
+      password: values.password,
+      country: getCountryName(values.country),
+    };
+
+    signupApi(payload)
+      .then((response) => {
+        setLoading(false);
+        if (response.status === "success") {
+          const storeAuthPayload: IAuthStore = {
+            isLoggedIn: false,
+            token: response?.data?.token,
+            id: response?.data?.user.id,
+            fullname: response?.data?.user.fullname,
+            email: response?.data?.user.email,
+            role: response?.data?.user.role,
+            country: "",
+          };
+          dispatch(onLogin(storeAuthPayload));
+
+          enqueueSnackbar("Successfully created", {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+
+          setTimeout(() => {
+            router.push("../auth/verify");
+          }, 1000);
+        } else {
+          enqueueSnackbar(response.message, {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        }
+      })
+      .catch((error: any) => {
+        setLoading(false);
+        enqueueSnackbar("Something went wrong", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
   };
 
   return (
@@ -98,8 +199,21 @@ function AuthUserSignup() {
             border: "0px solid red",
             width: { md: "50%", xs: "80%" },
           }}>
-          <Image src={Logo} alt="Logo" width={150} height={50} />
-          <br />
+          <Box display="flex" alignItems="center">
+            <Box flexGrow={1}>
+              <Image src={Logo} alt="Logo" width={150} height={50} />
+            </Box>
+            <Box
+              sx={{
+                color: "#A8518A",
+                fontWeight: "bold",
+                ":hover": {
+                  opacity: 0.8,
+                },
+              }}>
+              <Link href={`/`}>Home</Link>
+            </Box>
+          </Box>
           <br />
           <Typography
             sx={{
@@ -111,6 +225,47 @@ function AuthUserSignup() {
           </Typography>
           <br />
           <form onSubmit={formik.handleSubmit}>
+            <TextInput
+              name="country"
+              label="Location"
+              placeholder="Enter your Country"
+              fullWidth
+              size="small"
+              select
+              selectedValue={formik.values?.country}
+              validate={formik.touched.country}
+              validationMessage={formik.errors.country}
+              onChange={formik.handleChange}
+              inputStyle={{
+                background: "#FFF9FD",
+                border: "1px solid #A8518A",
+              }}
+              startIcon={
+                loadingCountries ? <CircularProgress size={20} /> : <></>
+              }>
+              {countries?.map((item: ICountry) => {
+                return (
+                  <MenuItem
+                    value={item.cca2}
+                    key={item.cca2}
+                    onClick={() => {
+                      if (item.cca2) setIsDialCode(true);
+                      else setIsDialCode(false);
+                    }}>
+                    <Stack direction="row" spacing={2}>
+                      <Image
+                        src={item.flags.png}
+                        alt="Flag"
+                        width={20}
+                        height={20}
+                      />
+                      <Typography>{item.name.common}</Typography>
+                    </Stack>
+                  </MenuItem>
+                );
+              })}
+            </TextInput>
+            <br />
             <TextInput
               label="Full Name"
               name="fullname"
@@ -149,18 +304,28 @@ function AuthUserSignup() {
               label="Phone Number"
               name="phone"
               placeholder="800 2738 9700"
-              value={formik.values.phone}
+              //value={formik.values.phone}
+              value={getPhoneNumberValueIfDialcodeExists(
+                formik.values.country,
+                formik.values.phone
+              )}
               validate={formik.touched.phone}
               validationMessage={formik.errors.phone}
               onChange={formik.handleChange}
-              type="text"
+              type="test"
               size="small"
               fullWidth
               inputStyle={{
                 background: "#FFF9FD",
                 border: "1px solid #CCCCCC",
               }}
-              startIcon={<Typography marginRight="5px">+234</Typography>}
+              startIcon={
+                <Typography marginRight="5px">
+                  {!formik.values?.country
+                    ? ""
+                    : getCountryDialCode(formik.values?.country)}
+                </Typography>
+              }
             />
             <br />
             <TextInput
@@ -180,17 +345,13 @@ function AuthUserSignup() {
               }}
               endIcon={
                 showPassword ? (
-                  <Tooltip title="Show">
-                    <IconButton onClick={() => setShowPassword(false)}>
-                      <VisibilityOff />
-                    </IconButton>
-                  </Tooltip>
+                  <IconButton onClick={() => setShowPassword(false)}>
+                    <VisibilityOff />
+                  </IconButton>
                 ) : (
-                  <Tooltip title="Show">
-                    <IconButton onClick={() => setShowPassword(true)}>
-                      <Visibility />
-                    </IconButton>
-                  </Tooltip>
+                  <IconButton onClick={() => setShowPassword(true)}>
+                    <Visibility />
+                  </IconButton>
                 )
               }
             />
@@ -201,39 +362,7 @@ function AuthUserSignup() {
               {`Password must contain at lease on symbol e.g @`}
             </Typography>
             <br />
-            <TextInput
-              name="country"
-              label="Location (optional)"
-              placeholder="Enter your Country"
-              fullWidth
-              size="small"
-              select
-              selectedValue={formik.values?.country}
-              onChange={formik.handleChange}
-              inputStyle={{
-                background: "#FFF9FD",
-                border: "1px solid #A8518A",
-              }}
-              startIcon={
-                loadingCountries ? <CircularProgress size={20} /> : <></>
-              }>
-              {countries?.map((item: ICountry) => {
-                return (
-                  <MenuItem value={item.cca2} key={item.cca2}>
-                    <Stack direction="row" spacing={2}>
-                      <Image
-                        src={item.flags.png}
-                        alt="Flag"
-                        width={20}
-                        height={20}
-                      />
-                      <Typography>{item.name.common}</Typography>
-                    </Stack>
-                  </MenuItem>
-                );
-              })}
-            </TextInput>
-            <br />
+
             <br />
             <PurpleButton
               text="Sign Up"

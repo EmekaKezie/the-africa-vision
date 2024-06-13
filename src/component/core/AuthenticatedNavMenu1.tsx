@@ -123,7 +123,7 @@ export default function AuthenticatedNavMenu1() {
     switch (authStore.role.toUpperCase()) {
       case "USER":
         return renderCreatorMenu();
-      case "SUPER ADMIN":
+      case "ADMIN":
         return renderSuperAdminMenu();
       default:
         //return "No roles found";

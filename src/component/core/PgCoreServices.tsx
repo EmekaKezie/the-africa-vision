@@ -31,12 +31,12 @@ export default function PgCoreServices() {
         </Typography>
         <Typography
           sx={{
-            fontSize: "1em",
+            fontSize: "1.1em",
             lineHeight: "24px",
             color: "#717171",
             textAlign: "center",
           }}>
-          Why we believe in our vision
+          Our dedication to excellence defines everything we do
         </Typography>
       </Box>
       <Grid container spacing={4}>
@@ -51,12 +51,12 @@ export default function PgCoreServices() {
                 sx={{
                   fontWeight: "bold",
                   color: "#4D4D4D",
-                  fontSize: "1em",
+                  fontSize: "1.5em",
                 }}>
                 {item.title}
               </Typography>
               <br />
-              <Typography sx={{ color: "#717171", fontSize: "0.9" }}>
+              <Typography sx={{ color: "#717171", fontSize: "1.1em" }}>
                 {item.summary}
               </Typography>
             </Box>
@@ -72,21 +72,22 @@ const data: dataProps[] = [
     id: "1",
     icon: Thumbnail1,
     title: "Crowdfunding",
-    summary:
-      "Beyond crowdfunding, we are passionate about preserving and celebrating African culture.",
+    summary: `We're here to empower Africa's groundbreaking ideas, support the 
+      brilliance of Africa's innovators, and champion Africa's entrepreneurial spirit through 
+      our cutting-edge crowdfunding platform.`,
   },
   {
     id: "2",
     icon: Thumbnail2,
     title: "Empowerment",
-    summary:
-      "We exist to bridge this gap, offering a platform where innovators can connect with the resources and backing, they require to turn their dreams into reality",
+    summary: `African Stories – Share your inspiring experiences in Africa and discover the 
+      continent's rich cultural heritage and creativity with African Stories.`,
   },
   {
     id: "3",
     icon: Thumbnail3,
     title: "Africa stories",
-    summary:
-      "Our commitment goes beyond crowdfunding. We recognize the immense value of preserving and celebrating African culture",
+    summary: `Empowerment – Beyond crowdfunding, we are passionate about empowering 
+      innovators with the resources and support they need to turn their dreams into reality.`,
   },
 ];

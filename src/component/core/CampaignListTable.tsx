@@ -1,18 +1,27 @@
-import { IActionOption, IStory } from "@/types/IStory";
+import { IActionOption } from "@/types/IStory";
 import {
   DeleteOutline,
   EditOutlined,
   VisibilityOutlined,
 } from "@mui/icons-material";
-import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  IconButton,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import MUIDataTable from "mui-datatables";
 import { ReactNode, useEffect, useState } from "react";
 import {
   convertToCurrency,
   convertToReadableDate,
   convertToReadableTime,
+  statusHandler,
 } from "../common/helpers";
 import Link from "next/link";
+import { ICampaignData } from "@/types/ICampaign";
 
 // type actionOptionProps = {
 //   showView: boolean;
@@ -26,13 +35,13 @@ type props = {
   startAt?: number;
   stopAt?: number;
   redirectUrl?: string;
-  data: IStory[];
-  onActionClick?: (item: IStory, url: string, action: string) => void;
+  data: ICampaignData[];
+  onActionClick?: (item: ICampaignData, url: string, action: string) => void;
   actionOptions?: IActionOption;
 };
 
 export default function CampaignListTable(props: props) {
-  const [data, setData] = useState<IStory[]>([]);
+  const [data, setData] = useState<ICampaignData[]>([]);
   const [loadingView, setLoadingView] = useState<boolean>(false);
 
   const offset: number = !props.startAt ? 0 : props.startAt;
@@ -43,7 +52,7 @@ export default function CampaignListTable(props: props) {
     // eslint-disable-next-line
   }, [props]);
 
-  const handleActionClick = (item: IStory, action: string) => {
+  const handleActionClick = (item: ICampaignData, action: string) => {
     if (props.onActionClick)
       props.onActionClick(item, props.redirectUrl ?? "", action);
   };
@@ -73,14 +82,14 @@ export default function CampaignListTable(props: props) {
                   color: "#333843",
                   fontSize: "0.95em",
                 }}>
-                {data[index].creatorFullname}
+                {data[index].user?.fullname}
               </Typography>
               <Typography
                 sx={{
                   color: "#667085",
                   fontSize: "0.8em",
                 }}>
-                {data[index].creatorEmail}
+                {data[index].user?.email}
               </Typography>
             </Box>
           );
@@ -176,8 +185,11 @@ export default function CampaignListTable(props: props) {
                 fontSize: "0.95em",
                 fontWeight: "bold",
               }}>
-              {data[index].budget &&
-                convertToCurrency(data[index].budget, data[index]?.currency!)}
+              {data[index].target_amount &&
+                convertToCurrency(
+                  data[index].target_amount,
+                  data[index]?.base_currency!
+                )}
             </Typography>
           );
         },
@@ -206,18 +218,17 @@ export default function CampaignListTable(props: props) {
                 sx={{
                   color: "#667085",
                   fontSize: "0.75em",
-                  
                 }}>
-                {convertToReadableDate(data[index].startDate!)},{" "}
-                {convertToReadableTime(data[index].startDate!)}
+                {convertToReadableDate(data[index].start_date!)},{" "}
+                {convertToReadableTime(data[index].start_date!)}
               </Typography>
               <Typography
                 sx={{
                   color: "#667085",
                   fontSize: "0.75em",
                 }}>
-                {convertToReadableDate(data[index].endDate!)},{" "}
-                {convertToReadableTime(data[index].endDate!)}
+                {convertToReadableDate(data[index].end_date!)},{" "}
+                {convertToReadableTime(data[index].end_date!)}
               </Typography>
             </Box>
           );
@@ -242,41 +253,19 @@ export default function CampaignListTable(props: props) {
           );
         },
         customBodyRenderLite: (index: number) => {
-          let backgroundColor = "";
-          let color = "";
-
-          switch (data[index].approvalStatus) {
-            case "approved":
-              backgroundColor = "#ECFDF3";
-              color = "#027A48";
-              break;
-            case "declined":
-              backgroundColor = "#F8E0E0";
-              color = "#EB0505";
-              break;
-            case "pending":
-              backgroundColor = "#FFF7E4";
-              color = "#FECE51";
-              break;
-          }
-
           return (
-            <Typography
-              //component="span"
+            <Chip
               sx={{
+                backgroundColor: statusHandler(data[index].approval_status)
+                  .backgroundColor,
+                color: statusHandler(data[index].approval_status).color,
+                //padding: "",
                 textTransform: "capitalize",
-                //color: "#101828",
-                fontSize: "0.95em",
-                backgroundColor: backgroundColor,
-                color: color,
-                fontWeight: "bold",
-                padding: "0.2em",
-                borderRadius: "10px",
-                width: "70px",
-                textAlign: "center",
-              }}>
-              {data[index].approvalStatus}
-            </Typography>
+                width:"80px"
+              }}
+              size="small"
+              label={data[index].approval_status}
+            />
           );
         },
       },
@@ -307,7 +296,6 @@ export default function CampaignListTable(props: props) {
                   </IconButton>
                 </Tooltip>
               )}
-
               {props.actionOptions?.showEdit && (
                 <Tooltip title="Edit">
                   <IconButton

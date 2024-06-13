@@ -15,20 +15,20 @@ import {
 export const mainMenuData: IMenu[] = [
   {
     id: "1",
-    url: "/explore/home",
+    url: "/",
     name: "Home",
     visibility: true,
   },
-  {
-    id: "1",
-    url: "/explore/campaign",
-    name: "Campaigns",
-    visibility: true,
-  },
+  // {
+  //   id: "1",
+  //   url: "/explore/campaign",
+  //   name: "Campaigns",
+  //   visibility: true,
+  // },
   {
     id: "1",
     url: "/explore/donate",
-    name: "Donate",
+    name: "Campaign",
     visibility: true,
   },
   {
@@ -39,7 +39,7 @@ export const mainMenuData: IMenu[] = [
   },
   {
     id: "1",
-    url: "/explore/contactus",
+    url: "/explore/contact",
     name: "Contact us",
     visibility: true,
   },
@@ -89,13 +89,13 @@ export const authenticatedCreatorMenu1: IMenu[] = [
     visibility: true,
     icon: <Payment />,
   },
-  {
-    id: "5",
-    url: "/",
-    name: "FAQ",
-    visibility: true,
-    icon: <Quiz />,
-  },
+  // {
+  //   id: "5",
+  //   url: "/",
+  //   name: "FAQ",
+  //   visibility: true,
+  //   icon: <Quiz />,
+  // },
 ];
 
 export const authenticatedSuperAdminMenu1: IMenu[] = [
@@ -113,13 +113,13 @@ export const authenticatedSuperAdminMenu1: IMenu[] = [
     visibility: true,
     icon: <People />,
   },
-  {
-    id: "3",
-    url: "/admin/analytics",
-    name: "Analytics",
-    visibility: true,
-    icon: <AutoGraph />,
-  },
+    // {
+    //   id: "3",
+    //   url: "/admin/analytics",
+    //   name: "Analytics",
+    //   visibility: true,
+    //   icon: <AutoGraph />,
+    // },
   {
     id: "4",
     url: "/admin/payments",
@@ -146,7 +146,7 @@ export const authenticatedCreatorMenu2: IMenu[] = [
   },
   {
     id: "2",
-    url: "../auth/logout",
+    url: "/auth/logout",
     name: "Log Out",
     visibility: true,
     icon: <Logout />,
@@ -163,7 +163,7 @@ export const authenticatedSuperAdminMenu2: IMenu[] = [
   },
   {
     id: "2",
-    url: "../auth/logout",
+    url: "/auth/logout",
     name: "Log Out",
     visibility: true,
     icon: <Logout />,

@@ -1,13 +1,15 @@
 import {
   Box,
+  CircularProgress,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
   Grid,
   IconButton,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   MenuItem,
+  Radio,
+  RadioGroup,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import TextInput from "@/component/common/TextInput";
@@ -16,62 +18,77 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { Close, Favorite } from "@mui/icons-material";
-import { useAppDispatch, useAppSelector } from "@/redux/useReduxHooks";
-import { onDonationAction } from "@/redux/slices/donateSlice";
-import { IDonationActionStore } from "@/types/IDonation";
 import { getCountries } from "../api/locationApi";
 import Image from "next/image";
 import { ICountry } from "@/types/ICountry";
+import { usePathname, useRouter } from "next/navigation";
+import { InitiatePaymentApi } from "../api/paymentApi";
+import { IResponse, ResponseEnum } from "@/types/IAppbaseTypes";
+import { enqueueSnackbar } from "notistack";
+import { paymentOptionData } from "@/data/paymentOptionData";
 
-export default function DonationActionForm() {
+type props = {
+  paymentOptions: string[];
+  campaignTitle: string;
+};
+
+export default function DonationActionForm(props: props) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const splitPathname: string[] = pathname.split("/");
+  const pageId = splitPathname[3];
+
   const [customAmount, setCustomAmount] = useState<string>("");
   const [countries, setCountries] = useState<ICountry[]>([]);
+  const [loadingCountries, setLoadingCountries] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [currency, setCurrency] = useState<string>("");
+  const [selectedPaymentOption, setSelectedPaymentOption] =
+    useState<string>("");
 
   useEffect(() => {
-    // getLocationByIpAddress()
-    //   .then((res: any) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err: any) => {
-    //     console.log(err);
-    //   });
-  }, []);
-
-  useEffect(() => {
+    setLoadingCountries(true);
     getCountries()
       .then((res) => {
+        console.log(res)
         const sorted = res
           .slice()
           .sort((a: any, b: any) => a.name.common.localeCompare(b.name.common));
         setCountries(sorted);
-        console.log(sorted);
+        setLoadingCountries(false);
+        //console.log(sorted);
       })
       .catch((err: any) => {
-        console.log(err);
+        enqueueSnackbar(
+          "Could not fetch the list of countries. Check your network!",
+          {
+            variant: "warning",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          }
+        );
+        setLoadingCountries(false);
       });
   }, []);
 
-  const store = useAppSelector((state) => state.donateReducer);
-  const dispatch = useAppDispatch();
+  const handleSelectPaymentOption = (e: any) => {
+    setSelectedPaymentOption(e.target.value);
+    //setSelectedPaymentOption(event.target.value);
+  };
 
   const formik = useFormik({
     initialValues: {
-      amount: !store.donationAction.amount ? "" : store.donationAction.amount,
-      fullname: !store.donationAction.fullname
-        ? ""
-        : store.donationAction.fullname,
-      email: !store.donationAction.email ? "" : store.donationAction.email,
-      phone: !store.donationAction.phone ? "" : store.donationAction.phone,
-      country: !store.donationAction.country
-        ? ""
-        : store.donationAction.country,
-      message: !store.donationAction.message
-        ? ""
-        : store.donationAction.message,
+      amount: "",
+      name: "",
+      email: "",
+      // phone: !store.donationAction.phone ? "" : store.donationAction.phone,
+      country: "",
+      //message: "",
     },
     validationSchema: Yup.object({
-      fullname: Yup.string().required("Please enter your Fullname"),
+      // fullname: Yup.string().required("Please enter your Fullname"),
       email: Yup.string().required("Please enter your Email Address"),
     }),
     onSubmit: (values) => {
@@ -81,21 +98,46 @@ export default function DonationActionForm() {
 
   const handleSubmit = (values: any) => {
     setLoading(true);
-    setTimeout(() => {
-      const payload: IDonationActionStore = {
-        currentPage: 1,
-        paymentChannel: "",
-        amount: values?.amount,
-        fullname: values.fullname,
-        email: values.email,
-        phone: values.phone,
-        country: values.country,
-        message: values.message,
-      };
-      setLoading(false);
-      dispatch(onDonationAction(payload));
-    }, 2000);
+    const payload = {
+      amount: Number(values?.amount),
+      campaign_id: pageId,
+      payment_gateway: selectedPaymentOption,
+      currency: currency,
+      description: props.campaignTitle,
+      email: values.email,
+      name: values.name,
+    };
+
+    InitiatePaymentApi(payload)
+      .then((response: IResponse<any>) => {
+        if (response.status === ResponseEnum.success) {
+          const checkoutUrl = response.data.payment_checkout_url;
+          router.push(checkoutUrl);
+        } else {
+          enqueueSnackbar(response.message, {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        enqueueSnackbar("Failed to initate payment", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+    //setLoading(false);
+    //dispatch(onDonationAction(payload));
   };
+
   return (
     <Box>
       <Typography
@@ -111,6 +153,47 @@ export default function DonationActionForm() {
         <Grid container>
           <Grid item lg={6} xs={12}>
             <form onSubmit={formik.handleSubmit}>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
+                <TextInput
+                  name="country"
+                  label="Country"
+                  placeholder="Enter your Country"
+                  fullWidth
+                  select
+                  selectedValue={formik.values?.country}
+                  onChange={formik.handleChange}
+                  inputStyle={{
+                    background: "#FFF9FD",
+                    border: "1px solid #A8518A",
+                  }}
+                  startIcon={
+                    loadingCountries ? <CircularProgress size={20} /> : <></>
+                  }>
+                  {countries?.map((item: ICountry) => {
+                    return (
+                      <MenuItem
+                        value={item.cca2}
+                        key={item.cca2}
+                        onClick={() => {
+                          const obj = item["currencies"];
+                          const theCurrency = Object.keys(obj)[0];
+                          setCurrency(theCurrency);
+                        }}>
+                        <Stack direction="row" spacing={2}>
+                          <Image
+                            src={item.flags.png}
+                            alt="Flag"
+                            width={20}
+                            height={20}
+                          />
+                          <Typography>{item.name.common}</Typography>
+                        </Stack>
+                      </MenuItem>
+                    );
+                  })}
+                </TextInput>
+              </Grid>
+
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <br />
                 <Typography
@@ -149,7 +232,7 @@ export default function DonationActionForm() {
                       <Box
                         sx={{
                           border: "1px solid gray",
-                          width: "56px",
+                          width: "70px",
                           height: "56px",
                           marginLeft: "-15px",
                           display: "flex",
@@ -161,12 +244,12 @@ export default function DonationActionForm() {
                           borderTopLeftRadius: "5px",
                           borderBottomLeftRadius: "5px",
                         }}>
-                        N
+                        {currency}
                       </Box>
                     }
                   />
 
-                  <PurpleButton
+                  {/* <PurpleButton
                     text="Custom Amount"
                     style={{ width: "300px" }}
                     type="button"
@@ -174,7 +257,7 @@ export default function DonationActionForm() {
                       formik.values.amount = "100000";
                       setCustomAmount(formik.values.amount);
                     }}
-                  />
+                  /> */}
                 </Box>
               </Grid>
               <br />
@@ -188,9 +271,9 @@ export default function DonationActionForm() {
               <Grid container spacing={4}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
                   <TextInput
-                    name="fullname"
+                    name="name"
                     label="Fullname"
-                    value={formik.values.fullname}
+                    value={formik.values.name}
                     placeholder="Enter your Fullname"
                     fullWidth
                     onChange={formik.handleChange}
@@ -198,8 +281,8 @@ export default function DonationActionForm() {
                       background: "#FFF9FD",
                       border: "1px solid #A8518A",
                     }}
-                    validate={!formik.errors.fullname}
-                    validationMessage={formik.errors.fullname}
+                    validate={!formik.errors.name}
+                    validationMessage={formik.errors.name}
                   />
                 </Grid>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -218,73 +301,7 @@ export default function DonationActionForm() {
                     validationMessage={formik.errors.email}
                   />
                 </Grid>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
-                  <TextInput
-                    name="phone"
-                    label="Phone Number"
-                    value={formik.values.phone}
-                    placeholder="Enter your Phone Number"
-                    fullWidth
-                    onChange={formik.handleChange}
-                    inputStyle={{
-                      background: "#FFF9FD",
-                      border: "1px solid #A8518A",
-                    }}
-                  />
-                </Grid>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
-                  <TextInput
-                    name="country"
-                    label="Country"
-                    placeholder="Enter your Country"
-                    fullWidth
-                    select
-                    selectedValue={formik.values?.country}
-                    onChange={formik.handleChange}
-                    inputStyle={{
-                      background: "#FFF9FD",
-                      border: "1px solid #A8518A",
-                    }}>
-                    {countries?.map((item: ICountry) => {
-                      //  <ListItem button>
-                      //   <ListItemIcon>
-                      //     <Image src={item.flags.png} alt="Flag" width={20} height={20}/>
-                      //   </ListItemIcon>
-                      //   <ListItemText secondary={item.name.common}/>
-                      //  </ListItem>
-
-                      return (
-                        <MenuItem value={item.cca2} key={item.cca2}>
-                          <Stack direction="row" spacing={2}>
-                            <Image
-                              src={item.flags.png}
-                              alt="Flag"
-                              width={20}
-                              height={20}
-                            />
-                            <Typography>{item.name.common}</Typography>
-                          </Stack>
-                        </MenuItem>
-                      );
-                    })}
-                    {/* <MenuItem value="A">Country A</MenuItem>
-                    <MenuItem value="B">Country B</MenuItem> */}
-                  </TextInput>
-
-                  {/* <TextField
-                    name="country"
-                    value={formik.values.country}
-                    select
-                    fullWidth
-                    // SelectProps={{
-                    //   value: "B",
-                    // }}
-                  >
-                    <MenuItem value="A">A</MenuItem>
-                    <MenuItem value="B">Country B</MenuItem>
-                  </TextField> */}
-                </Grid>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
+                {/* <Grid item lg={12} md={12} sm={12} xs={12}>
                   <TextInput
                     name="message"
                     value={formik.values.message}
@@ -297,8 +314,28 @@ export default function DonationActionForm() {
                       border: "1px solid #A8518A",
                     }}
                   />
+                </Grid> */}
+
+                <Grid item lg={12} md={12} sm={12} xs={12}>
+                  <FormControl>
+                    <FormLabel>Payment Option</FormLabel>
+                    <RadioGroup row>
+                      {paymentOptionData?.map((item) => (
+                        <FormControlLabel
+                          label={`${item.name} - ${item.desc}`}
+                          control={<Radio />}
+                          value={item.name}
+                          key={item.id}
+                          //onChange={handleSelectPaymentOption}
+                          onClick={(e) => handleSelectPaymentOption(e)}
+                          style={{ color: "black" }}
+                        />
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
                 </Grid>
               </Grid>
+              <br />
               <br />
               <PurpleButton
                 text="Donate"

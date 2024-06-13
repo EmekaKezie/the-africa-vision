@@ -70,7 +70,7 @@ export default function PgStory() {
               <br />
               <Typography
                 sx={{
-                  fontSize: "18px",
+                  fontSize: "1.2em",
                   lineHeight: "30px",
                 }}>
                 {data[0].summary}
@@ -101,7 +101,7 @@ export default function PgStory() {
               <br />
               <Typography
                 sx={{
-                  fontSize: "18px",
+                  fontSize: "1.2em",
                   lineHeight: "30px",
                 }}>
                 {data[1].summary}

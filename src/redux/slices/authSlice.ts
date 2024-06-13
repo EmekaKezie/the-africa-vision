@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoggedIn: false,
-  id: "",
+  id: 0,
   token: "",
   email: "",
   fullname: "",
@@ -22,13 +22,14 @@ export const authSlice = createSlice({
         email: action.payload.email,
         fullname: action.payload.fullname,
         role: action.payload.role,
+        country: action.payload.country,
       };
     },
 
     onLogout: (state) => {
       return {
         isLoggedIn: false,
-        id: "",
+        id: 0,
         token: "",
         fullname: "",
         email: "",

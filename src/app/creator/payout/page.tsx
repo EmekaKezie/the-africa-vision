@@ -2,6 +2,8 @@
 import AuthenticatedLayout from "@/component/common/AuthenticatedLayout";
 import PurpleButton from "@/component/common/PurpleButton";
 import ReduxProvider from "@/component/common/ReduxProvider";
+import DonationHistoryTable from "@/component/core/DonationHistoryTable";
+import PayoutListTable from "@/component/core/PayoutListTable";
 import StatsCard from "@/component/core/StatsCard";
 import TransactionTable from "@/component/core/TransactionTable";
 import { transactionData } from "@/data/transactionData";
@@ -52,7 +54,7 @@ function Transaction() {
       </Box>
       <br />
 
-      <Box>
+      {/* <Box>
         <Grid container spacing={2}>
           <Grid item lg={3} md={3} sm={6} xs={6}>
             <StatsCard
@@ -124,8 +126,9 @@ function Transaction() {
         </Grid>
       </Box>
 
-      <br />
-      <TransactionTable
+      <br /> */}
+
+      <DonationHistoryTable
         title={
           <Box
             sx={{
@@ -137,11 +140,11 @@ function Transaction() {
                 fontWeight: "bold",
                 fontSize: "1.1em",
               }}>
-              Transaction History
+              Donation History
             </Typography>
           </Box>
         }
-        data={transactionData}
+        pageSize={20}
         elevation={1}
       />
     </AuthenticatedLayout>

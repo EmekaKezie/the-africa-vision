@@ -12,10 +12,70 @@ import PgNewsLetter from "@/component/core/PgNewsLetter";
 import PgProjects from "@/component/core/PgProjects";
 import PgSectionDescription from "@/component/core/PgSectionDescription";
 import PgStory from "@/component/core/PgStory";
-import { storyData } from "@/data/storyData";
 import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
+import { ICampaignData } from "@/types/ICampaign";
+import { IBlogData } from "@/types/IBlog";
+import { ApiGetCampaignsForAll } from "@/component/api/campaignApi";
+import { enqueueSnackbar } from "notistack";
+import { ApiGetBlogsForAll } from "@/component/api/blogApi";
 
 function ExploreHomePage() {
+  const [campaigns, setCampaigns] = useState<ICampaignData[]>([]);
+  const [loadingCampaigns, setLoadingCampaigns] = useState<boolean>(false);
+  const [blogs, setBlogs] = useState<IBlogData[]>([]);
+  const [loadingBlogs, setLoadingBlogs] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchCampaigns();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    fetchBlogs();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchCampaigns = () => {
+    setLoadingCampaigns(true);
+    ApiGetCampaignsForAll()
+      .then((response) => {
+        const campaignData = response?.data?.campaigns;
+        setCampaigns(campaignData);
+        setLoadingCampaigns(false);
+      })
+      .catch((error: any) => {
+        setLoadingCampaigns(false);
+        enqueueSnackbar("Error fetching some content", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
+
+  const fetchBlogs = () => {
+    setLoadingBlogs(true);
+    ApiGetBlogsForAll()
+      .then((response) => {
+        const blogData = response.data.posts;
+        setBlogs(blogData);
+        setLoadingBlogs(false);
+      })
+      .catch((error: any) => {
+        setLoadingBlogs(false);
+        enqueueSnackbar("Error fetching blogs", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
+
   return (
     <UnauthenticatedLayout>
       <HeroHome />
@@ -44,7 +104,7 @@ function ExploreHomePage() {
           subtitle="Find The Popular Cause And Donate To Them"
         />
         <CampaignList
-          data={storyData}
+          data={campaigns}
           variation="swipeable"
           swipeButtons
           cardType="type1"
@@ -68,7 +128,7 @@ function ExploreHomePage() {
         />
         <BlogList
           variation="swipeable"
-          data={storyData}
+          data={blogs}
           cardType="type3"
           swipeButtons
         />
@@ -85,16 +145,7 @@ function ExploreHomePage() {
 
       <Box
         sx={{
-          display: { xs: "none", md: "block" },
-          padding: "0 8rem",
-          backgroundColor: "#FFF9FD",
-        }}>
-        <PgFooter />
-      </Box>
-      <Box
-        sx={{
-          display: { xs: "block", md: "none" },
-          padding: "0 1rem",
+          padding: { md: "0 8rem", xs: "0 1rem" },
           backgroundColor: "#FFF9FD",
         }}>
         <PgFooter />

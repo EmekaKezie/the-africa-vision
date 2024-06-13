@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prod": "next start -p 4000"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -27,6 +28,7 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
+    "react-share": "^5.1.0",
     "recharts": "^2.10.4",
     "redux": "^5.0.0",
     "redux-persist": "^6.0.0",

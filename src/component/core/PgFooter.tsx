@@ -13,6 +13,7 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import { makeStyles } from "@mui/styles";
+import config from "@/config";
 
 type contactProps = {
   icon: JSX.Element;
@@ -46,11 +47,11 @@ export default function PgFooter() {
         padding: "4rem 0",
       }}>
       <Grid container spacing={4}>
-        <Grid item lg={4} md={4} sm={12} xs={12}>
+        <Grid item lg={6} md={6} sm={12} xs={12}>
           <Box
             sx={{
-              width: "150px",
-              height: "40px",
+              width: "200px",
+              //height: "40px",
             }}>
             <Image
               src={Logo}
@@ -66,7 +67,7 @@ export default function PgFooter() {
           <Typography
             sx={{
               color: "#4B5563",
-              fontSize: "0.9em",
+              fontSize: "1.1em",
               lineHeight: "30px",
             }}>
             We pride ourselves to be a catalyst for change, innovation, and
@@ -80,7 +81,7 @@ export default function PgFooter() {
                   {item.icon}
                   <Typography
                     sx={{
-                      fontSize: "0.9em",
+                      fontSize: "1.1em",
                       color: "#4B5563",
                     }}>
                     {item.text}
@@ -91,16 +92,16 @@ export default function PgFooter() {
           </Box>
         </Grid>
 
-        <Grid item lg={8} md={8} sm={12} xs={12}>
+        <Grid item lg={6} md={6} sm={12} xs={12}>
           <Box
             style={{
               height: "100%",
             }}>
             <Box>
               <Grid container spacing={4}>
-                <Grid item lg={4} md={4} sm={4} xs={4}>
+                <Grid item lg={6} md={6} sm={4} xs={4}>
                   <Box>
-                    <Typography sx={{ fontWeight: "bold" }}>
+                    <Typography sx={{ fontWeight: "bold", fontSize:"1.5em" }}>
                       Quick Links
                     </Typography>
                     <br />
@@ -115,9 +116,9 @@ export default function PgFooter() {
                   </Box>
                 </Grid>
 
-                <Grid item lg={4} md={4} sm={4} xs={4}>
+                <Grid item lg={6} md={6} sm={4} xs={4}>
                   <Box>
-                    <Typography sx={{ fontWeight: "bold" }}>
+                    <Typography sx={{ fontWeight: "bold", fontSize:"1.5em" }}>
                       Get In Touch
                     </Typography>
                     <br />
@@ -132,7 +133,7 @@ export default function PgFooter() {
                   </Box>
                 </Grid>
 
-                <Grid item lg={4} md={4} sm={4} xs={4}>
+                {/* <Grid item lg={4} md={4} sm={4} xs={4}>
                   <Box>
                     <Typography sx={{ fontWeight: "bold" }}>Address</Typography>
                     <br />
@@ -142,11 +143,13 @@ export default function PgFooter() {
                         fontSize: "0.9em",
                         color: "#4B5563",
                       }}>
-                      2464 Surulere, Lagos State, <br />
-                      Nigeria.
+                      107-109 Alabi Oyo, Bucknor, <br />
+                      Transformer Bus Stop, <br />
+                      Iyana Isolo, <br />
+                      Lagos State, Nigeria
                     </Typography>
                   </Box>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Box>
             <Box
@@ -189,7 +192,7 @@ export default function PgFooter() {
           Copyrighted&#169; TheAfrica Vison as {new Date().getFullYear()}. All
           Rights Reserved
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "end" }}>
+        <Box sx={{ display: "flex", justifyContent: "end", gap:2 }}>
           {privacyLink?.map((item: linkDataProps) => (
             <Link key={item.id} href={item.url} className={classes.link2}>
               {item.name}
@@ -227,7 +230,7 @@ const useStyles = makeStyles(() => ({
     color: "#A8518A",
   },
   link: {
-    fontSize: "0.9em",
+    fontSize: "1.1em",
     color: "#4B5563",
     "&:hover": {
       color: "#A8518A",
@@ -236,7 +239,7 @@ const useStyles = makeStyles(() => ({
   link2: {
     fontSize: "0.7em",
     color: "#888888",
-    marginLeft:"5px",
+    marginLeft: "5px",
     "&:hover": {
       color: "#A8518A",
     },
@@ -244,21 +247,21 @@ const useStyles = makeStyles(() => ({
 }));
 
 const contactData: contactDataProps[] = [
-  {
-    id: "1",
-    icon: <WhatsApp sx={{ marginRight: "10px", color: "#A8518A" }} />,
-    text: "+234 (0) 912 879 8369",
-  },
+  // {
+  //   id: "1",
+  //   icon: <WhatsApp sx={{ marginRight: "10px", color: "#A8518A" }} />,
+  //   text: "+234 (0) 912 879 8369",
+  // },
   {
     id: "2",
     icon: <Email sx={{ marginRight: "10px", color: "#A8518A" }} />,
-    text: " growth@theafricavision.com",
+    text: config.baseContact.email,
   },
-  {
-    id: "3",
-    icon: <Phone sx={{ marginRight: "10px", color: "#A8518A" }} />,
-    text: "+234 (0) 912 879 8369",
-  },
+  // {
+  //   id: "3",
+  //   icon: <Phone sx={{ marginRight: "10px", color: "#A8518A" }} />,
+  //   text:  config.baseContact.phone,
+  // },
   {
     id: "4",
     icon: <Language sx={{ marginRight: "10px", color: "#A8518A" }} />,
@@ -274,17 +277,17 @@ const quickLinksData: linkDataProps[] = [
   },
   {
     id: "2",
-    url: "/",
+    url: "/explore/donate",
     name: "Donate",
   },
   {
     id: "3",
-    url: "/",
-    name: "Blog Post",
+    url: "/explore/blog",
+    name: "Blogs",
   },
   {
     id: "4",
-    url: "/",
+    url: "/explore/campaign",
     name: "Campaign",
   },
 ];
@@ -292,35 +295,35 @@ const quickLinksData: linkDataProps[] = [
 const contactUsData: linkDataProps[] = [
   {
     id: "1",
-    url: "/",
+    url: "/explore/contact",
     name: "Contact Us",
   },
   {
     id: "2",
-    url: "/",
-    name: "Our Services",
+    url: "/auth/login",
+    name: "Get Started",
   },
 ];
 
 const followUsData: followUsDataProps[] = [
   {
     id: "1",
-    url: "/",
+    url: "https://twitter.com/theafricavision",
     icon: <Twitter sx={{ color: "#A9518B" }} />,
   },
   {
     id: "2",
-    url: "/",
+    url: "https://www.instagram.com/theafricavision/",
     icon: <Instagram sx={{ color: "#A9518B" }} />,
   },
   {
     id: "3",
-    url: "/",
+    url: "https://facebook.com/theafricavisionhq/",
     icon: <Facebook sx={{ color: "#A9518B" }} />,
   },
   {
     id: "4",
-    url: "/",
+    url: "https://www.linkedin.com/company/theafricavision/",
     icon: <LinkedIn sx={{ color: "#A9518B" }} />,
   },
 ];
@@ -328,17 +331,17 @@ const followUsData: followUsDataProps[] = [
 const privacyLink = [
   {
     id: "1",
-    url: "/",
-    name: "Terms",
+    url: "terms",
+    name: "Terms of Use",
   },
   {
     id: "2",
-    url: "/",
+    url: "privacy",
     name: "Privacy",
   },
   {
     id: "3",
-    url: "/",
-    name: "Cookies",
+    url: "anti_money_laundry",
+    name: "Anti-Money Laundry",
   },
 ];

@@ -5,6 +5,8 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  IconButton,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import TextInput from "../common/TextInput";
@@ -12,16 +14,19 @@ import Link from "next/link";
 import PurpleButton from "../common/PurpleButton";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/useReduxHooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { IAuth, IAuthStore } from "@/types/IAuth";
+import { IAuthStore, ILogin, ILoginSignupResponse } from "@/types/IAuth";
 import { enqueueSnackbar } from "notistack";
-import { onLogin } from "@/redux/slices/authSlice";
-import { userData } from "@/data/userData";
+import { onLogin, onLogout } from "@/redux/slices/authSlice";
 import ReduxProvider from "../common/ReduxProvider";
 import Image from "next/image";
 import Logo from "@/assets/tavlogo.png";
+import { loginApi } from "../api/authApi";
+import { IResponse, ResponseEnum } from "@/types/IAppbaseTypes";
+import { onSessionValid } from "@/redux/slices/sessionSlice";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function AuthUserLogin() {
   const router = useRouter();
@@ -30,6 +35,10 @@ function AuthUserLogin() {
   const [remember, setRemember] = useState<boolean>(true);
   const [loginMessage, setLoginMesage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  dispatch(onSessionValid({ isValid: false }));
+  dispatch(onLogout());
 
   const formik = useFormik({
     initialValues: {
@@ -45,42 +54,58 @@ function AuthUserLogin() {
     },
   });
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = async (values: any) => {
     setLoginMesage("");
     setLoading(true);
+
     values = {
       ...values,
       rememberMe: remember,
     };
 
-    setTimeout(() => {
-      const getuser = userData.filter(
-        (a: IAuth) => a.email === values.email
-      )[0];
-      if (getuser) {
-        const payload: IAuthStore = {
-          isLoggedIn: true,
-          token: getuser.token,
-          id: getuser.id,
-          fullname: getuser.fullname,
-          email: getuser.email,
-          role: getuser.role,
-        };
-        dispatch(onLogin(payload));
-        handleRedirect(getuser.role);
-      } else {
-        setLoginMesage("Invalid credential!");
+    const payload: ILogin = {
+      email: values.email,
+      password: values.password,
+    };
+
+    await loginApi(payload)
+      .then((response: IResponse<ILoginSignupResponse>) => {
+        if (response.status === ResponseEnum.success) {
+          const storeAuthPayload: IAuthStore = {
+            isLoggedIn: true,
+            token: response?.data?.token,
+            id: response?.data?.user.id,
+            fullname: response?.data?.user.fullname,
+            email: response?.data?.user.email,
+            role: response?.data?.user?.role ?? "",
+            country: response?.data?.user?.country,
+          };
+          dispatch(onLogin(storeAuthPayload));
+          dispatch(onSessionValid({ isValid: true }));
+          handleRedirect(storeAuthPayload.role);
+        } else {
+          setLoading(false);
+          setLoginMesage(response.message);
+        }
+      })
+      .catch((error: any) => {
         setLoading(false);
-      }
-    }, 2000);
+        enqueueSnackbar("Something went wrong", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
   };
 
-  const handleRedirect = (roleName: string) => {
-    switch (roleName.toUpperCase()) {
+  const handleRedirect = (role: string) => {
+    switch (role.toUpperCase()) {
       case "USER":
         router.push("../creator/dashboard");
         break;
-      case "SUPER ADMIN":
+      case "ADMIN":
         router.push("../admin/dashboard");
         break;
       default:
@@ -110,7 +135,21 @@ function AuthUserLogin() {
             border: "0px solid red",
             width: { md: "50%", xs: "80%" },
           }}>
-          <Image src={Logo} alt="Logo" width={150} height={50} />
+          <Box display="flex" alignItems="center">
+            <Box flexGrow={1}>
+              <Image src={Logo} alt="Logo" width={150} height={50} />
+            </Box>
+            <Box
+              sx={{
+                color: "#A8518A",
+                fontWeight: "bold",
+                ":hover": {
+                  opacity: 0.8,
+                },
+              }}>
+              <Link href={`/`}>Home</Link>
+            </Box>
+          </Box>
           <br />
           <br />
           <Typography
@@ -158,12 +197,23 @@ function AuthUserLogin() {
                 validate={formik.touched.password}
                 validationMessage={formik.errors.password}
                 onChange={formik.handleChange}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 fullWidth
                 inputStyle={{
                   background: "#FFF9FD",
                   border: "1px solid #CCCCCC",
                 }}
+                endIcon={
+                  showPassword ? (
+                      <IconButton onClick={() => setShowPassword(false)}>
+                        <VisibilityOff />
+                      </IconButton>
+                  ) : (
+                      <IconButton onClick={() => setShowPassword(true)}>
+                        <Visibility />
+                      </IconButton>
+                  )
+                }
               />
               <Box display="flex" alignItems="center">
                 <FormGroup sx={{ flexGrow: 1 }}>

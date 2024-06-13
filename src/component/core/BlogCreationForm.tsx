@@ -1,14 +1,11 @@
 import InputFile from "@/component/common/InputFile";
 import PurpleButton from "@/component/common/PurpleButton";
 import TextInput from "@/component/common/TextInput";
-import { categoryData } from "@/data/categoryData";
-import { paymentOptionData } from "@/data/paymentOptionData";
 import { ICategory } from "@/types/ICategory";
-import { IPaymentOption } from "@/types/IPayment";
 import {
   Alert,
   Box,
-  Chip,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -23,13 +20,21 @@ import { ThemeProvider } from "@mui/styles";
 import { useFormik } from "formik";
 import MUIRichTextEditor from "mui-rte";
 import { enqueueSnackbar } from "notistack";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import * as Yup from "yup";
 import { getFileBase64 } from "../common/helpers";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/useReduxHooks";
+import { ApiCreateBlog, ApiGetBlogCategories } from "../api/blogApi";
+import { IResponse, ResponseEnum } from "@/types/IAppbaseTypes";
+import { IBlogInput } from "@/types/IBlog";
 
 export default function BlogCreationForm() {
   const router = useRouter();
+  const authStore = useAppSelector((state) => state.authReducer);
+
+  const [categories, setCategories] = useState<ICategory[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState<boolean>(false);
   const [imageBase64, setImageBase64] = useState<any>(null);
   const [powerPointBase64, setPowerPointBase64] = useState<any>(null);
   const [richContent, setRichContent] = useState<any>(null);
@@ -44,6 +49,40 @@ export default function BlogCreationForm() {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [dialogActionLoading, setDialogActionLoading] =
     useState<boolean>(false);
+
+  useEffect(() => {
+    fetchCategories();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchCategories = () => {
+    setLoadingCategories(true);
+    ApiGetBlogCategories(authStore.token)
+      .then((response: IResponse<ICategory[]>) => {
+        setLoadingCategories(false);
+        if ((response.status = ResponseEnum.success)) {
+          setCategories(response.data);
+        } else {
+          enqueueSnackbar(response.message, {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        }
+      })
+      .catch((error: any) => {
+        setLoadingCategories(false);
+        enqueueSnackbar("Something went wrong", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
+  };
 
   const handleEditorSave = (state: any) => {
     setRichContent(state);
@@ -146,30 +185,64 @@ export default function BlogCreationForm() {
     if (isValidInput < 1) {
       setLoading(true);
 
-      const param = {
+      const payload: IBlogInput = {
         title: values.title,
         content: richContent,
         imageBase64: imageBase64,
-        powerPointbase64: powerPointBase64,
-        categoryId: values.categoryId,
-        videoUrl: values.videoUrl,
-        seoKeywords: values.seoKeywords,
+        //powerPointBase64: powerPointBase64 ?? " ",
+        category_id: values.categoryId,
+        video_url: values.videoUrl,
+        seo_keywords: values.seoKeywords,
         referenceUrl: values.referenceUrl,
+        draft: true,
       };
-      console.log(param);
+      //console.log(payload);
 
-      setTimeout(() => {
-        setLoading(false);
-        enqueueSnackbar("Save and awaiting approval", {
-          variant: "success",
-          autoHideDuration: 6000,
-          anchorOrigin: {
-            vertical: "top",
-            horizontal: "right",
-          },
+      ApiCreateBlog(payload, authStore.token)
+        .then((response) => {
+          setLoading(false);
+          if (response.status === ResponseEnum.success) {
+            enqueueSnackbar(response.message, {
+              variant: "success",
+              anchorOrigin: {
+                vertical: "top",
+                horizontal: "right",
+              },
+            });
+            setOpenDialog(true);
+          } else {
+            enqueueSnackbar(response.message, {
+              variant: "error",
+              anchorOrigin: {
+                vertical: "top",
+                horizontal: "right",
+              },
+            });
+          }
+        })
+        .catch((error: any) => {
+          setLoading(false);
+          enqueueSnackbar("Something went wrong", {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
         });
-        setOpenDialog(true);
-      }, 2000);
+
+      // setTimeout(() => {
+      //   setLoading(false);
+      //   enqueueSnackbar("Save and awaiting approval", {
+      //     variant: "success",
+      //     autoHideDuration: 6000,
+      //     anchorOrigin: {
+      //       vertical: "top",
+      //       horizontal: "right",
+      //     },
+      //   });
+      //   setOpenDialog(true);
+      // }, 2000);
     }
   };
 
@@ -212,6 +285,7 @@ export default function BlogCreationForm() {
                     minHeight: "300px",
                     padding: "1rem",
                     overflow: "scroll",
+                    color: "#667085",
                   }}>
                   <ThemeProvider theme={myTheme}>
                     <MUIRichTextEditor
@@ -257,8 +331,11 @@ export default function BlogCreationForm() {
                 fullWidth
                 label="Category"
                 selectedValue={formik.values?.categoryId}
-                onChange={formik.handleChange}>
-                {categoryData?.map((item: ICategory) => (
+                onChange={formik.handleChange}
+                startIcon={
+                  loadingCategories ? <CircularProgress size={20} /> : <></>
+                }>
+                {categories?.map((item: ICategory) => (
                   <MenuItem key={item.id} value={item.id}>
                     {item.name}
                   </MenuItem>
@@ -330,7 +407,7 @@ export default function BlogCreationForm() {
               loading={dialogActionLoading}
               onClick={() => {
                 setDialogActionLoading(true);
-                router.push("/stories");
+                router.push("/creator/story");
               }}
             />
           </DialogActions>

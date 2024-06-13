@@ -1,4 +1,5 @@
 import PurpleButton from "@/component/common/PurpleButton";
+import config from "@/config";
 import { East, MarkEmailUnread, PhoneInTalk } from "@mui/icons-material";
 import { Box, Grid, Typography } from "@mui/material";
 import Link from "next/link";
@@ -20,36 +21,27 @@ export default function PgAboutUs() {
                 fontSize: "2em",
                 fontWeight: "bold",
               }}>
-              Who we are
+              OUR MISSION
             </Typography>
-            <Typography component="div" sx={{ fontSize: "0.9em" }}>
-              We exist to bridge this gap, offering a platform where innovators
-              can connect with the resources and backing, they require to turn
-              their dreams into reality
+            <Typography component="div" sx={{ fontSize: "1.1em" }}>
+              {`To empower individuals, communities, and organizations across Africa by providing essential resources, innovative technology solutions, and comprehensive support systems`}
             </Typography>
 
-            <Box sx={{ padding: "2rem 0" }}>
-              <Link href="/donate">
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "3rem 0",
+              }}>
+              <Link href="/auth/login">
                 <PurpleButton
-                  text="Donate"
+                  text="Get Started"
                   endIcon={<East />}
                   style={{ width: "150px" }}
                 />
               </Link>
-            </Box>
 
-            <Box sx={{ display: { xs: "flex" } }}>
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "flex" },
-                  alignItems: "center",
-                }}>
-                <PhoneInTalk sx={{ color: "#A8518A", marginRight: "5px" }} />
-                <Typography sx={{ fontSize: "0.9em" }}>
-                  +234 (0) 912 879 8369
-                </Typography>
-              </Box>
               <Box
                 sx={{
                   flexGrow: 1,
@@ -58,8 +50,8 @@ export default function PgAboutUs() {
                 <MarkEmailUnread
                   sx={{ color: "#A8518A", marginRight: "5px" }}
                 />
-                <Typography sx={{ fontSize: "0.9em" }}>
-                  growth@theafricavision.com
+                <Typography sx={{ fontSize: "1.1em" }}>
+                  {config.baseContact.email}
                 </Typography>
               </Box>
             </Box>
@@ -81,7 +73,7 @@ export default function PgAboutUs() {
             <Typography
               sx={{
                 color: "#4B5563",
-                fontSize: "0.9rem",
+                fontSize: "1.1rem",
                 paddingBottom: "2rem",
               }}>
               {texts[0]}
@@ -90,7 +82,7 @@ export default function PgAboutUs() {
             <Typography
               sx={{
                 color: "#4B5563",
-                fontSize: "0.9rem",
+                fontSize: "1.1rem",
               }}>
               {texts[1]}
             </Typography>

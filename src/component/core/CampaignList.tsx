@@ -1,4 +1,4 @@
-import { IActionOption, IStory } from "@/types/IStory";
+import { IActionOption } from "@/types/IStory";
 import {
   Delete,
   Edit,
@@ -19,16 +19,24 @@ import {
   convertToReadableDate,
   convertToReadableTime,
 } from "../common/helpers";
-import MUIDataTable from "mui-datatables";
 import CampaignListCardType1 from "./CampaignListCardType1";
 import CampaignListCardType2 from "./CampaignListCardType2";
 import CampaignListCardType3 from "./CampaignListCardType3";
 import CampaignListCardType4 from "./CampaignListCardType4";
 import CampaignListTable from "./CampaignListTable";
-import { storyData } from "@/data/storyData";
+import { ICampaignData } from "@/types/ICampaign";
+import { useAppSelector } from "@/redux/useReduxHooks";
+import CampaignListCardType5 from "./CampaignListCardType5";
+import CampaignListItems from "./CampaignListItems";
 
-type variationTypes = "swipeable" | "grid" | "pinned" | "tabular" | "docked";
-type cardTypes = "type1" | "type2" | "type3";
+type variationTypes =
+  | "swipeable"
+  | "grid"
+  | "pinned"
+  | "tabular"
+  | "docked"
+  | "itemized";
+type cardTypes = "type1" | "type2" | "type3" | "type4";
 
 type props = {
   variation: variationTypes;
@@ -37,13 +45,30 @@ type props = {
   startAt?: number;
   stopAt?: number;
   redirectUrl?: string;
-  data: IStory[];
-  onActionClick?: (item: IStory, url: string, action: string) => void;
+  //data: IStory[];
+  data: ICampaignData[];
+  //onActionClick?: (item: IStory, url: string, action: string) => void;
+  onActionClick?: (item: ICampaignData, url: string, action: string) => void;
   actionOptions?: IActionOption;
+  buttonText?: string;
 };
 
 export default function CampaignList(props: props) {
-  const [data, setData] = useState<IStory[]>([]);
+  const storeAuth = useAppSelector((state) => state.authReducer);
+  //const [data, setData] = useState<IStory[]>([]);
+  const [data, setData] = useState<ICampaignData[]>([]);
+
+  // useEffect(() => {
+  //   fetch();
+  // }, []);
+
+  // const fetch = () => {
+  //   getMyCampaignsApi(storeAuth.token)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((error: any) => {});
+  // };
 
   useEffect(() => {
     if (props?.data) setData(props?.data);
@@ -52,11 +77,15 @@ export default function CampaignList(props: props) {
   const offset: number = !props.startAt ? 0 : props.startAt;
   const limit: number = !props.stopAt ? data.length : props.stopAt;
 
-  const renderCard = (item: IStory) => {
+  const renderCard = (item: ICampaignData) => {
     switch (props.cardType) {
       case "type1":
         return (
-          <CampaignListCardType1 redirectUrl={props.redirectUrl} item={item} />
+          <CampaignListCardType1
+            redirectUrl={props.redirectUrl}
+            item={item}
+            buttonText={props.buttonText}
+          />
         );
       case "type2":
         return (
@@ -66,9 +95,21 @@ export default function CampaignList(props: props) {
         return (
           <CampaignListCardType3 redirectUrl={props.redirectUrl} item={item} />
         );
+      case "type4":
+        return (
+          <CampaignListCardType4
+            redirectUrl={props.redirectUrl}
+            item={item}
+            buttonText={props.buttonText}
+          />
+        );
       default:
         return (
-          <CampaignListCardType1 redirectUrl={props.redirectUrl} item={item} />
+          <CampaignListCardType1
+            redirectUrl={props.redirectUrl}
+            item={item}
+            buttonText={props.buttonText}
+          />
         );
     }
   };
@@ -98,11 +139,11 @@ export default function CampaignList(props: props) {
               backgroundColor: "transparent",
             },
           }}>
-          {data?.slice(offset, limit)?.map((item: IStory) => (
+          {data?.slice(offset, limit)?.map((item: ICampaignData) => (
             <Box
               key={item.id}
               sx={{
-                minWidth: "280px",
+                minWidth: "300px",
                 minHeight: "100px",
                 display: "flex",
                 alignItems: "center",
@@ -123,7 +164,7 @@ export default function CampaignList(props: props) {
           paddingBottom: "1rem",
         }}>
         <Grid container spacing={7}>
-          {data?.slice(offset, limit)?.map((item: IStory) => (
+          {data?.slice(offset, limit)?.map((item: ICampaignData) => (
             <Grid item lg={4} md={4} sm={6} xs={12} key={item.id}>
               <Box>{renderCard(item)}</Box>
             </Grid>
@@ -140,7 +181,7 @@ export default function CampaignList(props: props) {
           paddingBottom: "1rem",
         }}>
         <Grid container spacing={2}>
-          {data?.slice(offset, limit)?.map((item: IStory) => (
+          {data?.slice(offset, limit)?.map((item: ICampaignData) => (
             <Grid item lg={12} md={12} sm={6} xs={12} key={item.id}>
               <CampaignListCardType3
                 redirectUrl={props.redirectUrl}
@@ -160,9 +201,9 @@ export default function CampaignList(props: props) {
           paddingBottom: "1rem",
         }}>
         <Grid container spacing={2}>
-          {data?.slice(offset, limit)?.map((item: IStory) => (
+          {data?.slice(offset, limit)?.map((item: ICampaignData) => (
             <Grid item lg={12} md={12} sm={6} xs={12} key={item.id}>
-              <CampaignListCardType4
+              <CampaignListCardType5
                 redirectUrl={props.redirectUrl}
                 item={item}
               />
@@ -174,158 +215,161 @@ export default function CampaignList(props: props) {
   };
 
   const renderTabularVariation = () => {
-    const flattenedData = (data: IStory[]): any => {
-      return data?.map((item: IStory) => ({
+    const flattenedData = (data: ICampaignData[]): any => {
+      return data?.map((item: ICampaignData) => ({
         title: item.title,
         location: item?.venue,
-        amount: item?.budget,
-        date: item.startDate,
+        amount: item?.target_amount,
+        date: item.start_date,
       }));
     };
 
-    const columns = [
-      {
-        name: "title",
-        options: {
-          customHeadLabelRender: (i: any) => {
-            return (
-              <Typography
-                sx={{
-                  textTransform: "capitalize",
-                  color: "#898989",
-                  fontSize: "0.9em",
-                  fontWeight: "bold",
-                }}>
-                Project Name
-              </Typography>
-            );
-          },
-          customBodyRenderLite: (index: number) => {
-            return (
-              <Typography
-                sx={{
-                  color: "#101828",
-                  fontSize: "0.95em",
-                }}>
-                {data[index].title}
-              </Typography>
-            );
-          },
-        },
-      },
-      {
-        name: "location",
-        options: {
-          customHeadLabelRender: (i: any) => {
-            return (
-              <Typography
-                sx={{
-                  textTransform: "capitalize",
-                  color: "#898989",
-                  fontSize: "0.9em",
-                  fontWeight: "bold",
-                }}>
-                Location
-              </Typography>
-            );
-          },
-          customBodyRenderLite: (index: number) => {
-            return (
-              <Typography
-                sx={{
-                  color: "#667085",
-                  fontSize: "0.95em",
-                }}>
-                {data[index].venue}
-              </Typography>
-            );
-          },
-        },
-      },
-      {
-        name: "amount",
-        options: {
-          customHeadLabelRender: (i: any) => {
-            return (
-              <Typography
-                sx={{
-                  textTransform: "capitalize",
-                  color: "#898989",
-                  fontSize: "0.9em",
-                  fontWeight: "bold",
-                }}>
-                Project Amount
-              </Typography>
-            );
-          },
-          customBodyRenderLite: (index: number) => {
-            return (
-              <Typography
-                sx={{
-                  color: "#101828",
-                  fontSize: "0.95em",
-                  fontWeight: "bold",
-                }}>
-                {data[index].budget &&
-                  convertToCurrency(data[index].budget, data[index]?.currency!)}
-              </Typography>
-            );
-          },
-        },
-      },
-      {
-        name: "date",
-        options: {
-          customHeadLabelRender: (i: any) => {
-            return (
-              <Typography
-                sx={{
-                  textTransform: "capitalize",
-                  color: "#898989",
-                  fontSize: "0.9em",
-                  fontWeight: "bold",
-                }}>
-                Date
-              </Typography>
-            );
-          },
-          customBodyRenderLite: (index: number) => {
-            return (
-              <Typography
-                sx={{
-                  color: "#667085",
-                  fontSize: "0.95em",
-                }}>
-                {convertToReadableDate(data[index].startDate!)},{" "}
-                {convertToReadableTime(data[index].startDate!)}
-              </Typography>
-            );
-          },
-        },
-      },
-      {
-        name: "",
-        options: {
-          customBodyRenderLite: (index: number) => {
-            return (
-              <Stack direction="row" spacing={1}>
-                <Tooltip title="Delete">
-                  <IconButton size="small">
-                    <Delete sx={{ fontSize: "1em" }} />
-                  </IconButton>
-                </Tooltip>
+    // const columns = [
+    //   {
+    //     name: "title",
+    //     options: {
+    //       customHeadLabelRender: (i: any) => {
+    //         return (
+    //           <Typography
+    //             sx={{
+    //               textTransform: "capitalize",
+    //               color: "#898989",
+    //               fontSize: "0.9em",
+    //               fontWeight: "bold",
+    //             }}>
+    //             Project Name
+    //           </Typography>
+    //         );
+    //       },
+    //       customBodyRenderLite: (index: number) => {
+    //         return (
+    //           <Typography
+    //             sx={{
+    //               color: "#101828",
+    //               fontSize: "0.95em",
+    //             }}>
+    //             {data[index].title}
+    //           </Typography>
+    //         );
+    //       },
+    //     },
+    //   },
+    //   {
+    //     name: "location",
+    //     options: {
+    //       customHeadLabelRender: (i: any) => {
+    //         return (
+    //           <Typography
+    //             sx={{
+    //               textTransform: "capitalize",
+    //               color: "#898989",
+    //               fontSize: "0.9em",
+    //               fontWeight: "bold",
+    //             }}>
+    //             Location
+    //           </Typography>
+    //         );
+    //       },
+    //       customBodyRenderLite: (index: number) => {
+    //         return (
+    //           <Typography
+    //             sx={{
+    //               color: "#667085",
+    //               fontSize: "0.95em",
+    //             }}>
+    //             {data[index].venue}
+    //           </Typography>
+    //         );
+    //       },
+    //     },
+    //   },
+    //   {
+    //     name: "amount",
+    //     options: {
+    //       customHeadLabelRender: (i: any) => {
+    //         return (
+    //           <Typography
+    //             sx={{
+    //               textTransform: "capitalize",
+    //               color: "#898989",
+    //               fontSize: "0.9em",
+    //               fontWeight: "bold",
+    //             }}>
+    //             Project Amount
+    //           </Typography>
+    //         );
+    //       },
+    //       customBodyRenderLite: (index: number) => {
+    //         return (
+    //           <Typography
+    //             sx={{
+    //               color: "#101828",
+    //               fontSize: "0.95em",
+    //               fontWeight: "bold",
+    //             }}>
+    //             {data[index].target_amount &&
+    //               convertToCurrency(
+    //                 data[index].target_amount,
+    //                 data[index]?.base_currency!
+    //               )}
+    //           </Typography>
+    //         );
+    //       },
+    //     },
+    //   },
+    //   {
+    //     name: "date",
+    //     options: {
+    //       customHeadLabelRender: (i: any) => {
+    //         return (
+    //           <Typography
+    //             sx={{
+    //               textTransform: "capitalize",
+    //               color: "#898989",
+    //               fontSize: "0.9em",
+    //               fontWeight: "bold",
+    //             }}>
+    //             Date
+    //           </Typography>
+    //         );
+    //       },
+    //       customBodyRenderLite: (index: number) => {
+    //         return (
+    //           <Typography
+    //             sx={{
+    //               color: "#667085",
+    //               fontSize: "0.95em",
+    //             }}>
+    //             {convertToReadableDate(data[index].start_date!)},{" "}
+    //             {convertToReadableTime(data[index].start_date!)}
+    //           </Typography>
+    //         );
+    //       },
+    //     },
+    //   },
+    //   {
+    //     name: "",
+    //     options: {
+    //       customBodyRenderLite: (index: number) => {
+    //         return (
+    //           <Stack direction="row" spacing={1}>
+    //             <Tooltip title="Delete">
+    //               <IconButton size="small">
+    //                 <Delete sx={{ fontSize: "1em" }} />
+    //               </IconButton>
+    //             </Tooltip>
 
-                <Tooltip title="Edit">
-                  <IconButton size="small">
-                    <Edit sx={{ fontSize: "1em" }} />
-                  </IconButton>
-                </Tooltip>
-              </Stack>
-            );
-          },
-        },
-      },
-    ];
+    //             <Tooltip title="Edit">
+    //               <IconButton size="small">
+    //                 <Edit sx={{ fontSize: "1em" }} />
+    //               </IconButton>
+    //             </Tooltip>
+    //           </Stack>
+    //         );
+    //       },
+    //     },
+    //   },
+    // ];
 
     return (
       <CampaignListTable
@@ -340,39 +384,15 @@ export default function CampaignList(props: props) {
           showEdit: props.actionOptions?.showEdit ?? true,
         }}
       />
-      // <Box>
-      //   <MUIDataTable
-      //     title={
-      //       <Box>
-      //         <Typography
-      //           sx={{
-      //             color: "#120F0F",
-      //             fontWeight: "bold",
-      //             fontSize: "1.1em",
-      //           }}>
-      //           Recent Campaign
-      //         </Typography>
-      //       </Box>
-      //     }
-      //     data={flattenedData(data?.slice(offset, limit))}
-      //     columns={columns}
-      //     options={{
-      //       filter: "false",
-      //       download: "true",
-      //       downloadOptions: {
-      //         filterOptions: {
-      //           useDisplayedColumnsOnly: true,
-      //           useDisplayedRowsOnly: true,
-      //         },
-      //       },
-      //       print: "true",
-      //       viewColumns: "false",
-      //       elevation: 0,
-      //       responsive: "standard",
-      //       selectableRows: "none",
-      //     }}
-      //   />
-      // </Box>
+    );
+  };
+
+  const renderItemizedVariation = () => {
+    return (
+      <CampaignListItems
+        data={props.data}
+        onActionClick={props.onActionClick}
+      />
     );
   };
 
@@ -388,8 +408,10 @@ export default function CampaignList(props: props) {
         return renderTabularVariation();
       case "docked":
         return renderDockedVariation();
+      case "itemized":
+        return renderItemizedVariation();
       default:
-        return renderDockedVariation();
+        return renderGridVariation();
     }
   };
 

@@ -1,4 +1,3 @@
-import { IStory } from "@/types/IStory";
 import { CalendarMonth, Person } from "@mui/icons-material";
 import {
   Box,
@@ -15,11 +14,12 @@ import Link from "next/link";
 import PurpleButton from "../common/PurpleButton";
 import { ThemeProvider } from "@mui/styles";
 import MUIRichTextEditor from "mui-rte";
+import { IBlogData } from "@/types/IBlog";
 
 type props = {
   elevation?: number;
   redirectUrl?: string;
-  item: IStory;
+  item: IBlogData;
 };
 
 export default function BlogListCardType3(props: props) {
@@ -29,7 +29,7 @@ export default function BlogListCardType3(props: props) {
         <CardMedia
           component="img"
           height="150px"
-          image={props?.item?.coverImage.src}
+          image={props?.item?.image}
         />
         <CardContent>
           <Box display="flex">
@@ -45,7 +45,7 @@ export default function BlogListCardType3(props: props) {
                   fontSize: "12px",
                   color: "#999999",
                 }}>
-                {props?.item?.creatorFullname}
+                {props?.item?.user?.fullname}
               </Typography>
             </Stack>
             <Stack direction="row" spacing={0.5}>
@@ -60,7 +60,7 @@ export default function BlogListCardType3(props: props) {
                   fontSize: "12px",
                   color: "#999999",
                 }}>
-                {convertToReadableDate(props?.item?.startDate!)}
+                {convertToReadableDate(props?.item?.created_at!)}
               </Typography>
             </Stack>
           </Box>

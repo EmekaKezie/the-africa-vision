@@ -1,94 +1,85 @@
 "use client";
-import PurpleButton from "@/component/common/PurpleButton";
-import { onClear, onDecrement, onIncrement } from "@/redux/slices/_testSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/useReduxHooks";
-import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
 
-import { Provider } from "react-redux";
-import { persistor, store } from "@/redux/store";
-import { PersistGate } from "redux-persist/integration/react";
 import ReduxProvider from "@/component/common/ReduxProvider";
-import TextInput from "@/component/common/TextInput";
 import Nav from "@/component/core/Nav";
-import { useFormik } from "formik";
-import { Close, Favorite, KeyboardArrowLeft } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
+import { KeyboardArrowLeft } from "@mui/icons-material";
+import { usePathname, useRouter } from "next/navigation";
 import PgFooter from "@/component/core/PgFooter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DonationActionForm from "@/component/core/DonationActionForm";
-import DonationActionPreview from "@/component/core/DonationActionPreview";
-import { onDonationAction } from "@/redux/slices/donateSlice";
-import {
-  SnackbarProvider,
-  VariantType,
-  enqueueSnackbar,
-  useSnackbar,
-} from "notistack";
+import { enqueueSnackbar } from "notistack";
+import { ApiGetCampaignByIdForAll } from "@/component/api/campaignApi";
+import { ICampaignData } from "@/types/ICampaign";
+import { IResponse, ResponseEnum } from "@/types/IAppbaseTypes";
+import LoadingPage from "@/component/core/LoadingPage";
+import PageEmpty from "@/component/core/PageEmpty";
 
 function ExploreDonateAction() {
   const router = useRouter();
-  const testReducerStore = useAppSelector((state) => state.testReducer);
-  const store = useAppSelector((state) => state.donateReducer);
-  const dispatch = useAppDispatch();
+  const pathname = usePathname();
 
-  const [donnationForm, setdonationForm] = useState<boolean>(true);
+  const splitPathname: string[] = pathname.split("/");
+  const pageId = splitPathname[splitPathname.length - 2];
 
-  const handeIncrement = () => {
-    dispatch(onIncrement());
-  };
+  const [campaign, setCampaign] = useState<ICampaignData | undefined>();
+  const [loadingCampaign, setLoadingCampaign] = useState<boolean>(true);
 
-  const handleDecrement = () => {
-    dispatch(onDecrement());
-  };
+  useEffect(() => {
+    fetchCampaign();
+    // eslint-disable-next-line
+  }, []);
 
-  const handleClear = () => {
-    dispatch(onClear());
+  const fetchCampaign = () => {
+    setLoadingCampaign(true);
+    ApiGetCampaignByIdForAll(pageId)
+      .then((response: IResponse<any>) => {
+        if (response.status === ResponseEnum.success) {
+          const campaignData = response?.data;
+          setCampaign(campaignData);
+        }
+        setLoadingCampaign(false);
+      })
+      .catch((error: any) => {
+        setLoadingCampaign(false);
+        enqueueSnackbar("Error fetching content", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
+      });
   };
 
   const handleBackButton = () => {
-    if (store.donationAction.currentPage === 1) {
-      dispatch(
-        onDonationAction({
-          currentPage: 0,
-          paymentChannel: store.donationAction.paymentChannel,
-          amount: store.donationAction.amount,
-          fullname: store.donationAction.fullname,
-          email: store.donationAction.email,
-          phone: store.donationAction.phone,
-          country: store.donationAction.country,
-          message: store.donationAction.message,
-        })
-      );
-    } else {
-      router.push("/donate");
-    }
-  };
-
-  const renderDonationForm = () => {
-    return (
-      <Box sx={{ padding: { md: "0 8rem", xs: "0 1rem" } }}>
-        <DonationActionForm />
-      </Box>
-    );
-  };
-
-  const renderDonationPreview = () => {
-    return (
-      <Box
-        sx={{
-          padding: { md: "2rem 8rem", xs: "2rem 1rem" },
-          backgroundColor: "#fae6f4",
-        }}>
-        <DonationActionPreview />
-      </Box>
-    );
+    router.push(`/explore/donate/${pageId}`);
   };
 
   const renderContent = () => {
-    if (store.donationAction?.currentPage === 1) return renderDonationPreview();
-    else return renderDonationForm();
-    // if (donnationForm) return renderDonationForm();
-    // else return renderDonationPreview();
+    if (loadingCampaign) {
+      return <LoadingPage />;
+    }
+
+    if (!loadingCampaign && !campaign) {
+      return (
+        <PageEmpty
+          title="Page not found"
+          subtitle={<Box>{"We can't find what you are looking for"}</Box>}
+        />
+      );
+    }
+
+    if (!loadingCampaign && campaign) {
+      return (
+        <Box sx={{ padding: { md: "0 8rem", xs: "0 1rem" } }}>
+          <DonationActionForm
+            paymentOptions={campaign?.payment_options ?? []}
+            campaignTitle={campaign?.title ?? "Donation"}
+          />
+        </Box>
+      );
+    }
   };
 
   return (
@@ -104,14 +95,17 @@ function ExploreDonateAction() {
       <Box sx={{ padding: { md: "0 8rem", xs: "0 1rem" } }}>
         <Stack direction="row" alignItems="center">
           <IconButton
-            sx={{ backgroundColor: "#FFE1F5", marginRight:"5px" }}
             onClick={() => {
               handleBackButton();
             }}>
             <KeyboardArrowLeft />
           </IconButton>
-          <Typography sx={{ color: "#667085" }}>Back</Typography>
+          <Box component={"h3"} marginLeft={"1rem"} color="black">
+            {campaign?.title}
+          </Box>
         </Stack>
+        <br />
+        <br />
         <br />
       </Box>
       {renderContent()}

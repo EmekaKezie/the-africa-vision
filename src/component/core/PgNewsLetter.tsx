@@ -22,7 +22,7 @@ export default function PgNewsLetter() {
             <Typography
               sx={{
                 //lineHeight: "30px",
-                fontSize: "1.1rem",
+                fontSize: "1.1em",
                 color: "#120F0F",
               }}>
               Stay up to date with the latest news, announcements, and articles.

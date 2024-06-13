@@ -23,6 +23,10 @@ export default function TransactionTable(props: props) {
     // eslint-disable-next-line
   }, [props]);
 
+  const getDonations = () => {
+    
+  }
+
   const columns = [
     {
       name: "donorFullname",

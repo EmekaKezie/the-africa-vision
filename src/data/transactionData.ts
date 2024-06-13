@@ -1,4 +1,8 @@
-import { IPayoutSummary, ITransaction } from "@/types/ITransaction";
+import {
+  IPaymentHistory,
+  IPayoutSummary,
+  ITransaction,
+} from "@/types/ITransaction";
 
 export const transactionData: ITransaction[] = [
   {
@@ -103,5 +107,68 @@ export const payoutSummaryData: IPayoutSummary[] = [
     description: "Amount Payable",
     amount: 1945149.94,
     currencyCode: "NGN",
+  },
+];
+
+export const paymentHistoryData: IPaymentHistory[] = [
+  {
+    payment_id: 1,
+    invoice_no: "EKG464SJFN17",
+    invoice_date: "2023-12-02T09:21:30.123Z",
+    invoice_url:"https://api.iems.ng/Invoices/Test_Xyx_QAQC_1_2024.pdf",
+    paid_at: "",
+    status: "pending",
+    is_approved: 0,
+    payment_method: "",
+    subscription: "",
+    amount: 0,
+    currency: "",
+    user: {
+      id: 1,
+      fullname: "Wade Warren",
+      email: "wade@warren.com",
+      phone: "",
+      country: "",
+    },
+  },
+  {
+    payment_id: 2,
+    invoice_no: "EKG464SJFN18",
+    invoice_date: "2023-12-02T09:21:30.123Z",
+    invoice_url:"",
+    paid_at: "2023-12-02T09:21:30.123Z",
+    status: "completed",
+    is_approved: 1,
+    payment_method: "0077 **** **** 3814 (Visa)",
+    subscription: "Premium (Yearly)",
+    amount: 120500,
+    currency: "NGN",
+    user: {
+      id: 1,
+      fullname: "Adebayo Alabi",
+      email: "adebayo.alabi@gmail.com",
+      phone: "",
+      country: "",
+    },
+  },
+  {
+    payment_id: 3,
+    invoice_no: "EKG464SJFN19",
+    invoice_date: "2023-12-02T09:21:30.123Z",
+    invoice_url:"https://api.iems.ng/Invoices/Test_Xyx_QAQC_1_2024.pdf",
+    paid_at: "2023-12-02T09:21:30.123Z",
+    status: "completed",
+    is_approved: 1,
+    payment_method: "0077 **** **** 3814 (Visa)",
+    subscription: "Premium (Yearly)",
+    amount: 12309,
+    currency: "NGN",
+    user: {
+      id: 1,
+      fullname: "Wade Warren",
+      email: "wade@warren.com",
+      phone: "",
+      country: "",
+    },
   },
 ];
