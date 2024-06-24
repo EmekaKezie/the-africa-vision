@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  nextapp:
+    image: theafricavision:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:3000"
+      # Add any environment variables here
+      # NODE_ENV: production
+    restart: unless-stopped
